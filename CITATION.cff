@@ -1,5 +1,5 @@
 cff-version: 1.1.0
-message: "If you use this software please cite as below"
+message: "If you use this software, you are currently not supposed to TO BE CHANGED"
 authors:
   -
     affiliation: "Netherlands eScience Center"
@@ -21,20 +21,15 @@ authors:
     given-names: Robertus (Rob) Simon Petrus Warnaar
     orcid: "https://orcid.org/0000-0001-9443-4069"
   -
-    affiliation: "University of Twente"
-    family-names: Mos-Oppersma
-    given-names: Eline
-    orcid: "https://orcid.org/0000-0002-0150-306X"
-
-
+  
 keywords:
-  - EMG
-  - respiratory
+  - arterial spin labelling
+  - MRI
   - Python
-  - surface EMG
+  - brain age
 license: Apache-2.0
 
-repository-code: "https://github.com/ReSurfEMG/ReSurfEMG"
-title: "ReSurfEMG"
-version: "0.0.5"
-date-released: 20/01/2023
+repository-code: "https://github.com/brainspinner/brainspin"
+title: "brainspin"
+version: "0.0.1"
+date-released: 20/04/2023
