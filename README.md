@@ -1,0 +1,97 @@
+<p align="center">
+    <img style="width: 35%; height: 35%" src="https://github.com/resurfemg/resurfemg/blob/main/Logo_rond_tekst.svg">
+</p>
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6811554.svg)](https://doi.org/10.5281/zenodo.6811554)
+[![PyPI](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/brainspin/)
+[![Anaconda-Server Badge](https://anaconda.org/brainspinner/brainspin/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
+[![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml)
+[![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml)
+
+**brainspin** is an open source collaborative python library for analysis
+of brain MRIs. Many functions relate to arterial spin labeled sequences.
+
+
+
+This library
+supports the ongoing research at University of Amsterdam Medical Center on brain ageing, but
+is being buit for the entire community of radiology researchers across all university and academic medical centers and beyond.
+
+
+### Program files
+
+The main program in this repository (made of the modules in the brainspin folder) contains functions for analysis of MRIs..
+
+### Folders and Notebooks
+
+To look around keep in mind the following distinction on folders:
+
+researcher_interface:
+- These are a growing series of interactive notebooks that allow
+  researchers to investigate questions about their own MRI data
+ 
+open_work:
+- This folder contains experimental work by core members of the brainage
+  team (Dr. Candace Makeda Moore, Dr. Dani Bodor, Dr. Henk Mutsaerts)
+
+
+### Data sets
+
+The notebooks are configured to run on various datasets.  Contact
+Dr. Candace Makeda Moore( 📫 c.moore@esciencecenter.nl) to discuss any
+questions on data configuration for your datasets.
+
+
+### Configuring (to work with your data)
+
+In order to preprocess and/or to train  models the code needs to be
+able to locate the raw data you want it to find.
+
+There are several ways to specify the location of the following
+directories:
+
+-   **root_mei_directory:** Special directory.  The rest of the directory layout can
+    be derived from its location.
+-   **preprocessed:** The directory that will be used by preprocessing
+    code to output to.
+-   **models:** The directory to output trained models to.
+
+You can store this information persistently in several locations.
+
+1.  In the same directory where you run the script (or the notebook).
+    e.g. `./config.json`.
+2.  In home directory, e.g. `~/.brainspin/config.json`.
+3.  In global directory, e.g. `/etc/brainspin/config.json`.
+
+However, we highly recommend you use the home directory.
+This file can have this or similar contents:
+
+    {
+ 
+        'root_mei_directory': '/mnt/data',
+        'preprocessed': '/mnt/data/preprocessed',
+        'models': '/mnt/data/models',
+        'output': '/mnt/data/output',
+    }
+
+The file is read as follows: if the files specifies `root_mri_directory`
+directory, then the missing entries are assumed to be relative to
+the root.  You don't need to specify all entries.
+
+### Test data
+
+You can get test data by ... (TBA)
+```
+
+
+## Getting started
+
+
+
+
+### Testing
+
+The project doesn't include testing data yet.  
+
+✨Copyright 2023 Netherlands eScience Center and U. Amsterdam Medical Center
+Licensed under the Apache License, version 2.0. See LICENSE for details.✨
