@@ -3,9 +3,9 @@
     🧠
 </p>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6811554.svg)](https://doi.org/10.5281/zenodo.6811554)
-[![PyPI](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/brainspin/)
-[![Anaconda-Server Badge](https://anaconda.org/brainspinner/brainspin/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
+[![DOI](To be made)
+[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/brainspin/)
+[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/brainspin/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
 [![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml)
 
@@ -82,7 +82,6 @@ the root.  You don't need to specify all entries.
 ### Test data
 
 You can get test data by ... (TBA)
-```
 
 
 ## Getting started
@@ -95,4 +94,4 @@ You can get test data by ... (TBA)
 The project doesn't include testing data yet.  
 
 ✨Copyright 2023 Netherlands eScience Center and U. Amsterdam Medical Center
-Licensed under the Apache License, version 2.0. See LICENSE for details.✨
+Licensed under <TBA> See LICENSE for details.✨
