@@ -87,6 +87,46 @@ You can get test data by ... (TBA)
 ## Getting started
 
 
+How to get the notebooks running?  Assuming the raw data set and
+metadata is available.
+
+0. Assuming you are using conda for package management:    
+  * Make sure you are in no environment:
+
+      ```sh
+      conda deactivate
+      ```
+
+      _(repeat if you are in the base environment)_
+
+      You should be in no environment now
+
+
+1. Option A: To work with the most current versions with the possibility for development:
+  Install all Python packages required, using `conda` and the `environment.yml` file. 
+
+
+   * The command for Windows/Anaconda users can be something like:
+
+     ```sh
+     conda env create -f environment.yml
+     ```
+
+   * Linux users can create their own environment by hand (use
+     install_dev as in setup).
+
+
+1. To work with the most current versions: Install all Python packages
+   required, using `conda` and the `environment.yml` file.
+
+   * The command for Windows/Anaconda users can be something like:
+
+     ```sh
+     conda env create -f environment.yml
+     ```
+
+   * Linux users can create their own environment by hand (use
+     install_dev as in setup).
 
 
 ### Testing
