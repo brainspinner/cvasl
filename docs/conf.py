@@ -13,16 +13,12 @@
 import sys, subprocess
 import os
 
-# TODO(makeda): This is wrong, the brainspin module needs to have an __init__.py file.
-# Once that happens, the brainspin component should be removed from this path, and
-# the modules inside brainspin folder will become its submodules.
 
-#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'brainspin'
-copyright = '2022, c.moore@esciencecenter.nl'
+copyright = '2023, c.moore@esciencecenter.nl'
 author = 'c.moore@esciencecenter.nl'
 
 # The full version, including alpha/beta/rc tags
