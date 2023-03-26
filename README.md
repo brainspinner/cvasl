@@ -51,7 +51,7 @@ able to locate the raw data you want it to find.
 There are several ways to specify the location of the following
 directories:
 
--   **root_mei_directory:** Special directory.  The rest of the directory layout can
+-   **root_mri_directory:** Special directory.  The rest of the directory layout can
     be derived from its location.
 -   **preprocessed:** The directory that will be used by preprocessing
     code to output to.
@@ -69,7 +69,7 @@ This file can have this or similar contents:
 
     {
  
-        'root_mei_directory': '/mnt/data',
+        'root_mri_directory': '/mnt/data',
         'preprocessed': '/mnt/data/preprocessed',
         'models': '/mnt/data/models',
         'output': '/mnt/data/output',
