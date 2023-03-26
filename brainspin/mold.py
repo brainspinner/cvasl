@@ -7,7 +7,6 @@ This file contains methods to normalize brain MRIs.
 # import libraries
 
 
-import os 
+import os
 import glob
-import numpy 
-
+import numpy

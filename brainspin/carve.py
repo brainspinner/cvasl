@@ -9,6 +9,6 @@ and to strip soft tissues off head MRIs.
 # import libraries
 
 
-import os 
+import os
 import glob
-import numpy 
+import numpy

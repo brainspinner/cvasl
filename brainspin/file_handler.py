@@ -168,4 +168,3 @@ def hash_it_up_right_all(origin_folder1, file_extension):
     df = df.rename(columns={'index': 'file_name'})
 
     return df
-
