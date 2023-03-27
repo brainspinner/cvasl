@@ -1,0 +1,25 @@
+#  environment document
+
+name: mriland2
+channels:
+  - conda-forge
+  
+dependencies:
+  - python=3.8.6
+  - imageio=2.25.0
+  - ipympl=0.9.3
+  - jupyter=1.0.0
+  - jupyterlab=3.6.1
+  - matplotlib=3.3.3
+  - nest-asyncio=1.5.5
+  - notebook=6.4.10
+  - numexpr=2.7.3
+  - numpy=1.22.3
+  - pandas
+  - plotly
+  - scipy=1.7.3
+  - scikit-image=0.19.2
+  - simpleitk=2.2.1
+
+
+
