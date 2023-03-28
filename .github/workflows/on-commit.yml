@@ -9,8 +9,6 @@ jobs:
           submodules: recursive
       
           run: |
-            set -xe
-            cd /ci
             mkdir -p ./not_pushed/
             mount --bind /brainspin/tests/not_pushed/ ./not_pushed/
             python setup.py test
