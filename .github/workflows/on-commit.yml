@@ -8,10 +8,8 @@ jobs:
         with:
           submodules: recursive
       
-          run: |
-            mkdir -p ./not_pushed/
-            mount --bind /brainspin/tests/not_pushed/ ./not_pushed/
-            python setup.py test
+      - run: |
+          python setup.py test
 
   Lint:
     runs-on: ubuntu-latest
