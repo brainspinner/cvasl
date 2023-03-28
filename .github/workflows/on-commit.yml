@@ -7,13 +7,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-  #     
-  #         run: |
-  #           set -xe
-  #           cd /ci
-  #           mkdir -p ./not_pushed/
-  #           mount --bind /ReSurfEMG/tests/not_pushed/ ./not_pushed/
-  #           python setup.py test
+      
+          run: |
+            set -xe
+            cd /ci
+            mkdir -p ./not_pushed/
+            mount --bind /brainspin/tests/not_pushed/ ./not_pushed/
+            python setup.py test
 
   Lint:
     runs-on: ubuntu-latest
