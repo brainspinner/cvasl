@@ -8,7 +8,6 @@ from glob import glob
 from contextlib import contextmanager
 from urllib import parse as urlparse
 from urllib import request as urlrequest
-
 from setuptools import Command, setup
 from setuptools.command.bdist_egg import bdist_egg as BDistEgg
 from setuptools.command.install import install as InstallCommand
