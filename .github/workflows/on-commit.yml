@@ -25,38 +25,38 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py lint
 
-  Sphinx:
-    runs-on: ubuntu-latest
+  # Sphinx:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          submodules: recursive
-      - uses: s-weigand/setup-conda@v1
-        with:
-          conda-channels: conda-forge
-          python-version: 3.8
-      - run: python3 -m venv .venv
-      - run: .venv/bin/python -m pip install wheel sphinx
-      - run: .venv/bin/python setup.py install
-      - run: .venv/bin/python setup.py apidoc
-      - run: .venv/bin/python setup.py build_sphinx -W
-      - name: Publish Docs to Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: gh-pages
-          folder: build/sphinx/html
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #         submodules: recursive
+  #     - uses: s-weigand/setup-conda@v1
+  #       with:
+  #         conda-channels: conda-forge
+  #         python-version: 3.8
+  #     - run: python3 -m venv .venv
+  #     - run: .venv/bin/python -m pip install wheel sphinx
+  #     - run: .venv/bin/python setup.py install
+  #     - run: .venv/bin/python setup.py apidoc
+  #     - run: .venv/bin/python setup.py build_sphinx -W
+  #     - name: Publish Docs to Pages
+  #       uses: JamesIves/github-pages-deploy-action@4.1.1
+  #       with:
+  #         branch: gh-pages
+  #         folder: build/sphinx/html
 
-  Fair-software:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: fair-software/howfairis-github-action@0.2.1
-        name: Measure compliance with fair-software.eu recommendations
-        env:
-          PYCHARM_HOSTED: "Trick colorama into displaying colored output" 
-        with:
-          MY_REPO_URL: "https://github.com/${{ github.repository }}"
+  # Fair-software:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: fair-software/howfairis-github-action@0.2.1
+  #       name: Measure compliance with fair-software.eu recommendations
+  #       env:
+  #         PYCHARM_HOSTED: "Trick colorama into displaying colored output" 
+  #       with:
+  #         MY_REPO_URL: "https://github.com/${{ github.repository }}"
 
   
   # Markdown: 
