@@ -112,21 +112,10 @@ metadata is available.
      conda env create -f environment.yml
      ```
 
+  Option B:
    * Linux users can create their own environment by hand (use
      install_dev as in setup).
 
-
-1. To work with the most current versions: Install all Python packages
-   required, using `conda` and the `environment.yml` file.
-
-   * The command for Windows/Anaconda users can be something like:
-
-     ```sh
-     conda env create -f environment.yml
-     ```
-
-   * Linux users can create their own environment by hand (use
-     install_dev as in setup).
 
 
 ### Testing
