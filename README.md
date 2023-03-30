@@ -62,29 +62,28 @@ able to locate the raw data you want it to find.
 There are several ways to specify the location of the following
 directories:
 
--   **root_mri_directory:** Special directory.  The rest of the directory layout can
+-   _root_mri_directory_: Special directory.  The rest of the directory layout can
     be derived from its location.
--   **preprocessed:** The directory that will be used by preprocessing
+-   _preprocessed_: The directory that will be used by preprocessing
     code to output to.
--   **models:** The directory to output trained models to.
+-   _models_: The directory to output trained models to.
 
-You can store this information persistently in several locations.
 
-1.  In the same directory where you run the script (or the notebook).
-    e.g. `./config.json`.
-2.  In home directory, e.g. `~/.brainspin/config.json`.
-3.  In global directory, e.g. `/etc/brainspin/config.json`.
+The root directory of this repository contains a file called `config.json`, which by default stores the `/test_data` folder of this repository as your _root_mri_directory_. You can copy your (test) data to this location or adjust the _root_mri_directory_ to another location where your data is stored. 
+Notes:
+- while in principle no files in the `/test_data` folder will be pushed to your online repository, we recommend not storing large amounts or sensitive data within your repository folder structure.  
+- if you do not like to store your _config.json_ file within the repository (as this displays your system's folder structure), you can choose to store your config.json outside of the repository, in your home directory:
+  - on Windows: `C:\Users\<YourUserName>\.brainspin\config.json`
+  - on Linux: `home/.brainspin/config.json`
+  - on Mac: ???
 
-However, we highly recommend you use the home directory.
-This file can have this or similar contents:
 
-    {
- 
-        'root_mri_directory': '/mnt/data',
-        'preprocessed': '/mnt/data/preprocessed',
-        'models': '/mnt/data/models',
-        'output': '/mnt/data/output',
-    }
+{
+    "root_mri_directory": "/mnt/data",
+    "preprocessed": "/mnt/data/preprocessed",
+    "models": "/mnt/data/models",
+    "output": "/mnt/data/output",
+}
 
 The file is read as follows: if the files specifies `root_mri_directory`
 directory, then the missing entries are assumed to be relative to
