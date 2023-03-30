@@ -8,11 +8,9 @@ This file contains functions for command line processing
 """
 
 import logging
-
 from argparse import ArgumentParser
 
 from .file_handler import hash_it_up_right_all
-
 
 
 def common(parser):
@@ -66,9 +64,8 @@ def make_parser():
         Write over previously hashed data.
         ''',
     )
-    
-    common(hash_over)
 
+    common(hash_over)
 
     return parser
 
@@ -86,14 +83,12 @@ def main(argv):
 
             hash_for_cli(
                 config.get_directory('data', parsed.input),
-                
+
                 config.get_directory('output', parsed.output),
                 parsed.force,
             )
         except Exception as e:
             logging.exception(e)
             return 1
-
-    
 
     return 0
