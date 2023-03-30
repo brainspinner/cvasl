@@ -36,6 +36,7 @@ class Config:
     """
 
     default_locations = (
+        '../config.json',
         './config.json',
         os.path.expanduser('~/.brainspin/config.json'),
         '/etc/brainspin/config.json',
