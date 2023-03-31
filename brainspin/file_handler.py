@@ -144,11 +144,11 @@ def hash_folder(origin_folder1, file_extension, made):
     :type made: str
     """
     filepath = os.path.join(made, 'hash_output.csv')
-    df = hash_it_up_right_all(origin_folder1, file_extension)
+    df = hash_rash(origin_folder1, file_extension)
     df.to_csv(filepath)
 
 
-def hash_it_up_right_all(origin_folder1, file_extension):
+def hash_rash(origin_folder1, file_extension):
     """Hashing function to check files are not corrupted or to assure
     files are changed.
 
@@ -162,8 +162,11 @@ def hash_it_up_right_all(origin_folder1, file_extension):
     """
     hash_list = []
     file_names = []
-    files = '*' + file_extension
-    non_suspects1 = glob.glob(os.path.join(origin_folder1, files))
+    files = '**/*.' + file_extension
+    print(files)
+   
+    non_suspects1 = glob.glob(os.path.join(origin_folder1, files), recursive = True)
+    print(non_suspects1)
     BUF_SIZE = 65536
     for file in non_suspects1:
         sha256 = hashlib.sha256()
@@ -178,8 +181,8 @@ def hash_it_up_right_all(origin_folder1, file_extension):
         file_names.append(file)
 
     df = pd.DataFrame(hash_list, file_names)
-    df.columns = ["hash"]
-    df = df.reset_index()
-    df = df.rename(columns={'index': 'file_name'})
+    #df.columns = ["hash"]
+    #df = df.reset_index()
+    #df = df.rename(columns={'index': 'file_name'})
 
     return df

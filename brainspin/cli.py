@@ -56,20 +56,20 @@ def make_parser():
     hash_over = subparsers.add_parser('hash_over')
     hash_over.set_defaults(action='hash_over')
 
-    hash_over.add_argument(
-        '-f',
-        '--force',
-        action='store_true',
-        default=False,
-        help='''
-        Write over previously hashed data.
-        ''',
-    )
+    # hash_over.add_argument(
+    #     '-f',
+    #     '--force',
+    #     action='store_true',
+    #     default=False,
+    #     help='''
+    #     Write over previously hashed data.
+    #     ''',
+    # )
 
     hash_over.add_argument(
         '-x',
         '--extension',
-        action='append',
+        action='store',
         default=[],
         help='''
         Extension of files to be hashed.
