@@ -133,7 +133,7 @@ class Config:
         return value
 
 
-def hash_folder(origin_folder1, file_extension, made):
+def hash_folder(origin_folder1, file_extension, made, force=False):
     """Hashing function to be used by command line.
 
     :param origin_folder1: The string of the folder with files to hash
@@ -145,7 +145,29 @@ def hash_folder(origin_folder1, file_extension, made):
     """
     filepath = os.path.join(made, 'hash_output.csv')
     df = hash_rash(origin_folder1, file_extension)
+    if not force:
+        if os.path.isfile(filepath):
+            return
+    try:
+        os.makedirs(os.path.dirname(filepath))
+    except FileExistsError:
+        pass
+
     df.to_csv(filepath)
+
+# def save_preprocessed(array, out_fname, force):
+#     """
+#     This function is written to be called by the cli module.
+#     It stores arrays in a directory.
+#     """
+#     if not force:
+#         if os.path.isfile(out_fname):
+#             return
+#     try:
+#         os.makedirs(os.path.dirname(out_fname))
+    # except FileExistsError:
+    #     pass
+    # np.save(out_fname, array, allow_pickle=False)
 
 
 def hash_rash(origin_folder1, file_extension):
@@ -163,13 +185,12 @@ def hash_rash(origin_folder1, file_extension):
     hash_list = []
     file_names = []
     files = '**/*.' + file_extension
-    print(files)
 
     non_suspects1 = glob.glob(
         os.path.join(origin_folder1, files),
         recursive=True,
     )
-    print(non_suspects1)
+    # print(non_suspects1)
     BUF_SIZE = 65536
     for file in non_suspects1:
         sha256 = hashlib.sha256()

@@ -56,15 +56,15 @@ def make_parser():
     hash_over = subparsers.add_parser('hash_over')
     hash_over.set_defaults(action='hash_over')
 
-    # hash_over.add_argument(
-    #     '-f',
-    #     '--force',
-    #     action='store_true',
-    #     default=False,
-    #     help='''
-    #     Write over previously hashed data.
-    #     ''',
-    # )
+    hash_over.add_argument(
+        '-f',
+        '--force',
+        action='store_true',
+        default=False,
+        help='''
+        Write over previously hashed data.
+        ''',
+    )
 
     hash_over.add_argument(
         '-x',
@@ -96,7 +96,7 @@ def main(argv):
                 config.get_directory('data', parsed.input),
                 parsed.extension,
                 parsed.output,
-                # parsed.force,
+                parsed.force,
             )
         except Exception as e:
             logging.exception(e)
