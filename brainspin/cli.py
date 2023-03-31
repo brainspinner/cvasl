@@ -95,7 +95,7 @@ def main(argv):
             hash_folder(
                 config.get_directory('data', parsed.input),
                 parsed.extension,
-                config.get_directory('output', parsed.output),
+                parsed.output,
                 # parsed.force,
             )
         except Exception as e:

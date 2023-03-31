@@ -17,6 +17,7 @@ dependencies:
   - numexpr=2.7.3
   - numpy=1.22.3
   - pandas
+  - pycodestyle
   - scipy=1.7.3
   - scikit-image=0.19.2
   - simpleitk=2.2.1

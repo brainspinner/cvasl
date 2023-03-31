@@ -164,8 +164,11 @@ def hash_rash(origin_folder1, file_extension):
     file_names = []
     files = '**/*.' + file_extension
     print(files)
-   
-    non_suspects1 = glob.glob(os.path.join(origin_folder1, files), recursive = True)
+
+    non_suspects1 = glob.glob(
+        os.path.join(origin_folder1, files),
+        recursive=True,
+    )
     print(non_suspects1)
     BUF_SIZE = 65536
     for file in non_suspects1:
@@ -181,8 +184,8 @@ def hash_rash(origin_folder1, file_extension):
         file_names.append(file)
 
     df = pd.DataFrame(hash_list, file_names)
-    #df.columns = ["hash"]
-    #df = df.reset_index()
-    #df = df.rename(columns={'index': 'file_name'})
+    # df.columns = ["hash"]
+    # df = df.reset_index()
+    # df = df.rename(columns={'index': 'file_name'})
 
     return df
