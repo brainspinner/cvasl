@@ -132,9 +132,10 @@ class Config:
             return self._loaded[directory]
         return value
 
+
 def hash_folder(origin_folder1, file_extension, made):
-    """Hashing function to be used by command line. 
-    
+    """Hashing function to be used by command line.
+
     :param origin_folder1: The string of the folder with files to hash
     :type origin_folder1: str
     :param file_extension: File extension
@@ -142,10 +143,10 @@ def hash_folder(origin_folder1, file_extension, made):
     :param made: file directory where csv with hashes will be put
     :type made: str
     """
-    filepath = os.path.join(made,'hash_output.csv')
+    filepath = os.path.join(made, 'hash_output.csv')
     df = hash_it_up_right_all(origin_folder1, file_extension)
-    df.to_csv(filepath)  
-    
+    df.to_csv(filepath)
+
 
 def hash_it_up_right_all(origin_folder1, file_extension):
     """Hashing function to check files are not corrupted or to assure
