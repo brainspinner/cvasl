@@ -9,6 +9,7 @@ This file contains functions for command line processing
 
 import logging
 from argparse import ArgumentParser
+from .file_handler import Config
 
 from .file_handler import hash_folder
 
@@ -68,8 +69,8 @@ def make_parser():
     hash_over.add_argument(
         '-x',
         '--extension',
-        action='store_true',
-        default=False,
+        action='append',
+        default=[],
         help='''
         Extension of files to be hashed.
         ''',
@@ -95,7 +96,7 @@ def main(argv):
                 config.get_directory('data', parsed.input),
                 parsed.extension,
                 config.get_directory('output', parsed.output),
-                parsed.force,
+                # parsed.force,
             )
         except Exception as e:
             logging.exception(e)

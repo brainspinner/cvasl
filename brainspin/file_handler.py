@@ -142,7 +142,7 @@ def hash_folder(origin_folder1, file_extension, made):
     :param made: file directory where csv with hashes will be put
     :type made: str
     """
-    filepath = os.join(made,'hash_output.csv')
+    filepath = os.path.join(made,'hash_output.csv')
     df = hash_it_up_right_all(origin_folder1, file_extension)
     df.to_csv(filepath)  
     
