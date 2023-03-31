@@ -131,6 +131,9 @@ Below is an example of how to look at the help for that in general:
 And here is an example for a specific function:
 `python -m brainspin hash_over --help`
 
+And here is an example of a working command (file names as chosen):
+`python -m brainspin hash_over --extension tsv  --input not_pushed --output rash`
+
 All long options have short aliases.
 
 
