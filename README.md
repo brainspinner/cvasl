@@ -122,5 +122,17 @@ metadata is available.
 
 The project doesn't include testing data yet.  
 
+### Command-Line Interface
+You will eventually be be able to preprocess, train and use models, and perform other functions using command-line interface. As of now (April 2023) this module is still being built.
+
+Below is an example of how to look at the help for that in general:
+`python -m brainspin --help` 
+
+And here is an example for a specific function:
+`python -m brainspin hash_over --help`
+
+All long options have short aliases.
+
+
 ✨Copyright 2023 Netherlands eScience Center and U. Amsterdam Medical Center
 Licensed under <TBA> See LICENSE for details.✨
