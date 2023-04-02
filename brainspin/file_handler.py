@@ -190,7 +190,7 @@ def hash_rash(origin_folder1, file_extension):
         os.path.join(origin_folder1, files),
         recursive=True,
     )
-    # print(non_suspects1)
+    #print(non_suspects1)
     BUF_SIZE = 65536
     for file in non_suspects1:
         sha256 = hashlib.sha256()
@@ -203,8 +203,10 @@ def hash_rash(origin_folder1, file_extension):
         result = sha256.hexdigest()
         hash_list.append(result)
         file_names.append(file)
+        #print(hash_list)
 
     df = pd.DataFrame(hash_list, file_names)
+    # print(df)
     # df.columns = ["hash"]
     # df = df.reset_index()
     # df = df.rename(columns={'index': 'file_name'})
