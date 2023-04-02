@@ -1,6 +1,6 @@
 #  environment document
 
-name: sliceit
+name: stackview2
 channels:
   - conda-forge
   
@@ -21,7 +21,8 @@ dependencies:
   - scipy=1.7.3
   - scikit-image=0.19.2
   - simpleitk=2.2.1
-  - slicer
+  - stackview
+  
 
 
 
