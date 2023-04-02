@@ -207,8 +207,8 @@ def hash_rash(origin_folder1, file_extension):
 
     df = pd.DataFrame(hash_list, file_names)
     # print(df)
-    # df.columns = ["hash"]
-    # df = df.reset_index()
-    # df = df.rename(columns={'index': 'file_name'})
+    df.columns = ["hash"]
+    df = df.reset_index()
+    df = df.rename(columns={'index': 'file_name'})
 
     return df
