@@ -20,7 +20,7 @@ import numpy
 from datetime import datetime, date
 import pydicom as dicom
 import pandas as pd
-import skimgae.io as io
+import skimage.io as io
 
 from pydicom.multival import MultiValue
 from pydicom.sequence import Sequence
