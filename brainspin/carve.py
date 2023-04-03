@@ -232,6 +232,23 @@ class PydicomDicomReader:
                 parsed.pixel_array,
             )
 
+    def rip_out_numpys(self, source, destination):
+        """
+        Extract image data from DICOM files and save it as JPG in
+        :code:`destination`.
+        :param source: A source generator.  For extended explanation see
+                       :class:`~carve.Source`.
+        :type source: :class:`~carve.Source`
+        :param destination: The name of the directory where JPG files
+                            should be stored.
+        :type destination: Compatible with :func:`os.path.join`
+        """
+        for key, parsed in source.items(dicom.dcmread):
+            io.imsave(
+                rename_file(key, destination, 'npy'),
+                parsed.pixel_array,
+            )
+
     def read(self, source):
         """
         This function allows reading of metadata in what source gives.

@@ -88,3 +88,5 @@ hopi
 *.ipynb_checkpoints
 not_pushed
 conda-pkg/meta.yaml
+tests/dicom_example_folder/*
+tests/dicom_example_folder
