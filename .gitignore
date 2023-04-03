@@ -74,8 +74,7 @@ venv.bak/
 /historical_notebooks
 /historical_notebooks/*
 
-/open_work/hidden/*
-/ML_files/*
+/open_work/test/*
 /not_pushed/
 /hopi/
 hopi
