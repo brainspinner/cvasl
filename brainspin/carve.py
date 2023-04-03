@@ -285,7 +285,7 @@ def get_numpy_with_pydicom(dicom_folder_path, numpy_folder_path):
     :type dicom_folder_path: str
     :param jpg_folder_path: output_directory, where they should be placed
     :type jpg_folder_path: str
-    :return: lovely (will put your images in the new folder but not return them)
+    :return: lovely (will put your imgs in the new folder but not return them)
     :rtype: bool
     """
     images_path = os.listdir(dicom_folder_path)
