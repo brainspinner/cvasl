@@ -274,6 +274,34 @@ class PydicomDicomReader:
         return pd.DataFrame(columns)
 
 
+def get_numpy_with_pydicom(dicom_folder_path, numpy_folder_path):
+    """
+    This function is for users with pydicom library only.
+    If you do not have the library it will throw an error.
+    The function function jpeg files out of a dicom file directory,
+    one by one, each of them (not just the first series as), and puts them in
+    an out put directory.
+    :param dicom_folder_path: dicomfile_directory, directory with dicom/.dcm
+    :type dicom_folder_path: str
+    :param jpg_folder_path: output_directory, where they should be placed
+    :type jpg_folder_path: str
+    :return: lovely (will put your images in the new folder but not return them)
+    :rtype: bool
+    """
+    images_path = os.listdir(dicom_folder_path)
+    for n, image in enumerate(images_path):
+        ds = dicom.dcmread(os.path.join(dicom_folder_path, image))
+        pixel_array_numpy = ds.pixel_array
+        image = image.replace('.dcm', '.npy')
+        lovely = io.imsave(
+            os.path.join(numpy_folder_path, image),
+            pixel_array_numpy,
+        )
+
+    print('{} image converted'.format(n))
+    return lovely
+
+
 def get_jpg_with_pydicom(dicom_folder_path, jpg_folder_path):
     """
     This function is for users with pydicom library only.
