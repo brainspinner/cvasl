@@ -1,6 +1,5 @@
 <p align="center">
-    <img style="width: 35%; height: 35%" src="">
-    🧠
+    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/brainspin/blob/main/brainspin.png">
 </p>
 
 [![DOI](To be made)
