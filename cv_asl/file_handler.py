@@ -40,8 +40,8 @@ class Config:
 
     default_locations = (
         './config.json',
-        os.path.expanduser('~/.brainspin/config.json'),
-        '/etc/brainspin/config.json',
+        os.path.expanduser('~/.cv_asl/config.json'),
+        '/etc/cv_asl/config.json',
     )
 
     default_layout = {
