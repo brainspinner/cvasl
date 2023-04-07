@@ -551,18 +551,15 @@ class SimpleITKDicomReader:
         ).drop(columns=self.exclude_fields, errors='ignore')
 
 
-def rip_out_array_sitk(dicomfile_directory, output_directory):
+def rip_out_array_sitk(dicomfile_directory):
     """
-    This function is for users with simpleITK library only.  If you do
-    not have the library it will throw an error.  The function
-    function jpeg files out of a dicom file directory, one by one,
-    each of them (not just the first series as), and puts them in an
-    out put directory. It also returns the images for inspection (as
-    arrays), which you can look at the [0] layer with :mod:`matplotlib`
+    This function is to rip raays out of a dicom file directory, one by one,
+    each of them (not just the first series as), and they can be assigned
+    to a variable.
+
     :param dicomfile_directory: dicomfile_directory, directory with dicom/.dcm
     :type dicomfile_directory: str
-    :param output_directory: output_directory, where they should be placed
-    :type output_directory: str
+
     :return: List of images represented as NumPy arrays.
     :rtype: List[numpy.ndarray]
     """
@@ -577,7 +574,5 @@ def rip_out_array_sitk(dicomfile_directory, output_directory):
         image = reader.Execute()
         image_np = sitk.GetArrayFromImage(image)
         saved_images.append(image_np)
-        # target_base = output_directory + os.path.basename(dicom_files[i])
-        # target_name = target_base + ".jpg"
-        # io.imsave(target_name, image_np[0])
+
     return saved_images
