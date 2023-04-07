@@ -34,7 +34,7 @@ class Config:
     by setting up and modifying a .json file in the appropriate directory
     users can avoid the need for any hardcoded paths to data.
     If you do not set up a json file, then
-    your storage space will default to the test_data folder 
+    your storage space will default to the test_data folder
     in the repository.
     """
 
@@ -64,15 +64,15 @@ class Config:
         """
         This is essentally anotice message if the computer
         does not have paths configured or files made so that
-        the data paths of a config.json can be used. 
+        the data paths of a config.json can be used.
         Until you do it will defailt to test_data
         """
         return textwrap.dedent(
             '''
-            Cannot load config. If you did not make a config, 
+            Cannot load config. If you did not make a config,
             until you do your data layout will defailt to test_data.
             If you tried to make a config.json it is not in the
-            right place. 
+            right place.
 
             Please create a file in either one of the locations
             listed below:
