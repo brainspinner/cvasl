@@ -221,8 +221,6 @@ class PydicomDicomReader:
         day = int(source[6:])
         return date(year=year, month=month, day=day)
 
-    
-
     def read(self, source):
         """
         This function allows reading of metadata in what source gives.
@@ -264,12 +262,11 @@ class PydicomDicomReader:
                 columns[field] = col
         return pd.DataFrame(columns)
 
+
 def rename_file(original, target, ext):
     dst_file = os.path.basename(original)
     dst_file = os.path.splitext(dst_file)[0]
     return os.path.join(target, '{}.{}'.format(dst_file, ext))
-
-
 
 
 tag_dictionary = {   # 'key' , 'datapoint_name'
@@ -521,7 +518,6 @@ class SimpleITKDicomReader:
         #     seconds, milis = source.split('.')
         # TODO: We don't know how to convert this yet        return source
 
-
     def read(self, source):
         """
         Read DICOM files, parse their metadata, generate a :code:`DataFrame`
@@ -585,11 +581,3 @@ def rip_out_array_sitk(dicomfile_directory, output_directory):
         # target_name = target_base + ".jpg"
         # io.imsave(target_name, image_np[0])
     return saved_images
-
-
-
-
-
-
-
-
