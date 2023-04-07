@@ -1,6 +1,6 @@
 #  environment document
 
-name: mriland
+name: mrilanding
 channels:
   - conda-forge
   
@@ -11,14 +11,18 @@ dependencies:
   - jupyter=1.0.0
   - jupyterlab=3.6.1
   - matplotlib=3.3.3
+  - nibabel
   - nest-asyncio=1.5.5
   - notebook=6.4.10
   - numexpr=2.7.3
   - numpy=1.22.3
   - pandas
+  - pycodestyle
   - scipy=1.7.3
   - scikit-image=0.19.2
   - simpleitk=2.2.1
+  - pydicom
+  
 
 
 
