@@ -1,7 +1,7 @@
-brainspin.file_handler module
+cv_asl.mold module
 =======================
 
-.. automodule:: brainspin.file_handler
+.. automodule:: cv_asl.mold
    :members:
    :undoc-members:
    :show-inheritance:

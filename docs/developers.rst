@@ -111,8 +111,8 @@ This project has CI setup that uses GitHub Actions
 platform.  
 
 
-.. _GitHub repo: https://github.com/brainspinner/brainspin
-.. _GitHub Actions dashboard: https://github.com/brainspinner/brainspin/actions
+.. _GitHub repo: https://github.com/brainspinner/cv_asl
+.. _GitHub Actions dashboard: https://github.com/brainspinner/cv_asl/actions
 
 
 Style

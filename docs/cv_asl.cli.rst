@@ -1,7 +1,7 @@
-brainspin.cli module
+cv_asl.cli module
 ====================
 
-.. automodule:: brainspin.cli
+.. automodule:: cv_asl.cli
    :members:
    :undoc-members:
    :show-inheritance:
