@@ -434,7 +434,7 @@ class MetadataHelper:
         :return: Pixel array of the extracted image.
         :rtype: :class:`~numpy.ndarray`
         """
-        # TODO(wvxvw): Deal with the case when dicom_file is a stream,
+        # TODO(): Deal with the case when dicom_file is a stream,
         # not a file name.
         self.reader.SetFileName(dicom_file)
         dcm = self.reader.Execute()

@@ -58,16 +58,21 @@ class Config:
         self._loaded = None
         self.load(location)
         self.validate()
+        self.data_default
 
     def usage(self):
         """
-        This is essentally a corrective error message if the computer
+        This is essentally anotice message if the computer
         does not have paths configured or files made so that
-        the data paths of config.json can be used
+        the data paths of a config.json can be used. 
+        Until you do it will defailt to test_data
         """
         return textwrap.dedent(
             '''
-            Cannot load config.
+            Cannot load config. If you did not make a config, 
+            until you do your data layout will defailt to test_data.
+            If you tried to make a config.json it is not in the
+            right place. 
 
             Please create a file in either one of the locations
             listed below:
