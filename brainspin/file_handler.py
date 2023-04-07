@@ -33,6 +33,9 @@ class Config:
     which is then processed into a variable. Essentially
     by setting up and modifying a .json file in the appropriate directory
     users can avoid the need for any hardcoded paths to data.
+    If you do not set up a json file, then
+    your storage space will default to the test_data folder 
+    in the repository.
     """
 
     default_locations = (
