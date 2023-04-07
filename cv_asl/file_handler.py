@@ -58,7 +58,7 @@ class Config:
         self._loaded = None
         self.load(location)
         self.validate()
-        self.data_default
+        self.data_default = '../test_data'
 
     def usage(self):
         """
