@@ -10,7 +10,7 @@ import json
 from unittest import TestCase, main
 
 # config
-from brainspin.file_handler import Config
+from cv_asl.file_handler import Config
 
 class TestConfig(TestCase):
 

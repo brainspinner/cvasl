@@ -1,9 +1,9 @@
-.. brainspin documentation master
+.. cv_asl documentation master
 
-brainspin documentation
+cv_asl documentation
 =======================
 
-Here is some general information about the brainspin  package. We are working on
+Here is some general information about the cv_asl package. We are working on
 documentation for programmers and medical professionals with some coding
 experience. 
 

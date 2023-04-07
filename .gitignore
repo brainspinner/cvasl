@@ -91,4 +91,4 @@ conda-pkg/meta.yaml
 tests/dicom_example_folder/*
 tests/dicom_example_folder
 config.json
-/etc/brainspin/*
+/etc/cv_asl/*

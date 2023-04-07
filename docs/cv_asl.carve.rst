@@ -1,7 +1,7 @@
-brainspin.mold module
+cv_asl.carve module
 =======================
 
-.. automodule:: brainspin.mold
+.. automodule:: cv_asl.carve
    :members:
    :undoc-members:
    :show-inheritance:

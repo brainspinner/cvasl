@@ -1,7 +1,7 @@
-brainspin
-=========
+cv_asl
+======
 
 .. toctree::
    :maxdepth: 4
 
-   brainspin
+   cv_asl

@@ -1,14 +1,14 @@
 <p align="center">
-    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/brainspin/blob/main/brainspin.png">
+    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/cv_asl/blob/main/brainspin.png">
 </p>
 
 [![DOI](To be made)
-[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/brainspin/)
-[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/brainspin/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
-[![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-commit.yml)
-[![Sanity](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/brainspin/actions/workflows/on-tag.yml)
+[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/cv_asl/)
+[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/cv_asl/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
+[![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml)
+[![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml)
 
-**brainspin** is an open source collaborative python library for analysis
+**cv_asl** is an open source collaborative python library for analysis
 of brain MRIs. Many functions relate to arterial spin labeled sequences.
 
 
@@ -20,7 +20,7 @@ is being buit for the entire community of radiology researchers across all unive
 
 ### Program files
 
-The main program in this repository (made of the modules in the brainspin folder) contains functions for analysis of MRIs..
+The main program in this repository (made of the modules in the cv_asl folder) contains functions for analysis of MRIs..
 
 ### Folders and Notebooks
 
@@ -60,8 +60,8 @@ You can store this information persistently in several locations.
 
 1.  In the same directory where you run the script (or the notebook).
     e.g. `./config.json`.
-2.  In home directory, e.g. `~/.brainspin/config.json`.
-3.  In global directory, e.g. `/etc/brainspin/config.json`.
+2.  In home directory, e.g. `~/.cv_asl/config.json`.
+3.  In global directory, e.g. `/etc/cv_asl/config.json`.
 
 However, we highly recommend you use the home directory.
 This file can have this or similar contents:
@@ -125,13 +125,13 @@ The project doesn't include testing data yet.
 You will eventually be be able to preprocess, train and use models, and perform other functions using command-line interface. As of now (April 2023) this module is still being built.
 
 Below is an example of how to look at the help for that in general:
-`python -m brainspin --help` 
+`python -m cv_asl --help` 
 
 And here is an example for a specific function:
-`python -m brainspin hash_over --help`
+`python -m cv_asl hash_over --help`
 
 And here is an example of a working command (file names as chosen):
-`python -m brainspin hash_over --extension tsv  --input not_pushed --output rash`
+`python -m cv_asl hash_over --extension tsv  --input not_pushed --output rash`
 
 All long options have short aliases.
 
