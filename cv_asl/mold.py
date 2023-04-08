@@ -14,6 +14,8 @@ from ipywidgets import IntSlider, Output
 import ipywidgets as widgets
 import matplotlib.pyplot as plt
 
+import SimpleITK as sitk
+
 
 class SliceViewer:
     """
@@ -57,3 +59,45 @@ class SliceViewer:
             vmin=self.v[0],
             vmax=self.v[1],
         )
+
+
+def n4_debias_sitk(
+        image_filename,
+        iteration_vector=[20, 10, 10, 5],
+        masking=True
+):
+    """
+    This is our implementation of sitk's N4 debiasing algorithm.
+    It is implemeted so the algorithm
+    can be applied unformly from command line (eventually)
+    Need to cite SITK
+    """
+    # TODO: add sitk citation in docstring,
+    inputImage = sitk.ReadImage(image_filename)
+    bits_in_input = inputImage.GetPixelIDTypeAsString()
+    bit_dictionary = {"Signed 8 bit integer": sitk.sitkInt8,
+                      "Signed 16 bit integer": sitk.sitkInt16,
+                      "Signed 32 bit integer": sitk.sitkInt32,
+                      "Signed 64 bit integer": sitk.sitkInt64,
+                      "Unsigned 8 bit integer": sitk.sitkUInt8,
+                      "Unsigned 16 bit integer": sitk.sitkUInt16,
+                      "Unsigned 32 bit integer": sitk.sitkUInt32,
+                      "Unsigned 64 bit integer": sitk.sitkUInt64,
+                      "32-bit float": sitk.sitkFloat32,
+                      "64-bit float": sitk.sitkFloat64, }
+    bits_ing = bit_dictionary[bits_in_input]
+    maskImage = sitk.OtsuThreshold(inputImage, 0, 1, 200)
+
+    inputImage = sitk.Cast(inputImage, bits_ing)
+
+    corrector = sitk.N4BiasFieldCorrectionImageFilter()
+
+    corrector.SetMaximumNumberOfIterations(iteration_vector)
+
+    if masking:
+        output = corrector.Execute(inputImage, maskImage)
+    else:
+        output = corrector.Execute(inputImage)
+    outputCasted = sitk.Cast(output, bits_ing)
+
+    return outputCasted
