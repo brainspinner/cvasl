@@ -102,6 +102,7 @@ def n4_debias_sitk(
 
     return outputCasted
 
+
 def save_preprocessed(array, out_fname, force):
     """
     This function is written to be called by the cli module.
@@ -122,14 +123,13 @@ def debias_folder(file_directory, algorithm, processed, force=False):
     """
     Debias  function to perform bias field correction over an entire folder,
     through command_line. It does not return, files made are an artifact
-    
+
     :param file_directory: The string of the folder with files to hash
     :type file_directory: str
     :param algorithm: algorithm e.g. N4_debias_sitk
     :type algorithm: algorithm
     :param processed: folder where output images go
     :type processed: str
-
 
     """
     file_directory_list = glob.glob(
