@@ -58,21 +58,19 @@ class Config:
         self._loaded = None
         self.load(location)
         self.validate()
-        self.data_default = '../test_data'
+        # self.data_default = '../test_data'
 
     def usage(self):
         """
-        This is essentally anotice message if the computer
-        does not have paths configured or files made so that
-        the data paths of a config.json can be used.
-        Until you do it will defailt to test_data
+        This is essentally a notice message if the computer
+        finds a config.json that can not be used.
+        If you have added no json the layout will defailt to test_data
         """
         return textwrap.dedent(
             '''
-            Cannot load config. If you did not make a config,
+            Cannot load or read config. If you did not make a config at all,
             until you do your data layout will defailt to test_data.
-            If you tried to make a config.json it is not in the
-            right place.
+            If you tried to make a config.json it is not correct.
 
             Please create a file in either one of the locations
             listed below:
@@ -107,10 +105,14 @@ class Config:
                 with open(p) as f:
                     self._raw = json.load(f)
                     break
+            except json.JSONDecodeError:
+                raise
             except Exception as e:
                 logging.info('Failed to load %s: %s', p, e)
         else:
-            raise ValueError(self.usage())
+            self._raw = {
+                "root_mri_directory": os.path.join(__file__, '..', 'test_data')
+            }
 
         root = self._raw.get('root_mri_directory')
         self._loaded = dict(self._raw)
