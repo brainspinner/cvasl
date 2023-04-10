@@ -122,7 +122,8 @@ def debias_folder(file_directory, algorithm, processed, force=False):
 
     """
     Debias  function to perform bias field correction over an entire folder,
-    through command_line. It does not return, files made are an artifact
+    through command_line. It does not return, files made are an artifact.
+    Note this will only run on files with .gz at end of extension.
 
     :param file_directory: The string of the folder with files to hash
     :type file_directory: str
@@ -133,7 +134,7 @@ def debias_folder(file_directory, algorithm, processed, force=False):
 
     """
     file_directory_list = glob.glob(
-        os.path.join(file_directory, '**/*'),
+        os.path.join(file_directory, '**/*.gz'),
         recursive=True,
     )
     for file in file_directory_list:
