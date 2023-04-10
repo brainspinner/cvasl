@@ -76,9 +76,13 @@ def n4_debias_sitk(
     inputImage = sitk.ReadImage(image_filename)
     bits_in_input = inputImage.GetPixelIDTypeAsString()
     bit_dictionary = {"Signed 8 bit integer": sitk.sitkInt8,
+                      "8-bit signed integer": sitk.sitkInt8,
                       "Signed 16 bit integer": sitk.sitkInt16,
+                      "16-bit signed integer": sitk.sitkInt16,
                       "Signed 32 bit integer": sitk.sitkInt32,
+                      "32-bit signed integer": sitk.sitkInt32,
                       "Signed 64 bit integer": sitk.sitkInt64,
+                      "64-bit signed integer": sitk.sitkInt64,
                       "Unsigned 8 bit integer": sitk.sitkUInt8,
                       "Unsigned 16 bit integer": sitk.sitkUInt16,
                       "Unsigned 32 bit integer": sitk.sitkUInt32,

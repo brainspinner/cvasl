@@ -130,8 +130,10 @@ Below is an example of how to look at the help for that in general:
 And here is an example for a specific function:
 `python -m cv_asl hash_over --help`
 
-And here is an example of a working command (file names as chosen):
-`python -m cv_asl hash_over --extension tsv  --input not_pushed --output rash`
+And here are examples of a working commands (file names can be changed):
+`python -m cv_asl hash_over --extension tsv  --input test_data --output rash`
+`python -m cv_asl debias_over  --input test_data --output rash --preprocessing N4_debias_sitk`
+
 
 All long options have short aliases.
 
