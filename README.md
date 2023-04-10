@@ -3,7 +3,7 @@
 </p>
 
 [![DOI](To be made)
-[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/brainspin.svg)](https://pypi.python.org/pypi/cv_asl/)
+[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/cv_asl.svg)](https://pypi.python.org/pypi/cv_asl/)
 [![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/cv_asl/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
 [![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml)

@@ -12,6 +12,7 @@ from argparse import ArgumentParser
 from .file_handler import Config
 
 from .file_handler import hash_folder
+from .mold import debias_folder
 
 
 def common(parser):
@@ -78,6 +79,37 @@ def make_parser():
 
     common(hash_over)
 
+    
+
+
+    debias_over = subparsers.add_parser('debias_over')
+    debias_over.set_defaults(action='debias_over')
+
+    debias_over.add_argument(
+        '-f',
+        '--force',
+        action='store_true',
+        default=False,
+        help='''
+        Write over previously preprpocessed data.
+        ''',
+    )
+    
+    debias_over.add_argument(
+        '-p',
+        '--preprocessing',
+        default='N4_debias_sitk',
+        choices=(
+            'N4_debias_sitk',
+            'alternative_debias',
+            'something_else_allowed'),
+        type=str,
+        help='''
+        Pick the desired algorithm for bias field preprocessing.
+        ''',
+    )
+    common(debias_over)
+
     return parser
 
 
@@ -96,6 +128,19 @@ def main(argv):
                 config.get_directory('data', parsed.input),
                 parsed.extension,
                 parsed.output,
+                parsed.force,
+            )
+        except Exception as e:
+            logging.exception(e)
+            return 1
+
+    if parsed.action == 'debias_over':
+        try:
+
+            debias_folder(
+                config.get_directory('data', parsed.input),
+                parsed.preprocessing,
+                config.get_directory('preprocessed', parsed.output),
                 parsed.force,
             )
         except Exception as e:

@@ -101,3 +101,49 @@ def n4_debias_sitk(
     outputCasted = sitk.Cast(output, bits_ing)
 
     return outputCasted
+
+def save_preprocessed(array, out_fname, force):
+    """
+    This function is written to be called by the cli module.
+    It stores arrays in a directory.
+    """
+    if not force:
+        if os.path.isfile(out_fname):
+            return
+    try:
+        os.makedirs(os.path.dirname(out_fname))
+    except FileExistsError:
+        pass
+    np.save(out_fname, array, allow_pickle=False)
+
+
+def debias_folder(file_directory, algorithm, processed, force=False):
+
+    """
+    Debias  function to perform bias field correction over an entire folder,
+    through command_line. It does not return, files made are an artifact
+    
+    :param file_directory: The string of the folder with files to hash
+    :type file_directory: str
+    :param algorithm: algorithm e.g. N4_debias_sitk
+    :type algorithm: algorithm
+    :param processed: folder where output images go
+    :type processed: str
+
+
+    """
+    file_directory_list = glob.glob(
+        os.path.join(file_directory, '**/*'),
+        recursive=True,
+    )
+    for file in file_directory_list:
+        if algorithm == 'n4_debias_sitk':
+            array = n4_debias_sitk(file)
+        elif algorithm == 'alternative_debias_a':
+            array = alternative_debias_a(file)
+
+        else:
+            array = n4_debias_sitk(file)
+        rel_fname = os.path.relpath(file, file_directory)
+        out_fname = os.path.join(processed, rel_fname)
+        save_preprocessed(array, out_fname, force)
