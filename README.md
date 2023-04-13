@@ -1,5 +1,5 @@
 <p align="center">
-    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/cvasl/blob/main/cvasl_logo.png">
+    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/cvasl/blob/main/cv_asl_logo.png">
 </p>
 
 [![DOI](To be made)
