@@ -1,7 +1,7 @@
-cv_asl.carve module
+cvasl.carve module
 =======================
 
-.. automodule:: cv_asl.carve
+.. automodule:: cvasl.carve
    :members:
    :undoc-members:
    :show-inheritance:

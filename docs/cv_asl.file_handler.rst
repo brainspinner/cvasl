@@ -1,7 +1,7 @@
-cv_asl.file_handler module
+cvasl.file_handler module
 =======================
 
-.. automodule:: cv_asl.file_handler
+.. automodule:: cvasl.file_handler
    :members:
    :undoc-members:
    :show-inheritance:

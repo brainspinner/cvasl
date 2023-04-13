@@ -111,8 +111,8 @@ This project has CI setup that uses GitHub Actions
 platform.  
 
 
-.. _GitHub repo: https://github.com/brainspinner/cv_asl
-.. _GitHub Actions dashboard: https://github.com/brainspinner/cv_asl/actions
+.. _GitHub repo: https://github.com/brainspinner/cvasl
+.. _GitHub Actions dashboard: https://github.com/brainspinner/cvasl/actions
 
 
 Style

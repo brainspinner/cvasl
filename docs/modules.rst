@@ -1,7 +1,7 @@
-cv_asl
+cvasl
 ======
 
 .. toctree::
    :maxdepth: 4
 
-   cv_asl
+   cvasl

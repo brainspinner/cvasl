@@ -1,7 +1,7 @@
-cv_asl.mold module
+cvasl.mold module
 =======================
 
-.. automodule:: cv_asl.mold
+.. automodule:: cvasl.mold
    :members:
    :undoc-members:
    :show-inheritance:

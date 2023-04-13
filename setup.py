@@ -14,10 +14,10 @@ from setuptools.command.install import install as InstallCommand
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
-project_url = 'https://github.com/brainspinner/cv_asl'
+project_url = 'https://github.com/brainspinner/cvasl'
 project_description = 'A package for analysis of MRI'
 project_license = 'PENDING'
-name = 'cv_asl'
+name = 'cvasl'
 try:
     tag = subprocess.check_output(
         [
@@ -89,7 +89,7 @@ class TestCommand(Command):
 
     def sources(self):
         return glob(
-            os.path.join(project_dir, 'cv_asl', '**/*.py'),
+            os.path.join(project_dir, 'cvasl', '**/*.py'),
             recursive=True,
         ) + [os.path.join(project_dir, 'setup.py')]
 
@@ -252,7 +252,7 @@ class SphinxApiDoc(Command):
         sys.exit(main([
             '-o', src,
             '-f',
-            os.path.join(project_dir, 'cv_asl'),
+            os.path.join(project_dir, 'cvasl'),
             '--separate',
         ]))
 
@@ -565,7 +565,7 @@ if __name__ == '__main__':
         version=version,
         author='A team including the NLeSC and the Amsterdam Medical Center',
         author_email='c.moore@esciencecenter.nl',
-        packages=['cv_asl'],
+        packages=['cvasl'],
         url=project_url,
         license=project_license,
         license_files=('LICENSE.md',),

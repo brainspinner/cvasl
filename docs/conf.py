@@ -17,7 +17,7 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
-project = 'cv_asl'
+project = 'cvasl'
 copyright = '2023, c.moore@esciencecenter.nl'
 author = 'c.moore@esciencecenter.nl'
 

@@ -1,7 +1,7 @@
-cv_asl.cli module
+cvasl.cli module
 ====================
 
-.. automodule:: cv_asl.cli
+.. automodule:: cvasl.cli
    :members:
    :undoc-members:
    :show-inheritance:

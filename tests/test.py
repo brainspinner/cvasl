@@ -10,7 +10,7 @@ import json
 from unittest import TestCase, main
 
 # config
-from cv_asl.file_handler import Config
+from cvasl.file_handler import Config
 
 class TestConfig(TestCase):
 

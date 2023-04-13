@@ -2,6 +2,6 @@
 
 ## Unreleased
 
-Changed repo name from brainspin to cv_asl
+Changed repo name from brainspin to cvasl
 ### Added
 * 

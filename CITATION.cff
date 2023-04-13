@@ -24,7 +24,7 @@ keywords:
   - brain age
 license: Apache-2.0
 
-repository-code: "https://github.com/brainspinner/cv_asl"
-title: "cv_asl"
+repository-code: "https://github.com/brainspinner/cvasl"
+title: "cvasl"
 version: "0.0.1"
 date-released: 20/04/2023

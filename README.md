@@ -1,14 +1,14 @@
 <p align="center">
-    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/cv_asl/blob/main/cv_asl_logo.png">
+    <img style="width: 35%; height: 35%" src="https://github.com/brainspinner/cvasl/blob/main/cvasl_logo.png">
 </p>
 
 [![DOI](To be made)
-[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/cv_asl.svg)](https://pypi.python.org/pypi/cv_asl/)
-[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/cv_asl/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
-[![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-commit.yml)
-[![Sanity](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cv_asl/actions/workflows/on-tag.yml)
+[![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/cvasl.svg)](https://pypi.python.org/pypi/cvasl/)
+[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/cvasl/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
+[![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml)
+[![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml)
 
-**cv_asl** is an open source collaborative python library for analysis
+**cvasl** is an open source collaborative python library for analysis
 of brain MRIs. Many functions relate to arterial spin labeled sequences.
 
 
@@ -20,7 +20,7 @@ is being buit for the entire community of radiology researchers across all unive
 
 ### Program files
 
-The main program in this repository (made of the modules in the cv_asl folder) contains functions for analysis of MRIs..
+The main program in this repository (made of the modules in the cvasl folder) contains functions for analysis of MRIs..
 
 ### Folders and Notebooks
 
@@ -60,8 +60,8 @@ You can store this information persistently in several locations.
 
 1.  In the same directory where you run the script (or the notebook).
     e.g. `./config.json`.
-2.  In home directory, e.g. `~/.cv_asl/config.json`.
-3.  In global directory, e.g. `/etc/cv_asl/config.json`.
+2.  In home directory, e.g. `~/.cvasl/config.json`.
+3.  In global directory, e.g. `/etc/cvasl/config.json`.
 
 However, we highly recommend you use the home directory.
 This file can have this or similar contents:
@@ -125,17 +125,17 @@ The project doesn't include testing data yet.
 You will eventually be be able to preprocess, train and use models, and perform other functions using command-line interface. As of now (April 2023) this module is still being built.
 
 Below is an example of how to look at the help for that in general:
-`python -m cv_asl --help` 
+`python -m cvasl --help` 
 
 And here is an example for a specific function:
-`python -m cv_asl hash_over --help`
+`python -m cvasl hash_over --help`
 
 And here are examples of a working commands (file names can be changed):
 to hash over files:
-`python -m cv_asl hash_over --extension tsv  --input test_data --output some_ignored_folder`
+`python -m cvasl hash_over --extension tsv  --input test_data --output some_ignored_folder`
 
 to run a debiasing algorithm over files:
-`python -m cv_asl debias_over --preprocessing N4_debias_sitk --input test_data --output ignrd_flder `
+`python -m cvasl debias_over --preprocessing N4_debias_sitk --input test_data --output ignrd_flder `
 
 
 All long options have short aliases.

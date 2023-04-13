@@ -40,8 +40,8 @@ class Config:
 
     default_locations = (
         './config.json',
-        os.path.expanduser('~/.cv_asl/config.json'),
-        '/etc/cv_asl/config.json',
+        os.path.expanduser('~/.cvasl/config.json'),
+        '/etc/cvasl/config.json',
     )
 
     default_layout = {
