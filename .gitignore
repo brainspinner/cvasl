@@ -20,6 +20,7 @@ __pycache__/
 # var/
 # wheels/
 # share/python-wheels/
+/build/
 
 
 # Jupyter Notebook
