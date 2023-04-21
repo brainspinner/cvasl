@@ -19,10 +19,11 @@ import SimpleITK as sitk
 
 class NormedSliceViewer:
     """
-    A class to examine slices of MRIs, or other volumetric data, with normalizaiotn
+    A class to examine slices of MRIs, or other volumetric data,
+    with normalizaiotn
 
     """
-    #TODO: should just be an option with widget in slice viewer
+    # TODO: should just be an option with widget in slice viewer
     def __init__(self, volume, figsize=(10, 10)):
         self.volume = volume
         self.figsize = figsize
@@ -104,6 +105,7 @@ class SliceViewer:
             vmin=0,
             vmax=255,
         )
+
 
 def n4_debias_sitk(
         image_filename,
