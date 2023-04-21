@@ -26,12 +26,19 @@ class SliceViewer:
         self.volume = volume
         self.figsize = figsize
         self.v = [np.min(volume), np.max(volume)]
+        #self.norming= True
 
         widgets.interact(self.transpose, view=widgets.Dropdown(
             options=['axial', 'sag', 'cor'],
             value='axial',
             description='View:',
             disabled=False))
+        
+        # widgets.interact(self.plot_slice, norming=widgets.RadioButtons(
+        #     options=['YES', 'NO'],
+        #     value=None,
+        #     description='Normalize image:',
+        #     disabled=False))
 
     def transpose(self, view):
         # transpose the image to orient according to the slice plane selection
@@ -50,16 +57,77 @@ class SliceViewer:
             )
         )
 
-    def plot_slice(self, z):
+    def plot_slice(self,z) :
         # plot slice for plane which will match the widget intput
         self.fig = plt.figure(figsize=self.figsize)
+        
         plt.imshow(
-            self.vol[:, :, z],
-            cmap="gray",
-            vmin=self.v[0],
-            vmax=self.v[1],
+        self.vol[:, :, z],
+        cmap="gray",
+        vmin=0,
+        vmax=255,
+        )
+        # else:
+        #     plt.imshow(
+        #     self.vol[:, :, z],
+        #     cmap="gray",
+        #     vmin=self.v[0],
+        #     vmax=self.v[1],
+        #     )
+
+class NormedSliceViewer:
+    """
+    A class to examine slices of MRIs, or other volumetric data, with values
+    normalized on display
+
+    """
+    #TODO: rewrite as an option in the slice viewer
+    def __init__(self, volume, figsize=(10, 10)):
+        self.volume = volume
+        self.figsize = figsize
+        self.v = [np.min(volume), np.max(volume)]
+        #self.norming= True
+
+        widgets.interact(self.transpose, view=widgets.Dropdown(
+            options=['axial', 'sag', 'cor'],
+            value='axial',
+            description='View:',
+            disabled=False))
+        
+        # widgets.interact(self.plot_slice, norming=widgets.RadioButtons(
+        #     options=['YES', 'NO'],
+        #     value=None,
+        #     description='Normalize image:',
+        #     disabled=False))
+
+    def transpose(self, view):
+        # transpose the image to orient according to the slice plane selection
+        orient = {"sag": [1, 2, 0], "cor": [2, 0, 1], "axial": [0, 1, 2]}
+        self.vol = np.transpose(self.volume, orient[view])
+        maxZ = self.vol.shape[2] - 1
+
+        widgets.interact(
+            self.plot_slice,
+            z=widgets.IntSlider(
+                min=0,
+                max=maxZ,
+                step=1,
+                continuous_update=True,
+                description='Image Slice:'
+            )
         )
 
+    def plot_slice(self,z) :
+        # plot slice for plane which will match the widget intput
+        self.fig = plt.figure(figsize=self.figsize)
+        
+        
+        plt.imshow(
+        self.vol[:, :, z],
+        cmap="gray",
+        vmin=self.v[0],
+        vmax=self.v[1],
+        )
 
 def n4_debias_sitk(
         image_filename,
