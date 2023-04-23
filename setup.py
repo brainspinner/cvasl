@@ -590,8 +590,7 @@ if __name__ == '__main__':
             'pandas',
             'scipy',
             'matplotlib',
-            'scikit-learn==1.1.1',
-            'numpy>= 1.17.3', 
+            'scikit-learn==1.2.2',
         ],
         tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
         command_options={
