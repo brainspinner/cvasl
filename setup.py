@@ -591,6 +591,7 @@ if __name__ == '__main__':
             'scipy',
             'matplotlib',
             'scikit-learn==1.1.1',
+            'numpy>= 1.17.3', 
         ],
         tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
         command_options={
