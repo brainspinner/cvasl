@@ -47,14 +47,14 @@ class Config:
     default_layout = {
         'bids': '{}',
         'raw_data': '{}/raw_data',
-        'derivatives': '{}/derivatives/',
+        'derivatives': '{}/derivatives',
         'explore_asl': '{}/derivatives/explore_asl',
         'cvage': '{}/derivates/cvage',
         'cvage_inputs': '{}/derivates/cvage/cvasl_inputs',
         'cvage_outputs': '{}/derivates/cvage/cvasl_outputs',
     }
 
-    required_directories = ['bids', 'raw_data', 'derivatives']
+    required_directories = 'bids', 'raw_data', 'derivatives'
 
     def __init__(self, location=None):
         self._raw = None
@@ -95,24 +95,31 @@ class Config:
             You can override any individual directory (or subdirectory)
             by specifying it in the config.json file.
 
-            "bids" is expected to exist.
-            A "models" and "preprocessed" directories need not
-            exist.  They will be created as needed if missing.
+            {} are expected to exist.
             '''
-        ).format('\n'.join(self.default_locations))
+        ).format(
+            '\n'.join(self.default_locations),
+            self.required_directories,
+        )
 
     def load(self, location):
         locations = (
             [location] if location is not None else self.default_locations
         )
 
+        found = None
         for p in locations:
             try:
                 with open(p) as f:
                     self._raw = json.load(f)
+                    found = p
                     break
+            except json.JSONDecodeError as e:
+                raise ValueError(
+                    'Cannot parse configuration in {}'.format(p),
+                ) from e
             except Exception as e:
-                logging.info('Failed to load %s: %s', p, e)
+                logging.info('Configuration not found in %s: %s', p, e)
         else:
             raise ValueError(self.usage())
 
@@ -123,7 +130,10 @@ class Config:
             del required['bids']
             for directory in required.keys():
                 if directory not in self._raw:
-                    raise ValueError(self.usage())
+                    raise ValueError(
+                        'Configuration in {} is missing required directory {}'
+                        .format(found, directory),
+                    )
             # User specified all concrete directories.  Nothing for us to
             # do here.
         else:
@@ -134,10 +144,15 @@ class Config:
                 self._loaded[m] = self.default_layout[m].format(root)
 
     def validate(self):
+        # These directories are required to exist (contrast with the loading code where 
+        # we check for user *specifying* required directories)
         for d in self.required_directories:
             if not os.path.isdir(self._loaded[d]):
-                logging.error('Directory %s must exist', self._loaded[d])
-                raise ValueError(self.usage())
+                raise ValueError(
+                    'Required directory {}: {} doesn\'t exist'.format(
+                    d,
+                    self._loaded[d],
+                ))
 
     def get_directory(self, directory, value=None):
         if value is None:
