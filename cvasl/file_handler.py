@@ -45,20 +45,23 @@ class Config:
     )
 
     default_layout = {
-        'root_mri_directory': '{}',
-        'preprocessed': '{}/preprocessed',
-        'models': '{}/models',
-        'output': '{}/output',
+        'bids': '{}',
+        'raw_data': '{}/raw_data',
+        'derivatives': '{}/derivatives/',
+        'explore_asl': '{}/derivatives/explore_asl',
+        'cvage': '{}/derivates/cvage',
+        'cvage_inputs': '{}/derivates/cvage/cvasl_inputs',
+        'cvage_outputs': '{}/derivates/cvage/cvasl_outputs',
     }
 
-    required_directories = ['root_mri_directory']
+    required_directories = ['bids', 'raw_data','derivatives']
 
     def __init__(self, location=None):
         self._raw = None
         self._loaded = None
         self.load(location)
         self.validate()
-        self.data_default = '../test_data'
+        #self.data_default = '../test_data'
 
     def usage(self):
         """
@@ -70,7 +73,7 @@ class Config:
         return textwrap.dedent(
             '''
             Cannot load config. If you did not make a config,
-            until you do your data layout will defailt to test_data.
+            until you do your data layout not be accessed.
             If you tried to make a config.json it is not in the
             right place.
 
@@ -79,10 +82,12 @@ class Config:
             {}
 
             With the contents that specifies at least the root
-            directory as follows:
+            directory, and other neccesary directories as follows:
 
             {{
-                "root_mri_directory": "/path/to/storage"
+                "bids": "/path/to/storage"
+                "raw_data": "/path/to/storage/raw_data",
+                "derivatives": "/path/to/storage/derivatives/",
             }}
 
             The default directory layout is expected to be based on the above
@@ -91,9 +96,9 @@ class Config:
             You can override any individual directory (or subdirectory)
             by specifying it in the config.json file.
 
-            "root_mri_directory" is expected to exist.
-            The "models" and "preprocessed" directories need not
-            exist.  They will be created if missing.
+            "bids" is expected to exist.
+            A "models" and "preprocessed" directories need not
+            exist.  They will be created as needed if missing.
             '''
         ).format('\n'.join(self.default_locations))
 
@@ -112,11 +117,11 @@ class Config:
         else:
             raise ValueError(self.usage())
 
-        root = self._raw.get('root_mri_directory')
+        root = self._raw.get('bids')
         self._loaded = dict(self._raw)
         if root is None:
             required = dict(self.default_layout)
-            del required['root_mri_directory']
+            del required['bids']
             for directory in required.keys():
                 if directory not in self._raw:
                     raise ValueError(self.usage())
