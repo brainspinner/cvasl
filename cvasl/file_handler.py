@@ -144,15 +144,16 @@ class Config:
                 self._loaded[m] = self.default_layout[m].format(root)
 
     def validate(self):
-        # These directories are required to exist (contrast with the loading code where 
-        # we check for user *specifying* required directories)
+        # These directories are required to exist (contrast with the
+        # loading code where we check for user *specifying* required
+        # directories)
         for d in self.required_directories:
             if not os.path.isdir(self._loaded[d]):
                 raise ValueError(
                     'Required directory {}: {} doesn\'t exist'.format(
-                    d,
-                    self._loaded[d],
-                ))
+                        d,
+                        self._loaded[d],
+                    ))
 
     def get_directory(self, directory, value=None):
         if value is None:
