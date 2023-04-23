@@ -68,19 +68,23 @@ This file can have this or similar contents:
 
     {
  
-        'root_mri_directory': '/mnt/data',
-        'preprocessed': '/mnt/data/preprocessed',
-        'models': '/mnt/data/models',
-        'output': '/mnt/data/output',
+        'source_data': '/mnt/source_data',
+        'raw_data': '/mnt/data/raw_data',
+        'explore_asl': '/mnt/data/derivates/explore_asl',
+        'cvage': '/mnt/data/derivates/cvage',
+        'cvage_inputs': '/mnt/data/derivates/cvage/cvage_inputs',
+        'cvage_outputs': '/mnt/data/derivates/cvage/cvage_outputs',
+
     }
 
-The file is read as follows: if the files specifies `root_mri_directory`
-directory, then the missing entries are assumed to be relative to
-the root.  You don't need to specify all entries.
+The file is read as follows: if the file only specifies `raw_data`
+directory, then the derivative missing entries are assumed to be relative to
+the root in a BIDS compliant format order You don't need to specify all entries. If you do,
+you can overwrite the ALS-BIDS format order but this is not reccomended.
 
 ### Test data
 
-You can get test data by ... (TBA)
+You can get test data by contacting the cvage team. Please email Dr. Moore at c.moore@esciencecenter.nl
 
 
 ## Getting started
@@ -96,9 +100,9 @@ metadata is available.
       conda deactivate
       ```
 
-      _(repeat if you are in the base environment)_
+      _(optional repeat if you are in the base environment)_
 
-      You should be in no environment now
+      You should be in no environment or the base environment now
 
 
 1. Option A: To work with the most current versions with the possibility for development:
