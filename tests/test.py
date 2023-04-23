@@ -14,27 +14,34 @@ from cvasl.file_handler import Config
 
 class TestConfig(TestCase):
 
-    required_directories = {
-        'bids',
-    }
-    required_directories = ['bids']
+    # required_directories = {
+    #     'bids',
+    #     'raw_data',
+    #     'derivatives',
+    # }
+    required_directories = ['bids', 'raw_data', 'derivatives']
 
     def test_roots_only(self):
         with TemporaryDirectory() as td:
-            same_created_path = os.path.join(td, 'root')
-            os.mkdir(same_created_path)
+            bids = os.path.join(td, 'bids')
+            os.mkdir(bids)
+            raw_data = os.path.join(bids, 'raw_data')
+            os.mkdir(raw_data)
+            derivatives = os.path.join(bids, 'derivatives')
+            os.mkdir(derivatives)
             raw_config = {
-                'bids': same_created_path,
+                'bids': bids,
             }
             config_file = os.path.join(td, 'config.json')
             with open(config_file, 'w') as f:
                 json.dump(raw_config, f)
 
-            # for root in self.required_directories:
-            #     os.mkdir(os.path.join(td, root))
-
             config = Config(config_file)
-            assert config.get_directory('bids')
+            assert (
+                config.get_directory('bids') and
+                config.get_directory('raw_data') and
+                config.get_directory('derivatives')
+            )
 
     def test_missing_config_path(self):
         try:
