@@ -15,16 +15,16 @@ from cvasl.file_handler import Config
 class TestConfig(TestCase):
 
     required_directories = {
-        'root_mri_directory',
+        'bids',
     }
-    required_directories = ['root_mri_directory']
+    required_directories = ['bids']
 
     def test_roots_only(self):
         with TemporaryDirectory() as td:
             same_created_path = os.path.join(td, 'root')
             os.mkdir(same_created_path)
             raw_config = {
-                'root_mri_directory': same_created_path,
+                'bids': same_created_path,
             }
             config_file = os.path.join(td, 'config.json')
             with open(config_file, 'w') as f:
@@ -34,7 +34,7 @@ class TestConfig(TestCase):
             #     os.mkdir(os.path.join(td, root))
 
             config = Config(config_file)
-            assert config.get_directory('root_mri_directory')
+            assert config.get_directory('bids')
 
     def test_missing_config_path(self):
         try:

@@ -54,14 +54,13 @@ class Config:
         'cvage_outputs': '{}/derivates/cvage/cvasl_outputs',
     }
 
-    required_directories = ['bids', 'raw_data','derivatives']
+    required_directories = ['bids', 'raw_data', 'derivatives']
 
     def __init__(self, location=None):
         self._raw = None
         self._loaded = None
         self.load(location)
         self.validate()
-        #self.data_default = '../test_data'
 
     def usage(self):
         """
