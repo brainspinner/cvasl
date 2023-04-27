@@ -16,12 +16,28 @@ authors:
     family-names: Sivokon
     given-names: Oleg 
   -
+    affiliation: "Helmholtz-Zentrum Dresden-Rossendorf"
+    family-names: Petr
+    given-names: Jan
+    orcid: "https://orcid.org/0000-0002-3201-6002"
+  -
+    affiliation: "Amsterdam University Medical Centers, location VUmc"
+    family-names: Dijsselhof
+    given-names: Mathijs
+    orcid: "https://orcid.org/0000-0001-6005-3110"
+  -
+    affiliation: "Amsterdam University Medical Centers, location VUmc"
+    family-names: Mutsaerts
+    given-names: Henk JMM
+    orcid: "https://orcid.org/0000-0003-0894-0307"
 
 keywords:
   - arterial spin labelling
   - MRI
+  - machine learning
   - Python
   - brain age
+  - cerebrovascular
 license: Apache-2.0
 
 repository-code: "https://github.com/brainspinner/cvasl"
