@@ -20,19 +20,24 @@ is being buit for the entire community of radiology researchers across all unive
 
 ### Program files
 
-The main program in this repository (made of the modules in the cvasl folder) contains functions for analysis of MRIs..
+The main program in this repository (made of the modules in the cvasl folder) contains functions for analysis of MRIs.
 
 ### Folders and Notebooks
 
 To look around keep in mind the following distinction on folders:
 
 researcher_interface:
-- These are a growing series of interactive notebooks that allow
+- This folder will be added in the future for
+  a growing series of interactive notebooks that allow
   researchers to investigate questions about their own MRI data
  
 open_work:
-- This folder contains experimental work by core members of the brainage
-  team (Dr. Candace Makeda Moore, Dr. Dani Bodor, Dr. Henk Mutsaerts)
+- This folder contains experimental work by core members of the cvasl
+  team (including Dr. Candace Makeda Moore, Dr. Dani Bodor, Dr. Henk Mutsaerts)
+
+Please keep in mind that at present you will only be able to scroll images
+in the notebooks with a browser based approach i.e. run Jupyter in a browser but
+not in VSCode or another IDE to scroll the brain MRIs. 
 
 
 ### Data sets
@@ -50,11 +55,8 @@ able to locate the raw data you want it to find.
 There are several ways to specify the location of the following
 directories:
 
--   **root_mri_directory:** Special directory.  The rest of the directory layout can
+-   **sourcedata_directory:** Special directory.  The rest of the directory layout can
     be derived from its location.
--   **preprocessed:** The directory that will be used by preprocessing
-    code to output to.
--   **models:** The directory to output trained models to.
 
 You can store this information persistently in several locations.
 
@@ -115,6 +117,9 @@ metadata is available.
      ```sh
      conda env create -f environment.yml
      ```
+
+     Currently, you will then need to clone the repository to run the cvasl from repo. 
+     We will soon have an option to create the entire environment at once from conda.
 
   Option B:
    * Linux users can create their own environment by hand (use
