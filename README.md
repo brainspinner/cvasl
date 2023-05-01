@@ -68,12 +68,13 @@ This file can have this or similar contents:
 
     {
  
-        'source_data': '/mnt/source_data',
-        'raw_data': '/mnt/data/raw_data',
-        'explore_asl': '/mnt/data/derivates/explore_asl',
-        'cvage': '/mnt/data/derivates/cvage',
-        'cvage_inputs': '/mnt/data/derivates/cvage/cvage_inputs',
-        'cvage_outputs': '/mnt/data/derivates/cvage/cvage_outputs',
+        "source_data": "/mnt/source_data",
+        "raw_data": "/mnt/source_data/raw_data",
+        "derivatives": "/mnt/source_data/derivates/",
+        "explore_asl": "/mnt/source_data/derivates/explore_asl",
+        "cvage": "/mnt/source_data/derivates/cvage",
+        "cvage_inputs": "/mnt/source_data/derivates/cvage/cvage_inputs",
+        "cvage_outputs": "/mnt/source_data/derivates/cvage/cvage_outputs",
 
     }
 
