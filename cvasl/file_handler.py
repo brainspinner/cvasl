@@ -72,7 +72,7 @@ class Config:
         return textwrap.dedent(
             '''
             Cannot load config. If you did not make a config,
-            until you do your data layout not be accessed.
+            until you do your data layout cannot be accessed.
             If you tried to make a config.json it is not in the
             right place.
 
