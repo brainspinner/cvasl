@@ -204,7 +204,7 @@ def hash_rash(origin_folder1, file_extension):
 
     :param origin_folder1: The string of the folder with files to hash
     :type origin_folder1: str
-    :param file_extension: File extension
+    :param file_extension: File extension, written without period
     :type file_extension: str
 
     :returns: Dataframe with hashes for what is in folder
