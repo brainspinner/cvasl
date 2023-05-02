@@ -11,6 +11,8 @@ from unittest import TestCase, main
 
 # config
 from cvasl.file_handler import Config
+#hash_rash
+from cvasl.file_handler import hash_rash
 
 class TestConfig(TestCase):
 
@@ -52,7 +54,18 @@ class TestConfig(TestCase):
             assert False, 'Didn\'t notify on missing config file'
     
 
-        
+class TestHashMethods(unittest.TestCase):
+
+    def test_hash_rash(self):
+        tempfile1 = 'sample_mri_t.npy' # made up mri
+        tempfile2 = 'sample_mri_t.npy' # another made up mri
+        with TemporaryDirectory() as td:
+            with open(os.path.join(td, tempfile1), 'w') as tf:
+                tf.write('string')
+            with open(os.path.join(td, tempfile2), 'w') as tf:
+                tf.write('another_string')
+            
+            self.assertTrue((hash_rash(td, 'npy')["hash"]).equals(hash_rash(td, 'npy')["hash"]))
 
 
 if __name__ == '__main__':
