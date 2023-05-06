@@ -13,6 +13,7 @@ from unittest import TestCase, main
 from cvasl.file_handler import Config
 #hash_rash
 from cvasl.file_handler import hash_rash
+from cvasl.file_handler import intersect_all
 
 class TestConfig(TestCase):
 
@@ -66,6 +67,15 @@ class TestHashMethods(unittest.TestCase):
                 tf.write('another_string')
             
             self.assertTrue((hash_rash(td, 'npy')["hash"]).equals(hash_rash(td, 'npy')["hash"]))
+
+class TestIntersectMethods(unittest.TestCase):
+
+    def test_intersect_all(self):
+        p = [[1,2,8,9], [1,2,3,4,5,6,7,8,9]]
+        a = [[1,2,8,9], [1,2,3,4,5,6,7,8,9,10,11,12], [1,2,8,9,29]]
+        intersect_p = intersect_all(*p)
+        intersect_a = intersect_all(*a)
+        self.assertEqual((intersect_p),(intersect_a))
 
 
 if __name__ == '__main__':

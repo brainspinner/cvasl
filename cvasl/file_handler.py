@@ -238,14 +238,14 @@ def hash_rash(origin_folder1, file_extension):
 
     return df
 
+
 def make_columns(list_tsv_files):
     columns_list = []
     for file in list_tsv_files:
         dataframe_example = pd.read_csv(file, sep='\t')
-        columns= dataframe_example.columns.to_list()
+        columns = dataframe_example.columns.to_list()
         columns_list.append(columns)
     return columns_list
-
 
 
 def intersect_all(*sets):
@@ -253,4 +253,3 @@ def intersect_all(*sets):
     for remaining in rest:
         result = set(result).intersection(remaining)
     return result
-
