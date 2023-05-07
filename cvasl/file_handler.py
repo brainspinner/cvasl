@@ -302,3 +302,24 @@ def unduplicate_dfs(list_of_dataframes):
             core.append(frame)
     core.append(list_of_dataframes[0])
     return core
+
+
+def find_where_column(list_tsv_files, column_list):
+    """
+    A function to find which tsv contain
+    a list of specified columns
+
+    :param list_tsv_files: list of filenames of tsv files
+    :type list_tsv_files: list
+    :param column_list: list of columns as strings
+    :type column_list: list
+
+    :returns: list of lists of tsv names
+    :rtype: list
+    """
+    column_exists = []
+    for tsv in list_tsv_files:
+        dataframe = pd.read_csv(tsv, sep='\t')
+        if set(column_list).issubset(set(dataframe.columns.to_list())):
+            column_exists.append(tsv)
+    return column_exists
