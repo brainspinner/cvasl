@@ -240,6 +240,15 @@ def hash_rash(origin_folder1, file_extension):
 
 
 def make_columns(list_tsv_files):
+    """This function takes column titles
+    out of a tsv file.
+
+    :param list_tsv_files: list of filenames of tsv files
+    :type list_tsv_files: list
+
+    :returns: list of lists of column names
+    :rtype: list
+    """
     columns_list = []
     for file in list_tsv_files:
         dataframe_example = pd.read_csv(file, sep='\t')
@@ -249,7 +258,32 @@ def make_columns(list_tsv_files):
 
 
 def intersect_all(*sets):
+    """A function that given a group of sets
+    will return the elements common to all sets.
+
+    :param *sets: group of set or list of lists, but unpacked
+    :type *sets: list
+
+    :returns: result is common elements
+    :rtype: set
+    """
     result, *rest = sets
     for remaining in rest:
         result = set(result).intersection(remaining)
     return result
+
+
+def extract_common_columns(list_tsv_files):
+    """
+    This function takes a group of tsv
+    files and extracts the common columns
+
+    :param list_tsv_files: list of filenames of tsv files
+    :type list_tsv_files: list
+
+    :returns: result is common elements in columns
+    :rtype: set
+    """
+    b = make_columns(list_tsv_files)
+    columns_sets = intersect_all(*b)
+    return columns_sets
