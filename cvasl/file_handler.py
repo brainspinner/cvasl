@@ -287,3 +287,18 @@ def extract_common_columns(list_tsv_files):
     b = make_columns(list_tsv_files)
     columns_sets = intersect_all(*b)
     return columns_sets
+
+
+def unduplicate_dfs(list_of_dataframes):
+    """
+    This function takes a list of dataframes
+    and should return only dataframes that are not duplicated from each other
+    but it must be improved (see TODO)
+    """
+    # TODO: change to a rotating version so it picks off any duplicates
+    core = []
+    for frame, next_frame in zip(list_of_dataframes, list_of_dataframes[1:]):
+        if not frame.equals(next_frame):
+            core.append(frame)
+    core.append(list_of_dataframes[0])
+    return core
