@@ -17,14 +17,12 @@ from cvasl.file_handler import intersect_all
 
 
 sample_test_data1 = os.path.join(
-    os.path.abspath(os.path.dirname(os.path.dirname(__file__))),
-    '.helpers/fake_test_data',
+    '/cvasl/test_data',
     'ar1.npy',
 )
 
 sample_test_data2 = os.path.join(
-    os.path.abspath(os.path.dirname(os.path.dirname(__file__))),
-    '.helpers/fake_test_data',
+    '/cvasl/test_data',
     'ar2.npy',
 )
 
