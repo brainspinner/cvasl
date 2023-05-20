@@ -15,6 +15,20 @@ from cvasl.file_handler import Config
 from cvasl.file_handler import hash_rash
 from cvasl.file_handler import intersect_all
 
+
+sample_test_data1 = os.path.join(
+    os.path.abspath(os.path.dirname(os.path.dirname(__file__))),
+    '.helpers/fake_test_data',
+    'ar1.npy',
+)
+
+sample_test_data2 = os.path.join(
+    os.path.abspath(os.path.dirname(os.path.dirname(__file__))),
+    '.helpers/fake_test_data',
+    'ar2.npy',
+)
+
+
 class TestConfig(TestCase):
 
     # required_directories = {
@@ -76,6 +90,13 @@ class TestIntersectMethods(unittest.TestCase):
         intersect_p = intersect_all(*p)
         intersect_a = intersect_all(*a)
         self.assertEqual((intersect_p),(intersect_a))
+
+class TestDockerTests(unittest.TestCase):
+
+    def test_for_docker(self):
+        p = np.load(sample_test_data1)
+        a = np.load(sample_test_data2)
+        self.assertEqual((p.sum() + 24),(a.sum()))
 
 
 if __name__ == '__main__':
