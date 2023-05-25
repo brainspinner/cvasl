@@ -44,7 +44,11 @@ not in VSCode or another IDE to scroll the brain MRIs.
 
 The notebooks are configured to run on various datasets.  Contact
 Dr. Candace Makeda Moore( 📫 c.moore@esciencecenter.nl) to discuss any
-questions on data configuration for your datasets.
+questions on data configuration for your datasets. In terms of 
+derived value datasets (which use measurements instead of images)
+You will need tsv and/or csv file 
+datasets arranged in a particular format as specified in
+[seperated_values_specifications.md](seperated_values_specifications.md)
 
 
 ### Configuring (to work with your data)
@@ -124,6 +128,9 @@ metadata is available.
   Option B:
    * Linux users can create their own environment by hand (use
      install_dev as in setup).
+2. If you want to work with command-line, you can do so in your terminal, but 
+  if you would like to run our pre-made notebooks, then you can start them by entering
+  `jupyter lab` into the terminal prompt.
 
 
 
