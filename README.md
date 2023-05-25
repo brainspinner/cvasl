@@ -100,7 +100,8 @@ You can get test data by contacting the cvage team. Please email Dr. Moore at c.
 How to get the notebooks running?  Assuming the raw data set and
 metadata is available.
 
-0. Assuming you are using conda for package management:    
+0. 
+  Assuming you are using conda for package management:    
   * Make sure you are in no environment:
 
       ```sh
@@ -112,7 +113,8 @@ metadata is available.
       You should be in no environment or the base environment now
 
 
-1. Option A: To work with the most current versions with the possibility for development:
+1. 
+  Option A: To work with the most current versions with the possibility for development:
   Install all Python packages required, using `conda` and the `environment.yml` file. 
 
 
@@ -128,7 +130,8 @@ metadata is available.
   Option B:
    * Linux users can create their own environment by hand (use
      install_dev as in setup).
-2. If you want to work with command-line, you can do so in your terminal, but 
+2. 
+  If you want to work with command-line, you can do so in your terminal, but 
   if you would like to run our pre-made notebooks, then you can start them by entering
   `jupyter lab` into the terminal prompt.
 
