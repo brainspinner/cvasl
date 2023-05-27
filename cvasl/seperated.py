@@ -9,14 +9,14 @@ This file contains functions for processing csv and tsv
 files towards correct formats.
 """
 
-import pandas as pd # 
-import numpy as np    
-import copy     # Can Copy and Deepcopy files so original file is untouched.
+import pandas as pd
+import numpy as np
+import copy
 
 
 def recode_sex(whole_dataframe, string_for_sex):
     """
-    This function recodes sex into a new column if there 
+    This function recodes sex into a new column if there
     are two possible values. It maintains numerical older
     butchanges the values to 0 and 1. The new column is
     called 'sex_encoded'.
@@ -28,7 +28,7 @@ def recode_sex(whole_dataframe, string_for_sex):
 
     :returns: dataframe with sex encoded colum
     :rtype: pandas.dataFrame
-    
+
     """
     new_dataframe = whole_dataframe.copy()
     dataframe_column = whole_dataframe[string_for_sex]
@@ -36,15 +36,15 @@ def recode_sex(whole_dataframe, string_for_sex):
     if len(dataframe_column.unique()) == 2:
         if recoded.unique()[0] < recoded.unique()[1]:
             # transform smaller number to zero
-            recoded = recoded.replace(recoded.unique()[0], 0 )
-            recoded = recoded.replace(recoded.unique()[1], 1 )
+            recoded = recoded.replace(recoded.unique()[0], 0)
+            recoded = recoded.replace(recoded.unique()[1], 1)
         else:
-            recoded = recoded.replace(recoded.unique()[1], 0 )
-            recoded = recoded.replace(recoded.unique()[0], 1 )
+            recoded = recoded.replace(recoded.unique()[1], 0)
+            recoded = recoded.replace(recoded.unique()[0], 1)
         new_dataframe['sex_encoded'] = recoded
     elif len(recoded.unique) < 2:
         print('there are two sexes, you have fewer, caution, encode by hand')
     else:
         print('there are two sexes, you have more, caution, encode by hand')
-        
+
     return new_dataframe
