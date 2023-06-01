@@ -94,3 +94,4 @@ tests/dicom_example_folder
 config.json
 /etc/cvasl/*
 .helpers/fake_test_data/*
+internal_results/*
