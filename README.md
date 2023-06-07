@@ -128,6 +128,7 @@ metadata is available.
     Option B:
     * Linux users can create their own environment by hand (use
       install_dev as in setup).
+      
 2. If you want to work with command-line, you can do so in your terminal, but 
   if you would like to run our pre-made notebooks, then you can start them by entering
   `jupyter lab` into the terminal
