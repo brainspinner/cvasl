@@ -76,6 +76,7 @@ def relate_columns_graphs(dataframe, special_column_name):
         c = c + 1
     plt.savefig(("versus" + special_column_name + ".png"))
 
+
 def concat_double_header(dataframe_dub):
     """
     :param dataframe_dub: dataframe with double header
