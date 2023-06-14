@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright 2023 Netherlands eScience Center and VUMC(?).
+Copyright 2023 Netherlands eScience Center and Stichting VUMC.
 Licensed under <TBA>. See LICENSE for details.
 
 This file contains functions for processing csv and tsv
@@ -31,28 +31,28 @@ def recode_sex(whole_dataframe, string_for_sex):
     :rtype: pandas.dataFrame
 
     """
-    new_dataframe = whole_dataframe.copy()
-    dataframe_column = whole_dataframe[string_for_sex]
-    recoded = dataframe_column.copy()
+    new_dataframe = whole_dataframe.copy() # copy dataframe
+    dataframe_column = whole_dataframe[string_for_sex] # select column
+    recoded = dataframe_column.copy() # copy column
     if len(dataframe_column.unique()) == 2:
         if recoded.unique()[0] < recoded.unique()[1]:
             # transform smaller number to zero
-            recoded = recoded.replace(recoded.unique()[0], 0)
-            recoded = recoded.replace(recoded.unique()[1], 1)
+            recoded = recoded.replace(recoded.unique()[0], 0) # transform smaller number to zero
+            recoded = recoded.replace(recoded.unique()[1], 1) # transform larger number to one
         else:
-            recoded = recoded.replace(recoded.unique()[1], 0)
-            recoded = recoded.replace(recoded.unique()[0], 1)
+            recoded = recoded.replace(recoded.unique()[1], 0) # transform smaller number to zero
+            recoded = recoded.replace(recoded.unique()[0], 1) # transform larger number to one
         new_dataframe['sex_encoded'] = recoded
-    elif len(recoded.unique) < 2:
-        print('there are two sexes, you have fewer, caution, encode by hand')
-    else:
-        print('there are two sexes, you have more, caution, encode by hand')
+    elif len(recoded.unique) < 2: # if there is only one value or less
+        print('there should be two sexes (e.g., man and woman), your data have fewer, caution, encode by hand')
+    else: # if there are more than two values
+        print('there should be two sexes (e.g., man and woman), your data have more, caution, encode by hand')
 
-    return new_dataframe
+    return new_dataframe # return dataframe with new column
 
 
 def relate_columns_graphs(dataframe, special_column_name):
-    """
+    """ This function makes a scatter plot of all columns
 
     :param dataframe: dataframe variable
     :type dataframe: pandas.dataFrame
@@ -78,7 +78,7 @@ def relate_columns_graphs(dataframe, special_column_name):
 
 
 def concat_double_header(dataframe_dub):
-    """
+    """ This function concatenates the two headers of a dataframe
     :param dataframe_dub: dataframe with double header
     :type dataframe_dub: pandas.dataFrame
 
