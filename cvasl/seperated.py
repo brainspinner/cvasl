@@ -76,15 +76,15 @@ def relate_columns_graphs(dataframe, special_column_name):
     :returns: no return, makes artifact
     :rtype: None.
     """
-    y = dataframe[special_column_name]
+    y = dataframe[special_column_name].apply(pd.to_numeric)
     col = dataframe.columns.to_list()
     a = len(col)  # number of rows
     b = 1  # number of columns
     c = 1  # initialize plot counter
-    fig = plt.figure(figsize=(10, (len(col)*3)))
+    fig = plt.figure(figsize=(10, (len(col)*10)))
     for i in col:
         plt.subplot(a, b, c)
-        plt.scatter(dataframe[i], y)
+        plt.scatter(dataframe[i].apply(pd.to_numeric), y)
         plt.title('{}, subplot: {}{}{}'.format(i, a, b, c))
         plt.xlabel(i)
         c = c + 1
