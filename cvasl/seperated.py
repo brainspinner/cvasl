@@ -46,11 +46,14 @@ def recode_sex(whole_dataframe, string_for_sex):
     if len(dataframe_column.unique()) == 2:
         if recoded.unique()[0] < recoded.unique()[1]:
             # transform smaller number to zero
-            recoded = recoded.replace(recoded.unique()[0], 0) # transform smaller number to zero
-            recoded = recoded.replace(recoded.unique()[1], 1) # transform larger number to one
+            recoded = recoded.replace(recoded.unique()[0], 0)
+            # transform larger number to one
+            recoded = recoded.replace(recoded.unique()[1], 1)
         else:
-            recoded = recoded.replace(recoded.unique()[1], 0) # transform smaller number to zero
-            recoded = recoded.replace(recoded.unique()[0], 1) # transform larger number to one
+            # transform smaller number to zero
+            recoded = recoded.replace(recoded.unique()[1], 0)
+            # transform larger number to one
+            recoded = recoded.replace(recoded.unique()[0], 1)
         new_dataframe['sex_encoded'] = recoded
     elif len(recoded.unique) < 2:
         print('there are at least two sexes,')
@@ -59,7 +62,7 @@ def recode_sex(whole_dataframe, string_for_sex):
         print('your dataset appears to have more than two sexes')
         print('caution, encode by hand,')
 
-    return new_dataframe # return dataframe with new column
+    return new_dataframe  # return dataframe with new column
 
 
 def relate_columns_graphs(dataframe, special_column_name):
