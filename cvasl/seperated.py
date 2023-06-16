@@ -18,9 +18,10 @@ import copy
 def recode_sex(whole_dataframe, string_for_sex):
     """
     This function recodes sex into a new column if there
-    are two possible values. It maintains numerical older
-    butchanges the values to 0 and 1. The new column is
-    called 'sex_encoded'.
+    are two possible values. It maintains numerical order
+    but changes the values to 0 and 1. The new column is
+    called 'sex_encoded'. Note sex should be encoded
+    in numbers i.e. ints or floats
 
     :param whole_dataframe: dataframe variable
     :type whole_dataframe: str
@@ -31,9 +32,17 @@ def recode_sex(whole_dataframe, string_for_sex):
     :rtype: pandas.dataFrame
 
     """
-    new_dataframe = whole_dataframe.copy() # copy dataframe
-    dataframe_column = whole_dataframe[string_for_sex] # select column
-    recoded = dataframe_column.copy() # copy column
+    new_dataframe = whole_dataframe.copy()
+    dataframe_column = whole_dataframe[string_for_sex]
+    recoded = dataframe_column.copy()
+    if 999 in set(recoded.unique()):
+        recoded = recoded.replace(999, 'NaN')
+    if '999' in set(recoded.unique()):
+        recoded = recoded.replace('999', 'NaN')
+    if 'M' in set(recoded.unique()):
+        recoded = recoded.replace('M', 0)
+    if 'F' in set(recoded.unique()):
+        recoded = recoded.replace('F', 1)
     if len(dataframe_column.unique()) == 2:
         if recoded.unique()[0] < recoded.unique()[1]:
             # transform smaller number to zero
@@ -43,10 +52,12 @@ def recode_sex(whole_dataframe, string_for_sex):
             recoded = recoded.replace(recoded.unique()[1], 0) # transform smaller number to zero
             recoded = recoded.replace(recoded.unique()[0], 1) # transform larger number to one
         new_dataframe['sex_encoded'] = recoded
-    elif len(recoded.unique) < 2: # if there is only one value or less
-        print('there should be two sexes (e.g., man and woman), your data have fewer, caution, encode by hand')
-    else: # if there are more than two values
-        print('there should be two sexes (e.g., man and woman), your data have more, caution, encode by hand')
+    elif len(recoded.unique) < 2:
+        print('there are at least two sexes,')
+        print('your dataset appears to have fewer, caution, encode by hand')
+    else:
+        print('your dataset appears to have more than two sexes')
+        print('caution, encode by hand,')
 
     return new_dataframe # return dataframe with new column
 
