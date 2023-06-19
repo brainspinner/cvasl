@@ -95,3 +95,4 @@ config.json
 /etc/cvasl/*
 .helpers/fake_test_data/*
 internal_results/*
+result_models/bad_models/*
