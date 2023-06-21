@@ -11,9 +11,11 @@ from unittest import TestCase, main
 
 # config
 from cvasl.file_handler import Config
-#hash_rash
+# hash_rash
 from cvasl.file_handler import hash_rash
 from cvasl.file_handler import intersect_all
+# seperated
+from cvasl.seperated import check_identical_columns
 
 
 sample_test_data1 = os.path.join(
@@ -80,6 +82,24 @@ class TestHashMethods(unittest.TestCase):
             
             self.assertTrue((hash_rash(td, 'npy')["hash"]).equals(hash_rash(td, 'npy')["hash"]))
 
+class TestSeperatedMethods(unittest.TestCase):
+    #TODO: replace with test that runs over files in docker subdirectory
+
+    # def test_check_identical_columns(self):
+    #     tempfile1 = 'sample_mri_t.npy' # made up mri
+    #     tempfile2 = 'sample_mri_t.npy' # another made up mri
+    #     pandas_tempfile1 = np.load('sample_mri_t.npy') # made up numpy
+    #     pandas_tempfile2 = np.load('sample_mri_t.npy') # another made up numpy
+    #     pandas_tempfile1 
+    #     with TemporaryDirectory() as td:
+    #         with open(os.path.join(td, tempfile1), 'w') as tf:
+    #             tf.write('string')
+    #         with open(os.path.join(td, tempfile2), 'w') as tf:
+    #             tf.write('another_string')
+            
+    #         self.assertTrue(check_identical_columns(td).equals(0))
+    pass
+                            
 class TestIntersectMethods(unittest.TestCase):
 
     def test_intersect_all(self):
