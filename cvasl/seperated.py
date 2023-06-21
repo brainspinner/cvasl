@@ -13,6 +13,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import copy
+import glob
+import os
 
 
 def recode_sex(whole_dataframe, string_for_sex):
@@ -103,3 +105,31 @@ def concat_double_header(dataframe_dub):
     dataframe = dataframe_dub.copy()
     dataframe.columns = [c[0] + "_" + c[1] for c in dataframe.columns]
     return dataframe
+
+
+def check_identical_columns(tsv_path):
+    """
+    Here we enter the path to a folder, then return which columns which in
+    all files are exactly duplicated.In name and values
+    """
+    tsv_files = glob.glob(os.path.join(tsv_path, '*.tsv'))
+    dataframes = [
+        pd.read_csv(file, sep='\t', header=[0, 1], index_col=0)
+        for file in tsv_files
+    ]
+    key_df, *rest_dfs = dataframes
+
+    shared_columns = set(key_df.columns)
+
+    for frame in rest_dfs:
+        # check which labels are shared
+        shared_columns = shared_columns.intersection(frame.columns)
+
+    result = []
+    for column in shared_columns:
+        for frame in rest_dfs:
+            if not frame[column].equals(key_df[column]):
+                break
+        else:
+            result.append(column)
+    return result
