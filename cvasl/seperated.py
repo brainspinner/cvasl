@@ -91,6 +91,82 @@ def relate_columns_graphs(dataframe, special_column_name):
     plt.savefig(("versus" + special_column_name + ".png"))
 
 
+def relate_columns_graphs_two_dfs(
+        dataframe1,
+        dataframe2,
+        special_column_name,
+        other_column_name,
+):
+
+    """
+    This function is meant to be a helper function
+    for one that makes a scatter plot of all columns
+    that two dataframes have in common
+
+    :param dataframe1: dataframe variable
+    :type dataframe1: pandas.dataFrame
+    :param dataframe2: dataframe variable
+    :type dataframe2: pandas.dataFrame
+    :param special_column_name: str of column you graph against
+    :type  special_column_name: str
+    :param other_column_name: string of column you want to graph
+    :type  other_column_name: str
+
+    :returns: no return, makes artifact
+    :rtype: None.
+    """
+    shared_columns = (
+        dataframe1.columns.intersection(dataframe2.columns)).to_list()
+
+    dataframe1 = dataframe1[shared_columns]
+    dataframe2 = dataframe2[shared_columns]
+    plt.scatter(
+        dataframe1[special_column_name],
+        dataframe1[other_column_name],
+        color='purple',
+        alpha=0.5,
+    )
+    plt.scatter(
+        dataframe2[special_column_name],
+        dataframe2[other_column_name],
+        color='orange',
+        alpha=0.5,
+    )
+    plt.xlabel(special_column_name)
+    plt.ylabel(other_column_name)
+    plt.savefig((other_column_name + "versus" + special_column_name + ".png"))
+    plt.show(block=False)
+
+
+def plot_2on2_df(dataframe1, dataframe2, special_column):
+    """
+    This function is meant to create an artifact
+    of two datasets with comparable variables
+    in terms of graphing the variables
+    against a variable of interest
+
+
+    :param dataframe1: dataframe variable
+    :type dataframe1: pandas.dataFrame
+    :param dataframe2: dataframe variable
+    :type dataframe2: pandas.dataFrame
+    :param special_column_name: string of column you want to graph against
+    :type  special_column_name: str
+
+    :returns: no return, makes artifact
+    :rtype: None.
+    """
+    shared_columns = (
+        dataframe1.columns.intersection(dataframe2.columns)).to_list()
+    for rotator_column in dataframe1[shared_columns]:
+        relate_columns_graphs_two_dfs(
+            dataframe1,
+            dataframe2,
+            special_column,
+            rotator_column,
+        )
+
+
 def concat_double_header(dataframe_dub):
     """ This function concatenates the two headers of a dataframe
     :param dataframe_dub: dataframe with double header
