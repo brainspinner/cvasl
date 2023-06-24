@@ -95,3 +95,6 @@ config.json
 /etc/cvasl/*
 .helpers/fake_test_data/*
 internal_results/*
+# overlook all potentially patient related results
+*.csv
+*.tsv
