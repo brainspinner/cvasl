@@ -100,3 +100,4 @@ open_work/internal_results/*
 # overlook all potentially patient related results
 *.csv
 *.tsv
+help/
