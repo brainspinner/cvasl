@@ -98,6 +98,8 @@ def relate_columns_graphs_two_dfs(
         dataframe2,
         special_column_name,
         other_column_name,
+        color1='purple',
+        color2='orange',
 ):
 
     """
@@ -125,13 +127,13 @@ def relate_columns_graphs_two_dfs(
     plt.scatter(
         dataframe1[special_column_name],
         dataframe1[other_column_name],
-        color='purple',
+        color=color1,
         alpha=0.5,
     )
     plt.scatter(
         dataframe2[special_column_name],
         dataframe2[other_column_name],
-        color='orange',
+        color=color2,
         alpha=0.5,
     )
     plt.xlabel(special_column_name)
@@ -140,7 +142,11 @@ def relate_columns_graphs_two_dfs(
     plt.show(block=False)
 
 
-def plot_2on2_df(dataframe1, dataframe2, special_column):
+def plot_2on2_df(dataframe1,
+                 dataframe2,
+                 special_column,
+                 color1='purple',
+                 color2='orange',):
     """
     This function is meant to create an artifact
     of two datasets with comparable variables
@@ -166,7 +172,50 @@ def plot_2on2_df(dataframe1, dataframe2, special_column):
             dataframe2,
             special_column,
             rotator_column,
+            color1=color1,
+            color2=color2,
         )
+
+
+def polyfit_and_show(
+        dataframe,
+        special_column_name,
+        other_column_name,
+        color1='purple',
+):
+    """
+    This function creates a polynomial for two columns.
+    It returns the coefficients in a 2nd degree polynomial
+    and also creates a graph as a side effect.
+
+    :param dataframe: dataframe variable
+    :type dataframe: pandas.dataFrame
+    :param special_column_name: string of column you want to graph against
+    :type  special_column_name: str
+    :param other_column_name: string of column you want to graph
+    :type  other_column_name: str
+
+    :returns: coeffiects
+    :rtype: numpy.ndarray
+    """
+    x = np.array(dataframe[special_column_name])
+    y = np.array(dataframe[other_column_name])
+    degree = 2
+    coefficients = np.polyfit(x, y, degree)
+    print("Coëfficiënten 2nd degree polynomial:", coefficients)
+    tup = (x.min(), x.max())
+    line_z = []
+    for a in tup:
+        z = coefficients[0]*(a*a) + coefficients[1]*a + coefficients[2]
+        line_z.append(z)
+    plt.plot(tup, line_z)
+    plt.scatter(
+        dataframe[special_column_name],
+        dataframe[other_column_name],
+        color=color1,
+        alpha=0.4,
+    )
+    return coefficients
 
 
 def concat_double_header(dataframe_dub):
