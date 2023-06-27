@@ -223,7 +223,7 @@ def polyfit_and_show(
     else:
         print("Function does not support degree over 3, and should fail")
 
-    plt.plot(x,  y )
+    plt.plot(x, y)
     plt.scatter(
         xscat,
         yscat,
@@ -234,7 +234,7 @@ def polyfit_and_show(
 
 
 def concat_double_header(dataframe_dub):
-    """ 
+    """
     This function concatenates the two headers of a dataframe
     :param dataframe_dub: dataframe with double header
     :type dataframe_dub: pandas.dataFrame
