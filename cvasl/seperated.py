@@ -203,28 +203,30 @@ def polyfit_and_show(
     :returns: coeffiects
     :rtype: numpy.ndarray
     """
-    a = np.array(dataframe[special_column_name])
-    y = np.array(dataframe[other_column_name])
-    coefficients = np.polyfit(a, y, degree_poly)
+    dataframe = dataframe.dropna()
+    xscat = np.array(pd.to_numeric(dataframe[special_column_name]))
+    yscat = np.array(pd.to_numeric(dataframe[other_column_name]))
+    coefficients = np.polyfit(xscat, yscat, degree_poly)
     print("Coefficents for", degree_poly, "degree polynomial:", coefficients)
+    x = np.array((range(int(xscat.max()))))
     if degree_poly == 2:
-        z = coefficients[0]*(a*a) + coefficients[1]*a + coefficients[2]
+        y = coefficients[0]*(x**2) + coefficients[1]*x + coefficients[2]
     elif degree_poly == 1:
-        z = coefficients[0]*a + coefficients[1]
+        y = coefficients[0]*x + coefficients[1]
     elif degree_poly == 3:
-        z = sum(
-            coefficients[0]*(a*a*a),
-            coefficients[1]*(a*a),
-            coefficients[2]*a,
-            coefficients[3]
-        )
+        y = (
+                coefficients[0]*(x**3) +
+                coefficients[1]*(x**2) +
+                coefficients[2]*x +
+                coefficients[3]
+            )
     else:
         print("Function does not support degree over 3, and should fail")
 
-    plt.plot(a,  z )
+    plt.plot(x,  y )
     plt.scatter(
-        dataframe[special_column_name],
-        dataframe[other_column_name],
+        xscat,
+        yscat,
         color=color1,
         alpha=0.4,
     )
