@@ -181,6 +181,7 @@ def polyfit_and_show(
         dataframe,
         special_column_name,
         other_column_name,
+        degree_poly,
         color1='purple',
 ):
     """
@@ -193,22 +194,34 @@ def polyfit_and_show(
     :param special_column_name: string of column you want to graph against
     :type  special_column_name: str
     :param other_column_name: string of column you want to graph
-    :type  other_column_name: str
+    :type other_column_name: str
+    :param degree_poly: either 1,2 or 3 only
+    :type  degree_poly: int
+    :param color1: string of color for graphing
+    :type color1: str
 
     :returns: coeffiects
     :rtype: numpy.ndarray
     """
-    x = np.array(dataframe[special_column_name])
+    a = np.array(dataframe[special_column_name])
     y = np.array(dataframe[other_column_name])
-    degree = 2
-    coefficients = np.polyfit(x, y, degree)
-    print("Coëfficiënten 2nd degree polynomial:", coefficients)
-    tup = (x.min(), x.max())
-    line_z = []
-    for a in tup:
+    coefficients = np.polyfit(x, y, degree_poly)
+    print("Coefficents for", degree_poly, "degree polynomial:", coefficients)
+    if degree_poly == 2:
         z = coefficients[0]*(a*a) + coefficients[1]*a + coefficients[2]
-        line_z.append(z)
-    plt.plot(tup, line_z)
+    elif degree_poly == 1:
+        z = coefficients[0]*a + coefficients[1]
+    elif degree_poly == 3:
+        z = sum(
+            coefficients[0]*(a*a*a),
+            coefficients[1]*(a*a),
+            coefficients[2]*a,
+            coefficients[3]
+        )
+    else:
+        print("Function does not support degree over 3, and should fail")
+
+    plt.plot(a,  z )
     plt.scatter(
         dataframe[special_column_name],
         dataframe[other_column_name],
@@ -219,7 +232,8 @@ def polyfit_and_show(
 
 
 def concat_double_header(dataframe_dub):
-    """ This function concatenates the two headers of a dataframe
+    """ 
+    This function concatenates the two headers of a dataframe
     :param dataframe_dub: dataframe with double header
     :type dataframe_dub: pandas.dataFrame
 
