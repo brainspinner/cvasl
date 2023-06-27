@@ -201,7 +201,7 @@ def polyfit_and_show(
     :type color1: str
 
     :returns: coeffiects
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
     dataframe = dataframe.dropna()
     xscat = np.array(pd.to_numeric(dataframe[special_column_name]))
