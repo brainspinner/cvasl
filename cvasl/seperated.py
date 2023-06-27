@@ -205,7 +205,7 @@ def polyfit_and_show(
     """
     a = np.array(dataframe[special_column_name])
     y = np.array(dataframe[other_column_name])
-    coefficients = np.polyfit(x, y, degree_poly)
+    coefficients = np.polyfit(a, y, degree_poly)
     print("Coefficents for", degree_poly, "degree polynomial:", coefficients)
     if degree_poly == 2:
         z = coefficients[0]*(a*a) + coefficients[1]*a + coefficients[2]
