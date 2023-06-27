@@ -109,8 +109,8 @@ def concat_double_header(dataframe_dub):
 
 def check_identical_columns(tsv_path):
     """
-    Here we enter the path to a folder, then return which columns which in
-    all files are exactly duplicated.In name and values
+    Here we enter the path to a folder, then return the columns in
+    which all files are exactly duplicated in name and values.
     """
     tsv_files = glob.glob(os.path.join(tsv_path, '*.tsv'))
     dataframes = [
