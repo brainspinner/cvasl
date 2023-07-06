@@ -16,6 +16,7 @@ from cvasl.file_handler import hash_rash
 from cvasl.file_handler import intersect_all
 # seperated
 from cvasl.seperated import check_identical_columns
+from cvasl.seperated import find_original_y_values_quadratic
 
 
 sample_test_data1 = os.path.join(
@@ -81,6 +82,21 @@ class TestHashMethods(unittest.TestCase):
                 tf.write('another_string')
             
             self.assertTrue((hash_rash(td, 'npy')["hash"]).equals(hash_rash(td, 'npy')["hash"]))
+
+
+class TestPolynomiaMethods(unittest.TestCase):
+
+    def test_find_original_y_values_quadratic(self):
+        polynomial = 4,3,1
+        original_values = [1,2,3,4,5,6]
+        results_poly1 = []
+        for xs in original_values:
+            y = (4*xs**2 + xs*3 +1)
+            results_poly1.append(y)
+        mapped_back_values =find_original_y_values_quadratic(polynomial, results_poly1)
+        print(type(original_values))
+        print(type(mapped_back_values))         
+        self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
 
 class TestSeperatedMethods(unittest.TestCase):
     #TODO: replace with test that runs over files in docker subdirectory
