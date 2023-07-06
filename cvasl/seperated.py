@@ -135,12 +135,12 @@ def check_identical_columns(tsv_path):
     return result
 
 
-def find_original_y_values_quatratic(polynomial, output_value):
+def find_original_y_values_quadratic(polynomial, output_value):
     """
     Finds the original y-values of a second degree polynomial
     given its coefficients and an output value.
 
-    :param polynomial: Coefficients of the polynomial in the form (a, b, c)
+    :param polynomial: coefficients of the polynomial in the form (a, b, c)
     :type polynomial: tuple
 
     :param output_value: output of polynomial when a list of y are given
