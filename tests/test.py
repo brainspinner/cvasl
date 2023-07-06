@@ -17,6 +17,7 @@ from cvasl.file_handler import intersect_all
 # seperated
 from cvasl.seperated import check_identical_columns
 from cvasl.seperated import find_original_y_values_quadratic
+from cvasl.seperated import generate_transformation_matrix_quadratic
 
 
 sample_test_data1 = os.path.join(
@@ -93,28 +94,34 @@ class TestPolynomiaMethods(unittest.TestCase):
         for xs in original_values:
             y = (4*xs**2 + xs*3 +1)
             results_poly1.append(y)
-        mapped_back_values =find_original_y_values_quadratic(polynomial, results_poly1)
-        print(type(original_values))
-        print(type(mapped_back_values))         
+        mapped_back_values =find_original_y_values_quadratic(polynomial, results_poly1)      
         self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
 
-class TestSeperatedMethods(unittest.TestCase):
-    #TODO: replace with test that runs over files in docker subdirectory
+    def test_generate_transform_matrix_quadratic(self):
+        polynomial1 = 4,3,1
+        polynomial2 = 4,3,1
+        matrix1 = generate_transformation_matrix_quadratic(polynomial1,polynomial2)
+        matrix2 = np.array([[1,0,0],[0,1,0],[0,0,1]])       
+        self.assertEqual(matrix1.all(),(matrix2.all()))
 
-    # def test_check_identical_columns(self):
-    #     tempfile1 = 'sample_mri_t.npy' # made up mri
-    #     tempfile2 = 'sample_mri_t.npy' # another made up mri
-    #     pandas_tempfile1 = np.load('sample_mri_t.npy') # made up numpy
-    #     pandas_tempfile2 = np.load('sample_mri_t.npy') # another made up numpy
-    #     pandas_tempfile1 
-    #     with TemporaryDirectory() as td:
-    #         with open(os.path.join(td, tempfile1), 'w') as tf:
-    #             tf.write('string')
-    #         with open(os.path.join(td, tempfile2), 'w') as tf:
-    #             tf.write('another_string')
-            
-    #         self.assertTrue(check_identical_columns(td).equals(0))
-    pass
+
+    # class TestSeperatedMethods(unittest.TestCase):
+    #     #TODO: replace with test that runs over files in docker subdirectory
+
+    #     # def test_check_identical_columns(self):
+    #     #     tempfile1 = 'sample_mri_t.npy' # made up mri
+    #     #     tempfile2 = 'sample_mri_t.npy' # another made up mri
+    #     #     pandas_tempfile1 = np.load('sample_mri_t.npy') # made up numpy
+    #     #     pandas_tempfile2 = np.load('sample_mri_t.npy') # another made up numpy
+    #     #     pandas_tempfile1 
+    #     #     with TemporaryDirectory() as td:
+    #     #         with open(os.path.join(td, tempfile1), 'w') as tf:
+    #     #             tf.write('string')
+    #     #         with open(os.path.join(td, tempfile2), 'w') as tf:
+    #     #             tf.write('another_string')
+                
+    #     #         self.assertTrue(check_identical_columns(td).equals(0))
+    #     pass
                             
 class TestIntersectMethods(unittest.TestCase):
 
