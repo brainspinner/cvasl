@@ -19,6 +19,7 @@ from cvasl.seperated import check_identical_columns
 from cvasl.seperated import find_original_y_values_quadratic
 from cvasl.seperated import find_original_y_values_linear
 from cvasl.seperated import generate_transformation_matrix_quadratic
+from cvasl.seperated import generate_transformation_matrix_linear
 
 
 sample_test_data1 = os.path.join(
@@ -107,6 +108,24 @@ class TestPolynomiaMethods(unittest.TestCase):
             results_poly1.append(y)
         mapped_back_values =find_original_y_values_linear(polynomial, results_poly1)      
         self.assertEqual(np.array(original_values).all(),np.array(mapped_back_values).all())
+    
+    def test_generate_transform_matrix_linear2(self):
+        # test that different polynomials translate
+        polynomial1 = 4,3
+        polynomial2 = 3,3
+        matrix1 = generate_transformation_matrix_linear(polynomial1,polynomial2)
+        print(matrix1)
+        pol_made = (polynomial1 * matrix1)
+        print(pol_made) 
+        self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
+
+    def test_generate_transform_matrix_linear1(self):
+        # test that the same polynomial makes an identity matrix
+        polynomial1 = 4,3
+        polynomial2 = 4,3
+        matrix1 = generate_transformation_matrix_linear(polynomial1,polynomial2)
+        matrix2 = np.array([[1,0],[0,1]])       
+        self.assertEqual(matrix1.all(),(matrix2.all()))
 
     def test_generate_transform_matrix_quadratic1(self):
         # test that the same polynomial makes an identity matrix
