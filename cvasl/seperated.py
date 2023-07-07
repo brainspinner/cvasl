@@ -180,3 +180,27 @@ def find_original_y_values_quadratic(polynomial, output_value):
         pile.append(x1)
 
     return pile
+
+
+def find_original_y_values_linear(polynomial, output_value):
+    """
+    Finds the original y-values of a first degree polynomial
+    given its coefficients and an output value.
+
+    :param polynomial: coefficients of the polynomial in the form (a, b)
+    :type polynomial: tuple
+
+    :param output_value: output of polynomial when a list of y are given
+    :type output_value: list
+
+    :returns: pile,list of original y-values corresponding to the output value
+    :rtype: list
+    """
+    a, b = polynomial
+    pile = []
+    for value in output_value:
+        # calculate the original y-values
+        x1 = (value - b)/a
+        pile.append(x1)
+
+    return pile
