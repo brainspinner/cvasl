@@ -276,7 +276,7 @@ def check_identical_columns(tsv_path):
     return result
 
 
-def generate_transformation_matrix_linear(polynomial1, polynomial2):
+def generate_transformation_matrix(polynomial1, polynomial2):
     """
     Generates a matrix that transforms one linear polynomial into another.
     :param polynomial1: coefficients of the polynomial in the form (a1, b1)
@@ -288,6 +288,10 @@ def generate_transformation_matrix_linear(polynomial1, polynomial2):
     :returns: m, an array
     :rtype: ~numpy.ndarrray
     """
+    
+    if len(polynomial1) != len(polynomial2):
+        raise ValueError('Polynomials must be of equal size.')
+    
     a1, b1 = polynomial1
     a2, b2 = polynomial2
     m = np.array(((a2/a1, 0), (0, b2/b1)))
