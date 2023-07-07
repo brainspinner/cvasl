@@ -16,8 +16,7 @@ from cvasl.file_handler import hash_rash
 from cvasl.file_handler import intersect_all
 # seperated
 from cvasl.seperated import check_identical_columns
-from cvasl.seperated import find_original_y_values_quadratic
-from cvasl.seperated import find_original_y_values_linear
+from cvasl.seperated import find_original_y_values
 from cvasl.seperated import generate_transformation_matrix
 
 
@@ -95,7 +94,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         for xs in original_values:
             y = (4*xs**2 + xs*3 +1)
             results_poly1.append(y)
-        mapped_back_values =find_original_y_values_quadratic(polynomial, results_poly1)      
+        mapped_back_values =find_original_y_values(polynomial, results_poly1)      
         self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
 
     def test_find_original_y_values_linear(self):
@@ -105,7 +104,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         for xs in original_values:
             y = (xs*4 + 3)
             results_poly1.append(y)
-        mapped_back_values =find_original_y_values_linear(polynomial, results_poly1)      
+        mapped_back_values =find_original_y_values(polynomial, results_poly1)      
         self.assertEqual(np.array(original_values).all(),np.array(mapped_back_values).all())
     
     def test_generate_transform_matrix_linear2(self):
