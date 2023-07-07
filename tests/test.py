@@ -114,9 +114,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         polynomial1 = 4,3
         polynomial2 = 3,3
         matrix1 = generate_transformation_matrix_linear(polynomial1,polynomial2)
-        print(matrix1)
-        pol_made = (polynomial1 * matrix1)
-        print(pol_made) 
+        pol_made = (polynomial1 * matrix1).sum(axis=1)
         self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
 
     def test_generate_transform_matrix_linear1(self):
