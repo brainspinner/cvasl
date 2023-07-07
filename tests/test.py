@@ -17,6 +17,7 @@ from cvasl.file_handler import intersect_all
 # seperated
 from cvasl.seperated import check_identical_columns
 from cvasl.seperated import find_original_y_values_quadratic
+from cvasl.seperated import find_original_y_values_linear
 from cvasl.seperated import generate_transformation_matrix_quadratic
 
 
@@ -97,13 +98,31 @@ class TestPolynomiaMethods(unittest.TestCase):
         mapped_back_values =find_original_y_values_quadratic(polynomial, results_poly1)      
         self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
 
-    def test_generate_transform_matrix_quadratic(self):
+    def test_find_original_y_values_linear(self):
+        polynomial = 4,3
+        original_values = [3,4,5,6]
+        results_poly1 = []
+        for xs in original_values:
+            y = (xs*4 +3)
+            results_poly1.append(y)
+        mapped_back_values =find_original_y_values_linear(polynomial, results_poly1)      
+        self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
+
+    def test_generate_transform_matrix_quadratic1(self):
+        # test that the same polynomial makes an identity matrix
         polynomial1 = 4,3,1
         polynomial2 = 4,3,1
         matrix1 = generate_transformation_matrix_quadratic(polynomial1,polynomial2)
         matrix2 = np.array([[1,0,0],[0,1,0],[0,0,1]])       
         self.assertEqual(matrix1.all(),(matrix2.all()))
 
+    def test_generate_transform_matrix_quadratic2(self):
+        # test that different polynomials translate
+        polynomial1 = 4,3,1
+        polynomial2 = 3,3,3
+        matrix1 = generate_transformation_matrix_quadratic(polynomial1,polynomial2)
+        pol_made = (polynomial1 * matrix1).sum(axis=1)     
+        self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
 
     # class TestSeperatedMethods(unittest.TestCase):
     #     #TODO: replace with test that runs over files in docker subdirectory
