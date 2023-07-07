@@ -300,7 +300,7 @@ def generate_transformation_matrix(polynomial1, polynomial2):
 
 
 
-def find_original_y_values_quadratic(polynomial, output_value):
+def find_original_y_values(polynomial, output_value):
     """
     Finds the original y-values of a second degree polynomial
     given its coefficients and an output value.
@@ -314,40 +314,27 @@ def find_original_y_values_quadratic(polynomial, output_value):
     :returns: pile,list of original y-values corresponding to the output value
     :rtype: list
     """
-    a, b, c = polynomial
+
     pile = []
-    for value in output_value:
-        # calculate the discriminant
-        discriminant = b**2 - 4*a*(c - value)
-        # if the discriminant is negative, no real roots exist
-        if discriminant < 0:
-            return []
-        # calculate the original y-values
-        x1 = (-b + np.sqrt(discriminant)) / (2*a)
-        pile.append(x1)
 
-    return pile
+    if len(polynomial) == 3:
+        a, b, c = polynomial
+    
+        for value in output_value:
+            # calculate the discriminant
+            discriminant = b**2 - 4*a*(c - value)
+            # if the discriminant is negative, no real roots exist
+            if discriminant < 0:
+                return []
+            # calculate the original y-values
+            x1 = (-b + np.sqrt(discriminant)) / (2*a)
+            pile.append(x1)
 
-
-def find_original_y_values_linear(polynomial, output_value):
-    """
-    Finds the original y-values of a first degree polynomial
-    given its coefficients and an output value.
-
-    :param polynomial: coefficients of the polynomial in the form (a, b)
-    :type polynomial: tuple
-
-    :param output_value: output of polynomial when a list of y are given
-    :type output_value: list
-
-    :returns: pile,list of original y-values corresponding to the output value
-    :rtype: list
-    """
-    a, b = polynomial
-    pile = []
-    for value in output_value:
-        # calculate the original y-values
-        x1 = (value - b)/a
-        pile.append(x1)
-
+    elif len(polynomial) == 2:
+        a, b = polynomial
+        for value in output_value:
+            # calculate the original y-values
+            x1 = (value - b)/a
+            pile.append(x1)
+   
     return pile
