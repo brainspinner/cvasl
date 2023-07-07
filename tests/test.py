@@ -18,8 +18,7 @@ from cvasl.file_handler import intersect_all
 from cvasl.seperated import check_identical_columns
 from cvasl.seperated import find_original_y_values_quadratic
 from cvasl.seperated import find_original_y_values_linear
-from cvasl.seperated import generate_transformation_matrix_quadratic
-from cvasl.seperated import generate_transformation_matrix_linear
+from cvasl.seperated import generate_transformation_matrix
 
 
 sample_test_data1 = os.path.join(
@@ -113,7 +112,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         # test that different polynomials translate
         polynomial1 = 4,3
         polynomial2 = 3,3
-        matrix1 = generate_transformation_matrix_linear(polynomial1,polynomial2)
+        matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
         pol_made = (polynomial1 * matrix1).sum(axis=1)
         self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
 
@@ -121,7 +120,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         # test that the same polynomial makes an identity matrix
         polynomial1 = 4,3
         polynomial2 = 4,3
-        matrix1 = generate_transformation_matrix_linear(polynomial1,polynomial2)
+        matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
         matrix2 = np.array([[1,0],[0,1]])       
         self.assertEqual(matrix1.all(),(matrix2.all()))
 
@@ -129,7 +128,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         # test that the same polynomial makes an identity matrix
         polynomial1 = 4,3,1
         polynomial2 = 4,3,1
-        matrix1 = generate_transformation_matrix_quadratic(polynomial1,polynomial2)
+        matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
         matrix2 = np.array([[1,0,0],[0,1,0],[0,0,1]])       
         self.assertEqual(matrix1.all(),(matrix2.all()))
 
@@ -137,7 +136,7 @@ class TestPolynomiaMethods(unittest.TestCase):
         # test that different polynomials translate
         polynomial1 = 4,3,1
         polynomial2 = 3,3,3
-        matrix1 = generate_transformation_matrix_quadratic(polynomial1,polynomial2)
+        matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
         pol_made = (polynomial1 * matrix1).sum(axis=1)     
         self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
 
