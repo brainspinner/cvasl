@@ -135,6 +135,24 @@ def check_identical_columns(tsv_path):
     return result
 
 
+def generate_transformation_matrix_linear(polynomial1, polynomial2):
+    """
+    Generates a matrix that transforms one linear polynomial into another.
+    :param polynomial1: coefficients of the polynomial in the form (a1, b1)
+    :type polynomial1: tuple
+    :param polynomial2: coefficients of the polynomial in the form (a2, b2)
+    :type polynomial2: tuple
+
+
+    :returns: m, an array
+    :rtype: ~numpy.ndarrray
+    """
+    a1, b1 = polynomial1
+    a2, b2 = polynomial2
+    m = np.array(((a2/a1, 0), (0, b2/b1)))
+    return m
+
+
 def generate_transformation_matrix_quadratic(polynomial1, polynomial2):
     """
     Generates a matrix that transforms one polynomial into another.
