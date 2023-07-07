@@ -103,10 +103,10 @@ class TestPolynomiaMethods(unittest.TestCase):
         original_values = [3,4,5,6]
         results_poly1 = []
         for xs in original_values:
-            y = (xs*4 +3)
+            y = (xs*4 + 3)
             results_poly1.append(y)
         mapped_back_values =find_original_y_values_linear(polynomial, results_poly1)      
-        self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
+        self.assertEqual(np.array(original_values).all(),np.array(mapped_back_values).all())
 
     def test_generate_transform_matrix_quadratic1(self):
         # test that the same polynomial makes an identity matrix
