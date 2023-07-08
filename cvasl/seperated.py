@@ -146,15 +146,15 @@ def generate_transformation_matrix(polynomial1, polynomial2):
     :returns: m, an array
     :rtype: ~numpy.ndarrray
     """
-    
+
     if len(polynomial1) != len(polynomial2):
         raise ValueError('Polynomials must be of equal size.')
-    
+
     m = np.zeros([len(polynomial1), len(polynomial1)])
     for i, (c1, c2) in enumerate(zip(polynomial1, polynomial2)):
         m[i][i] = c2/c1
 
-    return m 
+    return m
 
 
 def find_original_y_values(polynomial, output_value):
@@ -176,7 +176,7 @@ def find_original_y_values(polynomial, output_value):
 
     if len(polynomial) == 3:
         a, b, c = polynomial
-    
+
         for value in output_value:
             # calculate the discriminant
             discriminant = b**2 - 4*a*(c - value)
@@ -193,7 +193,7 @@ def find_original_y_values(polynomial, output_value):
             # calculate the original y-values
             x1 = (value - b)/a
             pile.append(x1)
-    
+
     else:
         raise NotImplementedError('find_original_y_values only implemented for second or third degree polynomials.')
 
