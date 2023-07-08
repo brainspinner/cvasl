@@ -112,7 +112,22 @@ metadata is available.
       You should be in no environment or the base environment now
 
 
-1. Option A: To work with the most current versions with the possibility for development:
+1. 
+  Option A: Fastest option:
+  In a base-like environment with mamba installed, you can install all Python packages required, using `mamba` and the `environment.yml` file. 
+
+  If you do not have mamba installed you can follow instructions (here)[https://anaconda.org/conda-forge/mamba]
+  
+
+
+   * The command for Windows/Anaconda/Mamba users can be something like:
+
+     ```sh
+     mamba env create -f environment.yml
+     ```
+
+
+  Option B: To work with the most current versions with the possibility for development:
   Install all Python packages required, using `conda` and the `environment.yml` file. 
 
 
@@ -125,7 +140,7 @@ metadata is available.
      Currently, you will then need to clone the repository to run the cvasl from repo. 
      We will soon have an option to create the entire environment at once from conda.
 
-    Option B:
+    Option C:
     * Linux users can create their own environment by hand (use
       install_dev as in setup).
 2. If you want to work with command-line, you can do so in your terminal, but 

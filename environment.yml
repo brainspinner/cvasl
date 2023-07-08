@@ -1,6 +1,6 @@
 #  environment document
 
-name: mrilanding
+name: mrilander
 channels:
   - conda-forge
   
