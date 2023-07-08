@@ -278,7 +278,7 @@ def check_identical_columns(tsv_path):
 
 def generate_transformation_matrix(polynomial1, polynomial2):
     """
-    Generates a matrix that transforms one linear polynomial into another.
+    Generates a matrix that transforms one polynomial into another.
     :param polynomial1: coefficients of the polynomial in the form (a1, b1)
     :type polynomial1: tuple
     :param polynomial2: coefficients of the polynomial in the form (a2, b2)
@@ -302,7 +302,7 @@ def generate_transformation_matrix(polynomial1, polynomial2):
 
 def find_original_y_values(polynomial, output_value):
     """
-    Finds the original y-values of a second degree polynomial
+    Finds the original y-values of a second or third degree polynomial
     given its coefficients and an output value.
 
     :param polynomial: coefficients of the polynomial in the form (a, b, c)
