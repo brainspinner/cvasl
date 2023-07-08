@@ -113,10 +113,10 @@ class GlobSource:
         return self.tag
 
     def items(self, reader, transformer=None):
-        for file in glob(self.exp, recursive=self.recursive):
+        for file in glob(self.exp, recursive=self.recursive):  #TODO: glob is not callable, what are we trying to loop over here
             parsed = reader(file)
             if transformer is not None:
-                full_path = transformer(file)
+                self.full_path = transformer(file)
             yield file, parsed
 
 
@@ -138,7 +138,7 @@ class MultiSource:
 def rename_file(original, target, ext):
     dst_file = os.path.basename(original)
     dst_file = os.path.splitext(dst_file)[0]
-    return os.path.join(target, '{}.{}'.format(dst_file, ext))
+    return os.path.join(target, f'{dst_file}.{ext}')
 
 
 class PydicomDicomReader:
@@ -200,6 +200,8 @@ class PydicomDicomReader:
             self.exclude_field_types = exclude_field_types
         if date_fields:
             self.date_fields = date_fields
+        if time_fields:
+            self.time_fields = time_fields
         if exclude_fields:
             self.exclude_fields = exclude_fields
 
@@ -256,12 +258,6 @@ class PydicomDicomReader:
                 col.append(val)
                 columns[field] = col
         return pd.DataFrame(columns)
-
-
-def rename_file(original, target, ext):
-    dst_file = os.path.basename(original)
-    dst_file = os.path.splitext(dst_file)[0]
-    return os.path.join(target, '{}.{}'.format(dst_file, ext))
 
 
 tag_dictionary = {   # 'key' , 'datapoint_name'
@@ -433,7 +429,7 @@ class MetadataHelper:
         # not a file name.
         self.reader.SetFileName(dicom_file)
         dcm = self.reader.Execute()
-        return sitk.GetArrayFromImage(image)
+        return sitk.GetArrayFromImage(dcm)  #TODO check that dcm is correct parameter instead of `image`
 
 
 class SimpleITKDicomReader:
@@ -562,7 +558,7 @@ def rip_out_array_sitk(dicomfile_directory):
     dicom_files = glob.glob(dicomfile_directory + '/*')
     reader = sitk.ImageFileReader()
     saved_images = []
-    for i in range(len(dicom_files)):
+    for i, _ in enumerate(dicom_files):
         # give the reader a filename
         reader.SetFileName(dicom_files[i])
         # use the reader to read the image
