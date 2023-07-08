@@ -113,7 +113,8 @@ class GlobSource:
         return self.tag
 
     def items(self, reader, transformer=None):
-        for file in glob(self.exp, recursive=self.recursive):  # TODO: glob is not callable, what are we trying to loop over here
+        # TODO: glob is not callable, what are we trying to loop over?
+        for file in glob(self.exp, recursive=self.recursive):
             parsed = reader(file)
             if transformer is not None:
                 self.full_path = transformer(file)
@@ -429,7 +430,8 @@ class MetadataHelper:
         # not a file name.
         self.reader.SetFileName(dicom_file)
         dcm = self.reader.Execute()
-        return sitk.GetArrayFromImage(dcm)  # TODO check that dcm is correct parameter instead of `image`
+        # TODO check that dcm is correct parameter instead of `image`
+        return sitk.GetArrayFromImage(dcm)
 
 
 class SimpleITKDicomReader:

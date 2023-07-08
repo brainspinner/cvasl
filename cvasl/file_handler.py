@@ -126,7 +126,8 @@ class Config:
             for directory in required:
                 if directory not in self._raw:
                     raise ValueError(
-                        f'Configuration in {found} is missing required directory {directory}',
+                        f'Configuration in {found} is missing \
+                            required directory {directory}',
                     )
             # User specified all concrete directories.  Nothing for us to
             # do here.
