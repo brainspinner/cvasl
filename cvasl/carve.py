@@ -558,9 +558,9 @@ def rip_out_array_sitk(dicomfile_directory):
     dicom_files = glob.glob(dicomfile_directory + '/*')
     reader = sitk.ImageFileReader()
     saved_images = []
-    for i, _ in enumerate(dicom_files):
+    for file in dicom_files:
         # give the reader a filename
-        reader.SetFileName(dicom_files[i])
+        reader.SetFileName(file)
         # use the reader to read the image
         image = reader.Execute()
         image_np = sitk.GetArrayFromImage(image)
