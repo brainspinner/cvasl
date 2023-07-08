@@ -16,13 +16,13 @@ dependencies:
   - numexpr=2.7.3
   - numpy=1.22.3
   - pandas
+  - pydicom
   - pycodestyle
   - scipy=1.7.3
   - scikit-image=0.19.2
   - seaborn
   - simpleitk=2.2.1
   - sphinx=4.5.0
-  - pydicom
   
 
 

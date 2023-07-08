@@ -12,7 +12,6 @@ files towards correct formats.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import copy
 import glob
 import os
 
@@ -83,11 +82,11 @@ def relate_columns_graphs(dataframe, special_column_name):
     a = len(col)  # number of rows
     b = 1  # number of columns
     c = 1  # initialize plot counter
-    fig = plt.figure(figsize=(10, (len(col)*10)))
+    fig = plt.figure(figsize=(10, (len(col)*10)))  # noqa=F841, pylint: disable=unused-variable
     for i in col:
         plt.subplot(a, b, c)
         plt.scatter(dataframe[i].apply(pd.to_numeric), y)
-        plt.title('{}, subplot: {}{}{}'.format(i, a, b, c))
+        plt.title(f'{i}, subplot: {a}{b}{c}')
         plt.xlabel(i)
         c = c + 1
     plt.savefig(("versus" + special_column_name + ".png"))
@@ -147,16 +146,15 @@ def generate_transformation_matrix(polynomial1, polynomial2):
     :returns: m, an array
     :rtype: ~numpy.ndarrray
     """
-    
+
     if len(polynomial1) != len(polynomial2):
         raise ValueError('Polynomials must be of equal size.')
-    
+
     m = np.zeros([len(polynomial1), len(polynomial1)])
     for i, (c1, c2) in enumerate(zip(polynomial1, polynomial2)):
         m[i][i] = c2/c1
 
     return m
-
 
 
 def find_original_y_values(polynomial, output_value):
@@ -178,7 +176,7 @@ def find_original_y_values(polynomial, output_value):
 
     if len(polynomial) == 3:
         a, b, c = polynomial
-    
+
         for value in output_value:
             # calculate the discriminant
             discriminant = b**2 - 4*a*(c - value)
@@ -195,8 +193,11 @@ def find_original_y_values(polynomial, output_value):
             # calculate the original y-values
             x1 = (value - b)/a
             pile.append(x1)
-    
+
     else:
-        raise NotImplementedError('find_original_y_values only implemented for second or third degree polynomials.')
+        raise NotImplementedError(
+            'find_original_y_values only implemented for \
+            second or third degree polynomials.',
+            )
 
     return pile

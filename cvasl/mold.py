@@ -10,7 +10,6 @@ This file contains methods to normalize brain MRIs.
 import os
 import glob
 import numpy as np
-from ipywidgets import IntSlider, Output
 import ipywidgets as widgets
 import matplotlib.pyplot as plt
 
@@ -109,7 +108,7 @@ class SliceViewer:
 
 def n4_debias_sitk(
         image_filename,
-        iteration_vector=[20, 10, 10, 5],
+        iteration_vector=None,
         masking=True
 ):
     """
@@ -119,6 +118,10 @@ def n4_debias_sitk(
     Need to cite SITK
     """
     # TODO: add sitk citation in docstring,
+
+    if iteration_vector is None:
+        iteration_vector = [20, 10, 10, 5]
+
     inputImage = sitk.ReadImage(image_filename)
     bits_in_input = inputImage.GetPixelIDTypeAsString()
     bit_dictionary = {"Signed 8 bit integer": sitk.sitkInt8,
@@ -191,7 +194,7 @@ def debias_folder(file_directory, algorithm, processed, force=False):
         if algorithm == 'n4_debias_sitk':
             array = n4_debias_sitk(file)
         elif algorithm == 'alternative_debias_a':
-            array = alternative_debias_a(file)
+            array = alternative_debias_a(file)  # TODO: what is this?
 
         else:
             array = n4_debias_sitk(file)

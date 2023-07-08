@@ -110,7 +110,7 @@ def make_parser():
     return parser
 
 
-def main(argv):
+def main(argv):  # pylint: disable=unused-argument
     """
     This runs the parser and subparsers.
     """
