@@ -195,5 +195,8 @@ def find_original_y_values(polynomial, output_value):
             # calculate the original y-values
             x1 = (value - b)/a
             pile.append(x1)
-   
+    
+    else:
+        raise NotImplementedError('find_original_y_values only implemented for second or third degree polynomials.')
+
     return pile
