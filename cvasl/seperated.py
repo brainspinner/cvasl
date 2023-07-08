@@ -82,11 +82,11 @@ def relate_columns_graphs(dataframe, special_column_name):
     a = len(col)  # number of rows
     b = 1  # number of columns
     c = 1  # initialize plot counter
-    fig = plt.figure(figsize=(10, (len(col)*10)))
+    fig = plt.figure(figsize=(10, (len(col)*10)))  # noqa=F841, pylint: disable=unused-variable
     for i in col:
         plt.subplot(a, b, c)
         plt.scatter(dataframe[i].apply(pd.to_numeric), y)
-        plt.title('{}, subplot: {}{}{}'.format(i, a, b, c))
+        plt.title(f'{i}, subplot: {a}{b}{c}')
         plt.xlabel(i)
         c = c + 1
     plt.savefig(("versus" + special_column_name + ".png"))

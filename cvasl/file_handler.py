@@ -105,13 +105,13 @@ class Config:
         found = None
         for p in locations:
             try:
-                with open(p) as f:
+                with open(p, encoding="utf-8") as f:
                     self._raw = json.load(f)
                     found = p
                     break
             except json.JSONDecodeError as e:
                 raise ValueError(
-                    'Cannot parse configuration in {}'.format(p),
+                    f'Cannot parse configuration in {p}',
                 ) from e
             except Exception as e:
                 logging.info('Configuration not found in %s: %s', p, e)
@@ -123,11 +123,10 @@ class Config:
         if root is None:
             required = dict(self.default_layout)
             del required['bids']
-            for directory in required.keys():
+            for directory in required:
                 if directory not in self._raw:
                     raise ValueError(
-                        'Configuration in {} is missing required directory {}'
-                        .format(found, directory),
+                        f'Configuration in {found} is missing required directory {directory}',
                     )
             # User specified all concrete directories.  Nothing for us to
             # do here.
@@ -145,10 +144,8 @@ class Config:
         for d in self.required_directories:
             if not os.path.isdir(self._loaded[d]):
                 raise ValueError(
-                    'Required directory {}: {} doesn\'t exist'.format(
-                        d,
-                        self._loaded[d],
-                    ))
+                    f'Required directory {d}: {self._loaded[d]} does not exist'
+                    )
 
     def get_directory(self, directory, value=None):
         if value is None:
