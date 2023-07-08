@@ -12,7 +12,6 @@ files towards correct formats.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import copy
 import glob
 import os
 
@@ -155,8 +154,7 @@ def generate_transformation_matrix(polynomial1, polynomial2):
     for i, (c1, c2) in enumerate(zip(polynomial1, polynomial2)):
         m[i][i] = c2/c1
 
-    return m
-
+    return m 
 
 
 def find_original_y_values(polynomial, output_value):

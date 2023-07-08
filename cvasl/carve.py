@@ -17,17 +17,12 @@ import glob
 from abc import ABC, abstractmethod
 
 
-from datetime import datetime, date
+from datetime import date
 
 import pandas as pd
 import SimpleITK as sitk
 
-import numpy
-from datetime import datetime, date
 import pydicom as dicom
-import pandas as pd
-import skimage.io as io
-
 from pydicom.multival import MultiValue
 from pydicom.sequence import Sequence
 

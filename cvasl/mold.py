@@ -10,7 +10,6 @@ This file contains methods to normalize brain MRIs.
 import os
 import glob
 import numpy as np
-from ipywidgets import IntSlider, Output
 import ipywidgets as widgets
 import matplotlib.pyplot as plt
 
