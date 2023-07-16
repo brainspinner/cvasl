@@ -1,6 +1,6 @@
 #  environment document
 
-name: mrilanding
+name: mrilandingX
 channels:
   - conda-forge
   
@@ -16,6 +16,7 @@ dependencies:
   - numexpr=2.7.3
   - numpy=1.22.3
   - pandas
+  - plotly
   - pycodestyle
   - scipy=1.7.3
   - scikit-image=0.19.2
