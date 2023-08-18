@@ -1,6 +1,6 @@
 #  environment document
 
-name: opncombat
+name: opncomb
 channels:
   - conda-forge
   
