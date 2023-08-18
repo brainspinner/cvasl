@@ -35,6 +35,14 @@ open_work:
 - This folder contains experimental work by core members of the cvasl
   team (including Dr. Candace Makeda Moore, Dr. Dani Bodor, Dr. Henk Mutsaerts)
 
+harmonization_paper:
+- This folder contains experimental work for a forthcoming paper by core members of the cvasl
+  team (including Dr. Candace Makeda Moore, Dr. Dani Bodor, Dr. Henk Mutsaerts,
+  and Mathijs Dijsselhof) which deals with radiological image harmonization.
+
+lab_datasets:
+- This folder contains notebooks which show how image datasets were assembled in notebooks.
+
 Please keep in mind that at present you will only be able to scroll images
 in the notebooks with a browser based approach i.e. run Jupyter in a browser but
 not in VSCode or another IDE to scroll the brain MRIs. 
