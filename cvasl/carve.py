@@ -1,5 +1,6 @@
 """
-Copyright 2023 Netherlands eScience Center and Amsterdam University Medical Center.
+Copyright 2023 Netherlands eScience Center and
+the Amsterdam University Medical Center.
 Licensed under the Apache License, version 2.0. See LICENSE for details.
 
 This file contains methods to anonymize image files.
