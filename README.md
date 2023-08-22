@@ -1,5 +1,5 @@
 <p align="center">
-    <img style="width: 35%; height: 35%" src="cv_asl_logo.png">
+    <img style="width: 35%; height: 35%" src="cv_asl_svg.svg">
 </p>
 
 [![DOI](To be made)
