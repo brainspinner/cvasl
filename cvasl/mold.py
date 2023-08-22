@@ -1,6 +1,6 @@
 """
-Copyright 2023 Netherlands eScience Center and University of Amsterdam.
-Licensed under <TBA>. See LICENSE for details.
+Copyright 2023 Netherlands eScience Center and Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.
 
 This file contains methods to normalize brain MRIs.
 """
