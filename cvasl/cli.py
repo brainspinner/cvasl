@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright 2023 Netherlands eScience Center and VUMC(?).
-Licensed under <TBA>. See LICENSE for details.
+Copyright 2023 Netherlands eScience Center and Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.
 
-This file contains functions for command line processing
+This file contains functions for command line processing of images and image derived data.
 """
 
 import sys
