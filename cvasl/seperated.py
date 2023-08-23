@@ -248,16 +248,25 @@ def concat_double_header(dataframe_dub):
     return dataframe
 
 
-def check_identical_columns(tsv_path):
+def check_identical_columns(tsv_path, header=0):
     """
     Here we enter the path to a folder, then return the columns in
     which all files are exactly duplicated in name and values.
+
+    needs more
     """
     tsv_files = glob.glob(os.path.join(tsv_path, '*.tsv'))
-    dataframes = [
-        pd.read_csv(file, sep='\t', header=[0, 1], index_col=0)
-        for file in tsv_files
-    ]
+    if header == 1:
+        dataframes = [
+            pd.read_csv(file, sep='\t', header=[0, 1], index_col=0)
+            for file in tsv_files
+        ]
+    else: 
+        dataframes = [
+            pd.read_csv(file, sep='\t', header=[0], index_col=0)
+            for file in tsv_files
+        ]
+        
     key_df, *rest_dfs = dataframes
 
     shared_columns = set(key_df.columns)
