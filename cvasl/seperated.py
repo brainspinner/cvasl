@@ -261,12 +261,11 @@ def check_identical_columns(tsv_path, header=0):
             pd.read_csv(file, sep='\t', header=[0, 1], index_col=0)
             for file in tsv_files
         ]
-    else: 
+    else:
         dataframes = [
             pd.read_csv(file, sep='\t', header=[0], index_col=0)
             for file in tsv_files
         ]
-        
     key_df, *rest_dfs = dataframes
 
     shared_columns = set(key_df.columns)
