@@ -100,7 +100,9 @@ open_work/internal_results/*
 harmonization_paper/Testing/*
 # overlook all potentially patient related results
 *.csv
+!researcher_interface/sample_sep_values/showable_standard.csv
 *.tsv
 *.png
 help/
 researcher_interface/retool.ipynb
+harmonization_paper/Testing/ComBat/ResultTestingSite/*
