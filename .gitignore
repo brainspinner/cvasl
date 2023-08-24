@@ -103,3 +103,4 @@ harmonization_paper/Testing/*
 *.tsv
 *.png
 help/
+researcher_interface/retool.ipynb
