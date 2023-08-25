@@ -7,26 +7,19 @@ We are BIDS compliant, but have even more specification for how files must be or
 
 Please note, all column names should be exactly the same and represent the same values. Therefore we include a dictionary about the column names below:
 
-|                             | Linux     | Win       | OSX       |
-|:---------------------------:|:---------:|:---------:|:---------:|
-| ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
-| ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
-
-
 
 |    column name   | meaning|  units | notes     | data type|
 |:----------------:|:------:|:------:|:---------:|:---------:|
 | 'participant_id'| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-| 'participant_id',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'session_id, | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|        
-|'run_id', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'age',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'sex',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'site', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'gm_vol', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'wm_vol', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
+|'session_id' |identifier for the session| none  | essentially the visit numner   | int|        
+|'run_id' | unique identifier for instance during session| none  | rarely a patient may be imaged multple times, each a run  | int|
+|'age'| patient's chronological age| years |  exact age best | float|
+|'sex'| whether patient male or female| none  | intersex patients -> female  | string|
+|'site', | unique identifier for specific machine in specific hospital| none  | none  | string|
+|'gm_vol', | total gray matter volumne| Liters | bilateral   | float|
+|'wm_vol', | total white matter volumne| Liters | bilateral   | float|
 |'csf_vol', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
-|'gm_icv_ratio', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
+|'gm_icv_ratio', | gray matter to intrcranial volumne ratio| none  | none  | float|
 |'gmwm_icv_ratio',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
 |'wmh_vol', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
 |'wmh_count', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
