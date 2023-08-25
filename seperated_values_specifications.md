@@ -7,11 +7,16 @@ We are BIDS compliant, but have even more specification for how files must be or
 
 Please note, all column names should be exactly the same and represent the same values. Therefore we include a dictionary about the column names below:
 
-They need a table like this:
-
-|    column name   | meaning|  units | notes       | data type|
+|                             | Linux     | Win       | OSX       |
 |:---------------------------:|:---------:|:---------:|:---------:|
-| 'participant_id',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
+| ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
+| ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
+
+
+
+|    column name   | meaning|  units | notes     | data type|
+|:----------------:|:------:|:------:|:---------:|:---------:|
+| 'participant_id'| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
 | 'participant_id',| unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
 |'session_id, | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|        
 |'run_id', | unique identifier for patient instance| none  | includes patient, run and visit numner   | string|
