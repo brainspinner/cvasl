@@ -3,6 +3,7 @@
 
 import unittest
 import os
+import pandas as pd
 import numpy as np
 import scipy
 from tempfile import TemporaryDirectory
@@ -18,6 +19,8 @@ from cvasl.file_handler import intersect_all
 from cvasl.seperated import check_identical_columns
 from cvasl.seperated import find_original_y_values
 from cvasl.seperated import generate_transformation_matrix
+from cvasl.seperated import find_outliers_by_list
+from cvasl.seperated import check_sex_dimorph_expectations
 
 
 sample_test_data1 = os.path.join(
@@ -29,6 +32,8 @@ sample_test_data2 = os.path.join(
     '/cvasl/test_data',
     'ar2.npy',
 )
+
+sample_tab_csv1 = "researcher_interface/sample_sep_values/showable_standard.csv"
 
 
 class TestConfig(TestCase):
@@ -172,6 +177,28 @@ class TestDockerTests(unittest.TestCase):
         p = np.load(sample_test_data1)
         a = np.load(sample_test_data2)
         self.assertEqual((p.sum() + 24),(a.sum()))
+
+                            
+class TestIntersectMethods(unittest.TestCase):
+
+    def test_intersect_all(self):
+        p = [[1,2,8,9], [1,2,3,4,5,6,7,8,9]]
+        a = [[1,2,8,9], [1,2,3,4,5,6,7,8,9,10,11,12], [1,2,8,9,29]]
+        intersect_p = intersect_all(*p)
+        intersect_a = intersect_all(*a)
+        self.assertEqual((intersect_p),(intersect_a))
+
+class TestTabDataCleaning(unittest.TestCase):
+
+    def test_check_for_outliers(self):
+        data = pd.read_csv(sample_tab_csv1)
+        outliers = find_outliers_by_list(data, ['gm_vol','wm_vol'])
+        self.assertEqual(1, len(outliers))
+    
+    def test_check_sex_dimorph_expectations(self):
+        data =  pd.read_csv(sample_tab_csv1)
+        returned = check_sex_dimorph_expectations(data)
+        self.assertEqual(len(data), len(returned))
 
 
 if __name__ == '__main__':
