@@ -21,28 +21,28 @@ Please note, all column names should be exactly the same and represent the same 
 |'csf_vol' | cerebrospinal fluid volumen| Liters  | from where?  | string|
 |'gm_icv_ratio' | gray matter to intrcranial volume ratio| none  | none  | float|
 |'gmwm_icv_ratio'| gray matter and white matter to intrcranial volume ratio| none  | none  | float|
-|'wmh_vol' | white matter hyperintensities total volume| none  | sum bilateral   | float|
+|'wmh_vol' | white matter hyperintensities total volume| Liters  | sum bilateral   | float|
 |'wmh_count' |white matter hyperintensities total vcount| none  | sum bilateral   | int|
-|'cbf_gm_pvc0' | cerebral blood flow in grey matter, uncorrected| ?  | notes?  | float|
-|'cbf_gm_pvc2' | cerebral blood flow in grey matter, corrected| ?  | partial volume corrected  | float|
-|'cbf_wm_pvc0' | cerebral blood flow in white matter, uncorrected| ?  | notes?  | float|
-|'cbf_wm_pvc2' | cerebral blood flow in white matter, corrected| ?  | partial volume corrected  | float|
-|'cbf_aca_pvc0'| cerebral blood flow in anterior cerebral artery, uncorrected| ?  | notes?  | float|
-|'cbf_mca_pvc0'| cerebral blood flow in middle cerebral artery, uncorrected| ?  | notes?  | float|
-|'cbf_pca_pvc0'| cerebral blood flow in posterior cerebral artery, uncorrected| ?  | notes?  | float|
-|'cbf_aca_pvc2'| cerebral blood flow in anterior cerebral artery, corrected| ?  | partial volume corrected  | float|
-|'cbf_mca_pvc2'| cerebral blood flow in middle cerebral artery, corrected| ?  | partial volume corrected  | float|
-|'cbf_pca_pvc2'| cerebral blood flow in posterior cerebral artery, corrected| ?  | partial volume corrected  | float|
-|'cov_gm_pvc0', | coeffiecient of variation in grey matter| none  | not partial volume corrected?  | float|
-|'cov_gm_pvc2', | coeffiecient of variation in grey matter| none  | partial volume corrected?  | float|
-|'cov_wm_pvc0', | coeffiecient of variation in white matter| none  | not partial volume corrected? | float|
-|'cov_wm_pvc2', | coeffiecient of variation in white matter| none  | partial volume corrected?  | float|
-|'cov_aca_pvc0'| coeffiecient of variation in anterior cerebral artery | none  | not partial volume corrected?  | float| 
-|'cov_mca_pvc0'| coeffiecient of variation in middle cerebral artery | none  | not partial volume corrected?  | float| 
-|'cov_pca_pvc0'| coeffiecient of variation in posterior cerebral artery| none  | not partial volume corrected?  | float| 
-|'cov_aca_pvc2'| coeffiecient of variation in anterior cerebral artery| none  | partial volume corrected?  | float| 
-|'cov_mca_pvc2' | coeffiecient of variation in middle cererbral artery | none  | partial volume corrected?  | float| 
-|'cov_pca_pvc2'| coeffiecient of variation in posterior cerebral artery | none  | partial volume corrected?  | float| 
+|'cbf_gm_pvc0' | cerebral blood flow in grey matter, uncorrected| ml/min/100g | notes?  | float|
+|'cbf_gm_pvc2' | cerebral blood flow in grey matter, corrected| ml/min/100g  | partial volume corrected  | float|
+|'cbf_wm_pvc0' | cerebral blood flow in white matter, uncorrected| ml/min/100g  | notes?  | float|
+|'cbf_wm_pvc2' | cerebral blood flow in white matter, corrected| ml/min/100g  | partial volume corrected  | float|
+|'cbf_aca_pvc0'| cerebral blood flow in anterior cerebral artery, uncorrected| ml/min/100g | notes?  | float|
+|'cbf_mca_pvc0'| cerebral blood flow in middle cerebral artery, uncorrected| ml/min/100g  | notes?  | float|
+|'cbf_pca_pvc0'| cerebral blood flow in posterior cerebral artery, uncorrected| ml/min/100g  | notes?  | float|
+|'cbf_aca_pvc2'| cerebral blood flow in anterior cerebral artery, corrected| ml/min/100g  | partial volume corrected  | float|
+|'cbf_mca_pvc2'| cerebral blood flow in middle cerebral artery, corrected| ml/min/100g  | partial volume corrected  | float|
+|'cbf_pca_pvc2'| cerebral blood flow in posterior cerebral artery, corrected| ml/min/100g  | partial volume corrected  | float|
+|'cov_gm_pvc0', | spatial coefficient of variation in grey matter| none  | not partial volume corrected?  | float|
+|'cov_gm_pvc2', | spatial coefficient of variation in grey matter| none  | partial volume corrected?  | float|
+|'cov_wm_pvc0', | spatial coefficient of variation in white matter| none  | not partial volume corrected? | float|
+|'cov_wm_pvc2', | spatial coefficient of variation in white matter| none  | partial volume corrected?  | float|
+|'cov_aca_pvc0'| spatial coefficient of variation in anterior cerebral artery | none  | not partial volume corrected?  | float| 
+|'cov_mca_pvc0'| spatial coefficient of variation in middle cerebral artery | none  | not partial volume corrected?  | float| 
+|'cov_pca_pvc0'| spatial coefficient of variation in posterior cerebral artery| none  | not partial volume corrected?  | float| 
+|'cov_aca_pvc2'| spatial coefficient of variation in anterior cerebral artery| none  | partial volume corrected?  | float| 
+|'cov_mca_pvc2'| spatial coefficient of variation in middle cererbral artery | none  | partial volume corrected?  | float| 
+|'cov_pca_pvc2'| spatial coefficient of variation in posterior cerebral artery | none  | partial volume corrected?  | float| 
 |'Additional_1'| additional value| none  | choice of user   | string, int or float| 
 |'Additional_2'| additional value| none  | choice of user   | string, int or float| 
 
