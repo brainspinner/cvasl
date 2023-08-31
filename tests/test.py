@@ -24,12 +24,14 @@ from cvasl.seperated import check_sex_dimorph_expectations
 
 
 sample_test_data1 = os.path.join(
-    '/cvasl/test_data',
+    os.path.dirname(__file__),
+    '../test_data',
     'ar1.npy',
 )
 
 sample_test_data2 = os.path.join(
-    '/cvasl/test_data',
+    os.path.dirname(__file__),
+    '../test_data',
     'ar2.npy',
 )
 
