@@ -351,3 +351,59 @@ def find_original_y_values(polynomial, output_value):
         )
 
     return pile
+
+
+def find_outliers_by_list(dataframe, column_list):
+    """
+    This function finds the outliers in terms of anything outside two
+    standard deviations
+    from the mean on a list of specific specific column,
+    then returns these rows of the dataframe.
+    :param dataframe: whole dataframe on dataset
+    :type dataframe: ~pandas.DataFrame
+    :param column_list: list of relevant columns
+    :type column_list: list
+
+    :returns: dataframe of outliers
+    :rtype: ~pandas.DataFrame
+    """
+    outlier_frames = []
+    for column_n in column_list:
+        mean = dataframe[column_n].mean()
+        std = dataframe[column_n].std()
+        values = dataframe[column_n].abs() - abs(mean + 2 * std)
+        outliers = dataframe[values > 0]
+        outlier_frames.append(outliers)
+    outlier_super = pd.concat(outlier_frames)
+    return outlier_super
+
+
+def check_sex_dimorph_expectations(dataframe):
+    """
+    This function checks that men
+    as expected have larger brains than women
+    in a given dataframe.
+    """
+    ladies = dataframe[dataframe['sex'] == 'F']
+    men = dataframe[dataframe['sex'] == 'M']
+    print('You have', len(ladies)/len(men), 'times as many ladies than men')
+    if ladies.gm_vol.mean() < men.gm_vol.mean():
+        print('As expected men have larger grey matter')
+    if ladies.wm_vol.mean() < men.wm_vol.mean():
+        print('As expected men have larger white matter')
+    if ladies.gm_vol.mean() >= men.gm_vol.mean():
+        print(
+            'Caution, average female grey matter may be \
+                  at similar or larger size than men'
+        )
+    if ladies.wm_vol.mean() >= men.wm_vol.mean():
+        print(
+            'Caution, average female white matter may be \
+                  at similar or larger size than men'
+        )
+    if ladies.gm_vol.mean() >= men.gm_vol.mean() \
+            or ladies.wm_vol.mean() >= men.wm_vol.mean():
+        bad_data = dataframe
+    else:
+        bad_data = 0
+    return bad_data
