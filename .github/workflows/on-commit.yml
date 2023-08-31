@@ -24,8 +24,14 @@ jobs:
           docker run
           --rm
           -v ${{ github.workspace }}:/ci
+          --cap-add=SYS_ADMIN
+          --privileged=true
           ghcr.io/brainspinner/cvaslimage:latest
-          sh -c 'set -xe ; cd /ci ; python ./setup.py test'
+          sh -c '
+            set -xe
+            mount --bind /cvasl/test_data/ /ci/test_data/
+            cd /ci
+            python ./setup.py test'
 
   Lint:
     runs-on: ubuntu-latest
