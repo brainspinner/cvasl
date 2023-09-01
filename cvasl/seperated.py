@@ -353,10 +353,11 @@ def find_original_y_values(polynomial, output_value):
     return pile
 
 
-def find_outliers_by_list(dataframe, column_list):
+def find_outliers_by_list(dataframe, column_list, number_sd):
     """
-    This function finds the outliers in terms of anything outside two
-    standard deviations
+    This function finds the outliers in terms of anything outside
+    a given number of
+    standard deviations (number_sd)
     from the mean on a list of specific specific column,
     then returns these rows of the dataframe.
     :param dataframe: whole dataframe on dataset
@@ -371,7 +372,7 @@ def find_outliers_by_list(dataframe, column_list):
     for column_n in column_list:
         mean = dataframe[column_n].mean()
         std = dataframe[column_n].std()
-        values = dataframe[column_n].abs() - abs(mean + 2 * std)
+        values = dataframe[column_n].abs() - abs(mean + (number_sd * std))
         outliers = dataframe[values > 0]
         outlier_frames.append(outliers)
     outlier_super = pd.concat(outlier_frames)
