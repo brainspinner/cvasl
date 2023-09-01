@@ -192,7 +192,7 @@ class TestTabDataCleaning(unittest.TestCase):
 
     def test_check_for_outliers(self):
         data = pd.read_csv(sample_tab_csv1)
-        outliers = find_outliers_by_list(data, ['gm_vol','wm_vol'])
+        outliers = find_outliers_by_list(data, ['gm_vol','wm_vol'], 2)
         self.assertEqual(1, len(outliers))
     
     def test_check_sex_dimorph_expectations(self):
