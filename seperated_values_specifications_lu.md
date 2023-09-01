@@ -14,7 +14,7 @@ Please note, all column names should be exactly the same and represent the same 
 |'session_id' |identifier for the session| none | visit number in Legacy format| int|        
 |'run_id' | unique identifier for instance during session| none | rarely a patient may be imaged multple times, each a run | int|
 |'age'| patient's chronological age| years |  exact age best | float|
-|'sex'| whether patient male or female| none | intersex patients -> female  | string|
+|'sex'| whether patient male or female| none |  code as 'M' or 'F', intersex patients -> female ('F')  | string|
 |'site'| unique identifier for specific machine in specific hospital| none  | none  | string|
 |'gm_vol' | total gray matter volume | Liter | bilateral | float|
 |'wm_vol', | total white matter volume | Liter | bilateral | float|
