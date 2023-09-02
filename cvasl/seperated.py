@@ -67,13 +67,15 @@ def recode_sex(whole_dataframe, string_for_sex):
     return new_dataframe  # return dataframe with new column
 
 
-def relate_columns_graphs(dataframe, special_column_name):
+def relate_columns_graphs(dataframe, special_column_name, saver='False'):
     """ This function makes a scatter plot of all columns
 
     :param dataframe: dataframe variable
     :type dataframe: pandas.dataFrame
     :param special_column_name: string of column you want to graph against
     :type  special_column_name: str
+    :param saver: string to indicate if graph pngs should be saved
+    :type saver: str
 
     :returns: no return, makes artifact
     :rtype: None.
@@ -90,7 +92,10 @@ def relate_columns_graphs(dataframe, special_column_name):
         plt.title('{}, subplot: {}{}{}'.format(i, a, b, c))
         plt.xlabel(i)
         c = c + 1
-    plt.savefig(("versus" + special_column_name + ".png"))
+    if saver == 'True':
+        plt.savefig(("versus" + special_column_name + ".png"))
+    else:
+        pass
 
 
 def relate_columns_graphs_two_dfs(
