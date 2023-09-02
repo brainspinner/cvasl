@@ -376,7 +376,7 @@ def find_outliers_by_list(dataframe, column_list, number_sd):
         outliers = dataframe[values > 0]
         outlier_frames.append(outliers)
     outlier_super = pd.concat(outlier_frames)
-    outlier_super = outlier_super.loc[:, ~outlier_super.duplicated()].copy()
+    outlier_super = outlier_super.loc[~outlier_super.duplicated()].copy()
     return outlier_super
 
 
