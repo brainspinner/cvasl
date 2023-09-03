@@ -98,8 +98,14 @@ def relate_columns_graphs(dataframe, special_column_name, saver='False'):
     else:
         pass
 
-def relate_columns_graphs_numeric(dataframe, special_column_name, saver='False'):
-    """ This function makes a scatter plot of all columns that are numeric.
+
+def relate_columns_graphs_numeric(
+        dataframe,
+        special_column_name,
+        saver='False',
+):
+    """
+    This function makes a scatter plot of all columns that are numeric.
 
     :param dataframe: dataframe variable
     :type dataframe: pandas.dataFrame
@@ -129,6 +135,7 @@ def relate_columns_graphs_numeric(dataframe, special_column_name, saver='False')
         plt.savefig(("versus" + special_column_name + ".png"))
     else:
         pass
+
 
 def relate_columns_graphs_two_dfs(
         dataframe1,
