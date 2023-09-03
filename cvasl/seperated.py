@@ -10,6 +10,7 @@ files towards correct formats.
 """
 
 import pandas as pd
+from pandas.api.types import is_numeric_dtype
 import numpy as np
 import matplotlib.pyplot as plt
 import copy
@@ -97,6 +98,37 @@ def relate_columns_graphs(dataframe, special_column_name, saver='False'):
     else:
         pass
 
+def relate_columns_graphs_numeric(dataframe, special_column_name, saver='False'):
+    """ This function makes a scatter plot of all columns that are numeric.
+
+    :param dataframe: dataframe variable
+    :type dataframe: pandas.dataFrame
+    :param special_column_name: string of column you want to graph against
+    :type  special_column_name: str
+    :param saver: string to indicate if graph pngs should be saved
+    :type saver: str
+
+    :returns: no return, makes artifact
+    :rtype: None.
+    """
+    y = dataframe[special_column_name].apply(pd.to_numeric)
+    col = dataframe.columns.to_list()
+    a = len(col)  # number of rows
+    b = 1  # number of columns
+    c = 1  # initialize plot counter
+    fig = plt.figure(figsize=(4, (len(col)*4)))
+    for i in col:
+        if is_numeric_dtype(dataframe[i]):
+            plt.subplot(a, b, c)
+            plt.scatter(dataframe[i], y)
+            plt.title('{}, subplot: {}{}{}'.format(i, a, b, c))
+            plt.xlabel(i)
+            plt.ylabel(special_column_name)
+        c = c + 1
+    if saver == 'True':
+        plt.savefig(("versus" + special_column_name + ".png"))
+    else:
+        pass
 
 def relate_columns_graphs_two_dfs(
         dataframe1,
