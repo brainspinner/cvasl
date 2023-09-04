@@ -360,10 +360,13 @@ def find_outliers_by_list(dataframe, column_list, number_sd):
     standard deviations (number_sd)
     from the mean on a list of specific specific column,
     then returns these rows of the dataframe.
+
     :param dataframe: whole dataframe on dataset
     :type dataframe: ~pandas.DataFrame
     :param column_list: list of relevant columns
     :type column_list: list
+    :param number_sd: number of standard deviations
+    :type number_sd: float
 
     :returns: dataframe of outliers
     :rtype: ~pandas.DataFrame
