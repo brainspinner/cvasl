@@ -388,6 +388,12 @@ def check_sex_dimorph_expectations(dataframe):
     This function checks that men
     as expected have larger brains than women
     in a given dataframe.
+
+    :param dataframe: dataframe with cvasl standard for patient MRI data
+    :type dataframe: ~pandas.DataFrame
+
+    :returns: dataframe, or zero, with side effect of printed information
+    :rtype: ~pandas.DataFrame or int
     """
     ladies = dataframe[dataframe['sex'] == 'F']
     men = dataframe[dataframe['sex'] == 'M']
