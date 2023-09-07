@@ -24,6 +24,43 @@ import numpy as np
 import scipy
 from scipy import signal
 import random
+from pathlib import Path
+from typing import Union, List, Tuple
+
+
+def bids_loading(
+    base_folder: Union[Path, str],
+    derivative: str = 'ExploreASL',
+    output_folder_name: str = 'cvasl',
+    ) -> Tuple[List[str], str]:
+    """Load data from its BIDS folder location and the specific subfolder in
+    'derivatives' folder.
+
+    Also defines (and creates if non existent) the output data folder.
+
+    Args:
+        base_folder: path of base folder of data in BIDS format, i.e., the
+            folder that contains subfolders like `raw` and `derivatives`
+        derivative: name of the folder inside `<base_folder>/derivatives`.
+            Default: 'ExloreASL'.
+        output_folder_name: folder inside `<base_folder>/derivatives` to save
+            output into. This folder will be created if it does not exit.
+            Default: 'cvasl_output'.
+    Returns:
+        List[str]: paths to input data files found
+        str: path to output_folder
+    """
+    Path(base_folder).resolve(strict=True)  # checks that location exists
+
+    derivatives_loc = os.path.join(base_folder, 'derivatives')
+    input_loc = os.path.join(derivatives_loc, derivative)
+    data = [f for f in os.listdir(input_loc) if os.path.isfile(os.path.join(input_loc, f))]
+
+    output_loc = os.path.join(derivatives_loc, output_folder_name)
+    if not os.path.isdir(output_loc):
+        os.makedirs(output_loc)
+
+    return data, output_loc
 
 
 class Config:
