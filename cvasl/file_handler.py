@@ -26,37 +26,46 @@ from scipy import signal
 import random
 from pathlib import Path
 from typing import Union, List, Tuple
+import click
 
 
+@click.command()
+@click.option("--root", "-r", help="Root directory for your experiment.")
+@click.option("--derivative", "-d", default="ExploreASL", help="Name of the "
+              + "folder inside `<root>/derivatives/`. Default: 'ExloreASL'.")
+@click.option("--output_folder", "-o", default='cvasl', help="Name of folder "
+              + "inside `<root>/derivatives` to save output into. This folder "
+              + "will be created if it does not exit. Default: 'cvasl'.")
 def bids_loading(
-    base_folder: Union[Path, str],
+    root: Union[Path, str],
     derivative: str = 'ExploreASL',
-    output_folder_name: str = 'cvasl',
-    ) -> Tuple[List[str], str]:
+    output_folder: str = 'cvasl',
+) -> Tuple[List[str], str]:
     """Load data from its BIDS folder location and the specific subfolder in
     'derivatives' folder.
 
     Also defines (and creates if non existent) the output data folder.
 
     Args:
-        base_folder: path of base folder of data in BIDS format, i.e., the
+        root: Path of base folder of data in BIDS format, i.e., the
             folder that contains subfolders like `raw` and `derivatives`
-        derivative: name of the folder inside `<base_folder>/derivatives`.
+        derivative: Name of the folder inside `<root>/derivatives`.
             Default: 'ExloreASL'.
-        output_folder_name: folder inside `<base_folder>/derivatives` to save
+        output_folder: Name of folder inside `<root>/derivatives` to save
             output into. This folder will be created if it does not exit.
-            Default: 'cvasl_output'.
+            Default: 'cvasl'.
     Returns:
         List[str]: paths to input data files found
         str: path to output_folder
     """
-    Path(base_folder).resolve(strict=True)  # checks that location exists
+    Path(root).resolve(strict=True)  # checks that location exists
 
-    derivatives_loc = os.path.join(base_folder, 'derivatives')
+    derivatives_loc = os.path.join(root, 'derivatives')
     input_loc = os.path.join(derivatives_loc, derivative)
-    data = [f for f in os.listdir(input_loc) if os.path.isfile(os.path.join(input_loc, f))]
+    data = [f for f in os.listdir(input_loc)
+            if os.path.isfile(os.path.join(input_loc, f))]
 
-    output_loc = os.path.join(derivatives_loc, output_folder_name)
+    output_loc = os.path.join(derivatives_loc, output_folder)
     if not os.path.isdir(output_loc):
         os.makedirs(output_loc)
 

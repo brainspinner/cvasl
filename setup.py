@@ -591,6 +591,7 @@ if __name__ == '__main__':
             'scipy',
             'matplotlib',
             'scikit-learn==1.2.2',
+            'Click'
         ],
         tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
         command_options={
@@ -613,4 +614,9 @@ if __name__ == '__main__':
             ],
         },
         zip_safe=False,
+        entry_points={
+            'console_scripts': [
+                'load = cvasl.file_handler:bids_loading',
+            ],
+        },
     )
