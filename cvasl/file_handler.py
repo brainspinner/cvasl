@@ -45,11 +45,11 @@ class Config:
     )
 
     default_layout = {
-        'bids': '{}', # this is the root BIDS folder
+        'bids': '{}',  # this is the root BIDS folder
         'raw_data': '{}/raw_data',
-        'derivatives': '{}/derivatives', # check if must be called ExploreASL?
+        'derivatives': '{}/derivatives',  # check if must be called ExploreASL?
         'explore_asl': '{}/derivatives/explore_asl',
-        'cvage': '{}/derivates/cvage', # check is they want called cvasl
+        'cvage': '{}/derivates/cvage',  # check is they want called cvasl
         'cvage_inputs': '{}/derivates/cvage/cvasl_inputs',
         'cvage_outputs': '{}/derivates/cvage/cvasl_outputs',
     }
@@ -75,7 +75,7 @@ class Config:
         return textwrap.dedent(
             '''
             Cannot load config. If you did not make a config,
-            or specify an alterative by a path then 
+            or specify an alterative by a path then
             until you do your data layout cannot be accessed.
             If you tried to make a config.json it is not in the
             right place.
@@ -149,7 +149,7 @@ class Config:
             # back-fill all the not-specified directories.
             for m in missing:
                 self._loaded[m] = self.default_layout[m].format(root)
-    
+
     def parse_cmd(self, cmd):
         self._raw = {
             'bids': cmd.bids,
