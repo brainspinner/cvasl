@@ -13,8 +13,6 @@ import numpy as np
 import importlib
 import matplotlib.pyplot as plt
 
-import SimpleITK as sitk
-
 
 class NormedSliceViewer:
     """
