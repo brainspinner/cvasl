@@ -62,12 +62,12 @@ datasets arranged in a particular format as specified in
 ### Configuring (to work with your data)
 
 In order to preprocess and/or to train  models the code needs to be
-able to locate the raw data you want it to find.
+able to locate the raw data you want it to work with.
 
 There are several ways to specify the location of the following
 directories:
 
--   **sourcedata_directory:** Special directory.  The rest of the directory layout can
+-   **bids:** Special directory.  The rest of the directory layout can
     be derived from its location.
 
 You can store this information persistently in several locations.
@@ -82,7 +82,7 @@ This file can have this or similar contents:
 
     {
  
-        "source_data": "/mnt/source_data",
+        "bids": "/mnt/source_data",
         "raw_data": "/mnt/source_data/raw_data",
         "derivatives": "/mnt/source_data/derivates/",
         "explore_asl": "/mnt/source_data/derivates/explore_asl",
@@ -92,10 +92,51 @@ This file can have this or similar contents:
 
     }
 
-The file is read as follows: if the file only specifies `raw_data`
-directory, then the derivative missing entries are assumed to be relative to
-the root in a BIDS compliant format order You don't need to specify all entries. If you do,
-you can overwrite the ALS-BIDS format order but this is not reccomended.
+The file is read as follows: if the file only specifies `bids`
+directory, then the derivative missing entries are assumed to be
+relative to the root in a BIDS compliant format order You don't need
+to specify all entries.  If you do, you can overwrite the ALS-BIDS
+format order but this is not reccomended.
+
+When working from command line, it may be useful to experiment with
+different directory layouts or to quickly override the existing
+options.  To do so, you can invoke the program like this:
+
+```sh
+python -m cvasl -C raw_data:/path/to/data <other options>
+```
+
+The snippet above allows using existing `config.json` but overrides
+the location of `raw_data` directory.
+
+```sh
+python -m cvasl -C bids:/path/to/data -n <other options>
+```
+
+The snippet above ignores any existing `config.json` files and sets
+the BIDS directory to `/path/to/data` (the rest will be derived from
+it).
+
+```sh
+python -m cvasl \
+    -C raw_data:/path/to/data \
+    -C derivatives:/path/to/derivatives \
+    -c /custom/config/location \
+    <other options>
+```
+
+The snippet above looks for configuration file in the alternative
+location: `/custom/config/location` while overriding the locations of
+`raw_data` aand of `derivatives` directories.
+
+If you aren't sure where the data would be read or stored, you can run:
+
+```sh
+python -m cvasl <some options> dump_config
+```
+
+The above will print the effective configuration that will be used by
+the program.
 
 ### Test data
 
