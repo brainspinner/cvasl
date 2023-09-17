@@ -10,8 +10,7 @@ This file contains methods to normalize brain MRIs.
 import os
 import glob
 import numpy as np
-from ipywidgets import IntSlider, Output
-import ipywidgets as widgets
+import importlib
 import matplotlib.pyplot as plt
 
 import SimpleITK as sitk
@@ -28,8 +27,9 @@ class NormedSliceViewer:
         self.volume = volume
         self.figsize = figsize
         self.v = [np.min(volume), np.max(volume)]
+        self.widgets = importlib.import_module('ipywidgets')
 
-        widgets.interact(self.transpose, view=widgets.Dropdown(
+        self.widgets.interact(self.transpose, view=self.widgets.Dropdown(
             options=['axial', 'sag', 'cor'],
             value='axial',
             description='View:',
@@ -41,9 +41,9 @@ class NormedSliceViewer:
         self.vol = np.transpose(self.volume, orient[view])
         maxZ = self.vol.shape[2] - 1
 
-        widgets.interact(
+        self.widgets.interact(
             self.plot_slice,
-            z=widgets.IntSlider(
+            z=self.widgets.IntSlider(
                 min=0,
                 max=maxZ,
                 step=1,
@@ -73,7 +73,7 @@ class SliceViewer:
         self.figsize = figsize
         self.v = [np.min(volume), np.max(volume)]
 
-        widgets.interact(self.transpose, view=widgets.Dropdown(
+        self.widgets.interact(self.transpose, view=self.widgets.Dropdown(
             options=['axial', 'sag', 'cor'],
             value='axial',
             description='View:',
@@ -85,9 +85,9 @@ class SliceViewer:
         self.vol = np.transpose(self.volume, orient[view])
         maxZ = self.vol.shape[2] - 1
 
-        widgets.interact(
+        self.widgets.interact(
             self.plot_slice,
-            z=widgets.IntSlider(
+            z=self.widgets.IntSlider(
                 min=0,
                 max=maxZ,
                 step=1,
