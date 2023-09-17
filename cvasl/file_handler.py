@@ -56,14 +56,29 @@ class Config:
 
     required_directories = 'bids',
 
-    def __init__(self, location=None, command_line=None):
+    def __init__(self):
         self._raw = None
         self._loaded = None
-        if command_line is None:
-            self.load(location)
-        else:
-            self.parse_cmd(command_line)
-        self.validate()
+
+    @classmethod
+    def no_file(cls, parsed):
+        cfg = cls()
+        cfg.parse_overrides(parsed)
+        cfg.validate()
+        return cfg
+
+    @classmethod
+    def from_file(cls, parsed=None):
+        cfg = cls()
+        location = parsed.config if parsed is not None else None
+        found = cfg.load(location)
+        cfg.parse_overrides(parsed, found)
+        cfg.validate()
+        return cfg
+
+    def pprint(self, stream):
+        json.dump(self._loaded, stream, indent=2)
+        stream.write('\n')
 
     def usage(self):
         """
@@ -113,7 +128,6 @@ class Config:
 
         found = None
         for p in locations:
-
             try:
                 with open(p) as f:
                     self._raw = json.load(f)
@@ -128,6 +142,7 @@ class Config:
         else:
             raise ValueError(self.usage())
         self.parse(found)
+        return found
 
     def parse(self, found):
         root = self._raw.get('bids')
@@ -150,13 +165,13 @@ class Config:
             for m in missing:
                 self._loaded[m] = self.default_layout[m].format(root)
 
-    def parse_cmd(self, cmd):
-        self._raw = {
-            'bids': cmd.bids,
-            'raw_data': cmd.raw_data,
-            'derivatives': cmd.derivatives,
-        }
-        self.parse('<command line>')
+    def parse_overrides(self, cmd=None, source='<command line>'):
+        if cmd is not None:
+            if self._raw is None:
+                self._raw = dict(cmd.config_override)
+            else:
+                self._raw.update(cmd.config_override)
+        self.parse(source)
 
     def validate(self):
         # These directories are required to exist (contrast with the
