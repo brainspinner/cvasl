@@ -45,26 +45,29 @@ class Config:
     )
 
     default_layout = {
-        'bids': '{}',
+        'bids': '{}', # this is the root BIDS folder
         'raw_data': '{}/raw_data',
-        'derivatives': '{}/derivatives',
+        'derivatives': '{}/derivatives', # check if must be called ExploreASL?
         'explore_asl': '{}/derivatives/explore_asl',
-        'cvage': '{}/derivates/cvage',
+        'cvage': '{}/derivates/cvage', # check is they want called cvasl
         'cvage_inputs': '{}/derivates/cvage/cvasl_inputs',
         'cvage_outputs': '{}/derivates/cvage/cvasl_outputs',
     }
 
-    required_directories = 'bids', 'raw_data', 'derivatives'
+    required_directories = 'bids',
 
-    def __init__(self, location=None):
+    def __init__(self, location=None, command_line=None):
         self._raw = None
         self._loaded = None
-        self.load(location)
+        if command_line is None:
+            self.load(location)
+        else:
+            self.parse_cmd(command_line)
         self.validate()
 
     def usage(self):
         """
-        This is essentally anotice message if the computer
+        This is essentally a notice message if the computer
         does not have paths configured or files made so that
         the data paths of a config.json can be used.
         Until you do it will defailt to test_data
@@ -72,6 +75,7 @@ class Config:
         return textwrap.dedent(
             '''
             Cannot load config. If you did not make a config,
+            or specify an alterative by a path then 
             until you do your data layout cannot be accessed.
             If you tried to make a config.json it is not in the
             right place.
@@ -109,6 +113,7 @@ class Config:
 
         found = None
         for p in locations:
+
             try:
                 with open(p) as f:
                     self._raw = json.load(f)
@@ -122,7 +127,9 @@ class Config:
                 logging.info('Configuration not found in %s: %s', p, e)
         else:
             raise ValueError(self.usage())
+        self.parse(found)
 
+    def parse(self, found):
         root = self._raw.get('bids')
         self._loaded = dict(self._raw)
         if root is None:
@@ -142,6 +149,14 @@ class Config:
             # back-fill all the not-specified directories.
             for m in missing:
                 self._loaded[m] = self.default_layout[m].format(root)
+    
+    def parse_cmd(self, cmd):
+        self._raw = {
+            'bids': cmd.bids,
+            'raw_data': cmd.raw_data,
+            'derivatives': cmd.derivatives,
+        }
+        self.parse('<command line>')
 
     def validate(self):
         # These directories are required to exist (contrast with the
