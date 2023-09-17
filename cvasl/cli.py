@@ -116,13 +116,22 @@ def main(argv):
     """
     parser = make_parser()
     parsed = parser.parse_args()
-    config = Config(parsed.config)  # can be
-    # rewritten to take input or config file, but not really neccesary
+
+    path_in = parsed.input
+    path_out = parsed.output 
+
+    if (path_in is None):
+        try:
+            path_in = config.get_directory('bids', path_in)
+            path_out = config.get_directory('cvage', path_out)
+        except Exception as e:
+            logging.exception(e)
+            return 1
     if parsed.action == 'hash_over':
         try:
 
             hash_folder(
-                config.get_directory('data', parsed.input),
+                path_in,
                 # so the order here should switch?
                 parsed.extension,
                 parsed.output,
@@ -136,10 +145,10 @@ def main(argv):
         try:
 
             debias_folder(
-                config.get_directory('data', parsed.input),
+                path_in,
                 # so the order here should switch?
                 parsed.preprocessing,
-                config.get_directory('preprocessed', parsed.output),
+                path_out,
                 # so the order here should switch?
                 parsed.force,
             )
