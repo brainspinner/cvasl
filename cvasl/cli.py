@@ -33,13 +33,13 @@ def common(parser):
 
 
 def config_override(override):
-    if not ':' in override:
+    if ':' not in override:
         raise ArgumentTypeError('Overrides must be of "key:value" format')
     key, path = override.split(':', 1)
     key = key.strip()
     path = os.path.realpath(path.strip())
 
-    if not key in Config.default_layout:
+    if key not in Config.default_layout:
         raise ArgumentTypeError(
             '{} is not valid, must be one of: {}'.format(
                 key,

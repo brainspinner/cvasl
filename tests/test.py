@@ -62,7 +62,7 @@ class TestConfig(TestCase):
             with open(config_file, 'w') as f:
                 json.dump(raw_config, f)
 
-            config = Config.from_file()
+            config = Config.from_file(config_file)
             assert (
                 config.get_directory('bids')
             )
