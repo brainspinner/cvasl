@@ -212,11 +212,11 @@ And here is an example for a specific function:
 `python -m cvasl hash_over --help`
 
 And here are examples of a working commands (file names can be changed):
-to hash over files:
-`python -m cvasl hash_over --extension tsv  --input test_data --output some_ignored_folder`
+to hash over files (assuming no config file):
+`python -m cvasl -n -C raw_data:test_data hash_over --extension tsv --output some_ignored_folder`
 
 to run a debiasing algorithm over files:
-`python -m cvasl debias_over --preprocessing N4_debias_sitk --input test_data --output ignrd_flder `
+`python -m cvasl -n -C raw_data:image_data debias_over --preprocessing N4_debias_sitk --output ignrd_flder `
 
 
 All long options have short aliases.

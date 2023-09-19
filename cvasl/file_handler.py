@@ -63,8 +63,16 @@ class Config:
     @classmethod
     def no_file(cls, overrides):
         cfg = cls()
+        cfg._raw = {}
         cfg.parse_overrides(overrides)
-        cfg.validate()
+        if 'bids' in cfg._loaded:
+            # TODO(makeda): maybe warn here?  Downstream of here the 
+            # configuration is not valid because it doesn't contain
+            # all necessary directories.  I.e. the user specified some
+            # subset of directories that could be found in configuration,
+            # but didn't specify the root directory and we couldn't
+            # derive the (possibly) missing ones.
+            cfg.validate()
         return cfg
 
     @classmethod
@@ -164,11 +172,14 @@ class Config:
 
     def parse_overrides(self, overrides=None, source='<command line>'):
         if overrides is not None:
-            if self._raw is None:
-                self._raw = dict(overrides)
-            else:
-                self._raw.update(overrides)
-        self.parse(source)
+            self._raw.update(overrides)
+        if 'bids' in self._raw:
+            # We can only guess other directories if we have the root 
+            # directory in the overrides.  Otherwise, we hope that the user 
+            # will never try to access directories they never specified.
+            self.parse(source)
+        else:
+            self._loaded = dict(self._raw)
 
     def validate(self):
         # These directories are required to exist (contrast with the
