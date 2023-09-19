@@ -66,7 +66,7 @@ class Config:
         cfg._raw = {}
         cfg.parse_overrides(overrides)
         if 'bids' in cfg._loaded:
-            # TODO(makeda): maybe warn here?  Downstream of here the 
+            # TODO(makeda): maybe warn here?  Downstream of here the
             # configuration is not valid because it doesn't contain
             # all necessary directories.  I.e. the user specified some
             # subset of directories that could be found in configuration,
@@ -174,8 +174,8 @@ class Config:
         if overrides is not None:
             self._raw.update(overrides)
         if 'bids' in self._raw:
-            # We can only guess other directories if we have the root 
-            # directory in the overrides.  Otherwise, we hope that the user 
+            # We can only guess other directories if we have the root
+            # directory in the overrides.  Otherwise, we hope that the user
             # will never try to access directories they never specified.
             self.parse(source)
         else:
