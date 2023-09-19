@@ -62,9 +62,9 @@ class TestConfig(TestCase):
             with open(config_file, 'w') as f:
                 json.dump(raw_config, f)
 
-
+            config = Config.from_file()
             assert (
-                Config.get_directory(Config.from_file(),'bids')
+                config.get_directory('bids')
             )
 
     def test_missing_config_path(self):

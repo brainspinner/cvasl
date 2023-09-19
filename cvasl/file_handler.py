@@ -61,18 +61,17 @@ class Config:
         self._loaded = None
 
     @classmethod
-    def no_file(cls, parsed):
+    def no_file(cls, overrides):
         cfg = cls()
-        cfg.parse_overrides(parsed)
+        cfg.parse_overrides(overrides)
         cfg.validate()
         return cfg
 
     @classmethod
-    def from_file(cls, parsed=None):
+    def from_file(cls, location=None, overrides=None):
         cfg = cls()
-        location = parsed.config if parsed is not None else None
         found = cfg.load(location)
-        cfg.parse_overrides(parsed, found)
+        cfg.parse_overrides(overrides, found)
         cfg.validate()
         return cfg
 
@@ -163,12 +162,12 @@ class Config:
             for m in missing:
                 self._loaded[m] = self.default_layout[m].format(root)
 
-    def parse_overrides(self, cmd=None, source='<command line>'):
-        if cmd is not None:
+    def parse_overrides(self, overrides=None, source='<command line>'):
+        if overrides is not None:
             if self._raw is None:
-                self._raw = dict(cmd.config_override)
+                self._raw = dict(overrides)
             else:
-                self._raw.update(cmd.config_override)
+                self._raw.update(overrides)
         self.parse(source)
 
     def validate(self):
