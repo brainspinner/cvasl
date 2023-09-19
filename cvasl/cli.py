@@ -113,15 +113,7 @@ def make_parser():
         Extension of files to be hashed.
         ''',
     )
-    # hash_over.add_argument(
-    #     '-i',
-    #     '--input',
-    #     action='store',
-    #     default=[],
-    #     help='''
-    #     location of files to be hashed.
-    #     ''',
-    # )
+
     common(hash_over)
 
     debias_over = subparsers.add_parser('debias_over')

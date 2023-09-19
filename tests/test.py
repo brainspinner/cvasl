@@ -75,14 +75,6 @@ class TestConfig(TestCase):
             pass
         else:
             assert False, 'Didn\'t notify on missing config file'
-
-    # def test_process_command_line(self):
-    #     result = subprocess.run(['python -m cvasl', '--help',], capture_output=True)
-    #     self.assertIn('expected out', result.stdout)
-
-    # def test_process_failure_command_line(self):
-    #     result = subprocess.run(['your_script', 'your_args'], capture_output=True)
-    #     self.assertEqual(result.returncode, 1)
     
 
 class TestHashMethods(unittest.TestCase):
