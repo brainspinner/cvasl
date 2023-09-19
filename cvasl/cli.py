@@ -157,9 +157,9 @@ def main(argv):
     parsed = parser.parse_args(argv)
 
     if parsed.no_config:
-        config = Config.no_file(parsed)
+        config = Config.no_file(parsed.config, parsed.config_overrides)
     else:
-        config = Config.from_file(parsed)
+        config = Config.from_file(parsed.config_overrides)
 
     if parsed.action == 'hash_over':
         try:
