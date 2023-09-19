@@ -104,8 +104,6 @@ class Config:
 
             {{
                 "bids": "/path/to/storage"
-                "raw_data": "/path/to/storage/raw_data",
-                "derivatives": "/path/to/storage/derivatives/",
             }}
 
             The default directory layout is expected to be based on the above
