@@ -113,6 +113,15 @@ def make_parser():
         Extension of files to be hashed.
         ''',
     )
+    # hash_over.add_argument(
+    #     '-i',
+    #     '--input',
+    #     action='store',
+    #     default=[],
+    #     help='''
+    #     location of files to be hashed.
+    #     ''',
+    # )
     common(hash_over)
 
     debias_over = subparsers.add_parser('debias_over')
@@ -157,9 +166,9 @@ def main(argv):
     parsed = parser.parse_args(argv)
 
     if parsed.no_config:
-        config = Config.no_file(parsed.config, parsed.config_overrides)
+        config = Config.no_file(parsed.config_override)
     else:
-        config = Config.from_file(parsed.config_overrides)
+        config = Config.from_file(parsed.config, parsed.config_override)
 
     if parsed.action == 'hash_over':
         try:

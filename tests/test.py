@@ -3,6 +3,7 @@
 
 import unittest
 import os
+import subprocess
 import pandas as pd
 import numpy as np
 import scipy
@@ -69,12 +70,19 @@ class TestConfig(TestCase):
 
     def test_missing_config_path(self):
         try:
-            #Config.no_file('')
-            Config.get_directory(Config.no_file(None),'')
-        except AttributeError:
+            config = Config.from_file('')
+        except ValueError:
             pass
         else:
             assert False, 'Didn\'t notify on missing config file'
+
+    # def test_process_command_line(self):
+    #     result = subprocess.run(['python -m cvasl', '--help',], capture_output=True)
+    #     self.assertIn('expected out', result.stdout)
+
+    # def test_process_failure_command_line(self):
+    #     result = subprocess.run(['your_script', 'your_args'], capture_output=True)
+    #     self.assertEqual(result.returncode, 1)
     
 
 class TestHashMethods(unittest.TestCase):
