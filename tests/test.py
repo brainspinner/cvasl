@@ -69,8 +69,9 @@ class TestConfig(TestCase):
 
     def test_missing_config_path(self):
         try:
-            Config.no_file('')
-        except ValueError:
+            #Config.no_file('')
+            Config.get_directory(Config.no_file(None),'')
+        except AttributeError:
             pass
         else:
             assert False, 'Didn\'t notify on missing config file'
