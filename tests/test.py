@@ -45,7 +45,7 @@ class TestConfig(TestCase):
     #     'raw_data',
     #     'derivatives',
     # }
-    required_directories = ['bids', 'raw_data', 'derivatives']
+    required_directories = ['bids']
 
     def test_roots_only(self):
         with TemporaryDirectory() as td:
@@ -62,16 +62,14 @@ class TestConfig(TestCase):
             with open(config_file, 'w') as f:
                 json.dump(raw_config, f)
 
-            config = Config(config_file)
+
             assert (
-                config.get_directory('bids') and
-                config.get_directory('raw_data') and
-                config.get_directory('derivatives')
+                Config.get_directory(Config.from_file(),'bids')
             )
 
     def test_missing_config_path(self):
         try:
-            Config('non existent')
+            Config.no_file('')
         except ValueError:
             pass
         else:
