@@ -1,0 +1,13 @@
+{
+    "super_bids": "C:/Projects/brainspin/not_pushed/data_anonymized/",
+    "study_bids": "input stuff for file", # here is where user changes and points to folder
+    # os.path.join(super_bids)
+    "true_bids" : os.path.join("C:/Projects/brainspin/not_pushed/data_anonymized/",study_bids)
+    "rawdata": true_bids_path + "rawdata"
+    "derivatives": "true_bids_path/derivatives",
+    "explore_asl": "....[fill in]..derivatives/ExploreAsl",
+    "cvage": "...../derivates/cvage",
+    "cvage_inputs": ".........derivates/cvage/cvage_inputs",
+    "cvage_outputs": "..../derivates/cvage/cvage_outputs"
+   
+}
