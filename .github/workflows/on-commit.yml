@@ -68,19 +68,19 @@ jobs:
     strategy:
       fail-fast: false
         
-    permissions:
-      contents: write
+    # permissions:
+    #   contents: write
 
-    on:
-      push:
-      branches:
-        - main
-        - drcandacemakedamoore/publicdocu
-      pull_request:
-         types: [opened, synchronize, reopened, ready_for_review]
-         branches:
-          - main
-          - drcandacemakedamoore/publicdocu
+    # on:
+    #   push:
+    #   branches:
+    #     - main
+    #     - drcandacemakedamoore/publicdocu
+    #   pull_request:
+    #      types: [opened, synchronize, reopened, ready_for_review]
+    #      branches:
+    #       - main
+    #       - drcandacemakedamoore/publicdocu
       steps:
         - uses: actions/checkout@v2
         - name: Set up Python 3.10
