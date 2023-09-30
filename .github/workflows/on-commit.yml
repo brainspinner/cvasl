@@ -62,9 +62,8 @@ jobs:
   #       - main
   #       - drcandacemakedamoore/publicdocu
 
-
   Build-documentation:
-      if: github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false
       runs-on: ubuntu-latest
       strategy:
         fail-fast: false
