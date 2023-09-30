@@ -1,5 +1,5 @@
 cvasl.cli module
-====================
+================
 
 .. automodule:: cvasl.cli
    :members:

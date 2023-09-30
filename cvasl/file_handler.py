@@ -300,8 +300,8 @@ def intersect_all(*sets):
     """A function that given a group of sets
     will return the elements common to all sets.
 
-    :param *sets: group of set or list of lists, but unpacked
-    :type *sets: list
+    :param \\*sets: group of set or list of lists, but unpacked
+    :type \\*sets: list
 
     :returns: result is common elements
     :rtype: set

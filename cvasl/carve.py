@@ -9,6 +9,8 @@ and to strip soft tissues off head MRIs.
 
 Note the package has an optional pydicom dependancy, without it this module
 has functions related to dicoms that will not work.
+
+The pydicom is currently shut off.
 """
 # import libraries
 
@@ -25,65 +27,65 @@ import SimpleITK as sitk
 
 import numpy
 from datetime import datetime, date
-import pydicom as dicom
+# import pydicom as dicom
 import pandas as pd
 import skimage.io as io
 
-from pydicom.multival import MultiValue
-from pydicom.sequence import Sequence
+# from pydicom.multival import MultiValue
+# from pydicom.sequence import Sequence
 
 
-class Source(ABC):
-    """
-    This class is provided as a helper for those who want to implement
-    their own sources.
-    It is not necessary to extend this class.  Our code doesn't yet do
-    type checking, but if you want to ensure type checking on your side,
-    you may inherit from this class.
-    """
+# class Source(ABC):
+#     """
+#     This class is provided as a helper for those who want to implement
+#     their own sources.
+#     It is not necessary to extend this class.  Our code doesn't yet do
+#     type checking, but if you want to ensure type checking on your side,
+#     you may inherit from this class.
+#     """
 
-    @abstractmethod
-    def get_tag(self):
-        """
-        The value returned from this function should be suitable for
-        pandas to name a column.
-        """
-        raise NotImplementedError()
+#     @abstractmethod
+#     def get_tag(self):dicom
+#         """
+#         The value returned from this function should be suitable for
+#         pandas to name a column.
+#         """
+#         raise NotImplementedError()
 
-    @abstractmethod
-    def items(self, reader, transformer=None):
-        """
-        This function will be expected to produce file names or file-like
-        objects of DICOM files.  The results will be then fed to either
-        pydicom or SimpleITK libraries for metadata extraction.
-        This function should return a generator yielding a tuple of two
-        elements.  First element will be inserted into the source column
-        (the one labeled by :code:`get_tag()` method), the second is the
-        result of calling :code:`reader`.
-        :param reader: A function that takes an individual source, either
-                       a file path or a file-like object, and returns the
-                       processed metadata.
-        :param transformer: Optionally, the caller of this function will
-                            supply a transformer function that needs to
-                            be called on the value that will be stored
-                            in the source column of the resulting DataFrame
-        """
-        while False:
-            yield None
+#     @abstractmethod
+#     def items(self, reader, transformer=None):
+#         """
+#         This function will be expected to produce file names or file-like
+#         objects of DICOM files.  The results will be then fed to either
+#         pydicom or SimpleITK libraries for metadata extraction.
+#         This function should return a generator yielding a tuple of two
+#         elements.  First element will be inserted into the source column
+#         (the one labeled by :code:`get_tag()` method), the second is the
+#         result of calling :code:`reader`.
+#         :param reader: A function that takes an individual source, either
+#                        a file path or a file-like object, and returns the
+#                        processed metadata.
+#         :param transformer: Optionally, the caller of this function will
+#                             supply a transformer function that needs to
+#                             be called on the value that will be stored
+#                             in the source column of the resulting DataFrame
+#         """
+#         while False:
+#             yield None
 
-    @classmethod
-    def __subclasshook__(cls, C):
-        if cls is Source:
-            get_tag_found, items_found = False, False
-            for sub in C.mro():
-                for prop in sub.__dict__:
-                    if prop == 'get_tag':
-                        get_tag_found = True
-                    elif prop == 'items':
-                        items_found = True
-                    if get_tag_found and items_found:
-                        return True
-        return NotImplemented
+#     @classmethod
+#     def __subclasshook__(cls, C):
+#         if cls is Source:
+#             get_tag_found, items_found = False, False
+#             for sub in C.mro():
+#                 for prop in sub.__dict__:
+#                     if prop == 'get_tag':
+#                         get_tag_found = True
+#                     elif prop == 'items':
+#                         items_found = True
+#                     if get_tag_found and items_found:
+#                         return True
+#         return NotImplemented
 
 
 class DirectorySource:
@@ -147,121 +149,121 @@ def rename_file(original, target, ext):
     return os.path.join(target, '{}.{}'.format(dst_file, ext))
 
 
-class PydicomDicomReader:
-    """Class for reading DICOM metadata with pydicom."""
+# class PydicomDicomReader:
+#     """Class for reading DICOM metadata with pydicom."""
 
-    exclude_field_types = (Sequence, MultiValue, bytes)
-    """
-    Default types of fields not to be included in the dataframe
-    produced from parsed DICOM files.
-    """
+#     exclude_field_types = (Sequence, MultiValue, bytes)
+#     """
+#     Default types of fields not to be included in the dataframe
+#     produced from parsed DICOM files.
+#     """
 
-    date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
-    """
-    Default DICOM tags that should be interpreted as containing date
-    information.
-    """
+#     date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
+#     """
+#     Default DICOM tags that should be interpreted as containing date
+#     information.
+#     """
 
-    time_fields = ('ContentTime', 'StudyTime')
-    """
-    Default DICOM tags that should be interpreted as containing
-    datetime information.
-    """
+#     time_fields = ('ContentTime', 'StudyTime')
+#     """
+#     Default DICOM tags that should be interpreted as containing
+#     datetime information.
+#     """
 
-    exclude_fields = ()
-    """
-    Default tags to be excluded from genrated :code:`DataFrame` for any
-    other reason.
-    """
+#     exclude_fields = ()
+#     """
+#     Default tags to be excluded from genrated :code:`DataFrame` for any
+#     other reason.
+#     """
 
-    def __init__(
-            self,
-            exclude_field_types=None,
-            date_fields=None,
-            time_fields=None,
-            exclude_fields=None,
-    ):
-        """
-        Initializes the reader with some filtering options.
-        :param exclude_field_types: Some DICOM types have internal structure
-                                    difficult to represent in a dataframe.
-                                    These are filtered by default:
-                                    * :class:`~pydicom.sequence.Sequence`
-                                    * :class:`~pydicom.multival.MultiValue`
-                                    * :class:`bytes` (this is usually the
-                                      image data)
-        :type exclude_field_types: Sequence[type]
-        :param date_fields: Fields that should be interpreted as having
-                            date information in them.
-        :type date_fields: Sequence[str]
+#     def __init__(
+#             self,
+#             exclude_field_types=None,
+#             date_fields=None,
+#             time_fields=None,
+#             exclude_fields=None,
+#     ):
+#         """
+#         Initializes the reader with some filtering options.
+#         :param exclude_field_types: Some DICOM types have internal structure
+#                                     difficult to represent in a dataframe.
+#                                     These are filtered by default:
+#                                     * :class:`~pydicom.sequence.Sequence`
+#                                     * :class:`~pydicom.multival.MultiValue`
+#                                     * :class:`bytes` (this is usually the
+#                                       image data)
+#         :type exclude_field_types: Sequence[type]
+#         :param date_fields: Fields that should be interpreted as having
+#                             date information in them.
+#         :type date_fields: Sequence[str]
 
-        :param time_fields: Fields that should be interpreted as having
-                            time information in them.
-        :type time_fields: Sequence[str]
-        :param exclude_fields: Fields to exclude (in addition to those selected
-                               by :code:`exclude_field_types`
-        :type exclude_fields: Sequence[str]
-        """
-        if exclude_field_types:
-            self.exclude_field_types = exclude_field_types
-        if date_fields:
-            self.date_fields = date_fields
-        if exclude_fields:
-            self.exclude_fields = exclude_fields
+#         :param time_fields: Fields that should be interpreted as having
+#                             time information in them.
+#         :type time_fields: Sequence[str]
+#         :param exclude_fields: Fields to exclude (in addition to those selected
+#                                by :code:`exclude_field_types`
+#         :type exclude_fields: Sequence[str]
+#         """
+#         if exclude_field_types:
+#             self.exclude_field_types = exclude_field_types
+#         if date_fields:
+#             self.date_fields = date_fields
+#         if exclude_fields:
+#             self.exclude_fields = exclude_fields
 
-    def dicom_date_to_date(self, source):
-        """
-        Utility method to help translate DICOM dates to :class:`~datetime.date`
-        :param source: Date stored as a string in DICOM file.
-        :type source: str
-        :return: Python date object.
-        :rtype: :class:`~datetime.date`
-        """
-        year = int(source[:4])
-        month = int(source[4:6])
-        day = int(source[6:])
-        return date(year=year, month=month, day=day)
+#     def dicom_date_to_date(self, source):
+#         """
+#         Utility method to help translate DICOM dates to :class:`~datetime.date`
+#         :param source: Date stored as a string in DICOM file.
+#         :type source: str
+#         :return: Python date object.
+#         :rtype: :class:`~datetime.date`
+#         """
+#         year = int(source[:4])
+#         month = int(source[4:6])
+#         day = int(source[6:])
+#         return date(year=year, month=month, day=day)
 
-    def read(self, source):
-        """
-        This function allows reading of metadata in what source gives.
-        :param source: A source generator.  For extended explanation see
-                       :class:`~carve.Source`.
-        :type source: :class:`~carve.Source`
-        :return: dataframe with metadata from dicoms
-        :rtype: :class:`~pandas.DataFrame`
-        """
+#     def read(self, source):
+#         """
+#         This function allows reading of metadata in what source gives.
+#         :param source: A source generator.  For extended explanation see
+#                        :class:`~carve.Source`.
+#         :type source: :class:`~carve.Source`
+#         :return: dataframe with metadata from dicoms
+#         :rtype: :class:`~pandas.DataFrame`
+#         """
 
-        tag = source.get_tag()
-        columns = {tag: []}
-        colnames = set([])
-        excluded_columns = set([])
-        for key, parsed in source.items(dicom.dcmread):
-            for field in parsed.dir():
-                colnames.add(field)
-                val = parsed[field].value
-                if isinstance(val, self.exclude_field_types):
-                    excluded_columns.add(field)
-        colnames -= excluded_columns
-        colnames -= set(self.exclude_fields)
-        for key, parsed in source.items(dicom.dcmread, os.path.basename):
-            columns[tag].append(key)
-            for field in colnames:
-                val = parsed[field].value
-                col = columns.get(field, [])
-                if field in self.date_fields:
-                    val = self.dicom_date_to_date(val)
-                # elif field in self.time_fields:
-                #     val = self.dicom_time_to_time(val)
-                elif isinstance(val, int):
-                    val = int(val)
-                elif isinstance(val, float):
-                    val = float(val)
-                elif isinstance(val, str):
-                    val = str(val)
-                col.append(val)
-                columns[field] = col
-        return pd.DataFrame(columns)
+#         tag = source.get_tag()
+#         columns = {tag: []}
+#         colnames = set([])
+#         excluded_columns = set([])
+#         for key, parsed in source.items(dicom.dcmread):
+#             for field in parsed.dir():
+#                 colnames.add(field)
+#                 val = parsed[field].value
+#                 if isinstance(val, self.exclude_field_types):
+#                     excluded_columns.add(field)
+#         colnames -= excluded_columns
+#         colnames -= set(self.exclude_fields)
+#         for key, parsed in source.items(dicom.dcmread, os.path.basename):
+#             columns[tag].append(key)
+#             for field in colnames:
+#                 val = parsed[field].value
+#                 col = columns.get(field, [])
+#                 if field in self.date_fields:
+#                     val = self.dicom_date_to_date(val)
+#                 # elif field in self.time_fields:
+#                 #     val = self.dicom_time_to_time(val)
+#                 elif isinstance(val, int):
+#                     val = int(val)
+#                 elif isinstance(val, float):
+#                     val = float(val)
+#                 elif isinstance(val, str):
+#                     val = str(val)
+#                 col.append(val)
+#                 columns[field] = col
+#         return pd.DataFrame(columns)
 
 
 def rename_file(original, target, ext):
@@ -508,9 +510,11 @@ class SimpleITKDicomReader:
         """
         Utility method to help translate DICOM date and time objects to python
         :class:`~datetime.datetime`.
+
         .. warning::
             This isn't implemented yet.  Needs research on DICOM time
             representation.
+
         :param source: Date and time stored in DICOM as a string.
         :type source: str
         :return: Python's datetime object.
@@ -520,15 +524,15 @@ class SimpleITKDicomReader:
         # TODO: We don't know how to convert this yet        return source
 
     def read(self, source):
-        """
-        Read DICOM files, parse their metadata, generate a :code:`DataFrame`
-        based on that metadata.
-        :param source: A source generator.  For extended explanation see
-                       :class:`~cleanX.dicom_processing.Source`.
-        :type source: :class:`~cleanX.dicom_processing.Source`
-        :return: dataframe with metadata from dicoms
-        :rtype: :class:`~pandas.DataFrame`
-        """
+        # """
+        # Read DICOM files, parse their metadata, generate a :code:`DataFrame`
+        # based on that metadata.
+        # :param source: A source generator.  For extended explanation see
+        #     :class:`~cleanX.dicom_processing.Source`.
+        # :type source: :class:`~cleanX.dicom_processing.Source`
+        # :return: dataframe with metadata from dicoms
+        # :rtype: :class:`~pandas.DataFrame`
+        # """
         reader = sitk.ImageFileReader()
         m_reader = MetadataHelper(reader)
         tag = source.get_tag()
