@@ -219,6 +219,62 @@ class Isort(TestCommand):
             ))
 
 
+class SphinxDoc(Command):
+
+    description = 'generate documentation'
+
+    user_options = [('wall', 'W', ('Warnings are errors'))]
+
+    def initialize_options(self):
+        self.wall = True
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        from sphinx.util.console import nocolor
+        from sphinx.util.docutils import docutils_namespace, patch_docutils
+        from sphinx.application import Sphinx
+        from sphinx.cmd.build import handle_exception
+
+        nocolor()
+        confoverrides = {}
+        confoverrides['project'] = name
+        confoverrides['version'] = version
+        confdir = os.path.join(project_dir, 'docs')
+        srcdir = confdir
+        builder = 'html'
+        build = self.get_finalized_command('build')
+        build_dir = os.path.join(os.path.abspath(build.build_base), 'sphinx')
+        builder_target_dir = os.path.join(build_dir, builder)
+        app = None
+
+        try:
+            with patch_docutils(confdir), docutils_namespace():
+                app = Sphinx(
+                    srcdir,
+                    confdir,
+                    builder_target_dir,
+                    os.path.join(build_dir, 'doctrees'),
+                    builder,
+                    confoverrides,
+                    sys.stdout,
+                    freshenv=False,
+                    warningiserror=self.wall,
+                    verbosity=self.distribution.verbose - 1,
+                    keep_going=False,
+                )
+                app.build(force_all=False)
+                if app.statuscode:
+                    sys.stderr.write(
+                        'Sphinx builder {} failed.'.format(app.builder.name),
+                    )
+                    raise SystemExit(8)
+        except Exception as e:
+            handle_exception(app, self, e, sys.stderr)
+            raise
+
+
 class SphinxApiDoc(Command):
 
     description = 'run apidoc to generate documentation'
@@ -583,6 +639,7 @@ if __name__ == '__main__':
             'anaconda_gen_meta': GenerateCondaYaml,
             'bdist_conda': BdistConda,
             'sdist_conda': SdistConda,
+            'build_sphinx': SphinxDoc,
         },
         test_suite='setup.my_test_suite',
         install_requires=[
@@ -593,14 +650,6 @@ if __name__ == '__main__':
             'scikit-learn==1.2.2',
         ],
         tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
-        command_options={
-            'build_sphinx': {
-                'project': ('setup.py', name),
-                'version': ('setup.py', version),
-                'source_dir': ('setup.py', './docs'),
-                'config_dir': ('setup.py', './docs'),
-            },
-        },
         setup_requires=['wheel'],
         extras_require={
             'dev': [
