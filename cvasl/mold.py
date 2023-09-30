@@ -71,6 +71,7 @@ class SliceViewer:
         self.volume = volume
         self.figsize = figsize
         self.v = [np.min(volume), np.max(volume)]
+        self.widgets = importlib.import_module('ipywidgets')
 
         self.widgets.interact(self.transpose, view=self.widgets.Dropdown(
             options=['axial', 'sag', 'cor'],
