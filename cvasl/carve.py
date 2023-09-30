@@ -200,8 +200,8 @@ def rename_file(original, target, ext):
 #         :param time_fields: Fields that should be interpreted as having
 #                             time information in them.
 #         :type time_fields: Sequence[str]
-#         :param exclude_fields: Fields to exclude (in addition to those selected
-#                                by :code:`exclude_field_types`
+#         :param exclude_fields: Fields to exclude (in addition to those
+#                                selected by :code:`exclude_field_types`
 #         :type exclude_fields: Sequence[str]
 #         """
 #         if exclude_field_types:
@@ -213,7 +213,8 @@ def rename_file(original, target, ext):
 
 #     def dicom_date_to_date(self, source):
 #         """
-#         Utility method to help translate DICOM dates to :class:`~datetime.date`
+#         Utility method to help translate DICOM dates to 
+#            :class:`~datetime.date`
 #         :param source: Date stored as a string in DICOM file.
 #         :type source: str
 #         :return: Python date object.
