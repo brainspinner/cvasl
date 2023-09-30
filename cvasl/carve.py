@@ -213,7 +213,7 @@ def rename_file(original, target, ext):
 
 #     def dicom_date_to_date(self, source):
 #         """
-#         Utility method to help translate DICOM dates to 
+#         Utility method to help translate DICOM dates to
 #            :class:`~datetime.date`
 #         :param source: Date stored as a string in DICOM file.
 #         :type source: str
