@@ -65,7 +65,6 @@ jobs:
 
   Build-documentation:
       if: github.event.pull_request.draft == false
-      #name: Build documentation
       runs-on: ubuntu-latest
       strategy:
         fail-fast: false
