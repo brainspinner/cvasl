@@ -47,6 +47,52 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py lint
 
+  Documentation:
+  permissions:
+    contents: write
+
+  on:
+    push:
+      branches:
+      - main
+    pull_request:
+      types: [opened, synchronize, reopened, ready_for_review]
+      branches:
+      - main
+
+  jobs:
+
+    build-documentation:
+      if: github.event.pull_request.draft == false
+      name: Build documentation
+      runs-on: ubuntu-latest
+      strategy:
+        fail-fast: false
+      steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python 3.10
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.10'
+        - name: Python info
+          shell: bash -l {0}
+          run: |
+            which python3
+            python3 --version
+        - name: Upgrade pip and install dependencies
+          run: |
+            python3 -m pip install --upgrade pip setuptools
+            python3 -m pip install .[dev,publishing]
+        - name: Install pandoc using apt
+          run: sudo apt install pandoc
+        - name: Build documentation
+          run: make html
+          working-directory: docs
+        - name: Publish Docs to Pages
+          uses: JamesIves/github-pages-deploy-action@4.1.1
+          with:
+            branch: gh-pages
+            folder: docs/_build/html
   # Sphinx:
   #   runs-on: ubuntu-latest
 
