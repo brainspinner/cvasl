@@ -71,12 +71,12 @@ jobs:
     permissions:
       contents: write
 
-      on:
-        push:
-        branches:
-         - main
-         - drcandacemakedamoore/publicdocu
-       pull_request:
+    on:
+      push:
+      branches:
+        - main
+        - drcandacemakedamoore/publicdocu
+      pull_request:
          types: [opened, synchronize, reopened, ready_for_review]
          branches:
           - main
