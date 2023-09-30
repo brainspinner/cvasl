@@ -1,5 +1,5 @@
 cvasl.mold module
-=======================
+=================
 
 .. automodule:: cvasl.mold
    :members:

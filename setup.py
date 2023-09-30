@@ -249,6 +249,11 @@ class SphinxDoc(Command):
         builder_target_dir = os.path.join(build_dir, builder)
         app = None
 
+        # Allows better error reporting from Sphinx
+        self.pdb = False
+        self.verbosity = 10
+        self.traceback = True
+
         try:
             with patch_docutils(confdir), docutils_namespace():
                 app = Sphinx(
@@ -648,6 +653,8 @@ if __name__ == '__main__':
             'scipy',
             'matplotlib',
             'scikit-learn==1.2.2',
+            'SimpleITK',
+            'scikit-image',
         ],
         tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
         setup_requires=['wheel'],

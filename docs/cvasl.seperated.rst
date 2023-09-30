@@ -1,5 +1,5 @@
 cvasl.seperated module
-====================
+======================
 
 .. automodule:: cvasl.seperated
    :members:
