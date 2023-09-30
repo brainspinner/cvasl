@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cvasl.carve module &#8212; cvasl 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cvasl.cli module" href="cvasl.cli.html" />
+    <link rel="prev" title="cvasl package" href="cvasl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.cli.html" title="cvasl.cli module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.html" title="cvasl package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.carve module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-cvasl.carve">
+<span id="cvasl-carve-module"></span><h1>cvasl.carve module<a class="headerlink" href="#module-cvasl.carve" title="Link to this heading">¶</a></h1>
+<p>Copyright 2023 Netherlands eScience Center and
+the Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
+<p>This file contains methods to anonymize image files.
+Specifically we have a methods to get the image out of DICOMs,
+and to strip soft tissues off head MRIs.</p>
+<p>Note the package has an optional pydicom dependancy, without it this module
+has functions related to dicoms that will not work.</p>
+<p>The pydicom is currently shut off.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.carve.DirectorySource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.DirectorySource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to aid reading DICOMs, package agnostically</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.DirectorySource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.DirectorySource.get_tag" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.DirectorySource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.DirectorySource.items" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.carve.GlobSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.GlobSource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to aid finding files from path (for later reading out DICOM)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.GlobSource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.GlobSource.get_tag" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.GlobSource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.GlobSource.items" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.carve.MetadataHelper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">MetadataHelper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MetadataHelper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class for getting DICOM metadata with SimpleITK.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.MetadataHelper.fetch_image">
+<span class="sig-name descname"><span class="pre">fetch_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicom_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MetadataHelper.fetch_image" title="Link to this definition">¶</a></dt>
+<dd><p>Read the pixel data of the DICOM image.
+:param dicom_file: The file to extract image data from.
+:type dicom_file: str
+:return: Pixel array of the extracted image.
+:rtype: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.MetadataHelper.fetch_metadata">
+<span class="sig-name descname"><span class="pre">fetch_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicom_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MetadataHelper.fetch_metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Reads enough of the DICOM file to fetch its metadata.
+:param dicom_file: The file for which to read the metadata.
+:type dicom_file: str
+:return: Parsed metadata.
+:rtype: dict</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.carve.MultiSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MultiSource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.MultiSource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MultiSource.get_tag" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.MultiSource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.MultiSource.items" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">SimpleITKDicomReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class for reading DICOM metadata with SimpleITK.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.date_fields">
+<span class="sig-name descname"><span class="pre">date_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Content</span> <span class="pre">Date',</span> <span class="pre">'Series</span> <span class="pre">Date',</span> <span class="pre">'Study</span> <span class="pre">Date'}</span></em><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.date_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Default fields in the parsed DICOM file to be interpreted as date.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.dicom_date_to_date">
+<span class="sig-name descname"><span class="pre">dicom_date_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.dicom_date_to_date" title="Link to this definition">¶</a></dt>
+<dd><p>Utility method to parse DICOM dates to Python’s
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>.
+:param source: DICOM date given as string.
+:type source: str
+:return: Pyton date object.
+:rtype: <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.dicom_time_to_time">
+<span class="sig-name descname"><span class="pre">dicom_time_to_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.dicom_time_to_time" title="Link to this definition">¶</a></dt>
+<dd><p>Utility method to help translate DICOM date and time objects to python
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This isn’t implemented yet.  Needs research on DICOM time
+representation.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Date and time stored in DICOM as a string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Python’s datetime object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.exclude_fields">
+<span class="sig-name descname"><span class="pre">exclude_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.exclude_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Default fields to exclude from dataframe generated form DICOM files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.read" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.carve.SimpleITKDicomReader.time_fields">
+<span class="sig-name descname"><span class="pre">time_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Content</span> <span class="pre">Time',</span> <span class="pre">'Study</span> <span class="pre">Time'}</span></em><a class="headerlink" href="#cvasl.carve.SimpleITKDicomReader.time_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Default fields in the parsed DICOM file to be interpreted as datetime.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.carve.rename_file">
+<span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">rename_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.rename_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.carve.rip_out_array_sitk">
+<span class="sig-prename descclassname"><span class="pre">cvasl.carve.</span></span><span class="sig-name descname"><span class="pre">rip_out_array_sitk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicomfile_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.carve.rip_out_array_sitk" title="Link to this definition">¶</a></dt>
+<dd><p>This function is to rip raays out of a dicom file directory, one by one,
+each of them (not just the first series as), and they can be assigned
+to a variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dicomfile_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – dicomfile_directory, directory with dicom/.dcm</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of images represented as NumPy arrays.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cvasl.carve module</a><ul>
+<li><a class="reference internal" href="#cvasl.carve.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.carve.DirectorySource.get_tag"><code class="docutils literal notranslate"><span class="pre">DirectorySource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.DirectorySource.items"><code class="docutils literal notranslate"><span class="pre">DirectorySource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.carve.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.carve.GlobSource.get_tag"><code class="docutils literal notranslate"><span class="pre">GlobSource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.GlobSource.items"><code class="docutils literal notranslate"><span class="pre">GlobSource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.carve.MetadataHelper"><code class="docutils literal notranslate"><span class="pre">MetadataHelper</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.carve.MetadataHelper.fetch_image"><code class="docutils literal notranslate"><span class="pre">MetadataHelper.fetch_image()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.MetadataHelper.fetch_metadata"><code class="docutils literal notranslate"><span class="pre">MetadataHelper.fetch_metadata()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.carve.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.carve.MultiSource.get_tag"><code class="docutils literal notranslate"><span class="pre">MultiSource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.MultiSource.items"><code class="docutils literal notranslate"><span class="pre">MultiSource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.date_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.date_fields</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.dicom_date_to_date"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.dicom_date_to_date()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.dicom_time_to_time"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.dicom_time_to_time()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.exclude_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.exclude_fields</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.read"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.read()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.SimpleITKDicomReader.time_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.time_fields</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.carve.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.carve.rip_out_array_sitk"><code class="docutils literal notranslate"><span class="pre">rip_out_array_sitk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cvasl.html"
+                          title="previous chapter">cvasl package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cvasl.cli.html"
+                          title="next chapter">cvasl.cli module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cvasl.carve.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.cli.html" title="cvasl.cli module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.html" title="cvasl package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.carve module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, c.moore@esciencecenter.nl.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

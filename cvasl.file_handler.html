@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cvasl.file_handler module &#8212; cvasl 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cvasl.mold module" href="cvasl.mold.html" />
+    <link rel="prev" title="cvasl.cli module" href="cvasl.cli.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.mold.html" title="cvasl.mold module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.cli.html" title="cvasl.cli module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.file_handler module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-cvasl.file_handler">
+<span id="cvasl-file-handler-module"></span><h1>cvasl.file_handler module<a class="headerlink" href="#module-cvasl.file_handler" title="Link to this heading">¶</a></h1>
+<p>Copyright 2023 Netherlands eScience Center and
+the Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
+<p>This file contains one method to let the user configure
+all paths for data instead of hard-coding them, as well
+as methods to check data integrity, and create synthetic data.
+The data integrity can be checked because this file contains
+hash functions to track data. Synthetic data can be made
+with several methods.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#cvasl.file_handler.Config" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class allows configuration on the home computer
+or remote workspace, of a file setup for data,
+which is then processed into a variable. Essentially
+by setting up and modifying a .json file in the appropriate directory
+users can avoid the need for any hardcoded paths to data.
+If you do not set up a json file, then
+your storage space will default to the test_data folder
+in the repository.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.default_layout">
+<span class="sig-name descname"><span class="pre">default_layout</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'bids':</span> <span class="pre">'{}',</span> <span class="pre">'cvage':</span> <span class="pre">'{}/derivates/cvage',</span> <span class="pre">'cvage_inputs':</span> <span class="pre">'{}/derivates/cvage/cvasl_inputs',</span> <span class="pre">'cvage_outputs':</span> <span class="pre">'{}/derivates/cvage/cvasl_outputs',</span> <span class="pre">'derivatives':</span> <span class="pre">'{}/derivatives',</span> <span class="pre">'explore_asl':</span> <span class="pre">'{}/derivatives/explore_asl',</span> <span class="pre">'raw_data':</span> <span class="pre">'{}/raw_data'}</span></em><a class="headerlink" href="#cvasl.file_handler.Config.default_layout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.default_locations">
+<span class="sig-name descname"><span class="pre">default_locations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('./config.json',</span> <span class="pre">'/home/runner/.cvasl/config.json',</span> <span class="pre">'/etc/cvasl/config.json')</span></em><a class="headerlink" href="#cvasl.file_handler.Config.default_locations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.from_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.from_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.get_directory">
+<span class="sig-name descname"><span class="pre">get_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.get_directory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.load" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.no_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">no_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.no_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">found</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.parse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.parse_overrides">
+<span class="sig-name descname"><span class="pre">parse_overrides</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;command</span> <span class="pre">line&gt;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.parse_overrides" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.pprint">
+<span class="sig-name descname"><span class="pre">pprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.pprint" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.required_directories">
+<span class="sig-name descname"><span class="pre">required_directories</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('bids',)</span></em><a class="headerlink" href="#cvasl.file_handler.Config.required_directories" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.usage">
+<span class="sig-name descname"><span class="pre">usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.usage" title="Link to this definition">¶</a></dt>
+<dd><p>This is essentally a notice message if the computer
+does not have paths configured or files made so that
+the data paths of a config.json can be used.
+Until you do it will defailt to test_data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cvasl.file_handler.Config.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.Config.validate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.extract_common_columns">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">extract_common_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tsv_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.extract_common_columns" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes a group of tsv
+files and extracts the common columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result is common elements in columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.find_where_column">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">find_where_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tsv_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.find_where_column" title="Link to this definition">¶</a></dt>
+<dd><p>A function to find which tsv contain
+a list of specified columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of columns as strings</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of lists of tsv names</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.hash_folder">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">hash_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">made</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.hash_folder" title="Link to this definition">¶</a></dt>
+<dd><p>Hashing function to be used by command line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
+<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – File extension</p></li>
+<li><p><strong>made</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – file directory where csv with hashes will be put</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.hash_rash">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">hash_rash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extension</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.hash_rash" title="Link to this definition">¶</a></dt>
+<dd><p>Hashing function to check files are not corrupted or to assure
+files are changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
+<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – File extension, written without period</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe with hashes for what is in folder</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.1)"><em>DataFrame</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.intersect_all">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">intersect_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.intersect_all" title="Link to this definition">¶</a></dt>
+<dd><p>A function that given a group of sets
+will return the elements common to all sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*sets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – group of set or list of lists, but unpacked</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result is common elements</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.make_columns">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">make_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tsv_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.make_columns" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes column titles
+out of a tsv file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of lists of column names</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.file_handler.unduplicate_dfs">
+<span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">unduplicate_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_dataframes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.file_handler.unduplicate_dfs" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes a list of dataframes
+and should return only dataframes that are not duplicated from each other
+but it must be improved (see TODO)</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cvasl.file_handler module</a><ul>
+<li><a class="reference internal" href="#cvasl.file_handler.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.default_layout"><code class="docutils literal notranslate"><span class="pre">Config.default_layout</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.default_locations"><code class="docutils literal notranslate"><span class="pre">Config.default_locations</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.from_file"><code class="docutils literal notranslate"><span class="pre">Config.from_file()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.get_directory"><code class="docutils literal notranslate"><span class="pre">Config.get_directory()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.load"><code class="docutils literal notranslate"><span class="pre">Config.load()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.no_file"><code class="docutils literal notranslate"><span class="pre">Config.no_file()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.parse"><code class="docutils literal notranslate"><span class="pre">Config.parse()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.parse_overrides"><code class="docutils literal notranslate"><span class="pre">Config.parse_overrides()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.pprint"><code class="docutils literal notranslate"><span class="pre">Config.pprint()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.required_directories"><code class="docutils literal notranslate"><span class="pre">Config.required_directories</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.usage"><code class="docutils literal notranslate"><span class="pre">Config.usage()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.Config.validate"><code class="docutils literal notranslate"><span class="pre">Config.validate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.file_handler.extract_common_columns"><code class="docutils literal notranslate"><span class="pre">extract_common_columns()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.find_where_column"><code class="docutils literal notranslate"><span class="pre">find_where_column()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.hash_folder"><code class="docutils literal notranslate"><span class="pre">hash_folder()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.hash_rash"><code class="docutils literal notranslate"><span class="pre">hash_rash()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.intersect_all"><code class="docutils literal notranslate"><span class="pre">intersect_all()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.make_columns"><code class="docutils literal notranslate"><span class="pre">make_columns()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.file_handler.unduplicate_dfs"><code class="docutils literal notranslate"><span class="pre">unduplicate_dfs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cvasl.cli.html"
+                          title="previous chapter">cvasl.cli module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cvasl.mold.html"
+                          title="next chapter">cvasl.mold module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cvasl.file_handler.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.mold.html" title="cvasl.mold module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.cli.html" title="cvasl.cli module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.file_handler module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, c.moore@esciencecenter.nl.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

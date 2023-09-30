@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cvasl.seperated module &#8212; cvasl 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer’s Guide" href="developers.html" />
+    <link rel="prev" title="cvasl.mold module" href="cvasl.mold.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developers.html" title="Developer’s Guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.mold.html" title="cvasl.mold module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.seperated module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-cvasl.seperated">
+<span id="cvasl-seperated-module"></span><h1>cvasl.seperated module<a class="headerlink" href="#module-cvasl.seperated" title="Link to this heading">¶</a></h1>
+<p>Copyright 2023 Netherlands eScience Center and
+the Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
+<p>This file contains functions for processing csv and tsv
+files towards correct formats.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.check_identical_columns">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">check_identical_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tsv_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.check_identical_columns" title="Link to this definition">¶</a></dt>
+<dd><p>Here we enter the path to a folder, then return the columns in
+which all files are exactly duplicated in name and values.</p>
+<p>needs more</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.check_sex_dimorph_expectations">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">check_sex_dimorph_expectations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.check_sex_dimorph_expectations" title="Link to this definition">¶</a></dt>
+<dd><p>This function checks that men
+as expected have larger brains than women
+in a given dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.1)"><em>DataFrame</em></a>) – dataframe with cvasl standard for patient MRI data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe, or zero, with side effect of printed information</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.1)"><em>DataFrame</em></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.concat_double_header">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">concat_double_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe_dub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.concat_double_header" title="Link to this definition">¶</a></dt>
+<dd><p>This function concatenates the two headers of a dataframe
+:param dataframe_dub: dataframe with double header
+:type dataframe_dub: pandas.dataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dataframe with a single header</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.dataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.find_original_y_values">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">find_original_y_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.find_original_y_values" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the original y-values of a second or third degree polynomial
+given its coefficients and an output value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – coefficients of the polynomial in the form (a, b, c)</p></li>
+<li><p><strong>output_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – output of polynomial when a list of y are given</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pile,list of original y-values corresponding to the output value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.find_outliers_by_list">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_sd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.find_outliers_by_list" title="Link to this definition">¶</a></dt>
+<dd><p>This function finds the outliers in terms of anything outside
+a given number of
+standard deviations (number_sd)
+from the mean on a list of specific specific column,
+then returns these rows of the dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.1)"><em>DataFrame</em></a>) – whole dataframe on dataset</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of relevant columns</p></li>
+<li><p><strong>number_sd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – number of standard deviations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe of outliers</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.1)"><em>DataFrame</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.generate_transformation_matrix">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">generate_transformation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.generate_transformation_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a matrix that transforms one polynomial into another.
+:param polynomial1: coefficients of the polynomial in the form (a1, b1)
+:type polynomial1: tuple
+:param polynomial2: coefficients of the polynomial in the form (a2, b2)
+:type polynomial2: tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>m, an array</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarrray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.plot_2on2_df">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">plot_2on2_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'purple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'orange'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.plot_2on2_df" title="Link to this definition">¶</a></dt>
+<dd><p>This function is meant to create an artifact
+of two datasets with comparable variables
+in terms of graphing the variables
+against a variable of interest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe1</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>dataframe2</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph against</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>no return, makes artifact</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.polyfit_and_show">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">polyfit_and_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'purple'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.polyfit_and_show" title="Link to this definition">¶</a></dt>
+<dd><p>This function creates a polynomial for two columns.
+It returns the coefficients in a 2nd degree polynomial
+and also creates a graph as a side effect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph against</p></li>
+<li><p><strong>other_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph</p></li>
+<li><p><strong>degree_poly</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – either 1,2 or 3 only</p></li>
+<li><p><strong>color1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of color for graphing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>coeffiects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.recode_sex">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">recode_sex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">whole_dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string_for_sex</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.recode_sex" title="Link to this definition">¶</a></dt>
+<dd><p>This function recodes sex into a new column if there
+are two possible values. It maintains numerical order
+but changes the values to 0 and 1. The new column is
+called ‘sex_encoded’. Note sex should be encoded
+in numbers i.e. ints or floats</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>whole_dataframe</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – dataframe variable</p></li>
+<li><p><strong>string_for_sex</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – column name written in singe qoutes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe with sex encoded colum</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.relate_columns_graphs">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">relate_columns_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.relate_columns_graphs" title="Link to this definition">¶</a></dt>
+<dd><p>This function makes a scatter plot of all columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph against</p></li>
+<li><p><strong>saver</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – bool to indicate if graph pngs should be saved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>no return, makes artifact</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.relate_columns_graphs_numeric">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">relate_columns_graphs_numeric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.relate_columns_graphs_numeric" title="Link to this definition">¶</a></dt>
+<dd><p>This function makes a scatter plot of all columns that are numeric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph against</p></li>
+<li><p><strong>saver</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string to indicate if graph pngs should be saved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>no return, makes artifact</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.relate_columns_graphs_two_dfs">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">relate_columns_graphs_two_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'purple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'orange'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.relate_columns_graphs_two_dfs" title="Link to this definition">¶</a></dt>
+<dd><p>This function is meant to be a helper function
+for one that makes a scatter plot of all columns
+that two dataframes have in common</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe1</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>dataframe2</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – str of column you graph against</p></li>
+<li><p><strong>other_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – string of column you want to graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>no return, makes artifact</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cvasl.seperated module</a><ul>
+<li><a class="reference internal" href="#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.recode_sex"><code class="docutils literal notranslate"><span class="pre">recode_sex()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_numeric"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_numeric()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_two_dfs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_two_dfs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cvasl.mold.html"
+                          title="previous chapter">cvasl.mold module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="developers.html"
+                          title="next chapter">Developer’s Guide</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cvasl.seperated.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developers.html" title="Developer’s Guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.mold.html" title="cvasl.mold module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.seperated module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, c.moore@esciencecenter.nl.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
