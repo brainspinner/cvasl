@@ -47,21 +47,6 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py lint
 
-  # Documentation:
-  #   permissions:
-  #     contents: write
-
-  #   on:
-  #     push:
-  #       branches:
-  #       - main
-  #       - drcandacemakedamoore/publicdocu
-  #     pull_request:
-  #       types: [opened, synchronize, reopened, ready_for_review]
-  #       branches:
-  #       - main
-  #       - drcandacemakedamoore/publicdocu
-
   Sphinx:
     runs-on: ubuntu-latest
 
@@ -84,72 +69,6 @@ jobs:
         with:
           branch: gh-pages
           folder: build/sphinx/html  
-  # Build-documentation:
-  #   if: github.event.pull_request.draft == false
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-        
-  #   # permissions:
-  #   #   contents: write
-
-  #   # on:
-  #   #   push:
-  #   #   branches:
-  #   #     - main
-  #   #     - drcandacemakedamoore/publicdocu
-  #   #   pull_request:
-  #   #      types: [opened, synchronize, reopened, ready_for_review]
-  #   #      branches:
-  #   #       - main
-  #   #       - drcandacemakedamoore/publicdocu
-  #     steps:
-  #       - uses: actions/checkout@v2
-  #       - name: Set up Python 3.10
-  #         uses: actions/setup-python@v2
-  #         with:
-  #           python-version: '3.10'
-  #       - name: Python info
-  #         shell: bash -l {0}
-  #         run: |
-  #           which python3
-  #           python3 --version
-  #       - name: Upgrade pip and install dependencies
-  #         run: |
-  #           python3 -m pip install --upgrade pip setuptools
-  #           python3 -m pip install .[dev,publishing]
-  #       - name: Install pandoc using apt
-  #         run: sudo apt install pandoc
-  #       - name: Build documentation
-  #         run: make html
-  #         working-directory: docs
-  #       - name: Publish Docs to Pages
-  #         uses: JamesIves/github-pages-deploy-action@4.1.1
-  #         with:
-  #           branch: gh-pages
-  #           folder: build/sphinx/html
-  # Sphinx:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #         submodules: recursive
-  #     - uses: s-weigand/setup-conda@v1
-  #       with:
-  #         conda-channels: conda-forge
-  #         python-version: '3.10'
-  #     - run: python3 -m venv .venv
-  #     - run: .venv/bin/python -m pip install wheel sphinx
-  #     - run: .venv/bin/python setup.py install
-  #     - run: .venv/bin/python setup.py apidoc
-  #     - run: .venv/bin/python setup.py build_sphinx -W
-  #     - name: Publish Docs to Pages
-  #       uses: JamesIves/github-pages-deploy-action@4.1.1
-  #       with:
-  #         branch: gh-pages
-  #         folder: build/sphinx/html
 
   # Fair-software:
   #   runs-on: ubuntu-latest
