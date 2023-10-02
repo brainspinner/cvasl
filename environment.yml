@@ -1,6 +1,6 @@
 #  environment document
 
-name: mrilander
+name: mrilanding
 channels:
   - conda-forge
   
@@ -19,6 +19,7 @@ dependencies:
   - pycodestyle
   - scipy=1.7.3
   - scikit-image=0.19.2
+  - scikit-learn= 1.2.2
   - seaborn
   - simpleitk=2.2.1
   - sphinx=4.5.0
