@@ -200,7 +200,7 @@ metadata is available.
 ### Documentation:
 
 You can look at our [online documentation](https://brainspinner.github.io/cvasl) or build it by hand
-(see the setup file)
+(see the setup file, the workflows, and it may be clear)
 
 
 ### Testing
