@@ -25,4 +25,4 @@ Changed repo name from brainspin to cvasl
     - Notice
     - seperate environments for harmonization experiments inside harmonization_paper folder
     - notebook showing how showable standard was generated
-    - file with standard for submitting to package
+    - file with standard for submitting to package inside researcher_interface folder
