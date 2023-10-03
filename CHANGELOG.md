@@ -15,11 +15,14 @@ Changed repo name from brainspin to cvasl
 ### Changed
 
 *
-## Release 0.0.0
+## Release 0.0.0-alpha
 
 ### Added
 
 * First version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
 
 	- License
+    - Notice
     - seperate environments for harmonization experiments inside harmonization_paper folder
+    - notebook showing how showable standard was generated
+    - file with standard for submitting to package
