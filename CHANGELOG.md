@@ -26,4 +26,5 @@ Changed repo name from brainspin to cvasl
     - seperate environments for harmonization experiments inside harmonization_paper folder
     - notebook showing how showable standard was generated
     - file with standard for submitting to package inside researcher_interface folder
-    
+    - preliminary linear regression models as baseline for brain age models
+
