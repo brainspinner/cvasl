@@ -197,6 +197,11 @@ metadata is available.
   `jupyter lab` into the terminal
 
 
+### Documentation:
+
+You can look at our [online documentation](https://brainspinner.github.io/cvasl) or build it by hand
+(see the setup file)
+
 
 ### Testing
 
