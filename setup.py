@@ -652,7 +652,7 @@ if __name__ == '__main__':
             'pandas',
             'scipy',
             'matplotlib',
-            'scikit-learn==1.2.2',
+            'scikit-learn',
             'SimpleITK',
             'scikit-image',
         ],
