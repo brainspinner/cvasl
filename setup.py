@@ -435,7 +435,7 @@ class AnacondaUpload(Command):
 
     def run(self):
         env = dict(os.environ)
-        env['ANACONDA_API_TOKEN'] = self.token
+        env['ANACONDA_API_TOKEN2'] = self.token
         upload = glob(self.package)[0]
         sys.stderr.write('Uploading: {}\n'.format(upload))
         args = ['upload', '--force', '--label', 'main', upload]
