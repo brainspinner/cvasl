@@ -7,7 +7,7 @@ on:
 
 jobs:
   PyPIBuild:
-    if: ${{ github.repository == 'resurfemg/resurfemg' }}
+    if: ${{ github.repository == 'brainspinner/cvasl' }}
     name: Tagged Release
     runs-on: ubuntu-latest
     steps:
@@ -19,10 +19,10 @@ jobs:
         # build a wheel... and we need this stuff to be able to build
         # for CPython.
       
-      - name: Set up Python 3.8
+      - name: Set up Python 3.10
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.10
       - run: python3.8 -m venv .venv
       - run: .venv/bin/python -m pip install wheel twine
       - run: .venv/bin/python setup.py bdist_wheel
@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.8]
+        python-version: [3.10]
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v2
@@ -53,7 +53,7 @@ jobs:
           conda-channels: conda-forge
           python-version: ${{ matrix.python-version }}
       - run: conda config --remove channels defaults
-      - name: Generate conda meta.yaml (Python 3.8)
+      - name: Generate conda meta.yaml (Python 3.10)
         run: python -u setup.py anaconda_gen_meta
       - if: ${{ matrix.os == 'macos-latest' }}
         run: python -u setup.py bdist_conda -o
@@ -81,8 +81,8 @@ jobs:
           repo_token: "${{ secrets.GITHUBTOKEN }}"
           prerelease: false
           files: |
-            ./dist/*/linux-64/resurfemg-*.tar.bz2
-            ./dist/*/osx-64/resurfemg-*.tar.bz2
-            ./dist/*/win-64/resurfemg-*.tar.bz2
+            ./dist/*/linux-64/cvasl-*.tar.bz2
+            ./dist/*/osx-64/cvasl-*.tar.bz2
+            ./dist/*/win-64/cvasl-*.tar.bz2
             ./dist/pypi-build/*.whl
             ./dist/pypi-build/*.egg
