@@ -4,7 +4,7 @@
 
 [![DOI](To be made)
 [![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/cvasl.svg)](https://pypi.python.org/pypi/cvasl/)
-[![Anaconda-Server Badge- to be made, placeholder](https://anaconda.org/brainspinner/cvasl/badges/version.svg)](https://anaconda.org/resurfemg/resurfemg)
+[![Anaconda](https://anaconda.org/brainspinner-org/cvasl/badges/version.svg)
 [![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml)
 
