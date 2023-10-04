@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cvasl.mold module &#8212; cvasl 0.0.0 documentation</title>
+    <title>cvasl.mold module &#8212; cvasl 0.0.0-alpha documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
-    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/documentation_options.js?v=8e37ee27"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="cvasl.file_handler.html" title="cvasl.file_handler module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cvasl.mold module</a></li> 
@@ -52,7 +52,7 @@ Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cvasl.mold.NormedSliceViewer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.mold.</span></span><span class="sig-name descname"><span class="pre">NormedSliceViewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.mold.NormedSliceViewer" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class to examine slices of MRIs, or other volumetric data,
 with normalizaiotn</p>
 <dl class="py method">
@@ -70,7 +70,7 @@ with normalizaiotn</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cvasl.mold.SliceViewer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.mold.</span></span><span class="sig-name descname"><span class="pre">SliceViewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">10)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.mold.SliceViewer" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class to examine slices of MRIs, or other volumetric data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cvasl.mold.SliceViewer.plot_slice">
@@ -93,9 +93,9 @@ Note this will only run on files with .gz at end of extension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>file_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
+<li><p><strong>file_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
 <li><p><strong>algorithm</strong> (<em>algorithm</em>) – algorithm e.g. N4_debias_sitk</p></li>
-<li><p><strong>processed</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – folder where output images go</p></li>
+<li><p><strong>processed</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – folder where output images go</p></li>
 </ul>
 </dd>
 </dl>
@@ -194,7 +194,7 @@ It stores arrays in a directory.</p>
         <li class="right" >
           <a href="cvasl.file_handler.html" title="cvasl.file_handler module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cvasl.mold module</a></li> 

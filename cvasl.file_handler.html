@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cvasl.file_handler module &#8212; cvasl 0.0.0 documentation</title>
+    <title>cvasl.file_handler module &#8212; cvasl 0.0.0-alpha documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
-    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/documentation_options.js?v=8e37ee27"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="cvasl.cli.html" title="cvasl.cli module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cvasl.file_handler module</a></li> 
@@ -57,7 +57,7 @@ with several methods.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cvasl.file_handler.Config">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cvasl.file_handler.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#cvasl.file_handler.Config" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class allows configuration on the home computer
 or remote workspace, of a file setup for data,
 which is then processed into a variable. Essentially
@@ -139,13 +139,13 @@ Until you do it will defailt to test_data</p>
 files and extracts the common columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p>
+<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of filenames of tsv files</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>result is common elements in columns</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.12)">set</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,15 +158,15 @@ a list of specified columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p></li>
-<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of columns as strings</p></li>
+<li><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of filenames of tsv files</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of columns as strings</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of lists of tsv names</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,9 +178,9 @@ a list of specified columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
-<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – File extension</p></li>
-<li><p><strong>made</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – file directory where csv with hashes will be put</p></li>
+<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
+<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – File extension</p></li>
+<li><p><strong>made</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – file directory where csv with hashes will be put</p></li>
 </ul>
 </dd>
 </dl>
@@ -194,8 +194,8 @@ files are changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
-<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – File extension, written without period</p></li>
+<li><p><strong>origin_folder1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The string of the folder with files to hash</p></li>
+<li><p><strong>file_extension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – File extension, written without period</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -214,13 +214,13 @@ files are changed.</p>
 will return the elements common to all sets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>*sets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – group of set or list of lists, but unpacked</p>
+<dd class="field-odd"><p><strong>*sets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – group of set or list of lists, but unpacked</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>result is common elements</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.12)">set</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -232,13 +232,13 @@ will return the elements common to all sets.</p>
 out of a tsv file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – list of filenames of tsv files</p>
+<dd class="field-odd"><p><strong>list_tsv_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of filenames of tsv files</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of lists of column names</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -337,7 +337,7 @@ but it must be improved (see TODO)</p>
         <li class="right" >
           <a href="cvasl.cli.html" title="cvasl.cli module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cvasl.file_handler module</a></li> 
