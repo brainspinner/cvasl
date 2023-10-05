@@ -2,9 +2,9 @@
     <img style="width: 35%; height: 35%" src="cv_asl_svg.svg">
 </p>
 
-[![DOI](To be made)
+[![DOI](zenodo)](To be made)
 [![PyPI- to be made, placeholder](https://img.shields.io/pypi/v/cvasl.svg)](https://pypi.python.org/pypi/cvasl/)
-[![Anaconda](https://anaconda.org/brainspinner-org/cvasl/badges/version.svg)
+[![Anaconda](https://anaconda.org/brainspinner-org/cvasl/badges/version.svg)](https://anaconda.org/brainspinner-org/cvasl/badges/version.svg)
 [![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml/badge.svg)](https://github.com/brainspinner/cvasl/actions/workflows/on-tag.yml)
 
