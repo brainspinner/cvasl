@@ -3,7 +3,7 @@
 This folder contains notebooks and environments related to work for a paper on image harmonization. Several libraries used e.g. neurocombat require special environments that differ from our regular environments. They can be built as follows (here the neurocombat environment is used as an example):
 
 0. Assuming you are using conda for package management:    
-  * Make sure you are in no environment:
+  * Make sure you are in the base environment or no environment:
 
       ```sh
       conda deactivate
@@ -29,3 +29,5 @@ This folder contains notebooks and environments related to work for a paper on i
      ```
 
     Option B: Do it with only conda
+
+
