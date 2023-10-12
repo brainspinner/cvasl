@@ -1,8 +1,8 @@
 #  neurocombat environment document
 
-name: neurocombaty1
+name: neurocombaty
 channels:
-  - pip
+  - conda-forge
   
 dependencies:
   - python=3.7
