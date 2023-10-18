@@ -68,7 +68,13 @@ def recode_sex(whole_dataframe, string_for_sex):
 
     return new_dataframe  # return dataframe with new column
 
-
+def recode_sex_to_numeric(df):
+    """When we need to flip the sex back to numbers from the
+    suggested format this function will turn females to 1, males to 0"""
+    sex_mapping = {'F':1,'M':0}
+    df = df.assign(sex = df.sex.map(sex_mapping))
+    return df
+    
 def relate_columns_graphs(dataframe, special_column_name, saver=False):
     """ This function makes a scatter plot of all columns
 
