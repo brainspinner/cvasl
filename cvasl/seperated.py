@@ -337,9 +337,9 @@ def check_identical_columns(tsv_path, header=0):
 def generate_transformation_matrix(polynomial1, polynomial2):
     """
     Generates a matrix that transforms one polynomial into another.
-    :param polynomial1: coefficients of the polynomial in the form (a1, b1, c1)
+    :param polynomial1: coefficients of the polynomial in form (a1, b1, ...)
     :type polynomial1: Sequence
-    :param polynomial2: coefficients of the polynomial in the form (a2, b2, c2)
+    :param polynomial2: coefficients of the polynomial in form (a2, b2, ...)
     :type polynomial2: Sequence
 
 
