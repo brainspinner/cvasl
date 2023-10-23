@@ -283,6 +283,75 @@ def polyfit_and_show(
     return coefficients
 
 
+def polyfit_second_degree_to_df(
+        dataframe,
+        special_column_name,
+        other_column_names,
+):
+    """
+    This function creates polynomials for columns,
+    as compared to a special column, in our case age.
+    It returns the coefficients in a dataframe.
+
+    :param dataframe: dataframe variable
+    :type dataframe: pandas.dataFrame
+    :param special_column_name: column name, usually age
+    :type  special_column_name: str
+    :param other_column_names: columns you want to get poly coefficients on
+    :type other_column_names: list
+
+
+    :returns: coeffiects
+    :rtype: :class:`~numpy.ndarray`
+    """
+    list_as = []
+    list_bs = []
+    list_cs = []
+    list_columns = []
+    dataframe = dataframe.dropna()
+    for interest_column_name in other_column_names:
+        xscat = np.array(pd.to_numeric(dataframe[special_column_name]))
+        yscat = np.array(pd.to_numeric(dataframe[interest_column_name]))
+        coefficients = np.polyfit(xscat, yscat, 2)  # 2 = degree_poly
+        list_columns.append(interest_column_name)
+        list_as.append(coefficients[0])
+        list_bs.append(coefficients[1])
+        list_cs.append(coefficients[2])
+    d = {
+        'column': list_columns,
+        'coefficient_a': list_as,
+        'coefficient_b': list_bs,
+        'coefficient_c': list_cs,
+        }
+    coefficient_dataframe = pd.DataFrame(d)
+
+    return coefficient_dataframe
+
+
+def derived_function(column, a, b, c):
+    """
+    This functions allows you to derive a projected
+    value for any parameter based on a polynomial
+    for age versus the parameter, given that
+    your data is in a dataframe format.
+
+
+    :param column: pandas dataframe variable column
+    :type column: pandas.core.series.Series
+    :param a: first coeffiecnt
+    :type  a: float
+    :param b: second coefficient
+    :type  b: float
+    :param c: final term in polynomial
+    :type  c: float
+
+
+    :returns: series
+    :rtype: :class:`~pandas.core.series.Series`
+    """
+    return a * (column**2) + b * column + c
+
+
 def concat_double_header(dataframe_dub):
     """
     This function concatenates the two headers of a dataframe
