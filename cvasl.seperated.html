@@ -94,6 +94,31 @@ in a given dataframe.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.derived_function">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">derived_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.derived_function" title="Link to this definition">¶</a></dt>
+<dd><p>This functions allows you to derive a projected
+value for any parameter based on a polynomial
+for age versus the parameter, given that
+your data is in a dataframe format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.1.1)"><em>pandas.core.series.Series</em></a>) – pandas dataframe variable column</p></li>
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – first coeffiecnt</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – second coefficient</p></li>
+<li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – final term in polynomial</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>series</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.find_original_y_values">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">find_original_y_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.find_original_y_values" title="Link to this definition">¶</a></dt>
 <dd><p>Finds the original y-values of a second or third degree polynomial
@@ -195,6 +220,29 @@ and also creates a graph as a side effect.</p>
 <li><p><strong>other_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – string of column you want to graph</p></li>
 <li><p><strong>degree_poly</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – either 1,2 or 3 only</p></li>
 <li><p><strong>color1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – string of color for graphing</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>coeffiects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.polyfit_second_degree_to_df">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">polyfit_second_degree_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_column_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_column_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.polyfit_second_degree_to_df" title="Link to this definition">¶</a></dt>
+<dd><p>This function creates polynomials for columns,
+as compared to a special column, in our case age.
+It returns the coefficients in a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.dataFrame</em>) – dataframe variable</p></li>
+<li><p><strong>special_column_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – column name, usually age</p></li>
+<li><p><strong>other_column_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – columns you want to get poly coefficients on</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -318,11 +366,13 @@ that two dataframes have in common</p>
 <li><a class="reference internal" href="#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.derived_function"><code class="docutils literal notranslate"><span class="pre">derived_function()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.polyfit_second_degree_to_df"><code class="docutils literal notranslate"><span class="pre">polyfit_second_degree_to_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.recode_sex"><code class="docutils literal notranslate"><span class="pre">recode_sex()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.recode_sex_to_numeric"><code class="docutils literal notranslate"><span class="pre">recode_sex_to_numeric()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs()</span></code></a></li>
