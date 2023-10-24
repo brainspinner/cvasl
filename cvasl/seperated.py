@@ -283,6 +283,17 @@ def polyfit_and_show(
     return coefficients
 
 
+def drop_y(df):
+    """
+    This is meant as a psuedo-helper function for pandas columns
+    when they are merged. It drops columns that end in y
+    """
+
+    to_drop = [x for x in df if x.endswith('_y')]
+    df.drop(to_drop, axis=1, inplace=True)
+    return df
+
+
 def polyfit_second_degree_to_df(
         dataframe,
         special_column_name,
