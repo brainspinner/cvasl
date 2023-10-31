@@ -603,21 +603,21 @@ def frame_a_model_sex_split(
         print(
             f'Train shapes: X {X[train_index].shape}',
             f' y {y[train_index].shape}'
-            )
+        )
         unique, counts = np.unique(y_split[train_index], return_counts=True)
         print(
             f'Sex classes: {unique}',
             f'percentages: {100*counts/y[train_index].shape[0]}'
-            )
+        )
         print(
             f'\nTest shapes: X {X[test_index].shape}',
             f'  y {y[test_index].shape}'
-            )
+        )
         unique, counts = np.unique(y_split[test_index], return_counts=True)
         print(
             f'Sex classes: {unique},'
             f'percentages: {100*counts/y[test_index].shape[0]}'
-            )
+        )
         cols = [
             'algorithm',
             'fold',
@@ -634,9 +634,9 @@ def frame_a_model_sex_split(
         current_fold_y_pred = scikit_model.predict(current_fold_X_test)
 
         data = [[
-            model_name,
+            model_name + str(i),
             i,
-            model_file_name,
+            model_file_name + str(i) + '.sav',
             mean_absolute_error(current_fold_y_test, current_fold_y_pred),
             scikit_model.score(current_fold_X_test, current_fold_y_test),
             metrics.explained_variance_score(
