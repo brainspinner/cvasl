@@ -547,3 +547,22 @@ def check_sex_dimorph_expectations(dataframe):
     else:
         bad_data = 0
     return bad_data
+
+
+def avg_k_folds(frame):
+    """
+    This function takes a dataframe of k_fold results,
+    as formatted for our experiments with derived datasets
+    and returns an averaged dataframe
+    """
+    data = [[
+        frame['algorithm'][0],
+        frame['file_name'][0],
+        frame.mae.mean(),
+        frame.r2.mean(),
+        frame.explained_variance.mean()]]
+    frame_results_average = pd.DataFrame(
+        data,
+        columns=['algorithm', 'file_name', 'mae', 'r2', 'explained_variance']
+    )
+    return frame_results_average
