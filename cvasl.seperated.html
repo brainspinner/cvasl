@@ -180,6 +180,16 @@ then returns these rows of the dataframe.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.frame_a_model_sex_split">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">frame_a_model_sex_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.frame_a_model_sex_split" title="Link to this definition">¶</a></dt>
+<dd><p>This takes a sci-kit learn coded model and
+creates a dataframe based on k-folds of results on
+our_ml_matrix, and it’s X component
+returns a dataframe of fold results
+and raw y_test versus y_pred</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.generate_transformation_matrix">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">generate_transformation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.generate_transformation_matrix" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a matrix that transforms one polynomial into another.
@@ -386,6 +396,7 @@ that two dataframes have in common</p>
 <li><a class="reference internal" href="#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.frame_a_model_sex_split"><code class="docutils literal notranslate"><span class="pre">frame_a_model_sex_split()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
