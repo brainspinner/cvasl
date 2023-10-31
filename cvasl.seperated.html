@@ -51,6 +51,14 @@ Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
 <p>This file contains functions for processing csv and tsv
 files towards correct formats.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.avg_k_folds">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">avg_k_folds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.avg_k_folds" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes a dataframe of k_fold results,
+as formatted for our experiments with derived datasets
+and returns an averaged dataframe</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.check_identical_columns">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">check_identical_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tsv_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.check_identical_columns" title="Link to this definition">¶</a></dt>
 <dd><p>Here we enter the path to a folder, then return the columns in
@@ -370,6 +378,7 @@ that two dataframes have in common</p>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">cvasl.seperated module</a><ul>
+<li><a class="reference internal" href="#cvasl.seperated.avg_k_folds"><code class="docutils literal notranslate"><span class="pre">avg_k_folds()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
