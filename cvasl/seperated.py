@@ -662,3 +662,88 @@ def frame_a_model_sex_split(
         y_frame[4],], axis=0)
 
     return df, y_frame, models
+
+
+def frame_a_model_sex_split_2(
+        model_name,
+        model_file_name,
+        scikit_model,
+        our_ml_matrix,
+        our_x,
+        our_y,
+):
+    """
+    This takes a sci-kit learn coded model and
+    creates a dataframe based on k-folds of results on
+    our_ml_matrix, and it's X component
+    returns a dataframe of fold results
+    and raw y_test versus y_pred
+    as well as a tuple with models
+    and then the training data from the model
+    """
+    y_split = our_ml_matrix['sex'].values
+    # 5 folds as example, you can change this
+    sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
+
+    X = our_x
+    y = our_y
+    sss.get_n_splits(X, y_split)
+
+    unique, counts = np.unique(y_split, return_counts=True)
+
+    y_frame = []
+    all_mod_results = []
+    models = []
+    for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
+        unique, counts = np.unique(y_split[train_index], return_counts=True)
+        unique, counts = np.unique(y_split[test_index], return_counts=True)
+        cols = [
+            'algorithm',
+            'fold',
+            'file_name',
+            'mae',
+            'r2',
+            'explained_variance',
+        ]
+        mod_results = pd.DataFrame(columns=cols)
+        current_fold_X_train = X[train_index][:, 1:]
+        current_fold_y_train = y[train_index]
+        current_fold_X_test = X[test_index][:, 1:]
+        current_fold_y_test = y[test_index]
+        scikit_model.fit(current_fold_X_train, current_fold_y_train)
+        current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+
+        data = [[
+            f'{model_name}-{i}',
+            i,
+            f'{model_file_name}.{i}',
+            mean_absolute_error(current_fold_y_test, current_fold_y_pred),
+            scikit_model.score(current_fold_X_test, current_fold_y_test),
+            metrics.explained_variance_score(
+                current_fold_y_test,
+                current_fold_y_pred
+            )]]
+        mod_results_current_fold = pd.DataFrame(data, columns=cols)
+        mod_results = pd.concat([mod_results, mod_results_current_fold])
+        mod_results.reset_index(drop=True, inplace=True)
+        all_mod_results.append(mod_results)
+        y_frame_now = pd.DataFrame(
+            {
+                'y_test': list(current_fold_y_test),
+                'y_pred': list(current_fold_y_pred),
+            })
+
+        y_frame.append(y_frame_now)
+
+        models.append((scikit_model, X[train_index][:, 0]))
+
+    df = pd.concat(all_mod_results)
+    y_frame = pd.concat([
+        y_frame[0],
+        y_frame[1],
+        y_frame[2],
+        y_frame[3],
+        y_frame[4],
+    ], axis=0)
+
+    return df, y_frame, models
