@@ -1,36 +1,27 @@
 cff-version: 1.1.0
 message: "If you use this software, you should cite it."
 authors:
-  -
-    affiliation: "Netherlands eScience Center"
+  - affiliation: "Netherlands eScience Center"
     family-names: Moore
     given-names: Candace Makeda
     orcid: "https://orcid.org/0000-0003-1672-7565"
-  -
-
-    affiliation: "Netherlands eScience Center"
+  - affiliation: "Netherlands eScience Center"
     family-names: Crocioni
     given-names: Giulia
     orcid: "https://orcid.org/0000-0002-0823-0121"
-  -
-
-    affiliation: "Netherlands eScience Center"
+  - affiliation: "Netherlands eScience Center"
     family-names: Bodor
     given-names: Dani
     orcid: "https://orcid.org/0000-0003-2109-2349"
-  -
-
-    affiliation: "Helmholtz-Zentrum Dresden-Rossendorf"
+  - affiliation: "Helmholtz-Zentrum Dresden-Rossendorf"
     family-names: Petr
     given-names: Jan
     orcid: "https://orcid.org/0000-0002-3201-6002"
-  -
-    affiliation: "Amsterdam University Medical Centers, location VUmc"
+  - affiliation: "Amsterdam University Medical Centers, location VUmc"
     family-names: Dijsselhof
     given-names: Mathijs
     orcid: "https://orcid.org/0000-0001-6005-3110"
-  -
-    affiliation: "Amsterdam University Medical Centers, location VUmc"
+  - affiliation: "Amsterdam University Medical Centers, location VUmc"
     family-names: Mutsaerts
     given-names: Henk JMM
     orcid: "https://orcid.org/0000-0003-0894-0307"
