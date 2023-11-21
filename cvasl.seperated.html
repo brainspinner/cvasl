@@ -6,41 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>cvasl.seperated module &#8212; cvasl 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer’s Guide" href="developers.html" />
-    <link rel="prev" title="cvasl.mold module" href="cvasl.mold.html" /> 
+    <link rel="prev" title="cvasl.mold module" href="cvasl.mold.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="developers.html" title="Developer’s Guide"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="cvasl.mold.html" title="cvasl.mold module"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">cvasl.seperated module</a></li> 
-      </ul>
-    </div>  
+  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <section id="module-cvasl.seperated">
@@ -50,14 +38,6 @@ the Amsterdam University Medical Center.
 Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
 <p>This file contains functions for processing csv and tsv
 files towards correct formats.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.avg_k_folds">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">avg_k_folds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.avg_k_folds" title="Link to this definition">¶</a></dt>
-<dd><p>This function takes a dataframe of k_fold results,
-as formatted for our experiments with derived datasets
-and returns an averaged dataframe</p>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.check_identical_columns">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">check_identical_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tsv_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.check_identical_columns" title="Link to this definition">¶</a></dt>
@@ -127,13 +107,6 @@ your data is in a dataframe format.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.drop_y">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">drop_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.drop_y" title="Link to this definition">¶</a></dt>
-<dd><p>This is meant as a psuedo-helper function for pandas columns
-when they are merged. It drops columns that end in y</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.find_original_y_values">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">find_original_y_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.find_original_y_values" title="Link to this definition">¶</a></dt>
 <dd><p>Finds the original y-values of a second or third degree polynomial
@@ -177,28 +150,6 @@ then returns these rows of the dataframe.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.1.3)"><em>DataFrame</em></a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.frame_a_model_sex_split">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">frame_a_model_sex_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.frame_a_model_sex_split" title="Link to this definition">¶</a></dt>
-<dd><p>This takes a sci-kit learn coded model and
-creates a dataframe based on k-folds of results on
-our_ml_matrix, and it’s X component
-returns a dataframe of fold results
-and raw y_test versus y_pred</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.frame_a_model_sex_split_2">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">frame_a_model_sex_split_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.frame_a_model_sex_split_2" title="Link to this definition">¶</a></dt>
-<dd><p>This takes a sci-kit learn coded model and
-creates a dataframe based on k-folds of results on
-our_ml_matrix, and it’s X component
-returns a dataframe of fold results
-and raw y_test versus y_pred
-as well as a tuple with models
-and then the training data from the model</p>
 </dd></dl>
 
 <dl class="py function">
@@ -390,57 +341,45 @@ that two dataframes have in common</p>
 </section>
 
 
-            <div class="clearer"></div>
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">cvasl.seperated module</a><ul>
-<li><a class="reference internal" href="#cvasl.seperated.avg_k_folds"><code class="docutils literal notranslate"><span class="pre">avg_k_folds()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.derived_function"><code class="docutils literal notranslate"><span class="pre">derived_function()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.frame_a_model_sex_split"><code class="docutils literal notranslate"><span class="pre">frame_a_model_sex_split()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.frame_a_model_sex_split_2"><code class="docutils literal notranslate"><span class="pre">frame_a_model_sex_split_2()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.polyfit_second_degree_to_df"><code class="docutils literal notranslate"><span class="pre">polyfit_second_degree_to_df()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.recode_sex"><code class="docutils literal notranslate"><span class="pre">recode_sex()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.recode_sex_to_numeric"><code class="docutils literal notranslate"><span class="pre">recode_sex_to_numeric()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_numeric"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_numeric()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_two_dfs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_two_dfs()</span></code></a></li>
+<h1 class="logo"><a href="index.html">cvasl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cvasl</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cvasl.html">cvasl package</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="medical-professionals.html">Medical Professional Documentation</a></li>
 </ul>
 
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="cvasl.mold.html"
-                          title="previous chapter">cvasl.mold module</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="developers.html"
-                          title="next chapter">Developer’s Guide</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/cvasl.seperated.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">cvasl</a><ul>
+  <li><a href="cvasl.html">cvasl package</a><ul>
+      <li>Previous: <a href="cvasl.mold.html" title="previous chapter">cvasl.mold module</a></li>
+      <li>Next: <a href="developers.html" title="next chapter">Developer’s Guide</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -451,34 +390,32 @@ that two dataframes have in common</p>
     </div>
 </div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="developers.html" title="Developer’s Guide"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="cvasl.mold.html" title="cvasl.mold module"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">cvasl.seperated module</a></li> 
-      </ul>
+    <div class="footer">
+      &copy;2023, c.moore@esciencecenter.nl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/cvasl.seperated.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
-    <div class="footer" role="contentinfo">
-    &#169; Copyright 2023, c.moore@esciencecenter.nl.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
-    </div>
+
+    
+
+    
   </body>
 </html>
