@@ -35,7 +35,7 @@ div.header, div.content, div.footer {
 }
 
 div.header-wrapper {
-  background: #8B0000;
+  background: linear-gradient(#BF0000, #660000);
   border-bottom: 3px solid #2e3436;
 }
 
@@ -358,7 +358,7 @@ aside.sidebar input[type="submit"] {
 /* Footer */
 
 div.footer-wrapper {
-  background: 800000;
+  background: url(bgfooter.png) top left repeat-x;
   border-top: 4px solid #babdb6;
   padding-top: 10px;
   padding-bottom: 10px;
