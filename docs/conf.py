@@ -66,11 +66,16 @@ exclude_patterns = []
 html_theme = 'agogo'
 
 html_theme_options = {
-    # "rightsidebar": "true",
-    # "relbarbgcolor": "black"
-    # "footerbgcolor": "red " ,#Background color for the footer line.
-    # "footertextcolor (CSS color): Text color for the footer line.
-    # "headerbg " :"#8B0000",
+    #"bgcolor": Background color.
+    #"bodyfont":t (CSS font family): Font for normal text.
+    "headerfont": "Helvetica",
+    "rightsidebar": "False", 
+    "headerbg": "#8B0000", 
+    "footerbg": "800000",
+    "linkcolor": "#8B0000", 
+    "headercolor1": "#8B0000", 
+    "headercolor2": "#8B0000", 
+    "headerlinkcolor":"black", 
     
     # "sidebarbtncolor" :"#8B0000", #Background color for the sidebar collapse button (used when collapsiblesidebar is True).
     # "sidebartextcolor (CSS color): Text color for the sidebar.
