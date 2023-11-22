@@ -1,7 +1,7 @@
 .. cvasl documentation master
 
-cvasl documentation
-=======================
+<span style="color:red">**cvasl</span> documentation**
+======================================================
 
 Here is some general information about the cvasl package. We are working on
 documentation for programmers and medical professionals with some coding
