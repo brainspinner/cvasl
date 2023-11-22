@@ -70,8 +70,8 @@ html_theme_options = {
     #"bodyfont":t (CSS font family): Font for normal text.
     "headerfont": "Helvetica",
     "rightsidebar": "False", 
-    "headerbg": "#8B0000", 
-    "footerbg": "800000",
+    "headerbg": "linear-gradient(#BF0000, #660000)", #"#8B0000", 
+    # "footerbg": "800000",
     "linkcolor": "#8B0000", 
     "headercolor1": "#8B0000", 
     "headercolor2": "#8B0000", 
