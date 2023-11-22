@@ -63,7 +63,33 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'agogo'
+
+html_theme_options = {
+    # "rightsidebar": "true",
+    # "relbarbgcolor": "black"
+    # "footerbgcolor": "red " ,#Background color for the footer line.
+    # "footertextcolor (CSS color): Text color for the footer line.
+    # "headerbg " :"#8B0000",
+    
+    # "sidebarbtncolor" :"#8B0000", #Background color for the sidebar collapse button (used when collapsiblesidebar is True).
+    # "sidebartextcolor (CSS color): Text color for the sidebar.
+    # "sidebarlinkcolor (CSS color): Link color for the sidebar.
+    # "relbarbgcolor (CSS color): Background color for the relation bar.
+    # "relbartextcolor (CSS color): Text color for the relation bar.
+    # "relbarlinkcolor (CSS color): Link color for the relation bar.
+    # "bgcolor (CSS color): Body background color.
+    # "textcolor (CSS color): Body text color.
+    # "linkcolor (CSS color): Body link color.
+    # "visitedlinkcolor (CSS color): Body color for visited links.
+    # "headbgcolor (CSS color): Background color for headings.
+    # "headtextcolor (CSS color): Text color for headings.
+    # "headlinkcolor (CSS color): Link color for headings.
+    # "codebgcolor (CSS color): Background color for code blocks.
+    # "codetextcolor (CSS color): Default text color for code blocks, if not set differently by the highlighting style.
+    # "bodyfont (CSS font-family): Font for normal text.
+    # "headfont (CSS font-family): Font for headings.
+}
 
 # Add any paths that contain custom static files (such as style sheets) here, #
 # relative to this directory. They are copied after the builtin static files,
