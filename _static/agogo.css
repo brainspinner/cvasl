@@ -35,14 +35,14 @@ div.header, div.content, div.footer {
 }
 
 div.header-wrapper {
-  background: #555573 url(bgtop.png) top left repeat-x;
+  background: #8B0000;
   border-bottom: 3px solid #2e3436;
 }
 
 
 /* Default body styles */
 a {
-  color: #ce5c00;
+  color: #8B0000;
 }
 
 a:visited {
@@ -78,19 +78,19 @@ div.bodywrapper a, div.footer a {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: Helvetica;
   font-weight: normal;
-  color: #3465a4;
+  color: #8B0000;
   margin-bottom: .8em;
 }
 
 h1 {
-  color: #204a87;
+  color: #8B0000;
 }
 
 h2 {
   padding-bottom: .5em;
-  border-bottom: 1px solid #3465a4;
+  border-bottom: 1px solid #8B0000;
 }
 
 a.headerlink {
@@ -139,7 +139,7 @@ div.header {
 }
 
 div.header .headertitle {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: Helvetica;
   font-weight: normal;
   font-size: 180%;
   letter-spacing: .08em;
@@ -155,7 +155,7 @@ div.header div.rel {
 }
 
 div.header div.rel a {
-  color: #fcaf3e;
+  color: black;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -181,7 +181,8 @@ div.document {
 }
 
 div.body {
-  padding-right: 2em;
+  padding-left: 2em;
+  
   text-align: justify;
 }
 
@@ -276,7 +277,7 @@ div.document ol {
 div.sidebar,
 aside.sidebar {
   width: 20em;
-  float: right;
+  float: left;
   font-size: .9em;
 }
 
@@ -335,7 +336,7 @@ aside.sidebar li.toctree-l2:last-child a {
 
 div.sidebar li.toctree-l1.current a,
 aside.sidebar li.toctree-l1.current a {
-  border-right: 5px solid #fcaf3e;
+  border-right: 5px solid black;
 }
 
 div.sidebar li.toctree-l1.current li.toctree-l2 a,
@@ -357,7 +358,7 @@ aside.sidebar input[type="submit"] {
 /* Footer */
 
 div.footer-wrapper {
-  background: url(bgfooter.png) top left repeat-x;
+  background: 800000;
   border-top: 4px solid #babdb6;
   padding-top: 10px;
   padding-bottom: 10px;
