@@ -6,29 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>cvasl.mold module &#8212; cvasl 0.0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cvasl.seperated module" href="cvasl.seperated.html" />
-    <link rel="prev" title="cvasl.file_handler module" href="cvasl.file_handler.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="prev" title="cvasl.file_handler module" href="cvasl.file_handler.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.seperated.html" title="cvasl.seperated module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.file_handler.html" title="cvasl.file_handler module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" accesskey="U">cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.mold module</a></li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <section id="module-cvasl.mold">
@@ -108,45 +120,51 @@ It stores arrays in a directory.</p>
 </section>
 
 
+            <div class="clearer"></div>
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">cvasl</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cvasl</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="cvasl.html">cvasl package</a></li>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cvasl.mold module</a><ul>
+<li><a class="reference internal" href="#cvasl.mold.NormedSliceViewer"><code class="docutils literal notranslate"><span class="pre">NormedSliceViewer</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.mold.NormedSliceViewer.plot_slice"><code class="docutils literal notranslate"><span class="pre">NormedSliceViewer.plot_slice()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.mold.NormedSliceViewer.transpose"><code class="docutils literal notranslate"><span class="pre">NormedSliceViewer.transpose()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="developers.html">Developer’s Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="medical-professionals.html">Medical Professional Documentation</a></li>
+<li><a class="reference internal" href="#cvasl.mold.SliceViewer"><code class="docutils literal notranslate"><span class="pre">SliceViewer</span></code></a><ul>
+<li><a class="reference internal" href="#cvasl.mold.SliceViewer.plot_slice"><code class="docutils literal notranslate"><span class="pre">SliceViewer.plot_slice()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.mold.SliceViewer.transpose"><code class="docutils literal notranslate"><span class="pre">SliceViewer.transpose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cvasl.mold.debias_folder"><code class="docutils literal notranslate"><span class="pre">debias_folder()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.mold.n4_debias_sitk"><code class="docutils literal notranslate"><span class="pre">n4_debias_sitk()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.mold.save_preprocessed"><code class="docutils literal notranslate"><span class="pre">save_preprocessed()</span></code></a></li>
+</ul>
+</li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="modules.html">cvasl</a><ul>
-  <li><a href="cvasl.html">cvasl package</a><ul>
-      <li>Previous: <a href="cvasl.file_handler.html" title="previous chapter">cvasl.file_handler module</a></li>
-      <li>Next: <a href="cvasl.seperated.html" title="next chapter">cvasl.seperated module</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cvasl.file_handler.html"
+                          title="previous chapter">cvasl.file_handler module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cvasl.seperated.html"
+                          title="next chapter">cvasl.seperated module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cvasl.mold.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -157,32 +175,34 @@ It stores arrays in a directory.</p>
     </div>
 </div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2023, c.moore@esciencecenter.nl.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
-      
-      |
-      <a href="_sources/cvasl.mold.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cvasl.seperated.html" title="cvasl.seperated module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cvasl.file_handler.html" title="cvasl.file_handler module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvasl 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvasl</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cvasl.html" >cvasl package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cvasl.mold module</a></li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, c.moore@esciencecenter.nl.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
   </body>
 </html>
