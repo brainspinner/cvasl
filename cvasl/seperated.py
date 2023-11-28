@@ -579,7 +579,7 @@ def frame_a_model_sex_split(
         our_x,
         our_y,):
     """
-    This takes a sci-kit learn coded model and
+    This takes a scikit-learn coded model and
     creates a dataframe based on k-folds of results on
     our_ml_matrix, and it's X component
     returns a dataframe of fold results
