@@ -488,6 +488,39 @@ that two dataframes have in common</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.stratified_one_category_shuffle_split">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">stratified_one_category_shuffle_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.stratified_one_category_shuffle_split" title="Link to this definition">¶</a></dt>
+<dd><p>This takes a sci-kit learn coded model and
+creates a dataframe based on k-folds of results on
+our_ml_matrix, and it’s X component
+returns a dataframe of fold results
+and raw y_test versus y_pred
+as well as a tuple with models
+and then the training data from the model.
+The random state in the StratifiedShuffleSplit is set, so
+the results should be reproducible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of model</p></li>
+<li><p><strong>model_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name offile where specific model will be stored</p></li>
+<li><p><strong>skikit_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of skikit-model</p></li>
+<li><p><strong>our_ml_matrix</strong> (<em>DataFrame</em>) – dataframe to work over</p></li>
+<li><p><strong>category</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – categorical variable (column) to be stratified on eg. sex</p></li>
+<li><p><strong>our_x</strong> (<em>dataframe</em>) – X or features columnfor machine learning</p></li>
+<li><p><strong>our_y</strong> (<em>Series</em>) – y or label column for machine learning</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe, y dataframe, and models</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -524,6 +557,7 @@ that two dataframes have in common</p>
 <li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_numeric"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_numeric()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.relate_columns_graphs_two_dfs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_two_dfs()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.stratified_one_category_shuffle_split"><code class="docutils literal notranslate"><span class="pre">stratified_one_category_shuffle_split()</span></code></a></li>
 </ul>
 </li>
 </ul>
