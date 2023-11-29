@@ -694,7 +694,10 @@ def frame_a_model_sex_split_2(
     y_frame = []
     all_mod_results = []
     models = []
+    print('love')
     for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
+        print(f"\nFold {i}:")
+        print(f"\nFold ")
         unique, counts = np.unique(y_split[train_index], return_counts=True)
         unique, counts = np.unique(y_split[test_index], return_counts=True)
         cols = [
@@ -712,6 +715,25 @@ def frame_a_model_sex_split_2(
         current_fold_y_test = y[test_index]
         scikit_model.fit(current_fold_X_train, current_fold_y_train)
         current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+        print(f"\nFold {i}:")
+        print(
+            f'Train shapes: X {X[train_index].shape}',
+            f' y {y[train_index].shape}'
+        )
+        unique, counts = np.unique(y_split[train_index], return_counts=True)
+        print(
+            f'Sex classes: {unique}',
+            f'percentages: {100*counts/y[train_index].shape[0]}'
+        )
+        print(
+            f'\nTest shapes: X {X[test_index].shape}',
+            f'  y {y[test_index].shape}'
+        )
+        unique, counts = np.unique(y_split[test_index], return_counts=True)
+        print(
+            f'Sex classes: {unique},'
+            f'percentages: {100*counts/y[test_index].shape[0]}'
+        )
 
         data = [[
             f'{model_name}-{i}',
@@ -757,6 +779,8 @@ def stratified_one_category_shuffle_split(
         category,
         our_x,
         our_y,
+        splits=5,
+        test_size_p=0.25,
 ):
     """
     This takes a sci-kit learn coded model and
@@ -776,20 +800,23 @@ def stratified_one_category_shuffle_split(
     :param skikit_model: name of skikit-model
     :type skikit_model: str
     :param our_ml_matrix: dataframe to work over
-    :type our_ml_matrix: ~`pd.DataFrame
+    :type our_ml_matrix: `~pd.DataFrame`
     :param category: categorical variable (column) to be stratified on eg. sex
     :type category: str
     :param our_x: X or features columnfor machine learning
     :type our_x: dataframe
     :param our_y: y or label column for machine learning
-    :type our_y: Series
+    :type our_y: class:`~pandas.core.series.Series`
+    :param splits: number of folds desired
+    :type splits: int
+    :param test_size_p: percent to put into test
+    :type test_size_p: float
 
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
     y_split = our_ml_matrix[category].values
-    # 5 folds as example, you can change this
-    sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
+    sss = StratifiedShuffleSplit(n_splits=splits, test_size=test_size_p, random_state=12)
 
     X = our_x
     y = our_y
