@@ -812,14 +812,18 @@ def stratified_one_category_shuffle_split(
     :type splits: int
     :param test_size_p: percent to put into test
     :type test_size_p: float
-    :param print: printed information on folds option
-    :type print: bool
+    :param printed: printed information on folds option
+    :type printed: bool
 
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
     y_split = our_ml_matrix[category].values
-    sss = StratifiedShuffleSplit(n_splits=splits, test_size=test_size_p, random_state=12)
+    sss = StratifiedShuffleSplit(
+        n_splits=splits,
+        test_size=test_size_p,
+        random_state=12
+    )
 
     X = our_x
     y = our_y
@@ -854,7 +858,9 @@ def stratified_one_category_shuffle_split(
                 f'Train shapes: X {X[train_index].shape}',
                 f' y {y[train_index].shape}'
             )
-            unique_train, counts_train = np.unique(y_split[train_index], return_counts=True)
+            unique_tr, counts_train = np.unique(
+                y_split[train_index], return_counts=True
+            )
             print(
                 f'Sex classes: {unique_train}',
                 f'percentages: {100*counts_train/y[train_index].shape[0]}'
@@ -863,7 +869,9 @@ def stratified_one_category_shuffle_split(
                 f'\nTest shapes: X {X[test_index].shape}',
                 f'  y {y[test_index].shape}'
             )
-            unique_test, counts_test = np.unique(y_split[test_index], return_counts=True)
+            unique_test, counts_test = np.unique(
+                y_split[test_index], return_counts=True
+            )
             print(
                 f'Sex classes: {unique_test},'
                 f'percentages: {100*counts_test/y[test_index].shape[0]}'
