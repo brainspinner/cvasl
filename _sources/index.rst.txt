@@ -1,12 +1,7 @@
 .. cvasl documentation master
 
-
-cvasl  documentation
+cvasl documentation
 =======================
-
-.. .. image:: ../cv_asl_svg.svg
-..   :width: 200
-..   :alt: cvasl logo
 
 Here is some general information about the cvasl package. We are working on
 documentation for programmers and medical professionals with some coding
