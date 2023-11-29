@@ -63,19 +63,19 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'agogo'
+html_theme = 'piccolo_theme'
 
 html_theme_options = {
-    #"bgcolor": Background color.
+    #"bgcolor": "grey", # Background color.
     #"bodyfont":t (CSS font family): Font for normal text.
-    "headerfont": "Helvetica",
-    "rightsidebar": "False", 
-    "headerbg": "linear-gradient(#BF0000, #660000)", #"#8B0000", 
-    # "footerbg": "800000",
-    "linkcolor": "#8B0000", 
-    "headercolor1": "#8B0000", 
-    "headercolor2": "#8B0000", 
-    "headerlinkcolor":"black", 
+    #"headerfont": "Helvetica",
+    #"rightsidebar": "False", 
+    #"headerbg": "indigo",#"linear-gradient(#BF0000, #660000)", #"#8B0000", 
+    ## "footerbg": "800000",
+    #"linkcolor": "indigo", 
+    #"headercolor1": "#8B0000", 
+    #"headercolor2": "#8B0000", 
+    #"headerlinkcolor":"black", 
     
     # "sidebarbtncolor" :"#8B0000", #Background color for the sidebar collapse button (used when collapsiblesidebar is True).
     # "sidebartextcolor (CSS color): Text color for the sidebar.
