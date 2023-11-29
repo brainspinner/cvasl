@@ -781,6 +781,7 @@ def stratified_one_category_shuffle_split(
         our_y,
         splits=5,
         test_size_p=0.25,
+        printed=False
 ):
     """
     This takes a sci-kit learn coded model and
@@ -811,6 +812,8 @@ def stratified_one_category_shuffle_split(
     :type splits: int
     :param test_size_p: percent to put into test
     :type test_size_p: float
+    :param print: printed information on folds option
+    :type print: bool
 
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
@@ -845,6 +848,26 @@ def stratified_one_category_shuffle_split(
         current_fold_y_test = y[test_index]
         scikit_model.fit(current_fold_X_train, current_fold_y_train)
         current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+        if printed:
+            print(f"\nFold {i}:")
+            print(
+                f'Train shapes: X {X[train_index].shape}',
+                f' y {y[train_index].shape}'
+            )
+            unique_train, counts_train = np.unique(y_split[train_index], return_counts=True)
+            print(
+                f'Sex classes: {unique_train}',
+                f'percentages: {100*counts_train/y[train_index].shape[0]}'
+            )
+            print(
+                f'\nTest shapes: X {X[test_index].shape}',
+                f'  y {y[test_index].shape}'
+            )
+            unique_test, counts_test = np.unique(y_split[test_index], return_counts=True)
+            print(
+                f'Sex classes: {unique_test},'
+                f'percentages: {100*counts_test/y[test_index].shape[0]}'
+            )
 
         data = [[
             f'{model_name}-{i}',
