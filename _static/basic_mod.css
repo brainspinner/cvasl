@@ -45,28 +45,28 @@
 :root {
   --codeBackgroundColor: #f8f8f8;
   --inlineCodeBackgroundColor: #f8f8f8;
-  --codeBlue: #0000ff;
+  --codeBlue: #f7f7f7;
   --codeGreen: #008000;
   --dividerColor: rgba(0, 0, 0, 0.08);
-  --faintFontColor: rgba(0, 0, 0, 0.6);
-  --fontColor: #252630;
-  --linkColor: #2980b9;
-  --mainBackgroundColor: white;
-  --mainNavColor: #3889ce;
-  --notificationBannerColor: #176bb0;
+  --faintFontColor: rgba(249, 247, 247, 0.6);
+  --fontColor: #fbfbfc;
+  --linkColor:  rgb(76, 72, 196);
+  --mainBackgroundColor: #404050;
+  --mainNavColor: rgb(76, 72, 196);
+  --notificationBannerColor: #8e03ff;
   --searchHighlightColor: #fff150;
-  --sidebarColor: white;
+  --sidebarColor: #404050;
   --navbarHeight: 4rem;
 }
 :root[data-mode=darkest] {
-  --mainBackgroundColor: black;
-  --sidebarColor: black;
+  --mainBackgroundColor: #1b1b22;
+  --sidebarColor: #1b1b22;
   --codeBackgroundColor: rgba(255, 255, 255, 0.1);
   --inlineCodeBackgroundColor: rgba(255, 255, 255, 0.1);
 }
 :root[data-mode=dark] {
-  --mainBackgroundColor: #242429;
-  --sidebarColor: #242429;
+  --mainBackgroundColor: #2b2b36;
+  --sidebarColor: #2b2b36;
   --codeBackgroundColor: rgba(0, 0, 0, 0.1);
   --inlineCodeBackgroundColor: rgba(255, 255, 255, 0.06);
 }
@@ -76,7 +76,7 @@
   --dividerColor: rgba(255, 255, 255, 0.1);
   --faintFontColor: rgba(255, 255, 255, 0.6);
   --fontColor: white;
-  --linkColor: #319be0;
+  --linkColor: rgb(76, 72, 196);
   --searchHighlightColor: #fe8e04;
 }
 
