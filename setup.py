@@ -654,7 +654,7 @@ if __name__ == '__main__':
             'matplotlib',
             'scikit-learn',
             'SimpleITK',
-            'piccolo_theme',
+            # 'piccolo_theme',
             # Unfortunately, in later versions this library decided to cap
             # its version requirements for Pillow, which breaks installation
             # of other tools, which will install Pillow before we install
