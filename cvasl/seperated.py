@@ -571,214 +571,213 @@ def avg_k_folds(frame):
     return frame_results_average
 
 
-def frame_a_model_sex_split(
-        model_name,
-        model_file_name,
-        scikit_model,
-        our_ml_matrix,
-        our_x,
-        our_y,):
-    """
-    This takes a scikit-learn coded model and
-    creates a dataframe based on k-folds of results on
-    our_ml_matrix, and its X component
-    returns a dataframe of fold results
-    and raw y_test versus y_pred
-    """
-    y_split = our_ml_matrix['sex'].values
-# 5 folds as example, you can change this
-    sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
-    X = our_x
-    y = our_y
-    sss.get_n_splits(X, y_split)
-    print(sss)
-    print(f'Whole dataset shape: X {X.shape}, y {y.shape}')
-    unique, counts = np.unique(y_split, return_counts=True)
-    print(f'Classes: {unique}, percentages: {100*counts/y.shape[0]}')
-    y_frame = []
-    all_mod_results = []
-    models = []
-    for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
-        print(f"\nFold {i}:")
-        print(
-            f'Train shapes: X {X[train_index].shape}',
-            f' y {y[train_index].shape}'
-        )
-        unique, counts = np.unique(y_split[train_index], return_counts=True)
-        print(
-            f'Sex classes: {unique}',
-            f'percentages: {100*counts/y[train_index].shape[0]}'
-        )
-        print(
-            f'\nTest shapes: X {X[test_index].shape}',
-            f'  y {y[test_index].shape}'
-        )
-        unique, counts = np.unique(y_split[test_index], return_counts=True)
-        print(
-            f'Sex classes: {unique},'
-            f'percentages: {100*counts/y[test_index].shape[0]}'
-        )
-        cols = [
-            'algorithm',
-            'fold',
-            'file_name',
-            'mae',
-            'r2',
-            'explained_variance']
-        mod_results = pd.DataFrame(columns=cols)
-        current_fold_X_train = X[train_index]
-        current_fold_y_train = y[train_index]
-        current_fold_X_test = X[test_index]
-        current_fold_y_test = y[test_index]
-        scikit_model.fit(current_fold_X_train, current_fold_y_train)
-        current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+# def frame_a_model_sex_split(
+#         model_name,
+#         model_file_name,
+#         scikit_model,
+#         our_ml_matrix,
+#         our_x,
+#         our_y,):
+#     """
+#     This takes a scikit-learn coded model and
+#     creates a dataframe based on k-folds of results on
+#     our_ml_matrix, and its X component
+#     returns a dataframe of fold results
+#     and raw y_test versus y_pred
+#     """
+#     y_split = our_ml_matrix['sex'].values
+# # 5 folds as example, you can change this
+#     sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
+#     X = our_x
+#     y = our_y
+#     sss.get_n_splits(X, y_split)
+#     print(sss)
+#     print(f'Whole dataset shape: X {X.shape}, y {y.shape}')
+#     unique, counts = np.unique(y_split, return_counts=True)
+#     print(f'Classes: {unique}, percentages: {100*counts/y.shape[0]}')
+#     y_frame = []
+#     all_mod_results = []
+#     models = []
+#     for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
+#         print(f"\nFold {i}:")
+#         print(
+#             f'Train shapes: X {X[train_index].shape}',
+#             f' y {y[train_index].shape}'
+#         )
+#         unique, counts = np.unique(y_split[train_index], return_counts=True)
+#         print(
+#             f'Sex classes: {unique}',
+#             f'percentages: {100*counts/y[train_index].shape[0]}'
+#         )
+#         print(
+#             f'\nTest shapes: X {X[test_index].shape}',
+#             f'  y {y[test_index].shape}'
+#         )
+#         unique, counts = np.unique(y_split[test_index], return_counts=True)
+#         print(
+#             f'Sex classes: {unique},'
+#             f'percentages: {100*counts/y[test_index].shape[0]}'
+#         )
+#         cols = [
+#             'algorithm',
+#             'fold',
+#             'file_name',
+#             'mae',
+#             'r2',
+#             'explained_variance']
+#         mod_results = pd.DataFrame(columns=cols)
+#         current_fold_X_train = X[train_index]
+#         current_fold_y_train = y[train_index]
+#         current_fold_X_test = X[test_index]
+#         current_fold_y_test = y[test_index]
+#         scikit_model.fit(current_fold_X_train, current_fold_y_train)
+#         current_fold_y_pred = scikit_model.predict(current_fold_X_test)
 
-        data = [[
-            model_name + str(i),
-            i,
-            model_file_name + str(i) + '.sav',
-            mean_absolute_error(current_fold_y_test, current_fold_y_pred),
-            scikit_model.score(current_fold_X_test, current_fold_y_test),
-            metrics.explained_variance_score(
-                current_fold_y_test,
-                current_fold_y_pred)]]
-        mod_results_current_fold = pd.DataFrame(data, columns=cols)
-        mod_results = pd.concat([mod_results, mod_results_current_fold])
-        mod_results.reset_index(drop=True, inplace=True)
-        all_mod_results.append(mod_results)
-        y_frame_now = pd.DataFrame(
-            {'y_test': list(current_fold_y_test),
-             'y_pred': list(current_fold_y_pred)})
+#         data = [[
+#             model_name + str(i),
+#             i,
+#             model_file_name + str(i) + '.sav',
+#             mean_absolute_error(current_fold_y_test, current_fold_y_pred),
+#             scikit_model.score(current_fold_X_test, current_fold_y_test),
+#             metrics.explained_variance_score(
+#                 current_fold_y_test,
+#                 current_fold_y_pred)]]
+#         mod_results_current_fold = pd.DataFrame(data, columns=cols)
+#         mod_results = pd.concat([mod_results, mod_results_current_fold])
+#         mod_results.reset_index(drop=True, inplace=True)
+#         all_mod_results.append(mod_results)
+#         y_frame_now = pd.DataFrame(
+#             {'y_test': list(current_fold_y_test),
+#              'y_pred': list(current_fold_y_pred)})
 
-        y_frame.append(y_frame_now)
-        models.append(scikit_model)
+#         y_frame.append(y_frame_now)
+#         models.append(scikit_model)
 
-    df = pd.concat(all_mod_results)
-    y_frame = pd.concat([
-        y_frame[0],
-        y_frame[1],
-        y_frame[2],
-        y_frame[3],
-        y_frame[4],], axis=0)
+#     df = pd.concat(all_mod_results)
+#     y_frame = pd.concat([
+#         y_frame[0],
+#         y_frame[1],
+#         y_frame[2],
+#         y_frame[3],
+#         y_frame[4],], axis=0)
 
-    return df, y_frame, models
+#     return df, y_frame, models
 
 
-def frame_a_model_sex_split_2(
-        model_name,
-        model_file_name,
-        scikit_model,
-        our_ml_matrix,
-        our_x,
-        our_y,
-):
-    """
-    This takes a sci-kit learn coded model and
-    creates a dataframe based on k-folds of results on
-    our_ml_matrix, and it's X component
-    returns a dataframe of fold results
-    and raw y_test versus y_pred
-    as well as a tuple with models
-    and then the training data from the model
-    """
-    y_split = our_ml_matrix['sex'].values
-    # 5 folds as example, you can change this
-    sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
+# def frame_a_model_sex_split_2(
+#         model_name,
+#         model_file_name,
+#         scikit_model,
+#         our_ml_matrix,
+#         our_x,
+#         our_y,
+# ):
+#     """
+#     This takes a sci-kit learn coded model and
+#     creates a dataframe based on k-folds of results on
+#     our_ml_matrix, and it's X component
+#     returns a dataframe of fold results
+#     and raw y_test versus y_pred
+#     as well as a tuple with models
+#     and then the training data from the model
+#     """
+#     y_split = our_ml_matrix['sex'].values
+#     # 5 folds as example, you can change this
+#     sss = StratifiedShuffleSplit(n_splits=5, test_size=0.25, random_state=12)
 
-    X = our_x
-    y = our_y
-    sss.get_n_splits(X, y_split)
+#     X = our_x
+#     y = our_y
+#     sss.get_n_splits(X, y_split)
 
-    unique, counts = np.unique(y_split, return_counts=True)
+#     unique, counts = np.unique(y_split, return_counts=True)
 
-    y_frame = []
-    all_mod_results = []
-    models = []
-    print('love')
-    for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
-        print(f"\nFold {i}:")
-        print(f"\nFold ")
-        unique, counts = np.unique(y_split[train_index], return_counts=True)
-        unique, counts = np.unique(y_split[test_index], return_counts=True)
-        cols = [
-            'algorithm',
-            'fold',
-            'file_name',
-            'mae',
-            'r2',
-            'explained_variance',
-        ]
-        mod_results = pd.DataFrame(columns=cols)
-        current_fold_X_train = X[train_index][:, 1:]
-        current_fold_y_train = y[train_index]
-        current_fold_X_test = X[test_index][:, 1:]
-        current_fold_y_test = y[test_index]
-        scikit_model.fit(current_fold_X_train, current_fold_y_train)
-        current_fold_y_pred = scikit_model.predict(current_fold_X_test)
-        print(f"\nFold {i}:")
-        print(
-            f'Train shapes: X {X[train_index].shape}',
-            f' y {y[train_index].shape}'
-        )
-        unique, counts = np.unique(y_split[train_index], return_counts=True)
-        print(
-            f'Sex classes: {unique}',
-            f'percentages: {100*counts/y[train_index].shape[0]}'
-        )
-        print(
-            f'\nTest shapes: X {X[test_index].shape}',
-            f'  y {y[test_index].shape}'
-        )
-        unique, counts = np.unique(y_split[test_index], return_counts=True)
-        print(
-            f'Sex classes: {unique},'
-            f'percentages: {100*counts/y[test_index].shape[0]}'
-        )
+#     y_frame = []
+#     all_mod_results = []
+#     models = []
+#     print('love')
+#     for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
+#         print(f"\nFold {i}:")
+#         print(f"\nFold ")
+#         unique, counts = np.unique(y_split[train_index], return_counts=True)
+#         unique, counts = np.unique(y_split[test_index], return_counts=True)
+#         cols = [
+#             'algorithm',
+#             'fold',
+#             'file_name',
+#             'mae',
+#             'r2',
+#             'explained_variance',
+#         ]
+#         mod_results = pd.DataFrame(columns=cols)
+#         current_fold_X_train = X[train_index][:, 1:]
+#         current_fold_y_train = y[train_index]
+#         current_fold_X_test = X[test_index][:, 1:]
+#         current_fold_y_test = y[test_index]
+#         scikit_model.fit(current_fold_X_train, current_fold_y_train)
+#         current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+#         print(f"\nFold {i}:")
+#         print(
+#             f'Train shapes: X {X[train_index].shape}',
+#             f' y {y[train_index].shape}'
+#         )
+#         unique, counts = np.unique(y_split[train_index], return_counts=True)
+#         print(
+#             f'Sex classes: {unique}',
+#             f'percentages: {100*counts/y[train_index].shape[0]}'
+#         )
+#         print(
+#             f'\nTest shapes: X {X[test_index].shape}',
+#             f'  y {y[test_index].shape}'
+#         )
+#         unique, counts = np.unique(y_split[test_index], return_counts=True)
+#         print(
+#             f'Sex classes: {unique},'
+#             f'percentages: {100*counts/y[test_index].shape[0]}'
+#         )
 
-        data = [[
-            f'{model_name}-{i}',
-            i,
-            f'{model_file_name}.{i}',
-            mean_absolute_error(current_fold_y_test, current_fold_y_pred),
-            scikit_model.score(current_fold_X_test, current_fold_y_test),
-            metrics.explained_variance_score(
-                current_fold_y_test,
-                current_fold_y_pred
-            )]]
-        mod_results_current_fold = pd.DataFrame(data, columns=cols)
-        mod_results = pd.concat([mod_results, mod_results_current_fold])
-        mod_results.reset_index(drop=True, inplace=True)
-        all_mod_results.append(mod_results)
-        y_frame_now = pd.DataFrame(
-            {
-                'y_test': list(current_fold_y_test),
-                'y_pred': list(current_fold_y_pred),
-            })
+#         data = [[
+#             f'{model_name}-{i}',
+#             i,
+#             f'{model_file_name}.{i}',
+#             mean_absolute_error(current_fold_y_test, current_fold_y_pred),
+#             scikit_model.score(current_fold_X_test, current_fold_y_test),
+#             metrics.explained_variance_score(
+#                 current_fold_y_test,
+#                 current_fold_y_pred
+#             )]]
+#         mod_results_current_fold = pd.DataFrame(data, columns=cols)
+#         mod_results = pd.concat([mod_results, mod_results_current_fold])
+#         mod_results.reset_index(drop=True, inplace=True)
+#         all_mod_results.append(mod_results)
+#         y_frame_now = pd.DataFrame(
+#             {
+#                 'y_test': list(current_fold_y_test),
+#                 'y_pred': list(current_fold_y_pred),
+#             })
 
-        y_frame.append(y_frame_now)
+#         y_frame.append(y_frame_now)
 
-        models.append((scikit_model, X[train_index][:, 0]))
+#         models.append((scikit_model, X[train_index][:, 0]))
 
-    df = pd.concat(all_mod_results)
-    y_frame = pd.concat([
-        y_frame[0],
-        y_frame[1],
-        y_frame[2],
-        y_frame[3],
-        y_frame[4],
-    ], axis=0)
+#     df = pd.concat(all_mod_results)
+#     y_frame = pd.concat([
+#         y_frame[0],
+#         y_frame[1],
+#         y_frame[2],
+#         y_frame[3],
+#         y_frame[4],
+#     ], axis=0)
 
-    return df, y_frame, models
-
+#     return df, y_frame, models
 
 def stratified_one_category_shuffle_split(
         model_name,
         model_file_name,
         scikit_model,
         our_ml_matrix,
-        category,
         our_x,
         our_y,
+        category='sex',
         splits=5,
         test_size_p=0.25,
         printed=False
@@ -802,18 +801,19 @@ def stratified_one_category_shuffle_split(
     :type skikit_model: str
     :param our_ml_matrix: dataframe to work over
     :type our_ml_matrix: `~pd.DataFrame`
-    :param category: categorical variable (column) to be stratified on eg. sex
-    :type category: str
     :param our_x: X or features columnfor machine learning
     :type our_x: dataframe
     :param our_y: y or label column for machine learning
     :type our_y: class:`~pandas.core.series.Series`
+    :param category: categorical variable (column) to be stratified on eg. sex
+    :type category: str
     :param splits: number of folds desired
     :type splits: int
     :param test_size_p: percent to put into test
     :type test_size_p: float
     :param printed: printed information on folds option
     :type printed: bool
+    
 
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
@@ -826,6 +826,7 @@ def stratified_one_category_shuffle_split(
     )
 
     X = our_x
+    # TODO: (makeda)finish split and put back index so everything is traceable
     y = our_y
     sss.get_n_splits(X, y_split)
 
@@ -858,7 +859,7 @@ def stratified_one_category_shuffle_split(
                 f'Train shapes: X {X[train_index].shape}',
                 f' y {y[train_index].shape}'
             )
-            unique_tr, counts_train = np.unique(
+            unique_train, counts_train = np.unique(
                 y_split[train_index], return_counts=True
             )
             print(
