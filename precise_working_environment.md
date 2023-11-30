@@ -1,6 +1,7 @@
 # packages in environment at C:\Users\CandaceMoore\miniconda3\envs\mriland:
-#
+# date = November 2023
 # Name                    Version                   Build  Channel
+
 aiofiles                  22.1.0             pyhd8ed1ab_0    conda-forge
 aiosqlite                 0.19.0             pyhd8ed1ab_0    conda-forge
 alabaster                 0.7.13             pyhd8ed1ab_0    conda-forge
