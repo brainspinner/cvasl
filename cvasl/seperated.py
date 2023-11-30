@@ -571,7 +571,6 @@ def avg_k_folds(frame):
     return frame_results_average
 
 
-
 def stratified_one_category_shuffle_split(
         model_name,
         model_file_name,
@@ -615,7 +614,7 @@ def stratified_one_category_shuffle_split(
     :type test_size_p: float
     :param printed: printed information on folds option
     :type printed: bool
-    
+
 
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
