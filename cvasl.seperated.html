@@ -281,28 +281,6 @@ then returns these rows of the dataframe.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.frame_a_model_sex_split">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">frame_a_model_sex_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.frame_a_model_sex_split" title="Link to this definition">¶</a></dt>
-<dd><p>This takes a scikit-learn coded model and
-creates a dataframe based on k-folds of results on
-our_ml_matrix, and its X component
-returns a dataframe of fold results
-and raw y_test versus y_pred</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cvasl.seperated.frame_a_model_sex_split_2">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">frame_a_model_sex_split_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.frame_a_model_sex_split_2" title="Link to this definition">¶</a></dt>
-<dd><p>This takes a sci-kit learn coded model and
-creates a dataframe based on k-folds of results on
-our_ml_matrix, and it’s X component
-returns a dataframe of fold results
-and raw y_test versus y_pred
-as well as a tuple with models
-and then the training data from the model</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.generate_transformation_matrix">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">generate_transformation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polynomial1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.generate_transformation_matrix" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a matrix that transforms one polynomial into another.
@@ -490,7 +468,7 @@ that two dataframes have in common</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.stratified_one_category_shuffle_split">
-<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">stratified_one_category_shuffle_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.stratified_one_category_shuffle_split" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">stratified_one_category_shuffle_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scikit_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_ml_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">our_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.stratified_one_category_shuffle_split" title="Link to this definition">¶</a></dt>
 <dd><p>This takes a sci-kit learn coded model and
 creates a dataframe based on k-folds of results on
 our_ml_matrix, and it’s X component
@@ -507,9 +485,9 @@ the results should be reproducible.</p>
 <li><p><strong>model_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name offile where specific model will be stored</p></li>
 <li><p><strong>skikit_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of skikit-model</p></li>
 <li><p><strong>our_ml_matrix</strong> (<cite>~pd.DataFrame</cite>) – dataframe to work over</p></li>
-<li><p><strong>category</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – categorical variable (column) to be stratified on eg. sex</p></li>
 <li><p><strong>our_x</strong> (<em>dataframe</em>) – X or features columnfor machine learning</p></li>
 <li><p><strong>our_y</strong> (class:<cite>~pandas.core.series.Series</cite>) – y or label column for machine learning</p></li>
+<li><p><strong>category</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – categorical variable (column) to be stratified on eg. sex</p></li>
 <li><p><strong>splits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – number of folds desired</p></li>
 <li><p><strong>test_size_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – percent to put into test</p></li>
 <li><p><strong>printed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – printed information on folds option</p></li>
@@ -549,8 +527,6 @@ the results should be reproducible.</p>
 <li><a class="reference internal" href="#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.frame_a_model_sex_split"><code class="docutils literal notranslate"><span class="pre">frame_a_model_sex_split()</span></code></a></li>
-<li><a class="reference internal" href="#cvasl.seperated.frame_a_model_sex_split_2"><code class="docutils literal notranslate"><span class="pre">frame_a_model_sex_split_2()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
