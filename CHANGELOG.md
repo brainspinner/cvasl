@@ -28,3 +28,21 @@ Changed repo name from brainspin to cvasl
     - file with standard for submitting to package inside researcher_interface folder
     - preliminary linear regression models as baseline for brain age models
 
+## Release 0.0.1
+
+### Added
+
+* Second version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
+
+    - additional experiments inside harmonization_paper folder
+    - example of correct format for csv of derived values to use with library 
+
+## Release 0.0.2
+
+### Pending (December 1 2023)
+
+* Third version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
+
+	- harmony module for functions related to common harmonization algorithms
+    - generalized function for k-folding as specific to project in seperated module
+    - exact freeze of environment in precise_working_environment
