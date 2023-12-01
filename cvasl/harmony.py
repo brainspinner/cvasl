@@ -6,15 +6,21 @@ Copyright 2023 Netherlands eScience Center and
 the Amsterdam University Medical Center.
 Licensed under the Apache License, version 2.0. See LICENSE for details.
 
-This file contains functions for processing csv and tsv
+Most seperated values processing
+is in the seperated modeul, hoever, this file contains functions
+for processing csv and tsv
 files as they relate to specific harmonization algorithms.
+Essentially this module has been made
+so it can be called in environments
+compatible with common
+harmonization algorithms which often require
+older versions of python and numpy than usual in 2023.
 """
 
 import os
 import copy
 import glob
 import pandas as pd
-from pandas.api.types import is_numeric_dtype
 import numpy as np
 
 
@@ -25,8 +31,10 @@ def log_out_columns(dataframe, column_list):
 
 
 def split_frame_half_balanced_by_column(frame, column):
-    """This is useful in cases where you want to split on a columns
-    with continous values e.g. age."""
+    """
+    This is function is made for a dataframe you want to split
+    on a columns with continous values e.g. age.
+    """
     df = frame.sort_values(column).reset_index()
     rng_even = range(0, len(df), 2)
     rng_odd = range(1, len(df), 2)
@@ -51,7 +59,6 @@ def prep_for_neurocombat(dataframename1, dataframename2):
     This function takes two dataframes in the cvasl format,
     then turns them into three items needed for the
     neurocombat algorithm with re-identification.
-
     """
     two_selection = dataframename2.drop(['Unnamed: 0'], axis=1)
     one_selection = dataframename1.drop(['Unnamed: 0'], axis=1)
