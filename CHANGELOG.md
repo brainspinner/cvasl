@@ -46,3 +46,4 @@ Changed repo name from brainspin to cvasl
 	- harmony module for functions related to common harmonization algorithms
     - generalized function for k-folding as specific to project in seperated module
     - exact freeze of environment in precise_working_environment
+    -(PENDING) new graphing functions...
