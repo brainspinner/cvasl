@@ -15,7 +15,7 @@ dependencies:
   - numpy
   - pandas
   - pycodestyle
-  - python=3.11
+  - python>=3.10
   - scipy
   - scikit-image
   - scikit-learn
