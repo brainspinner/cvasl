@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cvasl &#8212; cvasl 0.0.1 documentation</title>
+    <title>cvasl.harmony module &#8212; cvasl 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/basic_mod.css?v=a0b6f7b1" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
@@ -15,8 +15,8 @@
     <script src="_static/js/petite-vue.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cvasl package" href="cvasl.html" />
-    <link rel="prev" title="cvasl documentation" href="index.html" /> 
+    <link rel="next" title="cvasl.mold module" href="cvasl.mold.html" />
+    <link rel="prev" title="cvasl.file_handler module" href="cvasl.file_handler.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
 <div id="top_nav">
@@ -120,8 +120,16 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">cvasl</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cvasl.html">cvasl package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cvasl</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cvasl.html">cvasl package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cvasl.carve.html">cvasl.carve module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.cli.html">cvasl.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.file_handler.html">cvasl.file_handler module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cvasl.harmony module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.mold.html">cvasl.mold module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.seperated.html">cvasl.seperated module</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">Developer’s Guide</a></li>
@@ -137,84 +145,49 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="cvasl">
-<h1>cvasl<a class="headerlink" href="#cvasl" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cvasl.html">cvasl package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cvasl.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.carve.html">cvasl.carve module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.MetadataHelper"><code class="docutils literal notranslate"><span class="pre">MetadataHelper</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.SimpleITKDicomReader"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.carve.html#cvasl.carve.rip_out_array_sitk"><code class="docutils literal notranslate"><span class="pre">rip_out_array_sitk()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.cli.html">cvasl.cli module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.cli.html#cvasl.cli.common"><code class="docutils literal notranslate"><span class="pre">common()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.cli.html#cvasl.cli.config_override"><code class="docutils literal notranslate"><span class="pre">config_override()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.cli.html#cvasl.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.cli.html#cvasl.cli.make_parser"><code class="docutils literal notranslate"><span class="pre">make_parser()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.file_handler.html">cvasl.file_handler module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.extract_common_columns"><code class="docutils literal notranslate"><span class="pre">extract_common_columns()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.find_where_column"><code class="docutils literal notranslate"><span class="pre">find_where_column()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.hash_folder"><code class="docutils literal notranslate"><span class="pre">hash_folder()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.hash_rash"><code class="docutils literal notranslate"><span class="pre">hash_rash()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.intersect_all"><code class="docutils literal notranslate"><span class="pre">intersect_all()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.make_columns"><code class="docutils literal notranslate"><span class="pre">make_columns()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.file_handler.html#cvasl.file_handler.unduplicate_dfs"><code class="docutils literal notranslate"><span class="pre">unduplicate_dfs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.harmony.html">cvasl.harmony module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.harmony.html#cvasl.harmony.log_out_columns"><code class="docutils literal notranslate"><span class="pre">log_out_columns()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.harmony.html#cvasl.harmony.make_topper"><code class="docutils literal notranslate"><span class="pre">make_topper()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.harmony.html#cvasl.harmony.prep_for_neurocombat"><code class="docutils literal notranslate"><span class="pre">prep_for_neurocombat()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.harmony.html#cvasl.harmony.split_frame_half_balanced_by_column"><code class="docutils literal notranslate"><span class="pre">split_frame_half_balanced_by_column()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.harmony.html#cvasl.harmony.top_and_bottom_by_column"><code class="docutils literal notranslate"><span class="pre">top_and_bottom_by_column()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.mold.html">cvasl.mold module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.mold.html#cvasl.mold.NormedSliceViewer"><code class="docutils literal notranslate"><span class="pre">NormedSliceViewer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.mold.html#cvasl.mold.SliceViewer"><code class="docutils literal notranslate"><span class="pre">SliceViewer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.mold.html#cvasl.mold.debias_folder"><code class="docutils literal notranslate"><span class="pre">debias_folder()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.mold.html#cvasl.mold.n4_debias_sitk"><code class="docutils literal notranslate"><span class="pre">n4_debias_sitk()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.mold.html#cvasl.mold.save_preprocessed"><code class="docutils literal notranslate"><span class="pre">save_preprocessed()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cvasl.seperated.html">cvasl.seperated module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.avg_k_folds"><code class="docutils literal notranslate"><span class="pre">avg_k_folds()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.derived_function"><code class="docutils literal notranslate"><span class="pre">derived_function()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.polyfit_second_degree_to_df"><code class="docutils literal notranslate"><span class="pre">polyfit_second_degree_to_df()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.recode_sex"><code class="docutils literal notranslate"><span class="pre">recode_sex()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.recode_sex_to_numeric"><code class="docutils literal notranslate"><span class="pre">recode_sex_to_numeric()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.relate_columns_graphs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.relate_columns_graphs_numeric"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_numeric()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.relate_columns_graphs_two_dfs"><code class="docutils literal notranslate"><span class="pre">relate_columns_graphs_two_dfs()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cvasl.seperated.html#cvasl.seperated.stratified_one_category_shuffle_split"><code class="docutils literal notranslate"><span class="pre">stratified_one_category_shuffle_split()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cvasl.html#module-cvasl">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <section id="module-cvasl.harmony">
+<span id="cvasl-harmony-module"></span><h1>cvasl.harmony module<a class="headerlink" href="#module-cvasl.harmony" title="Link to this heading">¶</a></h1>
+<p>Copyright 2023 Netherlands eScience Center and
+the Amsterdam University Medical Center.
+Licensed under the Apache License, version 2.0. See LICENSE for details.</p>
+<p>This file contains functions for processing csv and tsv
+files as they relate to specific harmonization algorithms.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.log_out_columns">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">log_out_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.log_out_columns" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.make_topper">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">make_topper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">btF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.make_topper" title="Link to this definition">¶</a></dt>
+<dd><p>This function makes top rows for something harmonized
+out of the btF part produced with
+prep_for_neurocombat(dataframename1, dataframename2)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.prep_for_neurocombat">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">prep_for_neurocombat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframename1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframename2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.prep_for_neurocombat" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes two dataframes in the cvasl format,
+then turns them into three items needed for the
+neurocombat algorithm with re-identification.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.split_frame_half_balanced_by_column">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">split_frame_half_balanced_by_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.split_frame_half_balanced_by_column" title="Link to this definition">¶</a></dt>
+<dd><p>This is useful in cases where you want to split on a columns
+with continous values e.g. age.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.top_and_bottom_by_column">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">top_and_bottom_by_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.top_and_bottom_by_column" title="Link to this definition">¶</a></dt>
+<dd><p>This is useful in cases where you want to split on a columns
+with continous values e.g. age.; and upi
+want the highest and lowest values seperated</p>
+</dd></dl>
+
 </section>
 
 
@@ -223,6 +196,27 @@
         </div>
       </div>
     
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">cvasl.harmony module</a><ul>
+<li><a class="reference internal" href="#cvasl.harmony.log_out_columns"><code class="docutils literal notranslate"><span class="pre">log_out_columns()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.make_topper"><code class="docutils literal notranslate"><span class="pre">make_topper()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.prep_for_neurocombat"><code class="docutils literal notranslate"><span class="pre">prep_for_neurocombat()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.split_frame_half_balanced_by_column"><code class="docutils literal notranslate"><span class="pre">split_frame_half_balanced_by_column()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.top_and_bottom_by_column"><code class="docutils literal notranslate"><span class="pre">top_and_bottom_by_column()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
 
       <div class="clearer"></div>
     </div>
@@ -230,14 +224,14 @@
         <div class="button_nav">
             <div class="left">
                 
-                <a href="index.html">
-                    <span class="icon">&lt;</span><span>cvasl documentation</span></a>
+                <a href="cvasl.file_handler.html">
+                    <span class="icon">&lt;</span><span>cvasl.file_handler module</span></a>
                 
             </div>
 
             <div class="right">
                 
-                    <a href="cvasl.html"><span>cvasl package</span><span class="icon">&gt;</span></a>
+                    <a href="cvasl.mold.html"><span>cvasl.mold module</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>
