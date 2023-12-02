@@ -14,7 +14,7 @@ Essentially this module has been made
 so it can be called in environments
 compatible with common
 harmonization algorithms which often require
-older versions of python and numpy than usual in 2023.
+older versions of python, pandas and numpy than usual in 2023.
 """
 
 import os
@@ -25,6 +25,20 @@ import numpy as np
 
 
 def log_out_columns(dataframe, column_list):
+    """
+    This function recodes changes specified
+    column values in a dataframe to a log
+    of the values, which can make overall
+    distributions change.
+
+    :param dataframe: dataframe variable
+    :type dataframe: str
+    :param column_list: column names
+    :type column_list: list
+
+    :returns: dataframe with different (log) values in specified columns
+    :rtype: pandas.dataFrame
+    """
     for column in column_list:
         dataframe[column] = np.log(dataframe[column])
     return dataframe
@@ -33,7 +47,18 @@ def log_out_columns(dataframe, column_list):
 def split_frame_half_balanced_by_column(frame, column):
     """
     This is function is made for a dataframe you want to split
-    on a columns with continous values e.g. age.
+    on a columns with continous values e.g. age.; and returns 
+    two dataframes in which the values in this column are
+    about equally distributed e.g. average age over both frames, 
+    if age is column variable, will be similar
+
+    :param dataframe: frame variable
+    :type frame: str
+    :param column: column name
+    :type column: Series
+
+    :returns: dataframes evenly idstributed on values in specified column
+    :rtype: pandas.dataFrame
     """
     df = frame.sort_values(column).reset_index()
     rng_even = range(0, len(df), 2)
@@ -44,9 +69,19 @@ def split_frame_half_balanced_by_column(frame, column):
 
 
 def top_and_bottom_by_column(frame, column):
-    """This is useful in cases where you want to split on a columns
+    """
+    This is useful in cases where you want to split on a columns
     with continous values e.g. age.; and upi
-    want the highest and lowest values seperated"""
+    want the highest and lowest values seperated
+
+    :param dataframe: frame variable
+    :type frame: str
+    :param column: column name
+    :type column: Series
+
+    :returns: dataframes unevenly distributed on values in specified column
+    :rtype: `~pandas.DataFrame`
+    """
     df = frame.sort_values(column)
     len_first_half = len(df) // 2
     top = df.iloc[:len_first_half]
@@ -57,7 +92,7 @@ def top_and_bottom_by_column(frame, column):
 def prep_for_neurocombat(dataframename1, dataframename2):
     """
     This function takes two dataframes in the cvasl format,
-    then turns them into three items needed for the
+    then turns them into the items needed for the
     neurocombat algorithm with re-identification.
     """
     two_selection = dataframename2.drop(['Unnamed: 0'], axis=1)

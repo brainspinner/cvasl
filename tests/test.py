@@ -28,6 +28,9 @@ from cvasl.seperated import find_original_y_values
 from cvasl.seperated import generate_transformation_matrix
 from cvasl.seperated import find_outliers_by_list
 from cvasl.seperated import check_sex_dimorph_expectations
+# harmony
+from cvasl.harmony import top_and_bottom_by_column
+from cvasl.harmony import split_frame_half_balanced_by_column
 
 
 sample_test_data1 = os.path.join(
@@ -206,6 +209,18 @@ class TestTabDataCleaning(unittest.TestCase):
         data =  pd.read_csv(sample_tab_csv1)
         returned = check_sex_dimorph_expectations(data)
         self.assertEqual(len(data), len(returned))
+
+class TestHarmonyDataManipulation(unittest.TestCase):
+
+    def test_top_and_bottom_by_column(self):
+        data = pd.read_csv(sample_tab_csv1)
+        split1, split2 = top_and_bottom_by_column(data,'age')
+        self.assertGreater(split2['age'].sum(), split1['age'].sum())
+    
+    def test_split_frame_half_balanced_by_column(self):
+        data = pd.read_csv(sample_tab_csv1)
+        split1, split2 = top_and_bottom_by_column(data,'age')
+        self.assertEqual(len(split1), len(split2))
 
 
 if __name__ == '__main__':
