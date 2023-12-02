@@ -6,14 +6,11 @@ Copyright 2023 Netherlands eScience Center and
 the Amsterdam University Medical Center.
 Licensed under the Apache License, version 2.0. See LICENSE for details.
 
-Most seperated values processing
-is in the seperated modeul, hoever, this file contains functions
-for processing csv and tsv
-files as they relate to specific harmonization algorithms.
-Essentially this module has been made
-so it can be called in environments
-compatible with common
-harmonization algorithms which often require
+This file contains functions for processing csv and tsv
+files as they relate to specific common harmonization algorithms.
+Most seperated values processing is in the seperated module,
+however, this  this module has been made so it can be called in environments
+compatible with common harmonization algorithms which often require
 older versions of python, pandas and numpy than usual in 2023.
 """
 
@@ -144,8 +141,18 @@ def prep_for_neurocombat(dataframe1, dataframe2):
 def make_topper(btF, row0, row1):
     """
     This function makes top rows for something harmonized
-    out of the btF part produced with
-    prep_for_neurocombat(dataframename1, dataframename2)
+    out of the btF part produced by the prep_for_neurocombat function
+    i.e. prep_for_neurocombat(dataframename1, dataframename2)
+
+    :param btF: frame variable produced in prep_for_neurocombat
+    :type btF: `~pandas.DataFrame`
+    :param row0: frame column removed i.e. age or sex
+    :type row0: str
+    :param row1: frame column removed i.e. age or sex
+    :type row1: str
+
+    :returns: dataframe called TopperF to add back
+    :rtype: `~pandas.DataFrame`
     """
     topperF = btF.head(2)
     topperF = topperF.rename_axis(None, axis="columns")
