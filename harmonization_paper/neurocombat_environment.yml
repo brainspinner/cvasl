@@ -1,13 +1,13 @@
 #  neurocombat environment document
 
-name: neuron
+name: neuron_g
 channels:
   - conda-forge
   
 dependencies:
   - python=3.7
   - jupyterlab
-  - matplotlib
+  - matplotlib=3.4
   - pip 
 
   - pip:
