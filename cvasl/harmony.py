@@ -39,17 +39,18 @@ def log_out_columns(dataframe, column_list):
     :returns: dataframe with different (log) values in specified columns
     :rtype: pandas.dataFrame
     """
+    frame = dataframe.copy()
     for column in column_list:
-        dataframe[column] = np.log(dataframe[column])
-    return dataframe
+        frame[column] = np.log(dataframe[column])
+    return frame
 
 
 def split_frame_half_balanced_by_column(frame, column):
     """
     This is function is made for a dataframe you want to split
-    on a columns with continous values e.g. age.; and returns 
+    on a columns with continous values e.g. age.; and returns
     two dataframes in which the values in this column are
-    about equally distributed e.g. average age over both frames, 
+    about equally distributed e.g. average age over both frames,
     if age is column variable, will be similar
 
     :param dataframe: frame variable
@@ -89,14 +90,23 @@ def top_and_bottom_by_column(frame, column):
     return top, bottom
 
 
-def prep_for_neurocombat(dataframename1, dataframename2):
+def prep_for_neurocombat(dataframe1, dataframe2):
     """
     This function takes two dataframes in the cvasl format,
     then turns them into the items needed for the
     neurocombat algorithm with re-identification.
+
+    :param dataframe1: frame variable
+    :type frame: `~pandas.DataFrame`
+    :param dataframe2: frame variable
+    :type frame: `~pandas.DataFrame`
+
+    :returns: dataframes for neurocombat algorithm and ints of some legnths
+    :rtype: tuple
     """
-    two_selection = dataframename2.drop(['Unnamed: 0'], axis=1)
-    one_selection = dataframename1.drop(['Unnamed: 0'], axis=1)
+    # TODO:(makeda) make so it can take frame name or frame
+    two_selection = dataframe2.drop(['Unnamed: 0'], axis=1)
+    one_selection = dataframe1.drop(['Unnamed: 0'], axis=1)
     one_selection = one_selection.set_index('participant_id')
     two_selection = two_selection.set_index('participant_id')
     one_selection = one_selection.T
