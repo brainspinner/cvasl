@@ -158,11 +158,29 @@ Essentially this module has been made
 so it can be called in environments
 compatible with common
 harmonization algorithms which often require
-older versions of python and numpy than usual in 2023.</p>
+older versions of python, pandas and numpy than usual in 2023.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cvasl.harmony.log_out_columns">
 <span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">log_out_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.log_out_columns" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This function recodes changes specified
+column values in a dataframe to a log
+of the values, which can make overall
+distributions change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – dataframe variable</p></li>
+<li><p><strong>column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – column names</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe with different (log) values in specified columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cvasl.harmony.make_topper">
@@ -176,7 +194,7 @@ prep_for_neurocombat(dataframename1, dataframename2)</p>
 <dt class="sig sig-object py" id="cvasl.harmony.prep_for_neurocombat">
 <span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">prep_for_neurocombat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframename1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframename2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.prep_for_neurocombat" title="Link to this definition">¶</a></dt>
 <dd><p>This function takes two dataframes in the cvasl format,
-then turns them into three items needed for the
+then turns them into the items needed for the
 neurocombat algorithm with re-identification.</p>
 </dd></dl>
 
@@ -184,7 +202,24 @@ neurocombat algorithm with re-identification.</p>
 <dt class="sig sig-object py" id="cvasl.harmony.split_frame_half_balanced_by_column">
 <span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">split_frame_half_balanced_by_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.split_frame_half_balanced_by_column" title="Link to this definition">¶</a></dt>
 <dd><p>This is function is made for a dataframe you want to split
-on a columns with continous values e.g. age.</p>
+on a columns with continous values e.g. age.; and returns 
+two dataframes in which the values in this column are
+about equally distributed e.g. average age over both frames, 
+if age is column variable, will be similar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> – frame variable</p></li>
+<li><p><strong>column</strong> (<em>Series</em>) – column name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframes evenly idstributed on values in specified column</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.dataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -193,6 +228,20 @@ on a columns with continous values e.g. age.</p>
 <dd><p>This is useful in cases where you want to split on a columns
 with continous values e.g. age.; and upi
 want the highest and lowest values seperated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> – frame variable</p></li>
+<li><p><strong>column</strong> (<em>Series</em>) – column name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframes unevenly distributed on values in specified column</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>~pandas.DataFrame</cite></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
