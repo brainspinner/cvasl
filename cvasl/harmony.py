@@ -19,6 +19,8 @@ import copy
 import glob
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def log_out_columns(dataframe, column_list):
@@ -161,3 +163,60 @@ def make_topper(btF, row0, row1):
     topperF['char'][0] = row0  # 'age'
     topperF['char'][1] = row1  # 'sex'
     return topperF
+
+
+def compare_harm_multi_site_violins(
+        unharmonized_df,
+        harmonized_df,
+        feature_list
+):
+    """
+    Create a violin plot on multisite harmonization by features.
+    """
+    for feature in feature_list:
+        complete_merge = pd.concat(
+            [unharmonized_df, harmonized_df]).reset_index(drop=True)
+        complete_merge[feature] = complete_merge[feature].astype('float64')
+        sns.set_style("whitegrid")
+        y_axis = feature
+        g = sns.FacetGrid(complete_merge, col="batch")
+        g.map(
+            sns.violinplot,
+            'harmonization',
+            y_axis,
+            order=["UH", "H"],
+            palette=["b", "g", "pink",],
+            alpha=0.3
+        )
+        lowest_on_graph = complete_merge[y_axis].min() - 0.5
+        plt.ylim(
+            lowest_on_graph,
+            complete_merge[y_axis].max() * 1.5)
+        plt.show()
+
+
+def compare_harm_one_site_violins(
+        unharmonized_df,
+        harmonized_df,
+        feature_list,
+):
+    """
+    Create a violin plot on single site harmonization by features,
+    split on sex.
+    """
+    for feat in feature_list:
+        complete_merg = pd.concat(
+            [unharmonized_df, harmonized_df]).reset_index(drop=True)
+        complete_merg[feat] = complete_merg[feat].astype('float64')
+        sns.set_style("whitegrid")
+        y_axis = feat
+        g = sns.catplot(
+            data=complete_merg,
+            x='harmonization', y=y_axis, hue="sex",
+            split=True, inner='quartile', kind='violin',
+            height=5, aspect=0.6, palette=['pink', 'blue'], alpha=0.4)
+
+        lowest_on_graph = complete_merg[y_axis].min() - 0.5
+        plt.ylim((lowest_on_graph, complete_merg[y_axis].max() * 1.5))
+        plt.title(feat)
+        plt.show()
