@@ -157,6 +157,19 @@ however, this  this module has been made so it can be called in environments
 compatible with common harmonization algorithms which often require
 older versions of python, pandas and numpy than usual in 2023.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.compare_harm_multi_site_violins">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">compare_harm_multi_site_violins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unharmonized_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harmonized_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.compare_harm_multi_site_violins" title="Link to this definition">¶</a></dt>
+<dd><p>Create a violin plot on multisite harmonization by features.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.compare_harm_one_site_violins">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">compare_harm_one_site_violins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unharmonized_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harmonized_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.compare_harm_one_site_violins" title="Link to this definition">¶</a></dt>
+<dd><p>Create a violin plot on single site harmonization by features,
+split on sex.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.harmony.log_out_columns">
 <span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">log_out_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.log_out_columns" title="Link to this definition">¶</a></dt>
 <dd><p>This function recodes changes specified
@@ -287,6 +300,8 @@ want the highest and lowest values seperated</p>
             <div class="page_toc">
                 <ul>
 <li><a class="reference internal" href="#">cvasl.harmony module</a><ul>
+<li><a class="reference internal" href="#cvasl.harmony.compare_harm_multi_site_violins"><code class="docutils literal notranslate"><span class="pre">compare_harm_multi_site_violins()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.compare_harm_one_site_violins"><code class="docutils literal notranslate"><span class="pre">compare_harm_one_site_violins()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.log_out_columns"><code class="docutils literal notranslate"><span class="pre">log_out_columns()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.make_topper"><code class="docutils literal notranslate"><span class="pre">make_topper()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.prep_for_neurocombat"><code class="docutils literal notranslate"><span class="pre">prep_for_neurocombat()</span></code></a></li>
