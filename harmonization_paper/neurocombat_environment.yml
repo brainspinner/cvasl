@@ -1,6 +1,6 @@
 #  neurocombat environment document
 
-name: neuron_g
+name: neuron_go
 channels:
   - conda-forge
   
@@ -8,6 +8,7 @@ dependencies:
   - python=3.7
   - jupyterlab
   - matplotlib=3.4
+  - seaborn
   - pip 
 
   - pip:

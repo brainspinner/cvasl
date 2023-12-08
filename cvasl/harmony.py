@@ -199,10 +199,11 @@ def compare_harm_one_site_violins(
         unharmonized_df,
         harmonized_df,
         feature_list,
+        chosen_feature="sex"
 ):
     """
     Create a violin plot on single site harmonization by features,
-    split on sex.
+    split on a binary feature of choice which defaults to sex.
     """
     for feat in feature_list:
         complete_merg = pd.concat(
@@ -212,7 +213,7 @@ def compare_harm_one_site_violins(
         y_axis = feat
         g = sns.catplot(
             data=complete_merg,
-            x='harmonization', y=y_axis, hue="sex",
+            x='harmonization', y=y_axis, hue=chosen_feature,
             split=True, inner='quartile', kind='violin',
             height=5, aspect=0.6, palette=['pink', 'blue'], alpha=0.4)
 

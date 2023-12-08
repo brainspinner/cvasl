@@ -39,7 +39,7 @@ Changed repo name from brainspin to cvasl
 
 ## Release 0.0.2
 
-### Pending (December 1 2023)
+### Pending (December 11 2023)
 
 * Third version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
 
@@ -47,3 +47,4 @@ Changed repo name from brainspin to cvasl
     - generalized function for k-folding as specific to project in seperated module
     - exact freeze of environment in precise_working_environment
     - new graphing functions in harmony module to illustrate harmonization effects
+    - (pending) k folding which allows splitting on a continous variable?
