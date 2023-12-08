@@ -221,3 +221,30 @@ def compare_harm_one_site_violins(
         plt.ylim((lowest_on_graph, complete_merg[y_axis].max() * 1.5))
         plt.title(feat)
         plt.show()
+
+
+def bin_dataset(dataframe, column, graph=False):
+    """
+    This function creates an additional column
+    where a continues variable can be binned
+    into 4 parts.
+
+    :param dataframe: dataframe variable
+    :type dataframe: str
+    :param column: column name written in singe qoutes
+    :type column: str
+
+    :returns: dataframe with additional column
+    :rtype: pandas.dataFrame
+    """
+    bins = [
+        dataframe[column].describe()['min'],
+        dataframe[column].describe()['25%'],
+        dataframe[column].describe()['50%'],
+        dataframe[column].describe()['75%'],
+        dataframe[column].describe()['max']]
+    labels = [1, 2, 3, 4]
+    dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
+    if graph:
+        sns.displot(dataframe, x=column, hue='binned')
+    return dataframe

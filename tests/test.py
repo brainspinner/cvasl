@@ -32,6 +32,7 @@ from cvasl.seperated import check_sex_dimorph_expectations
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
 from cvasl.harmony import log_out_columns
+from cvasl.harmony import bin_dataset
 
 sample_test_data1 = os.path.join(
     os.path.dirname(__file__),
@@ -226,6 +227,13 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         data = pd.read_csv(sample_tab_csv1)
         logged = log_out_columns(data,['gm_vol'])
         self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
+    
+    def test_bin_dataset(self):
+        data = pd.read_csv(sample_tab_csv1)
+        binned_data = bin_dataset(data, 'age')
+        lows = binned_data.loc[binned_data['binned'] == 1]
+        highs = binned_data.loc[binned_data['binned'] == 4]
+        self.assertLess(lows.age.sum(), highs.age.sum())
 
 
 if __name__ == '__main__':
