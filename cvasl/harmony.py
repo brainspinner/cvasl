@@ -223,28 +223,44 @@ def compare_harm_one_site_violins(
         plt.show()
 
 
-def bin_dataset(dataframe, column, graph=False):
+def bin_dataset(dataframe, column, num_bins=4, graph=False):
     """
     This function creates an additional column
     where a continues variable can be binned
-    into 4 parts.
+    into 2 or  4 parts.
 
     :param dataframe: dataframe variable
     :type dataframe: str
     :param column: column name written in singe qoutes
     :type column: str
+    :param num_bins: 2 or 4 for number bins
+    :type num_bins: int
+    :param graph: on True setting produces split graph
+    :type graph: bool
 
     :returns: dataframe with additional column
     :rtype: pandas.dataFrame
     """
-    bins = [
-        dataframe[column].describe()['min'],
-        dataframe[column].describe()['25%'],
-        dataframe[column].describe()['50%'],
-        dataframe[column].describe()['75%'],
-        dataframe[column].describe()['max']]
-    labels = [1, 2, 3, 4]
-    dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
+    if num_bins == 2:
+        bins = [
+            dataframe[column].describe()['min'],
+            dataframe[column].describe()['50%'],
+            dataframe[column].describe()['max']]
+        labels = [1, 2]
+        dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
+    else: 
+        bins = [
+            dataframe[column].describe()['min'],
+            dataframe[column].describe()['25%'],
+            dataframe[column].describe()['50%'],
+            dataframe[column].describe()['75%'],
+            dataframe[column].describe()['max']]
+        labels = [1, 2, 3, 4]
+        dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
+        
+    if num_bins != 2 and num_bins != 4:
+        print("You can only bin into 2 or 4 bins, we defaulted to 4 for you")
     if graph:
         sns.displot(dataframe, x=column, hue='binned')
     return dataframe
+
