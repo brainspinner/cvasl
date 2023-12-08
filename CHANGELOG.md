@@ -47,4 +47,6 @@ Changed repo name from brainspin to cvasl
     - generalized function for k-folding as specific to project in seperated module
     - exact freeze of environment in precise_working_environment
     - new graphing functions in harmony module to illustrate harmonization effects
-    - (pending) k folding which allows splitting on a continous variable?
+    - new functon to bin data on a continous variable
+    - haromnzation_abstract_one folder to save and make reproducible work for brain mapping abstract 
+    - (pending) k folding which allows splitting on multiple variables 
