@@ -262,3 +262,22 @@ def bin_dataset(dataframe, column, num_bins=4, graph=False):
     if graph:
         sns.displot(dataframe, x=column, hue='binned')
     return dataframe
+
+
+def static_bin_age(dataframe):
+    """
+    This function applies static binning by age decade
+    to a dataframe
+    """
+    dataframe['static_bin_age'] = 0
+    dataframe.loc[dataframe['age'] >= 10, 'static_bin_age'] = 1
+    dataframe.loc[dataframe['age'] >= 20, 'static_bin_age'] = 2
+    dataframe.loc[dataframe['age'] >= 30, 'static_bin_age'] = 3
+    dataframe.loc[dataframe['age'] >= 40, 'static_bin_age'] = 4
+    dataframe.loc[dataframe['age'] >= 50, 'static_bin_age'] = 5
+    dataframe.loc[dataframe['age'] >= 60, 'static_bin_age'] = 6
+    dataframe.loc[dataframe['age'] >= 70, 'static_bin_age'] = 7
+    dataframe.loc[dataframe['age'] >= 80, 'static_bin_age'] = 8
+    dataframe.loc[dataframe['age'] >= 90, 'static_bin_age'] = 9
+    dataframe.loc[dataframe['age'] >= 100, 'static_bin_age'] = 10
+    return dataframe
