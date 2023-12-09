@@ -255,7 +255,7 @@ def bin_dataset(dataframe, column, num_bins=4, graph=False):
             dataframe[column].describe()['50%'],
             dataframe[column].describe()['75%'],
             dataframe[column].describe()['max'] + 1]
-        labels = [1, 2, 3, 4]
+        labels = [0, 1, 2, 3]
         dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
     if num_bins != 2 and num_bins != 4:
         print("You can only bin into 2 or 4 bins, we defaulted to 4 for you")
