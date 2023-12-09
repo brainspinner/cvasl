@@ -227,6 +227,13 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         data = pd.read_csv(sample_tab_csv1)
         logged = log_out_columns(data,['gm_vol'])
         self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
+
+    def test_log_out_columns2(self):
+        #TOFO: parameterize this test on variable
+        variable = 'gm_vol'
+        data = pd.read_csv(sample_tab_csv1)
+        logged = log_out_columns(data,[])
+        self.assertEqual(logged[variable].sum(), data[variable].sum())
     
     def test_bin_dataset(self):
         data = pd.read_csv(sample_tab_csv1)

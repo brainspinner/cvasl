@@ -248,19 +248,17 @@ def bin_dataset(dataframe, column, num_bins=4, graph=False):
             dataframe[column].describe()['max']]
         labels = [1, 2]
         dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
-    else: 
+    else:
         bins = [
-            dataframe[column].describe()['min'],
+            dataframe[column].describe()['min'] - 1,
             dataframe[column].describe()['25%'],
             dataframe[column].describe()['50%'],
             dataframe[column].describe()['75%'],
-            dataframe[column].describe()['max']]
+            dataframe[column].describe()['max'] + 1]
         labels = [1, 2, 3, 4]
         dataframe['binned'] = pd.cut(dataframe[column], bins, labels=labels)
-        
     if num_bins != 2 and num_bins != 4:
         print("You can only bin into 2 or 4 bins, we defaulted to 4 for you")
     if graph:
         sns.displot(dataframe, x=column, hue='binned')
     return dataframe
-
