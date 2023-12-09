@@ -223,17 +223,16 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         split1, split2 = top_and_bottom_by_column(data,'age')
         self.assertEqual(len(split1), len(split2))
 
-    def test_log_out_columns(self):
+    def test_log_out_columns_cat_logged(self):
         data = pd.read_csv(sample_tab_csv1)
         logged = log_out_columns(data,['gm_vol'])
         self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
 
-    def test_log_out_columns2(self):
-        #TOFO: parameterize this test on variable
-        variable = 'gm_vol'
+    def test_log_out_columns_no_log(self):
         data = pd.read_csv(sample_tab_csv1)
         logged = log_out_columns(data,[])
-        self.assertEqual(logged[variable].sum(), data[variable].sum())
+        result = data.equals(logged)
+        self.assertTrue(result)
     
     def test_bin_dataset(self):
         data = pd.read_csv(sample_tab_csv1)

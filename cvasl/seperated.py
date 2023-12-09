@@ -664,7 +664,7 @@ def stratified_one_category_shuffle_split(
                 y_split[train_index], return_counts=True
             )
             print(
-                f'Sex classes: {unique_train}',
+                f'Category classes: {unique_train}',
                 f'percentages: {100*counts_train/y[train_index].shape[0]}'
             )
             print(
@@ -675,7 +675,7 @@ def stratified_one_category_shuffle_split(
                 y_split[test_index], return_counts=True
             )
             print(
-                f'Sex classes: {unique_test},'
+                f'Category classes: {unique_test},'
                 f'percentages: {100*counts_test/y[test_index].shape[0]}'
             )
 
