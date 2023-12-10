@@ -28,11 +28,12 @@ from cvasl.seperated import find_original_y_values
 from cvasl.seperated import generate_transformation_matrix
 from cvasl.seperated import find_outliers_by_list
 from cvasl.seperated import check_sex_dimorph_expectations
+from cvasl.seperated import bin_dataset
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
 from cvasl.harmony import log_out_columns
-from cvasl.harmony import bin_dataset
+
 
 sample_test_data1 = os.path.join(
     os.path.dirname(__file__),
@@ -237,9 +238,23 @@ class TestHarmonyDataManipulation(unittest.TestCase):
     def test_bin_dataset(self):
         data = pd.read_csv(sample_tab_csv1)
         binned_data = bin_dataset(data, 'age')
-        lows = binned_data.loc[binned_data['binned'] == 1]
-        highs = binned_data.loc[binned_data['binned'] == 4]
+        lows = binned_data.loc[binned_data['binned'] == 0]
+        highs = binned_data.loc[binned_data['binned'] == 3]
         self.assertLess(lows.age.sum(), highs.age.sum())
+
+class TestLogWithParameters(unittest.TestCase):
+    data = pd.read_csv(sample_tab_csv1)
+    parameter = log_out_columns(data,['gm_vol'])
+
+    def test_parameter(self):
+        #print(type(self), self.parameter)
+        data = pd.read_csv(sample_tab_csv1)
+        self.assertEqual(self.parameter.shape, data.shape)
+
+
+class TestWithNoLog(TestLogWithParameters):
+    data = pd.read_csv(sample_tab_csv1)
+    parameter = log_out_columns(data,[])
 
 
 if __name__ == '__main__':
