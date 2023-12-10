@@ -801,7 +801,9 @@ def stratified_cat_and_cont_categories_shuffle_split(
     and then the training data from the model.
     This is a twist on Stratified Shuffle Split
     to allow it's stratification on a categorical
-    and continous variable.
+    and continous variable. Note tat the categorical
+    should already be converted into integers before
+    this function is run.
     The random state in the StratifiedShuffleSplit is set, so
     the results should be reproducible.
 
