@@ -283,6 +283,10 @@ class TestWithNoLog(TestLogWithParameters):
     data = pd.read_csv(sample_tab_csv1)
     parameter = log_out_columns(data,[])
 
+class TestWithTwoLog(TestLogWithParameters):
+    data = pd.read_csv(sample_tab_csv1)
+    parameter = log_out_columns(data,['gm_vol', 'wm_vol'])
+
 
 if __name__ == '__main__':
     unittest.main()
