@@ -39,14 +39,18 @@ Changed repo name from brainspin to cvasl
 
 ## Release 0.0.2
 
-### Pending (December 11 2023)
+### Added
 
 * Third version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
 
-	- harmony module for functions related to common harmonization algorithms
-    - generalized function for k-folding as specific to project in seperated module
+	- haromnzation_abstract_one folder to save and make reproducible work for brain mapping abstract 
     - exact freeze of environment in precise_working_environment
-    - new graphing functions in harmony module to illustrate harmonization effects
-    - new functons to bin data on a continous variable
-    - haromnzation_abstract_one folder to save and make reproducible work for brain mapping abstract 
+
+    - harmony module for functions related to implementing common harmonization algorithms
+    - harmony also includes new graphing functions in harmony module to illustrate harmonization effects e.g.
+    `compare_harm_one_site_violins` and `compare_harm_multi_site_violins`
+
+    - updates to seperated module including:
+    - new functons in seperated to bin data on a continous variable
+    - generalized functions for k-folding as specific to project in seperated module
     - k folding which allows splitting on twp variables (one continous, one categorical) with           `stratified_cat_and_cont_categories_shuffle_split` function 
