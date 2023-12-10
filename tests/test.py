@@ -16,7 +16,7 @@ import scipy
 from tempfile import TemporaryDirectory
 import json
 from unittest import TestCase, main
-
+from sklearn.linear_model import LinearRegression
 # config
 from cvasl.file_handler import Config
 # hash_rash
@@ -29,6 +29,8 @@ from cvasl.seperated import generate_transformation_matrix
 from cvasl.seperated import find_outliers_by_list
 from cvasl.seperated import check_sex_dimorph_expectations
 from cvasl.seperated import bin_dataset
+from cvasl.seperated import stratified_one_category_shuffle_split
+from cvasl.seperated import stratified_cat_and_cont_categories_shuffle_split
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
@@ -234,6 +236,8 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         logged = log_out_columns(data,[])
         result = data.equals(logged)
         self.assertTrue(result)
+
+class TestSeperatedDataManipulation(unittest.TestCase):
     
     def test_bin_dataset(self):
         data = pd.read_csv(sample_tab_csv1)
@@ -242,12 +246,35 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         highs = binned_data.loc[binned_data['binned'] == 3]
         self.assertLess(lows.age.sum(), highs.age.sum())
 
+class TestKFolds(unittest.TestCase):
+    
+    def test_stratified_one_category_shuffle_split(self):
+        #TODO: add formal sanity test for stratified_cat_and_cont_categories_shuffle_split
+        data = pd.read_csv(sample_tab_csv1)
+        ml_matrix = data.drop(['participant_id','session_id','run_id','sex'], axis=1)
+        X = ml_matrix.drop('age', axis =1)
+        X = X.values
+        X = X.astype('float')
+        y = ml_matrix['age'].values
+        y=y.astype('float')
+        outcomes = stratified_one_category_shuffle_split(
+            'linear regression',
+            'unharm_mri_linr', 
+            LinearRegression(),
+            ml_matrix,
+            X,
+            y,
+            category='site',
+            printed=True,
+        )
+        self.assertEqual(len(outcomes[0]), 5 )
+    
+
 class TestLogWithParameters(unittest.TestCase):
     data = pd.read_csv(sample_tab_csv1)
     parameter = log_out_columns(data,['gm_vol'])
 
     def test_parameter(self):
-        #print(type(self), self.parameter)
         data = pd.read_csv(sample_tab_csv1)
         self.assertEqual(self.parameter.shape, data.shape)
 

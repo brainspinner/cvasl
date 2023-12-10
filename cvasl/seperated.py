@@ -886,8 +886,11 @@ def stratified_cat_and_cont_categories_shuffle_split(
             unique_train, counts_train = np.unique(
                 y_split[train_index], return_counts=True
             )
+            bins = our_ml_matrix['binned']
             print(
                 f'Category classes: {unique_train}',
+                f'from categorical: {our_ml_matrix[cat_category].unique()} ',
+                f'and continous binned to: {bins.unique()} ',
                 f'percentages: {100*counts_train/y[train_index].shape[0]}'
             )
             print(
