@@ -134,6 +134,39 @@ def recode_sex(whole_dataframe, string_for_sex):
 
     return new_dataframe  # return dataframe with new column
 
+def recode_sex_folder(directory):
+    """
+    This function recodes sex on csvs 
+    with such a column in a sepcified directory 
+    into csvs with a new column if there
+    are two possible values. It maintains numerical order
+    but changes the values to 0 and 1. The column is
+    called changed. Note sex should be encoded
+    in numbers i.e. ints for many functions.
+    The new files are produced as a side effect.
+
+    :param directory: directory where csv are variable
+    :type directory: str
+
+    :returns: dataframes with sex encoded correctly
+    :rtype: list
+
+    """
+    collection = []
+    directory_list = glob.glob(directory + "/*.csv")
+    for frame in directory_list:
+        framed = pd.read_csv(frame,)
+        output = recode_sex(framed, 'sex')
+        recoded_dir = 'recoded'
+        if not os.path.exists(recoded_dir):
+            os.makedirs(recoded_dir)
+        frame_s = os.path.split(frame)
+        name = ('recoded/'+ frame_s[-1][:-4] + 'recoded.csv')
+        print(name)
+        print(frame_s[-1])
+        output.to_csv(name)
+        
+    return collection 
 
 def recode_sex_to_numeric(df):
     """When we need to flip the sex back to numbers from the

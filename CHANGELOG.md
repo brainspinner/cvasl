@@ -53,4 +53,7 @@ Changed repo name from brainspin to cvasl
     - updates to seperated module including:
     - new functons in seperated to bin data on a continous variable
     - generalized functions for k-folding as specific to project in seperated module
-    - k folding which allows splitting on twp variables (one continous, one categorical) with           `stratified_cat_and_cont_categories_shuffle_split` function 
+    - k folding which allows splitting on twp variables (one continous, one categorical) with           
+    `stratified_cat_and_cont_categories_shuffle_split` function 
+
+    - command-line sex recoding
