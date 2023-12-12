@@ -223,8 +223,11 @@ to hash over files (assuming no config file):
 to run a debiasing algorithm over files:
 `python -m cvasl -n -C raw_data:image_data debias_over --preprocessing N4_debias_sitk --output ignrd_flder `
 
-to recode sex on a bunch of files:
+to recode sex on csv files in a folder:
 `python -m cvasl -n sex_recode_over -i folder_w_files_to_be_recoded `
+
+to log columns 'gm_vol' and 'wm_vol' in csvs in a folder:
+`python -m cvasl -n log_recode_over -i loged1 -l gm_vol -l wm_vol`
 
 All long options have short aliases.
 
