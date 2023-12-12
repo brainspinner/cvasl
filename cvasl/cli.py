@@ -16,6 +16,7 @@ from argparse import ArgumentParser, ArgumentTypeError
 from .file_handler import Config, hash_folder
 
 from .mold import debias_folder
+from .seperated import recode_sex_folder
 
 
 def common(parser):
@@ -93,6 +94,21 @@ def make_parser():
         '''.format(tuple(Config.default_layout.keys())),
     )
     subparsers = parser.add_subparsers()
+    sex_recode_over = subparsers.add_parser('sex_recode_over')
+    sex_recode_over.set_defaults(action='sex_recode_over')
+
+    sex_recode_over.add_argument(
+        '-i',
+        '--input',
+        default='.',
+        help='''
+        Folder to use csv data data.
+        ''',
+    )
+
+    common(sex_recode_over)
+
+
     hash_over = subparsers.add_parser('hash_over')
     hash_over.set_defaults(action='hash_over')
 
@@ -158,13 +174,21 @@ def main(argv):
     """
     parser = make_parser()
     parsed = parser.parse_args(argv)
+    # import pdb
+    # pdb.set_trace()
 
     if parsed.no_config:
         config = Config.no_file(parsed.config_override)
     else:
         config = Config.from_file(parsed.config, parsed.config_override)
 
-    if parsed.action == 'hash_over':
+    if parsed.action == 'sex_recode_over':
+        try:
+            recode_sex_folder(parsed.input)
+        except Exception as e:
+            logging.exception(e)
+            return 1
+    elif parsed.action == 'hash_over':
         try:
 
             hash_folder(
@@ -177,8 +201,7 @@ def main(argv):
         except Exception as e:
             logging.exception(e)
             return 1
-
-    if parsed.action == 'debias_over':
+    elif parsed.action == 'debias_over':
         try:
 
             debias_folder(
@@ -193,7 +216,7 @@ def main(argv):
             logging.exception(e)
             return 1
 
-    if parsed.action == 'dump_config':
+    elif parsed.action == 'dump_config':
         config.pprint(sys.stdout)
 
     # TODO(makeda): User didn't specify any action: what do we do?  Is
