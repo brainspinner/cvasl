@@ -24,6 +24,8 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn import metrics
 from sklearn.metrics import mean_absolute_error
 
+from .harmony import log_out_columns
+
 
 def bin_dataset(dataframe, column, num_bins=4, graph=False):
     """
@@ -134,10 +136,11 @@ def recode_sex(whole_dataframe, string_for_sex):
 
     return new_dataframe  # return dataframe with new column
 
+
 def recode_sex_folder(directory):
     """
-    This function recodes sex on csvs 
-    with such a column in a sepcified directory 
+    This function recodes sex on csvs
+    with such a column in a sepcified directory
     into csvs with a new column if there
     are two possible values. It maintains numerical order
     but changes the values to 0 and 1. The column is
@@ -161,12 +164,42 @@ def recode_sex_folder(directory):
         if not os.path.exists(recoded_dir):
             os.makedirs(recoded_dir)
         frame_s = os.path.split(frame)
-        name = ('recoded/'+ frame_s[-1][:-4] + 'recoded.csv')
+        name = ('recoded/' + frame_s[-1][:-4] + 'recoded.csv')
         print(name)
         print(frame_s[-1])
         output.to_csv(name)
-        
-    return collection 
+
+    return collection
+
+
+def make_log_folder(directory, list_of_columns):
+    """
+    This function recodes columns on csvs
+    with such a column in a sepcified directory
+    into csvs with a new column is the log of old.
+    The new files are produced as a side effect.
+
+    :param directory: directory where csv are variable
+    :type directory: str
+
+    :returns: dataframes with sex encoded correctly
+    :rtype: list
+
+    """
+    collection = []
+    directory_list = glob.glob(directory + "/*.csv")
+    for frame in directory_list:
+        framed = pd.read_csv(frame,)
+        output = log_out_columns(framed, list_of_columns)
+        recoded_dir = 'loged'
+        if not os.path.exists(recoded_dir):
+            os.makedirs(recoded_dir)
+        frame_s = os.path.split(frame)
+        name = ('loged/' + frame_s[-1][:-4] + 'loged.csv')
+        output.to_csv(name)
+
+    return collection
+
 
 def recode_sex_to_numeric(df):
     """When we need to flip the sex back to numbers from the

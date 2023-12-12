@@ -17,6 +17,7 @@ from .file_handler import Config, hash_folder
 
 from .mold import debias_folder
 from .seperated import recode_sex_folder
+from .seperated import make_log_folder
 
 
 def common(parser):
@@ -94,6 +95,31 @@ def make_parser():
         '''.format(tuple(Config.default_layout.keys())),
     )
     subparsers = parser.add_subparsers()
+
+    log_recode_over = subparsers.add_parser('log_recode_over')
+    log_recode_over.set_defaults(action='log_recode_over')
+
+    log_recode_over.add_argument(
+        '-i',
+        '--input',
+        default='.',
+        help='''
+        Folder to use csv data data.
+        ''',
+    )
+
+    log_recode_over.add_argument(
+        '-l',
+        '--columns',
+        action='append',
+        default=['wmh_count'],
+        help='''
+        columns which will be loged.
+        ''',
+    )
+
+    common(log_recode_over)
+
     sex_recode_over = subparsers.add_parser('sex_recode_over')
     sex_recode_over.set_defaults(action='sex_recode_over')
 
@@ -107,7 +133,6 @@ def make_parser():
     )
 
     common(sex_recode_over)
-
 
     hash_over = subparsers.add_parser('hash_over')
     hash_over.set_defaults(action='hash_over')
@@ -188,6 +213,16 @@ def main(argv):
         except Exception as e:
             logging.exception(e)
             return 1
+    elif parsed.action == 'log_recode_over':
+        try:
+            make_log_folder(
+                parsed.input,
+                parsed.columns,
+            )
+        except Exception as e:
+            logging.exception(e)
+            return 1
+
     elif parsed.action == 'hash_over':
         try:
 
