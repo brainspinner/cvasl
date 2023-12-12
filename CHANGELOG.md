@@ -56,4 +56,5 @@ Changed repo name from brainspin to cvasl
     - k folding which allows splitting on twp variables (one continous, one categorical) with           
     `stratified_cat_and_cont_categories_shuffle_split` function 
 
-    - command-line sex recoding
+    - command-line sex recoding over a folder
+    - command-line loging of columns over a folder
