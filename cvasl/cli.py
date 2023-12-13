@@ -18,6 +18,7 @@ from .file_handler import Config, hash_folder
 from .mold import debias_folder
 from .seperated import recode_sex_folder
 from .seperated import make_log_folder
+from .seperated import drop_columns_folder
 
 
 def common(parser):
@@ -249,7 +250,7 @@ def main(argv):
 
     elif parsed.action == 'column_out_over':
         try:
-            make_log_folder(
+            drop_columns_folder(
                 parsed.input,
                 parsed.removed_columns,
             )
