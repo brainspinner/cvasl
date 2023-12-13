@@ -253,6 +253,27 @@ your data is in a dataframe format.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.drop_columns_folder">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">drop_columns_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_droppables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.drop_columns_folder" title="Link to this definition">¶</a></dt>
+<dd><p>This function works  csvs in a folder
+on those with unnamed columns and
+other unwanted columns
+it drops them, they are then available
+in a new folder called ‘stripped’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – directory where csv are variable</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframes without unnamed columns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.drop_y">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">drop_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.drop_y" title="Link to this definition">¶</a></dt>
 <dd><p>This is meant as a psuedo-helper function for pandas columns
@@ -413,6 +434,15 @@ It returns the coefficients in a dataframe.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.pull_off_unnamed_column">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">pull_off_unnamed_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unclean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.pull_off_unnamed_column" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes a dataframe
+and if there are columns with the string
+“Unnamed” it drops them.
+It also drops the extra columns you input</p>
 </dd></dl>
 
 <dl class="py function">
@@ -643,6 +673,7 @@ the results should be reproducible.</p>
 <li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.derived_function"><code class="docutils literal notranslate"><span class="pre">derived_function()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.drop_columns_folder"><code class="docutils literal notranslate"><span class="pre">drop_columns_folder()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
@@ -651,6 +682,7 @@ the results should be reproducible.</p>
 <li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_second_degree_to_df"><code class="docutils literal notranslate"><span class="pre">polyfit_second_degree_to_df()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.pull_off_unnamed_column"><code class="docutils literal notranslate"><span class="pre">pull_off_unnamed_column()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.recode_sex"><code class="docutils literal notranslate"><span class="pre">recode_sex()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.recode_sex_folder"><code class="docutils literal notranslate"><span class="pre">recode_sex_folder()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.recode_sex_to_numeric"><code class="docutils literal notranslate"><span class="pre">recode_sex_to_numeric()</span></code></a></li>
