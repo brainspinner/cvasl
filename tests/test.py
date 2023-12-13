@@ -31,6 +31,7 @@ from cvasl.seperated import check_sex_dimorph_expectations
 from cvasl.seperated import bin_dataset
 from cvasl.seperated import stratified_one_category_shuffle_split
 from cvasl.seperated import stratified_cat_and_cont_categories_shuffle_split
+from cvasl.seperated import pull_off_unnamed_column
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
@@ -213,6 +214,11 @@ class TestTabDataCleaning(unittest.TestCase):
         data =  pd.read_csv(sample_tab_csv1)
         returned = check_sex_dimorph_expectations(data)
         self.assertEqual(len(data), len(returned))
+
+    def test_pull_off_unnamed_column(self):
+        data = pd.read_csv(sample_tab_csv1)
+        outed = pull_off_unnamed_column(data, extra_columns=['age','sex'])
+        self.assertEqual(len(data.columns), (len(outed.columns) + 2))
 
 class TestHarmonyDataManipulation(unittest.TestCase):
 

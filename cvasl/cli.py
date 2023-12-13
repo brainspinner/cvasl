@@ -96,6 +96,30 @@ def make_parser():
     )
     subparsers = parser.add_subparsers()
 
+    column_out_over = subparsers.add_parser('column_out_over')
+    column_out_over.set_defaults(action='column_out_over')
+
+    column_out_over.add_argument(
+        '-i',
+        '--input',
+        default='.',
+        help='''
+        Folder to use csv data data.
+        ''',
+    )
+
+    column_out_over.add_argument(
+        '-r',
+        '--removed_columns',
+        action='append',
+        default=['wmh_count'],
+        help='''
+        columns which will be removed.
+        ''',
+    )
+
+    common(column_out_over)
+
     log_recode_over = subparsers.add_parser('log_recode_over')
     log_recode_over.set_defaults(action='log_recode_over')
 
@@ -218,6 +242,16 @@ def main(argv):
             make_log_folder(
                 parsed.input,
                 parsed.columns,
+            )
+        except Exception as e:
+            logging.exception(e)
+            return 1
+
+    elif parsed.action == 'column_out_over':
+        try:
+            make_log_folder(
+                parsed.input,
+                parsed.removed_columns,
             )
         except Exception as e:
             logging.exception(e)

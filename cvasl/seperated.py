@@ -137,6 +137,49 @@ def recode_sex(whole_dataframe, string_for_sex):
     return new_dataframe  # return dataframe with new column
 
 
+def pull_off_unnamed_column(unclean, extra_columns=[]):
+    """
+    This function takes a dataframe
+    and if there are columns with the string
+    "Unnamed" it drops them.
+    It also drops the extra columns you input
+    """
+    df = unclean[unclean.columns.drop(list(unclean.filter(regex='Unnamed')))]
+    df = df.drop(extra_columns, axis=1)
+    return df
+
+
+def drop_columns_folder(directory, list_droppables):
+    """
+    This function works  csvs in a folder
+    on those with unnamed columns and
+    other unwanted columns
+    it drops them, they are then available
+    in a new folder called 'stripped'
+
+    :param directory: directory where csv are variable
+    :type directory: str
+
+    :returns: dataframes without unnamed columns
+    :rtype: list
+
+    """
+    collection = []
+    directory_list = glob.glob(directory + "/*.csv")
+    for frame in directory_list:
+        framed = pd.read_csv(frame,)
+        output = pull_off_unnamed_column(framed)
+        output = output.drop(list_droppables, axis=1)
+        recoded_dir = 'stripped'
+        if not os.path.exists(recoded_dir):
+            os.makedirs(recoded_dir)
+        frame_s = os.path.split(frame)
+        name = ('stripped/' + frame_s[-1][:-4] + 'stripped.csv')
+        output.to_csv(name)
+
+    return collection
+
+
 def recode_sex_folder(directory):
     """
     This function recodes sex on csvs
