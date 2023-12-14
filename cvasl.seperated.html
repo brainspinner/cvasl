@@ -222,7 +222,7 @@ in a given dataframe.</p>
 <dd class="field-odd"><p>dataframe with a single header</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>pandas.dataFrame</p>
+<dd class="field-even"><p><cite>~pandas.DataFrame</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -340,6 +340,24 @@ then returns these rows of the dataframe.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>ndarrray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.make_log_file">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">make_log_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_of_columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.make_log_file" title="Link to this definition">¶</a></dt>
+<dd><p>This function recodes columns on a csv
+file into their log value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – csv with  variables as columns</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>dataframe</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -678,6 +696,7 @@ the results should be reproducible.</p>
 <li><a class="reference internal" href="#cvasl.seperated.find_original_y_values"><code class="docutils literal notranslate"><span class="pre">find_original_y_values()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.find_outliers_by_list"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_list()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.generate_transformation_matrix"><code class="docutils literal notranslate"><span class="pre">generate_transformation_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.make_log_file"><code class="docutils literal notranslate"><span class="pre">make_log_file()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.make_log_folder"><code class="docutils literal notranslate"><span class="pre">make_log_folder()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.plot_2on2_df"><code class="docutils literal notranslate"><span class="pre">plot_2on2_df()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.polyfit_and_show"><code class="docutils literal notranslate"><span class="pre">polyfit_and_show()</span></code></a></li>
