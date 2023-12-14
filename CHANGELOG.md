@@ -58,4 +58,5 @@ Changed repo name from brainspin to cvasl
 
     - command-line sex recoding over a folder
     - command-line loging of columns over a folder
+    - command-line loging of columns over a file
     - command-line cleaning off unwanted columns run over a folder
