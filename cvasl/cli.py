@@ -19,6 +19,7 @@ from .mold import debias_folder
 from .seperated import recode_sex_folder
 from .seperated import make_log_folder
 from .seperated import drop_columns_folder
+from .seperated import make_log_file
 
 
 def common(parser):
@@ -120,6 +121,30 @@ def make_parser():
     )
 
     common(column_out_over)
+
+    log_file_over = subparsers.add_parser('log_file_over')
+    log_file_over.set_defaults(action='log_file_over')
+
+    log_file_over.add_argument(
+        '-i',
+        '--input',
+        default='.',
+        help='''
+        File to use csv data data.
+        ''',
+    )
+
+    log_file_over.add_argument(
+        '-l',
+        '--columns',
+        action='append',
+        default=['wmh_count'],
+        help='''
+        columns which will be loged.
+        ''',
+    )
+
+    common(log_file_over)
 
     log_recode_over = subparsers.add_parser('log_recode_over')
     log_recode_over.set_defaults(action='log_recode_over')
@@ -238,6 +263,17 @@ def main(argv):
         except Exception as e:
             logging.exception(e)
             return 1
+
+    elif parsed.action == 'log_file_over':
+        try:
+            make_log_file(
+                parsed.input,
+                parsed.columns,
+            )
+        except Exception as e:
+            logging.exception(e)
+            return 1
+
     elif parsed.action == 'log_recode_over':
         try:
             make_log_folder(

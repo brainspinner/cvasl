@@ -215,6 +215,31 @@ def recode_sex_folder(directory):
     return collection
 
 
+def make_log_file(file_name, list_of_columns):
+    """
+    This function recodes columns on a csv
+    file into their log value
+
+    :param file_name:  csv with  variables as columns
+    :type file_name: str
+
+    :returns: dataframe
+    :rtype: ~pandas.dataframe
+
+    """
+
+    framed = pd.read_csv(file_name)
+    output = log_out_columns(framed, list_of_columns)
+    recoded_dir = 'loged_file'
+    if not os.path.exists(recoded_dir):
+        os.makedirs(recoded_dir)
+    frame_s = os.path.split(file_name)
+    name = ('loged_file/' + frame_s[-1][:-4] + 'loged.csv')
+    output.to_csv(name)
+
+    return output
+
+
 def make_log_folder(directory, list_of_columns):
     """
     This function recodes columns on csvs
@@ -545,7 +570,7 @@ def concat_double_header(dataframe_dub):
 
 
     :returns: dataframe with a single header
-    :rtype: pandas.dataFrame
+    :rtype: `~pandas.DataFrame`
     """
     dataframe = dataframe_dub.copy()
     dataframe.columns = [c[0] + "_" + c[1] for c in dataframe.columns]
