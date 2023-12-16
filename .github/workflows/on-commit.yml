@@ -34,7 +34,7 @@ jobs:
             python -m pip install pycodestyle pytest nbmake
             python ./setup.py install
             python ./setup.py test
-            python pytest --nbmake **/*ipynb
+            python pytest --nbmake **/*ipynb'
 
   Lint:
     runs-on: ubuntu-latest
