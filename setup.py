@@ -16,7 +16,7 @@ from setuptools.command.install import install as InstallCommand
 project_dir = os.path.dirname(os.path.realpath(__file__))
 project_url = 'https://github.com/brainspinner/cvasl'
 project_description = 'A package for analysis of MRI'
-project_license = 'PENDING'
+project_license = 'Apache 2.0'
 name = 'cvasl'
 try:
     tag = subprocess.check_output(
