@@ -5,12 +5,17 @@ import os
 import subprocess
 import sys
 from glob import glob
+import site
+import shlex
 from contextlib import contextmanager
 from urllib import parse as urlparse
 from urllib import request as urlrequest
 from setuptools import Command, setup
 from setuptools.command.bdist_egg import bdist_egg as BDistEgg
 from setuptools.command.install import install as InstallCommand
+from setuptools.command.easy_install import easy_install as EZInstallCommand
+from setuptools.dist import Distribution
+ 
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
@@ -75,17 +80,12 @@ def translate_reqs(packages):
 class TestCommand(Command):
 
     user_options = [
+        ('pytest-args=', 'a', 'Arguments to pass into py.test'),
         ('fast', 'f', (
             'Don\'t install dependencies, test in the current environment'
-        )),
+            )
+        ),
     ]
-
-    def initialize_options(self):
-        self.fast = False
-
-    def finalize_options(self):
-        self.test_args = []
-        self.test_suite = True
 
     def sources(self):
         return glob(
@@ -93,68 +93,33 @@ class TestCommand(Command):
             recursive=True,
         ) + [os.path.join(project_dir, 'setup.py')]
 
-    @contextmanager
-    def prepare(self):
-        tf = importlib.import_module('tempfile')
-        site = importlib.import_module('site')
-        st = importlib.import_module('setuptools.dist')
-        venv = importlib.import_module('venv')
-        ei = importlib.import_module('setuptools.command.easy_install')
-        EZInstallCommand = ei.easy_install
+    def initialize_options(self):
+        self.pytest_args = ''
+        self.fast = False
 
-        class ContextVenvBuilder(venv.EnvBuilder):
-
-            def ensure_directories(self, env_dir):
-                self.context = super().ensure_directories(env_dir)
-                return self.context
-
-        recs = self.distribution.tests_require
-
-        with tf.TemporaryDirectory() as builddir:
-            vbuilder = ContextVenvBuilder(with_pip=True)
-            vbuilder.create(os.path.join(builddir, '.venv'))
-            env_python = vbuilder.context.env_exe
-            platlib = subprocess.check_output(
-                (env_python,
-                 '-c',
-                 'import sysconfig;print(sysconfig.get_path("platlib"))'
-                 ),
-            ).strip().decode()
-
-            egg = BDistEgg(self.distribution)
-            egg.initialize_options()
-            egg.dist_dir = builddir
-            egg.keep_temp = False
-            egg.finalize_options()
-            egg.run()
-
-            test_dist = st.Distribution()
-            test_dist.install_requires = recs
-            ezcmd = EZInstallCommand(test_dist)
-            ezcmd.initialize_options()
-            ezcmd.args = recs
-            ezcmd.always_copy = True
-            ezcmd.install_dir = platlib
-            ezcmd.install_base = platlib
-            ezcmd.install_purelib = platlib
-            ezcmd.install_platlib = platlib
-            sys.path.insert(0, platlib)
-            os.environ['PYTHONPATH'] = platlib
-            ezcmd.finalize_options()
-
-            ezcmd.easy_install(glob(os.path.join(builddir, '*.egg'))[0])
-
-            ezcmd.run()
-            site.main()
-
-            yield env_python
+    def finalize_options(self):
+        self.test_args = []
+        self.test_suite = True
 
     def run(self):
-        if not self.fast:
-            with self.prepare() as env_python:
-                self.run_tests(env_python)
+
         self.run_tests()
 
+
+class PyTest(TestCommand):
+
+    description = 'run unit tests'
+
+    def run_tests(self):
+        import pytest
+
+        if self.fast:
+            here = os.path.dirname(os.path.abspath(__file__))
+            sys.path.insert(0, here)
+            self.initialize_options()
+        self.initialize_options()
+        errno = pytest.main(shlex.split(self.pytest_args))
+        sys.exit(errno)
 
 class UnitTest(TestCommand):
 
@@ -635,7 +600,7 @@ if __name__ == '__main__':
         long_description_content_type='text/markdown',
         package_data={'': ('README.md',)},
         cmdclass={
-            'test': UnitTest,
+            'test': PyTest,
             'lint': Pep8,
             'isort': Isort,
             'apidoc': SphinxApiDoc,
