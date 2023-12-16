@@ -7,7 +7,6 @@ import sys
 from glob import glob
 import site
 import shlex
-import pycodestyle
 from contextlib import contextmanager
 from urllib import parse as urlparse
 from urllib import request as urlrequest
@@ -122,21 +121,21 @@ class PyTest(TestCommand):
         errno = pytest.main(shlex.split(self.pytest_args))
         sys.exit(errno)
 
-class UnitTest(TestCommand):
+# class UnitTest(TestCommand):
 
-    description = 'run unit tests'
+#     description = 'run unit tests'
 
-    def run_tests(self, env_python=None):
-        unittest = importlib.import_module('unittest')
-        if env_python is None:
-            loader = unittest.TestLoader()
-            suite = loader.discover('tests', pattern='test.py')
-            runner = unittest.TextTestRunner()
-            result = runner.run(suite)
-            sys.exit(1 if result.errors else 0)
+#     def run_tests(self, env_python=None):
+#         unittest = importlib.import_module('unittest')
+#         if env_python is None:
+#             loader = unittest.TestLoader()
+#             suite = loader.discover('tests', pattern='test.py')
+#             runner = unittest.TextTestRunner()
+#             result = runner.run(suite)
+#             sys.exit(1 if result.errors else 0)
 
-        tests = os.path.join(project_dir, 'tests', 'test.py')
-        sys.exit(subprocess.call((env_python, '-m', 'unittest', tests)))
+#         tests = os.path.join(project_dir, 'tests', 'test.py')
+#         sys.exit(subprocess.call((env_python, '-m', 'unittest', tests)))
 
 
 class Pep8(TestCommand):
@@ -621,8 +620,6 @@ if __name__ == '__main__':
             'scikit-learn',
             'SimpleITK',
             'seaborn',
-            'pycodestyle',
-            'pytest',
             # Unfortunately, in later versions this library decided to cap
             # its version requirements for Pillow, which breaks installation
             # of other tools, which will install Pillow before we install
