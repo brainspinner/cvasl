@@ -53,7 +53,7 @@ Changed repo name from brainspin to cvasl
     - updates to seperated module including:
     - new functons in seperated to bin data on a continous variable
     - generalized functions for k-folding as specific to project in seperated module
-    - k folding which allows splitting on twp variables (one continous, one categorical) with           
+    - k folding which allows splitting on two variables (one continuous, one categorical) with           
     `stratified_cat_and_cont_categories_shuffle_split` function 
 
     - command-line sex recoding over a folder
@@ -69,5 +69,5 @@ Changed repo name from brainspin to cvasl
 * Fourth version of this Python project containing (added to this version):
 
 	- testing has been changed to use pytest ( all unit-test formatted tests will still run)
-    - possibility to test notebooks with nbmake module added, but not in CI due to time issues
-    
+    - possibility to test notebooks with nbmake module added, but not in CI due to time and data issues
+
