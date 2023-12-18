@@ -625,7 +625,7 @@ if __name__ == '__main__':
             'imageio<=2.31.5',
             'scikit-image',
         ],
-        tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
+        tests_require=['pytest', 'nbmake', 'pycodestyle', 'isort', 'wheel'],
         setup_requires=['wheel'],
         extras_require={
             'dev': [
