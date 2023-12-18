@@ -202,13 +202,13 @@ def recode_sex_folder(directory):
     directory_list = glob.glob(directory + "/*.csv")
     for frame in directory_list:
         framed = pd.read_csv(frame,)
-        output = recode_sex(framed, 'sex')
+        sex_mapping = {'F': 0, 'M': 1}
+        output = framed.assign(sex=framed.sex.map(sex_mapping))
         recoded_dir = 'recoded'
         if not os.path.exists(recoded_dir):
             os.makedirs(recoded_dir)
         frame_s = os.path.split(frame)
         name = ('recoded/' + frame_s[-1][:-4] + 'recoded.csv')
-        print(name)
         print(frame_s[-1])
         output.to_csv(name)
 
