@@ -140,8 +140,8 @@
 <h2>Sending Your Work<a class="headerlink" href="#sending-your-work" title="Link to this heading">¶</a></h2>
 <p>We accept pull requests made through GitHub. As is usual,
 we request that the changes be rebased
-on the branch they are to be integrated into.  We also request that
-you pre-lint and test anything you send.</p>
+on the branch they are to be integrated into (usually the develop brannch).
+We also request that you pre-lint and test anything you send.</p>
 <p>We’ll try our best to attribute
 your work to you, however, you need to release your work under
 compatible license for us to be able to use it.</p>
@@ -171,11 +171,17 @@ common ways to work with Python projects.  It’s a common practice to
 <p>We provide limited support for approaches not based on Anaconda right
 now.  For instance, if you want to work on the project using <cite>pip</cite>,
 you could try it, and contact us: <a class="reference external" href="mailto:brainspinner&#37;&#52;&#48;gmail&#46;com">brainspinner<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
-<p>.</p>
+<p>Due to the complexity of environments involved we reccomend
+using <cite>mamba</cite> a drop in substitute for conda.</p>
 <p>The environment files are generated using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>./environment.yml
 </pre></div>
 </div>
+<p>or
+.. code-block:: bash</p>
+<blockquote>
+<div><p>mamba env create -f ./environment.yml</p>
+</div></blockquote>
 </section>
 <section id="rationale">
 <h3>Rationale<a class="headerlink" href="#rationale" title="Link to this heading">¶</a></h3>
@@ -189,11 +195,15 @@ now we are doing what is simple and fast.</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
-<p>You may run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>./tests/test.py
+<p>You may now locally run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
 </pre></div>
 </div>
-<p>Under the hood, this runs unittest.</p>
+<p>or you can call the testing from the setup file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>setup.py<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>Under the hood, this runs unittest and pytest tests.</p>
 <p>Alternatively,
 you can run tests from the setup.py file
 i.e.
