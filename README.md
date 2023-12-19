@@ -205,7 +205,7 @@ You can look at our [online documentation](https://brainspinner.github.io/cvasl)
 
 ### Testing
 
-The project doesn't include testing data yet.  
+The project doesn't include testing data yet. The testing framework is pytest.
 
 ### Command-Line Interface
 You will eventually be be able to preprocess, train and use models, and perform other functions using command-line interface. As of now (April 2023) this module is still being built.
