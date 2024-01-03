@@ -205,7 +205,11 @@ You can look at our [online documentation](https://brainspinner.github.io/cvasl)
 
 ### Testing
 
-The project doesn't include testing data yet. The testing framework is pytest.
+The testing framework is pytest. If you wish to run 
+automated testing of the notebooks then you must run it in the dedicated testing environment
+`mriland` which can be built from the test_environment.yml file. All other testing and automated testing 
+can be run in the regular environment. 
+ The project doesn't include complete testing data yet. 
 
 ### Command-Line Interface
 You will eventually be be able to preprocess, train and use models, and perform other functions using command-line interface. As of now (April 2023) this module is still being built.
