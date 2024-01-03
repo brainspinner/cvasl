@@ -204,13 +204,13 @@ now we are doing what is simple and fast.</p>
 </pre></div>
 </div>
 <p>Under the hood, this runs unittest and pytest tests.</p>
-<p>Alternatively,
-you can run tests from the setup.py file
-i.e.
-.. code-block:: bash</p>
-<blockquote>
-<div><p>python setup.py test</p>
-</div></blockquote>
+<p>Additionally, you can automatically test
+all notebooks by switching into
+the mriland environment (or any appropriate
+environment with nbmake) and running the following command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--nbmake<span class="w"> </span>&lt;&lt;directory_of_notebooks_you_want_to_test&gt;&gt;
+</pre></div>
+</div>
 <section id="style-guide-for-python-code">
 <h3>Style Guide for Python Code<a class="headerlink" href="#style-guide-for-python-code" title="Link to this heading">¶</a></h3>
 <p>We have linting!</p>
