@@ -1,0 +1,16 @@
+#  environment document for combat-GAM neuroHarmonize package runnign
+
+name: neurogam
+channels:
+  - conda-forge
+  
+dependencies:
+
+  - pandas
+  - numpy
+  - statsmodels
+  - nibabel
+
+  - pip:
+
+    - neuroHarmonize
