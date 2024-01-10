@@ -1,0 +1,14 @@
+#  environment document
+
+name: rland
+channels:
+  - conda-forge
+  
+dependencies:
+  - r-recommended 
+  - r-irkernel 
+  - Jupyter
+  - r-devtools
+  
+
+# after running this from terminal use devtools::install_github("andy1764/CovBat_Harmonization/R")
