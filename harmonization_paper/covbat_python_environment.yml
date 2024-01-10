@@ -1,0 +1,24 @@
+#  environment document
+
+name: covbatland
+channels:
+  - conda-forge
+  
+dependencies:
+  - ipympl=0.9.3
+  - jupyter=1.0.0
+  - jupyterlab=3.6.1
+  - matplotlib
+  - notebook=6.4.10
+  - numpy
+  - pandas
+  - python>=3.10
+  - scipy
+
+
+    - pip:
+    - git+https://github.com/andy1764/CovBat_Harmonization.git@main
+  
+
+
+
