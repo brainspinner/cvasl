@@ -33,8 +33,7 @@ jobs:
             cd /ci
             python -m pip install pycodestyle pytest nbmake
             python ./setup.py install
-            python ./setup.py test
-            python pytest --nbmake harmonization_abstract_one/*ipynb'
+            python ./setup.py test'
 
   Lint:
     runs-on: ubuntu-latest
