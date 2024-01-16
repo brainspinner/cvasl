@@ -41,7 +41,7 @@ Changed repo name from brainspin to cvasl
 
 ### Added
 
-* Third version of this Python project containing (added to this version):
+* Third version of this Python project to follow the Netherlands eScience Center software development guide, containing (added to this version):
 
 	- haromnzation_abstract_one folder to save and make reproducible work for brain mapping abstract 
     - exact freeze of environment in precise_working_environment
@@ -60,14 +60,3 @@ Changed repo name from brainspin to cvasl
     - command-line loging of columns over a folder
     - command-line loging of columns over a file
     - command-line cleaning off unwanted columns run over a folder
-
-
-## Release 0.0.3
-
-### Pending
-
-* Fourth version of this Python project containing (added to this version):
-
-	- testing has been changed to use pytest ( all unit-test formatted tests will still run)
-    - possibility to test notebooks with nbmake module added, but not in CI due to time issues
-    
