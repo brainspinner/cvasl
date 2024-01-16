@@ -1,6 +1,6 @@
 #  environment document for combat-GAM neuroHarmonize package runnign
-# note you should be using a python like 3.10 or 3.11
-name: neurogamy
+
+name: neurogam
 channels:
   - conda-forge
   
@@ -10,7 +10,6 @@ dependencies:
   - numpy
   - statsmodels
   - nibabel
-  - jupyterlab
 
   - pip:
 
