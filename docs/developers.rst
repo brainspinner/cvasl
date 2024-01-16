@@ -98,14 +98,12 @@ or you can call the testing from the setup file:
 
 Under the hood, this runs unittest and pytest tests.
 
-Additionally, you can automatically test
-all notebooks by switching into 
-the mriland environment (or any appropriate
-environment with nbmake) and running the following command line:
-
+Alternatively,
+you can run tests from the setup.py file
+i.e. 
 .. code-block:: bash
 
-   pytest --nbmake <<directory_of_notebooks_you_want_to_test>>
+   python setup.py test
 
 
 
