@@ -32,7 +32,6 @@ jobs:
             mount --bind /cvasl/test_data/ /ci/test_data/
             cd /ci
             python -m pip install pycodestyle pytest
-            python ./setup.py install
             python ./setup.py test'
 
   Lint:
