@@ -32,7 +32,6 @@ from cvasl.seperated import bin_dataset
 from cvasl.seperated import stratified_one_category_shuffle_split
 from cvasl.seperated import stratified_cat_and_cont_categories_shuffle_split
 from cvasl.seperated import pull_off_unnamed_column
-from cvasl.seperated import recode_sex_to_numeric
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
@@ -243,12 +242,6 @@ class TestHarmonyDataManipulation(unittest.TestCase):
         logged = log_out_columns(data,[])
         result = data.equals(logged)
         self.assertTrue(result)
-    
-    def test_recode_sex_to_numeric(self):
-        data = pd.read_csv(sample_tab_csv1)
-        number_s = recode_sex_to_numeric(data)
-        numeric_result = number_s['sex'].sum()
-        self.assertTrue(numeric_result)
 
 class TestSeperatedDataManipulation(unittest.TestCase):
     
