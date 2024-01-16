@@ -1,6 +1,6 @@
 #  environment document
 
-name: covbatl
+name: covbatland
 channels:
   - conda-forge
   
@@ -15,8 +15,9 @@ dependencies:
   - python>=3.10
   - scipy
 
-    # - pip:
-    # - git+https://github.com/andy1764/CovBat_Harmonization.git@main
+
+    - pip:
+    - git+https://github.com/andy1764/CovBat_Harmonization.git@main
   
 
 
