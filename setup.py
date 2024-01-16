@@ -15,6 +15,7 @@ from setuptools.command.bdist_egg import bdist_egg as BDistEgg
 from setuptools.command.install import install as InstallCommand
 from setuptools.command.easy_install import easy_install as EZInstallCommand
 from setuptools.dist import Distribution
+ 
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
@@ -82,7 +83,8 @@ class TestCommand(Command):
         ('pytest-args=', 'a', 'Arguments to pass into py.test'),
         ('fast', 'f', (
             'Don\'t install dependencies, test in the current environment'
-            )),
+            )
+        ),
     ]
 
     def sources(self):
