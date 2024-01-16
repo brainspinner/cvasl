@@ -34,7 +34,7 @@ jobs:
             python -m pip install pycodestyle pytest nbmake
             python ./setup.py install
             python ./setup.py test
-            pytest --nbmake harmonization_abstract_one/*ipynb'
+            python pytest --nbmake harmonization_abstract_one/*ipynb'
 
   Lint:
     runs-on: ubuntu-latest

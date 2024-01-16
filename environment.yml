@@ -10,8 +10,6 @@ dependencies:
   - jupyter=1.0.0
   - jupyterlab=3.6.1
   - matplotlib
-  - pytest
-  - nbmake
   - nibabel
   - notebook=6.4.10
   - numpy
