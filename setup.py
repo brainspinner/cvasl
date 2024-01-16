@@ -7,7 +7,6 @@ import sys
 from glob import glob
 import site
 import shlex
-import pycodestyle
 from contextlib import contextmanager
 from urllib import parse as urlparse
 from urllib import request as urlrequest
