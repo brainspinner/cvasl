@@ -7,8 +7,8 @@ Sending Your Work
 
 We accept pull requests made through GitHub. As is usual,
 we request that the changes be rebased
-on the branch they are to be integrated into (usually the develop brannch).
-We also request that you pre-lint and test anything you send.
+on the branch they are to be integrated into.  We also request that
+you pre-lint and test anything you send.
 
 We'll try our best to attribute
 your work to you, however, you need to release your work under
@@ -50,8 +50,7 @@ We provide limited support for approaches not based on Anaconda right
 now.  For instance, if you want to work on the project using `pip`,
 you could try it, and contact us: brainspinner@gmail.com
 
-Due to the complexity of environments involved we reccomend 
-using `mamba` a drop in substitute for conda.
+.
 
 The environment files are generated using:
 
@@ -59,12 +58,6 @@ The environment files are generated using:
 .. code-block:: bash
 
    conda env create -f ./environment.yml
-
-
-or
-.. code-block:: bash
-
-   mamba env create -f ./environment.yml
 
 
 
@@ -83,20 +76,13 @@ now we are doing what is simple and fast.
 Testing
 =======
 
-You may now locally run:
+You may run:
 
 .. code-block:: bash
 
-  pytest
+  python ./tests/test.py 
 
-
-or you can call the testing from the setup file:
-
-.. code-block:: bash
-
-  python setup.py test
-
-Under the hood, this runs unittest and pytest tests.
+Under the hood, this runs unittest.
 
 Alternatively,
 you can run tests from the setup.py file
