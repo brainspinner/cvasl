@@ -620,8 +620,6 @@ if __name__ == '__main__':
             'scikit-learn',
             'SimpleITK',
             'seaborn',
-            'pycodestyle',
-            'pytest',
             # Unfortunately, in later versions this library decided to cap
             # its version requirements for Pillow, which breaks installation
             # of other tools, which will install Pillow before we install
