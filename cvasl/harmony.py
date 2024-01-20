@@ -104,8 +104,14 @@ def prep_for_neurocombat(dataframe1, dataframe2):
     :rtype: tuple
     """
     # TODO:(makeda) make so it can take frame name or frame
-    two_selection = dataframe2.drop(['Unnamed: 0'], axis=1)
-    one_selection = dataframe1.drop(['Unnamed: 0'], axis=1)
+    if 'Unnamed: 0' in dataframe2.columns:
+        two_selection = dataframe2.drop(['Unnamed: 0'], axis=1)
+    else:
+        two_selection = dataframe2
+    if 'Unnamed: 0' in dataframe1.columns:
+        one_selection = dataframe1.drop(['Unnamed: 0'], axis=1)
+    else:
+        one_selection = dataframe1
     one_selection = one_selection.set_index('participant_id')
     two_selection = two_selection.set_index('participant_id')
     one_selection = one_selection.T
