@@ -174,7 +174,8 @@ def make_topper(btF, row0, row1):
 def compare_harm_multi_site_violins(
         unharmonized_df,
         harmonized_df,
-        feature_list
+        feature_list,
+        batch_column='site'
 ):
     """
     Create a violin plot on multisite harmonization by features.
@@ -185,7 +186,7 @@ def compare_harm_multi_site_violins(
         complete_merge[feature] = complete_merge[feature].astype('float64')
         sns.set_style("whitegrid")
         y_axis = feature
-        g = sns.FacetGrid(complete_merge, col="batch")
+        g = sns.FacetGrid(complete_merge, col=batch_column)
         g.map(
             sns.violinplot,
             'harmonization',
