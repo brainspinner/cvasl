@@ -110,3 +110,4 @@ help/
 researcher_interface/retool.ipynb
 harmonization_paper/Testing/ComBat/ResultTestingSite/*
 extended_harm_paper/our_datasets/*
+extended_harm_paper/harmonizations/harm_results/*
