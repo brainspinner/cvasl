@@ -20,43 +20,46 @@ def neuroCombat(
         mean_only=False,
         ref_batch=None,
 ):
-
     """
     Run ComBat to remove scanner effects in multi-site imaging data
 
     Arguments
     ---------
     dat : a pandas data frame or numpy array
-        - neuroimaging data to correct with shape = (features, samples)
-        e.g. cortical thickness measurements, image voxels, etc
+    - neuroimaging data to correct with shape = (features, samples)
+
+    e.g. cortical thickness measurements, image voxels, etc
 
     covars : a pandas data frame w/ shape = (samples, covariates)
-        - contains the batch/scanner covariate as well as additional
-        covariates (optional) that should be preserved during harmonization.
+    - contains the batch/scanner covariate as well as additional
+
+    covariates (optional) that should be preserved during harmonization.
 
     batch_col : string
-        - indicates batch (scanner) column name in covars (e.g. "scanner")
+    - indicates batch (scanner) column name in covars (e.g. "scanner")
 
     categorical_cols : list of strings
-        - specifies column names in covars data frame of categorical variables
-        to be preserved during harmonization (e.g. ["sex", "disease"])
+    - specifies column names in covars data frame of categorical variables
+
+    to be preserved during harmonization (e.g. ["sex", "disease"])
 
     continuous_cols : list of strings
-        - indicates column names in covars data frame of continuous variables
-        to be preserved during harmonization (e.g. ["age"])
+    - indicates column names in covars data frame of continuous variables
+
+    to be preserved during harmonization (e.g. ["age"])
 
     eb : should Empirical Bayes be performed?
-        - True by default
+    - True by default
 
     parametric : should parametric adjustements be performed?
-        - True by default
+    - True by default
 
     mean_only : should only be the mean adjusted (no scaling)?
-        - False by default
+    - False by default
 
     ref_batch : batch (site or scanner) to be used as
     reference for batch adjustment.
-        - None by default
+    - None by default
 
     Returns
     -------
