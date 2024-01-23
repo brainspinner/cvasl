@@ -37,13 +37,10 @@ def neuroCombat(
     - indicates batch (scanner) column name in covars (e.g. "scanner")
 
     categorical_cols : list of strings
-    - specifies column names in covars data frame of categorical variables
-
-    to be preserved during harmonization (e.g. ["sex", "disease"])
+    - specifies column names in covars frame of categorical vars to preserve
 
     continuous_cols : list of strings
-    - indicates column names in covars data frame of continuous variables
-    to be preserved during harmonization (e.g. ["age"])
+    - column names in covars frame of continuous vars to be preserved
 
     eb : should Empirical Bayes be performed?
     - True by default
@@ -54,15 +51,14 @@ def neuroCombat(
     mean_only : should only be the mean adjusted (no scaling)?
     - False by default
 
-    ref_batch : batch (site or scanner) to be used as
-    reference for batch adjustment.
+    ref_batch : batch  to be used as reference for batch adjustment.
     - None by default
 
     Returns
     -------
     A dictionary of length 3:
     - data: A numpy array with the same shape as `dat` which
-      has now been ComBat-harmonized
+    has now been ComBat-harmonized
     - estimates: A dictionary of the ComBat estimates used for harmonization
     - info: A dictionary of the inputs needed for ComBat harmonization
     """
