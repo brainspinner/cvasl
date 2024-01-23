@@ -25,7 +25,7 @@ import seaborn as sns
 from sklearn.mixture import GaussianMixture
 from scipy.stats import ranksums, ttest_ind
 from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
-#import neuroCombat as nC
+# import neuroCombat as nC
 
 
 def log_out_columns(dataframe, column_list):
@@ -256,7 +256,8 @@ def compare_harm_one_site_violins(
 
 #     According to Dr. Horng's documentation this function
 
-#     "Completes sequential OPNested ComBat harmonization on an input DataFrame.
+#     "Completes sequential OPNested ComBat harmonization
+        # on an input DataFrame.
 #     Order is determined by running through all
 #     possible permutations of the order, then picking the order with the
 #     lowest number of features with significant
@@ -424,21 +425,21 @@ def feature_ad(dat, output_df, covars, batch_list, filepath):
 def GMMSplit(dat, caseno, filepath):
     """
     The following is from the Hannah Horng library open nested combat here :
-      https://github.com/hannah-horng/opnested-combat
-      As the library is unreleased and unversioned,
-      we are using the MIT lisenced functions directly
-        to version control them.
+    https://github.com/hannah-horng/opnested-combat
+    As the library is unreleased and unversioned,
+    we are using the MIT lisenced functions directly
+    to version control them.
 
     According to Dr. Horng's documentation this function
 
     "Completes Gaussian Mixture model fitting and ComBat harmonization
-      by the resulting sample grouping. The assumption
+    by the resulting sample grouping. The assumption
     here is that there is an unknown batch effect causing
     bimodality such that we can estimate the sample groupings for
     this hidden batch effect from the distribution. This function will
-      take in a dataset, determine the best 2-component
+    take in a dataset, determine the best 2-component
     Gaussian mixture model, and use the resulting sample grouping to
-      harmonize the data with ComBat." [needs better citation]
+    harmonize the data with ComBat." [needs better citation]
 
     Arguments
     ---------
@@ -447,11 +448,11 @@ def GMMSplit(dat, caseno, filepath):
     caseno :
     DataFrame/Series containing sample IDs
     (should be aligned with dat and covars),
-      used to return sample
-        grouping assignments.
+    used to return sample
+    grouping assignments.
     filepath :
     root directory path for saving the grouping and
-      corresponding kernel density plots
+    corresponding kernel density plots
     -------
     new_dat :
     DataFrame with shape (features, samples)
