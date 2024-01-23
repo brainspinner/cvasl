@@ -358,12 +358,12 @@ def compare_harm_one_site_violins(
 
 def feature_ad(dat, output_df, covars, batch_list, filepath):
     """
-    This function is from the Hannah Horng library open nested combat here :
-      https://github.com/hannah-horng/opnested-combat
+    This function is from the Hannah Horng library open nested combat here:
+    https://github.com/hannah-horng/opnested-combat
     As the library is unreleased and unversioned,
     we are using the MIT lisenced functions directly
-        to version control them. There are minimal
-        changes for linting purposes.
+    to version control them. There are minimal
+    changes for linting purposes.
 
     According to Dr. Horng's documentation this function
     "Computes AD test p-values separated by batch effect groups for a
@@ -376,10 +376,11 @@ def feature_ad(dat, output_df, covars, batch_list, filepath):
     dat : DataFrame of original data with shape (samples, features)
     output_df: DataFrame of harmonized data with shape (samples, features)
     covars : DataFrame with shape (samples, covariates) corresponding to
-      original data. All variables should be label-
-            encoded (i.e. strings converted to integer designations)
+    original data. All variables should be label-
+    encoded (i.e. strings converted to integer designations)
     batch_list : list of strings indicating batch effect column names
-      within covars (i.e. ['Manufacturer', 'CE'...])
+    within covars (i.e. ['Manufacturer', 'CE'...])
+    
     filepath : write destination for kernel density plots and p-values
 
     If a feature is all the same value, the AD test cannot be completed.
