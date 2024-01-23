@@ -18,7 +18,9 @@ def neuroCombat(
         eb=True,
         parametric=True,
         mean_only=False,
-        ref_batch=None):
+        ref_batch=None,
+    ):
+
     """
     Run ComBat to remove scanner effects in multi-site imaging data
 
@@ -26,13 +28,11 @@ def neuroCombat(
     ---------
     dat : a pandas data frame or numpy array
         - neuroimaging data to correct with shape = (features, samples)
-          e.g. cortical
-          thickness measurements, image voxels, etc
+        e.g. cortical thickness measurements, image voxels, etc
 
     covars : a pandas data frame w/ shape = (samples, covariates)
         - contains the batch/scanner covariate as well as additional
-          covariates (optional)
-          that should be preserved during harmonization.
+        covariates (optional) that should be preserved during harmonization.
 
     batch_col : string
         - indicates batch (scanner) column name in covars (e.g. "scanner")
@@ -54,8 +54,8 @@ def neuroCombat(
     mean_only : should only be the mean adjusted (no scaling)?
         - False by default
 
-    ref_batch : batch (site or scanner) to be used as reference
-      for batch adjustment.
+    ref_batch : batch (site or scanner) to be used as
+    reference for batch adjustment.
         - None by default
 
     Returns
