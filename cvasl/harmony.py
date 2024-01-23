@@ -380,7 +380,7 @@ def feature_ad(dat, output_df, covars, batch_list, filepath):
     encoded (i.e. strings converted to integer designations)
     batch_list : list of strings indicating batch effect column names
     within covars (i.e. ['Manufacturer', 'CE'...])
-    
+
     filepath : write destination for kernel density plots and p-values
 
     If a feature is all the same value, the AD test cannot be completed.
