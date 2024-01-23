@@ -3,8 +3,9 @@
 <html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Module Index &#8212; cvasl 0.0.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cvasl.vendor.open_nested_combat.nest module &#8212; cvasl 0.0.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
     <link rel="stylesheet" type="text/css" href="_static/basic_mod.css?v=a0b6f7b1" />
     <script src="_static/documentation_options.js?v=e3a6060d"></script>
@@ -14,9 +15,8 @@
     <script src="_static/js/petite-vue.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
- 
-
-
+    <link rel="next" title="cvasl.carve module" href="cvasl.carve.html" />
+    <link rel="prev" title="cvasl.vendor.open_nested_combat package" href="cvasl.vendor.open_nested_combat.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
 <div id="top_nav">
@@ -119,8 +119,20 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">cvasl</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cvasl</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cvasl.html">cvasl package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="cvasl.vendor.html">cvasl.vendor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.carve.html">cvasl.carve module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.cli.html">cvasl.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.file_handler.html">cvasl.file_handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.harmony.html">cvasl.harmony module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.mold.html">cvasl.mold module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvasl.seperated.html">cvasl.seperated module</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">Developer’s Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="medical-professionals.html">Medical Professional Documentation</a></li>
 </ul>
@@ -134,85 +146,77 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
+  <section id="module-cvasl.vendor.open_nested_combat.nest">
+<span id="cvasl-vendor-open-nested-combat-nest-module"></span><h1>cvasl.vendor.open_nested_combat.nest module<a class="headerlink" href="#module-cvasl.vendor.open_nested_combat.nest" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.vendor.open_nested_combat.nest.OPNestedComBat">
+<span class="sig-prename descclassname"><span class="pre">cvasl.vendor.open_nested_combat.nest.</span></span><span class="sig-name descname"><span class="pre">OPNestedComBat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">continuous_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_estimates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.vendor.open_nested_combat.nest.OPNestedComBat" title="Link to this definition">¶</a></dt>
+<dd><p>This function is from the Hannah Horng library open nested combat here :
+<a class="reference external" href="https://github.com/hannah-horng/opnested-combat">https://github.com/hannah-horng/opnested-combat</a>
+As the library is unreleased and unversioned,
+we are using the MIT lisenced functions directly
+to version control them. There are some
+minimal changes for the sake of format correctness</p>
+<p>According to Dr. Horng’s documentation this function
+”
+Completes sequential OPNested ComBat harmonization on an input DataFrame.
+Order is determined by running through all
+possible permutations of the order, then picking the order with the
+lowest number of features with significant
+differences in distribution.”</p>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading">¶</a></h2>
+<p>dat : DataFrame of original data with shape (features, samples)
+covars : DataFrame with shape (samples, covariates)
+corresponding to original data.
+All variables should be label-
+encoded (i.e. strings converted to integer designations)
+batch_list : list of strings indicating batch effect column names
+within covars (i.e. [‘Manufacturer’, ‘CE’…])
+filepath : root directory path for saving KS test p-values and
+kernel density plots created during harmonization
+categorical_cols : string or list of strings of categorical
+variables to adjust for
+continuous_cols : string or list of strings of continuous
+variables to adjust for
+return_estimates : if True, function will return both
+output_df and final_estimates</p>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h2>
+<p>output_df : DataFrame with shape (features, samples) that
+has been sequentially harmonized with Nested ComBat
+final_estimates : list of dictionaries of estimates from
+iterative harmonization, used if user is deriving estimates
+from training data that need to be applied
+to a separate validation dataset</p>
+</section>
+</dd></dl>
 
-   <h1>Python Module Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-c"><strong>c</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-c"><td></td><td>
-       <strong>c</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-       <td>
-       <a href="cvasl.html#module-cvasl"><code class="xref">cvasl</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.carve.html#module-cvasl.carve"><code class="xref">cvasl.carve</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.cli.html#module-cvasl.cli"><code class="xref">cvasl.cli</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.file_handler.html#module-cvasl.file_handler"><code class="xref">cvasl.file_handler</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.harmony.html#module-cvasl.harmony"><code class="xref">cvasl.harmony</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.mold.html#module-cvasl.mold"><code class="xref">cvasl.mold</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.seperated.html#module-cvasl.seperated"><code class="xref">cvasl.seperated</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.vendor.html#module-cvasl.vendor"><code class="xref">cvasl.vendor</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.vendor.neurocombat.html#module-cvasl.vendor.neurocombat"><code class="xref">cvasl.vendor.neurocombat</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.vendor.neurocombat.neurocombat.html#module-cvasl.vendor.neurocombat.neurocombat"><code class="xref">cvasl.vendor.neurocombat.neurocombat</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.vendor.open_nested_combat.html#module-cvasl.vendor.open_nested_combat"><code class="xref">cvasl.vendor.open_nested_combat</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="cvasl.vendor.open_nested_combat.nest.html#module-cvasl.vendor.open_nested_combat.nest"><code class="xref">cvasl.vendor.open_nested_combat.nest</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+</section>
 
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">cvasl.vendor.open_nested_combat.nest module</a><ul>
+<li><a class="reference internal" href="#cvasl.vendor.open_nested_combat.nest.OPNestedComBat"><code class="docutils literal notranslate"><span class="pre">OPNestedComBat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
     
 
       <div class="clearer"></div>
@@ -221,9 +225,14 @@
         <div class="button_nav">
             <div class="left">
                 
+                <a href="cvasl.vendor.open_nested_combat.html">
+                    <span class="icon">&lt;</span><span>cvasl.vendor.open_nested_combat package</span></a>
+                
             </div>
 
             <div class="right">
+                
+                    <a href="cvasl.carve.html"><span>cvasl.carve module</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>

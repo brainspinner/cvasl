@@ -1,0 +1,7 @@
+cvasl.vendor.open\_nested\_combat.nest module
+=============================================
+
+.. automodule:: cvasl.vendor.open_nested_combat.nest
+   :members:
+   :undoc-members:
+   :show-inheritance:

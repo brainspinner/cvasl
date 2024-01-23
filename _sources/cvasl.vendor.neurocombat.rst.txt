@@ -1,0 +1,18 @@
+cvasl.vendor.neurocombat package
+================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cvasl.vendor.neurocombat.neurocombat
+
+Module contents
+---------------
+
+.. automodule:: cvasl.vendor.neurocombat
+   :members:
+   :undoc-members:
+   :show-inheritance:

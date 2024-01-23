@@ -1,0 +1,18 @@
+cvasl.vendor.open\_nested\_combat package
+=========================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cvasl.vendor.open_nested_combat.nest
+
+Module contents
+---------------
+
+.. automodule:: cvasl.vendor.open_nested_combat
+   :members:
+   :undoc-members:
+   :show-inheritance:
