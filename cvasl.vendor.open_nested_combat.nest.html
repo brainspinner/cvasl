@@ -149,6 +149,42 @@
   <section id="module-cvasl.vendor.open_nested_combat.nest">
 <span id="cvasl-vendor-open-nested-combat-nest-module"></span><h1>cvasl.vendor.open_nested_combat.nest module<a class="headerlink" href="#module-cvasl.vendor.open_nested_combat.nest" title="Link to this heading">¶</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.vendor.open_nested_combat.nest.GMMSplit">
+<span class="sig-prename descclassname"><span class="pre">cvasl.vendor.open_nested_combat.nest.</span></span><span class="sig-name descname"><span class="pre">GMMSplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caseno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.vendor.open_nested_combat.nest.GMMSplit" title="Link to this definition">¶</a></dt>
+<dd><p>The following is from the Hannah Horng library open nested combat here :
+<a class="reference external" href="https://github.com/hannah-horng/opnested-combat">https://github.com/hannah-horng/opnested-combat</a>
+As the library is unreleased and unversioned,
+we are using the MIT lisenced functions directly
+to version control them.</p>
+<p>According to Dr. Horng’s documentation this function</p>
+<p>“Completes Gaussian Mixture model fitting and ComBat harmonization
+by the resulting sample grouping. The assumption
+here is that there is an unknown batch effect causing
+bimodality such that we can estimate the sample groupings for
+this hidden batch effect from the distribution. This function will
+take in a dataset, determine the best 2-component
+Gaussian mixture model, and use the resulting sample grouping to
+harmonize the data with ComBat.” [needs better citation]</p>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading">¶</a></h2>
+<p>dat :
+DataFrame of original data with shape (features, samples)
+caseno :
+DataFrame/Series containing sample IDs
+(should be aligned with dat and covars),
+used to return sample
+grouping assignments.
+filepath :
+root directory path for saving the grouping and
+corresponding kernel density plots
+——-
+new_dat :
+DataFrame with shape (features, samples)
+that has been sequentially harmonized with Nested ComBat</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.vendor.open_nested_combat.nest.OPNestedComBat">
 <span class="sig-prename descclassname"><span class="pre">cvasl.vendor.open_nested_combat.nest.</span></span><span class="sig-name descname"><span class="pre">OPNestedComBat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">continuous_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_estimates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.vendor.open_nested_combat.nest.OPNestedComBat" title="Link to this definition">¶</a></dt>
 <dd><p>This function is from the Hannah Horng library open nested combat here :
@@ -164,8 +200,8 @@ Order is determined by running through all
 possible permutations of the order, then picking the order with the
 lowest number of features with significant
 differences in distribution.”</p>
-<section id="arguments">
-<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h2>Arguments<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>dat : DataFrame of original data with shape (features, samples)
 covars : DataFrame with shape (samples, covariates)
 corresponding to original data.
@@ -193,6 +229,34 @@ to a separate validation dataset</p>
 </section>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="cvasl.vendor.open_nested_combat.nest.feature_ad">
+<span class="sig-prename descclassname"><span class="pre">cvasl.vendor.open_nested_combat.nest.</span></span><span class="sig-name descname"><span class="pre">feature_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.vendor.open_nested_combat.nest.feature_ad" title="Link to this definition">¶</a></dt>
+<dd><p>This function is from the Hannah Horng library open nested combat here:
+<a class="reference external" href="https://github.com/hannah-horng/opnested-combat">https://github.com/hannah-horng/opnested-combat</a>
+As the library is unreleased and unversioned,
+we are using the MIT lisenced functions directly
+to version control them. There are minimal
+changes for linting purposes.</p>
+<p>According to Dr. Horng’s documentation this function
+“Computes AD test p-values separated by batch effect groups for a
+dataset (intended to assess differences in
+distribution to all batch effects in batch_list
+following harmonization NestedComBat”</p>
+<section id="id2">
+<h2>Arguments<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>dat : DataFrame of original data with shape (samples, features)
+output_df: DataFrame of harmonized data with shape (samples, features)
+covars : DataFrame with shape (samples, covariates) corresponding to
+original data. All variables should be label-
+encoded (i.e. strings converted to integer designations)
+batch_list : list of strings indicating batch effect column names
+within covars (i.e. [‘Manufacturer’, ‘CE’…])</p>
+<p>filepath : write destination for kernel density plots and p-values</p>
+<p>If a feature is all the same value, the AD test cannot be completed.</p>
+</section>
+</dd></dl>
+
 </section>
 
 
@@ -210,7 +274,9 @@ to a separate validation dataset</p>
             <div class="page_toc">
                 <ul>
 <li><a class="reference internal" href="#">cvasl.vendor.open_nested_combat.nest module</a><ul>
+<li><a class="reference internal" href="#cvasl.vendor.open_nested_combat.nest.GMMSplit"><code class="docutils literal notranslate"><span class="pre">GMMSplit()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.vendor.open_nested_combat.nest.OPNestedComBat"><code class="docutils literal notranslate"><span class="pre">OPNestedComBat()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.vendor.open_nested_combat.nest.feature_ad"><code class="docutils literal notranslate"><span class="pre">feature_ad()</span></code></a></li>
 </ul>
 </li>
 </ul>
