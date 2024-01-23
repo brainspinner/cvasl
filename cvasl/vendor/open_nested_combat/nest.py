@@ -33,8 +33,8 @@ def OPNestedComBat(
     minimal changes for the sake of format correctness
 
     According to Dr. Horng's documentation this function
-
-    "Completes sequential OPNested ComBat harmonization on an input DataFrame.
+    "
+    Completes sequential OPNested ComBat harmonization on an input DataFrame.
     Order is determined by running through all
     possible permutations of the order, then picking the order with the
     lowest number of features with significant
@@ -46,26 +46,26 @@ def OPNestedComBat(
     covars : DataFrame with shape (samples, covariates)
     corresponding to original data.
     All variables should be label-
-        encoded (i.e. strings converted to integer designations)
+    encoded (i.e. strings converted to integer designations)
     batch_list : list of strings indicating batch effect column names
-      within covars (i.e. ['Manufacturer', 'CE'...])
+    within covars (i.e. ['Manufacturer', 'CE'...])
     filepath : root directory path for saving KS test p-values and
-      kernel density plots created during harmonization
+    kernel density plots created during harmonization
     categorical_cols : string or list of strings of categorical
-      variables to adjust for
+    variables to adjust for
     continuous_cols : string or list of strings of continuous
-      variables to adjust for
+    variables to adjust for
     return_estimates : if True, function will return both
-      output_df and final_estimates
+    output_df and final_estimates
 
     Returns
     -------
     output_df : DataFrame with shape (features, samples) that
-      has been sequentially harmonized with Nested ComBat
+    has been sequentially harmonized with Nested ComBat
     final_estimates : list of dictionaries of estimates from
-      iterative harmonization, used if user is deriving estimates
-        from training data that need to be applied
-          to a separate validation dataset
+    iterative harmonization, used if user is deriving estimates
+    from training data that need to be applied
+    to a separate validation dataset
 
     """
     if not os.path.exists(filepath):
