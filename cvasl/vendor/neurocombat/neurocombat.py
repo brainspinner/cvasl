@@ -28,8 +28,6 @@ def neuroCombat(
     dat : a pandas data frame or numpy array
     - neuroimaging data to correct with shape = (features, samples)
 
-    e.g. cortical thickness measurements, image voxels, etc
-
     covars : a pandas data frame w/ shape = (samples, covariates)
     - contains the batch/scanner covariate as well as additional
 
@@ -45,7 +43,6 @@ def neuroCombat(
 
     continuous_cols : list of strings
     - indicates column names in covars data frame of continuous variables
-
     to be preserved during harmonization (e.g. ["age"])
 
     eb : should Empirical Bayes be performed?
