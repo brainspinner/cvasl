@@ -11,7 +11,7 @@ import seaborn as sns
 from sklearn.mixture import GaussianMixture
 from scipy.stats import ranksums, ttest_ind
 from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
-import neuroCombat as nC
+from ..neurocombat import neurocombat as nC
 
 
 def OPNestedComBat(
