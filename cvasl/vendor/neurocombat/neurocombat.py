@@ -19,7 +19,7 @@ def neuroCombat(
         parametric=True,
         mean_only=False,
         ref_batch=None,
-    ):
+):
 
     """
     Run ComBat to remove scanner effects in multi-site imaging data
