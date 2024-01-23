@@ -1,4 +1,5 @@
-#
+# The folling is minimally modified code from the library:
+#  https://github.com/hannah-horng/opnested-combat
 
 import os
 import copy
