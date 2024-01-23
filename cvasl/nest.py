@@ -13,6 +13,7 @@ from scipy.stats import ranksums, ttest_ind
 from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
 import neuroCombat as nC
 
+
 def OPNestedComBat(
         dat,
         covars,
@@ -129,5 +130,3 @@ def OPNestedComBat(
         return output_df, final_estimate
     else:
         return output_df
-
-
