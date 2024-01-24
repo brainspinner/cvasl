@@ -89,7 +89,9 @@ def covbat(data, batch, model=None, numerical_covariates=None, pct_var=0.95, n_p
     n_array = float(sum(n_batches))
 
     # drop intercept
-    drop_cols = [cname for cname, inter in  ((model == 1).all()).iteritems() if inter == True]
+    drop_cols = [
+        cname for cname, inter in  ((model == 1).all()).iteritems() if inter == True
+        ]
     drop_idxs = [list(model.columns).index(cdrop) for cdrop in drop_cols]
     model = model[[c for c in model.columns if not c in drop_cols]]
     numerical_covariates = [list(model.columns).index(c) if isinstance(c, str) else c
@@ -99,37 +101,50 @@ def covbat(data, batch, model=None, numerical_covariates=None, pct_var=0.95, n_p
 
     sys.stderr.write("Standardizing Data across genes.\n")
     B_hat = np.dot(np.dot(la.inv(np.dot(design.T, design)), design.T), data.T)
-    grand_mean = np.dot((n_batches / n_array).T, B_hat[:n_batch,:])
-    var_pooled = np.dot(((data - np.dot(design, B_hat).T)**2), np.ones((int(n_array), 1)) / int(n_array))
+    grand_mean = np.dot((n_batches / n_array).T, B_hat[:n_batch, :])
+    var_pooled = np.dot(
+        ((data - np.dot(design, B_hat).T)**2),
+        np.ones((int(n_array), 1)) / int(n_array)
+    )
 
-    stand_mean = np.dot(grand_mean.T.reshape((len(grand_mean), 1)), np.ones((1, int(n_array))))
+    stand_mean = np.dot(
+        grand_mean.T.reshape((len(grand_mean), 1)),
+        np.ones((1, int(n_array)))
+    )
     tmp = np.array(design.copy())
-    tmp[:,:n_batch] = 0
-    stand_mean  += np.dot(tmp, B_hat).T
+    tmp[:, :n_batch] = 0
+    stand_mean += np.dot(tmp, B_hat).T
 
-    s_data = ((data - stand_mean) / np.dot(np.sqrt(var_pooled), np.ones((1, int(n_array)))))
+    s_data = (
+        (data - stand_mean) / np.dot(np.sqrt(var_pooled), np.ones((1, int(n_array))))
+        )
 
     sys.stderr.write("Fitting L/S model and finding priors\n")
     batch_design = design[design.columns[:n_batch]]
-    gamma_hat = np.dot(np.dot(la.inv(np.dot(batch_design.T, batch_design)), batch_design.T), s_data.T)
+    gamma_hat = np.dot(
+        np.dot(
+            la.inv(np.dot(batch_design.T, batch_design)),
+            batch_design.T),
+        s_data.T
+    )
 
     delta_hat = []
 
     for i, batch_idxs in enumerate(batch_info):
-        #batches = [list(model.columns).index(b) for b in batches]
+        # batches = [list(model.columns).index(b) for b in batches]
         delta_hat.append(s_data[batch_idxs].var(axis=1))
 
-    gamma_bar = gamma_hat.mean(axis=1) 
+    gamma_bar = gamma_hat.mean(axis=1)
     t2 = gamma_hat.var(axis=1)
-   
+
     a_prior = list(map(aprior, delta_hat))
     b_prior = list(map(bprior, delta_hat))
 
     sys.stderr.write("Finding parametric adjustments\n")
     gamma_star, delta_star = [], []
     for i, batch_idxs in enumerate(batch_info):
-        #print '18 20 22 28 29 31 32 33 35 40 46'
-        #print batch_info[batch_id]
+        # print '18 20 22 28 29 31 32 33 35 40 46'
+        # print batch_info[batch_id]
 
         temp = it_sol(s_data[batch_idxs], gamma_hat[i],
                      delta_hat[i], gamma_bar[i], t2[i], a_prior[i], b_prior[i])
@@ -144,13 +159,15 @@ def covbat(data, batch, model=None, numerical_covariates=None, pct_var=0.95, n_p
 
     for j, batch_idxs in enumerate(batch_info):
 
-        dsq = np.sqrt(delta_star[j,:])
+        dsq = np.sqrt(delta_star[j, :])
         dsq = dsq.reshape((len(dsq), 1))
-        denom =  np.dot(dsq, np.ones((1, n_batches[j])))
-        numer = np.array(bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_star).T)
+        denom = np.dot(dsq, np.ones((1, n_batches[j])))
+        numer = np.array(
+            bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_star).T
+        )
 
         bayesdata[batch_idxs] = numer / denom
-   
+
     vpsq = np.sqrt(var_pooled).reshape((len(var_pooled), 1))
     # not adding back stand_mean yet
     bayesdata = bayesdata * np.dot(vpsq, np.ones((1, int(n_array))))
@@ -162,29 +179,29 @@ def covbat(data, batch, model=None, numerical_covariates=None, pct_var=0.95, n_p
     # standardize data before PCA
     scaler = StandardScaler()
     comdata = scaler.fit_transform(comdata)
-    
+
     pca = PCA()
     pca.fit(comdata)
     pc_comp = pca.components_
     full_scores = pd.DataFrame(pca.fit_transform(comdata)).T
     full_scores.columns = data.columns
 
-    var_exp=np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4))
-    npc = np.min(np.where(var_exp>pct_var))+1
+    var_exp = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4))
+    npc = np.min(np.where(var_exp>pct_var)) + 1
     if n_pc > 0:
         npc = n_pc
-    scores = full_scores.loc[range(0,npc),:]
+    scores = full_scores.loc[range(0, npc),:]
     scores_com = combat(scores, batch, model=None, eb=False)
-    full_scores.loc[range(0,npc),:] = scores_com
+    full_scores.loc[range(0, npc), :] = scores_com
 
-    x_covbat = bayesdata - bayesdata # create pandas DataFrame to store output
+    x_covbat = bayesdata - bayesdata  # create pandas DataFrame to store
     # x_covbat = x_covbat.add(bmu, axis='index')
     proj = np.dot(full_scores.T, pc_comp).T
     x_covbat += scaler.inverse_transform(proj.T).T
-    # x_covbat = x_covbat * np.dot(vpsq, np.ones((1, int(n_array)))) + stand_mean
     x_covbat += stand_mean
- 
+
     return x_covbat
+
 
 def combat(data, batch, model=None, numerical_covariates=None, eb=True):
     """Correct for batch effects in a dataset
@@ -241,29 +258,40 @@ def combat(data, batch, model=None, numerical_covariates=None, eb=True):
 
     sys.stderr.write("Standardizing Data across genes.\n")
     B_hat = np.dot(np.dot(la.inv(np.dot(design.T, design)), design.T), data.T)
-    grand_mean = np.dot((n_batches / n_array).T, B_hat[:n_batch,:])
-    var_pooled = np.dot(((data - np.dot(design, B_hat).T)**2), np.ones((int(n_array), 1)) / int(n_array))
+    grand_mean = np.dot((n_batches / n_array).T, B_hat[:n_batch, :])
+    var_pooled = (
+        np.dot(((data - np.dot(design, B_hat).T)**2),
+               np.ones((int(n_array), 1)) / int(n_array))
+    )
 
-    stand_mean = np.dot(grand_mean.T.reshape((len(grand_mean), 1)), np.ones((1, int(n_array))))
+    stand_mean = np.dot(
+        grand_mean.T.reshape((len(grand_mean), 1)),
+        np.ones((1, int(n_array)))
+    )
     tmp = np.array(design.copy())
-    tmp[:,:n_batch] = 0
-    stand_mean  += np.dot(tmp, B_hat).T
+    tmp[:, :n_batch] = 0
+    stand_mean += np.dot(tmp, B_hat).T
 
-    s_data = ((data - stand_mean) / np.dot(np.sqrt(var_pooled), np.ones((1, int(n_array)))))
+    s_data = (
+        (data - stand_mean) / np.dot(np.sqrt(var_pooled), np.ones((1, int(n_array))))
+    )
 
     sys.stderr.write("Fitting L/S model and finding priors\n")
     batch_design = design[design.columns[:n_batch]]
-    gamma_hat = np.dot(np.dot(la.inv(np.dot(batch_design.T, batch_design)), batch_design.T), s_data.T)
+    gamma_hat = np.dot(
+        np.dot(
+            la.inv(np.dot(batch_design.T, batch_design)), batch_design.T),
+        s_data.T
+    )
 
     delta_hat = []
 
     for i, batch_idxs in enumerate(batch_info):
-        #batches = [list(model.columns).index(b) for b in batches]
+        # batches = [list(model.columns).index(b) for b in batches]
         delta_hat.append(s_data[batch_idxs].var(axis=1))
 
-    gamma_bar = gamma_hat.mean(axis=1) 
+    gamma_bar = gamma_hat.mean(axis=1)
     t2 = gamma_hat.var(axis=1)
-   
 
     a_prior = list(map(aprior, delta_hat))
     b_prior = list(map(bprior, delta_hat))
@@ -271,8 +299,6 @@ def combat(data, batch, model=None, numerical_covariates=None, eb=True):
     sys.stderr.write("Finding parametric adjustments\n")
     gamma_star, delta_star = [], []
     for i, batch_idxs in enumerate(batch_info):
-        #print '18 20 22 28 29 31 32 33 35 40 46'
-        #print batch_info[batch_id]
 
         temp = it_sol(s_data[batch_idxs], gamma_hat[i],
                      delta_hat[i], gamma_bar[i], t2[i], a_prior[i], b_prior[i])
@@ -285,30 +311,36 @@ def combat(data, batch, model=None, numerical_covariates=None, eb=True):
     gamma_star = np.array(gamma_star)
     delta_star = np.array(delta_star)
 
-
     for j, batch_idxs in enumerate(batch_info):
         if eb:
-            dsq = np.sqrt(delta_star[j,:])
+            dsq = np.sqrt(delta_star[j, :])
             dsq = dsq.reshape((len(dsq), 1))
-            denom =  np.dot(dsq, np.ones((1, n_batches[j])))
-            numer = np.array(bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_star).T)
+            denom = np.dot(dsq, np.ones((1, n_batches[j])))
+            numer = np.array(
+                bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_star).T
+            )
 
             bayesdata[batch_idxs] = numer / denom
         else:
             gamma_hat = np.array(gamma_hat)
             delta_hat = np.array(delta_hat)
-            
-            dsq = np.sqrt(delta_hat[j,:])
+
+            dsq = np.sqrt(delta_hat[j, :])
             dsq = dsq.reshape((len(dsq), 1))
-            denom =  np.dot(dsq, np.ones((1, n_batches[j])))
-            numer = np.array(bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_hat).T)
+            denom = np.dot(dsq, np.ones((1, n_batches[j])))
+            numer = np.array(
+                bayesdata[batch_idxs] - np.dot(batch_design.loc[batch_idxs], gamma_hat).T
+            )
 
             bayesdata[batch_idxs] = numer / denom
 
     vpsq = np.sqrt(var_pooled).reshape((len(var_pooled), 1))
-    bayesdata = bayesdata * np.dot(vpsq, np.ones((1, int(n_array)))) + stand_mean
- 
+    bayesdata = (
+        bayesdata * np.dot(vpsq, np.ones((1, int(n_array)))) + stand_mean
+    )
+
     return bayesdata
+
 
 def it_sol(sdat, g_hat, d_hat, g_bar, t2, a, b, conv=0.0001):
     n = (1 - np.isnan(sdat)).sum(axis=1)
@@ -318,32 +350,39 @@ def it_sol(sdat, g_hat, d_hat, g_bar, t2, a, b, conv=0.0001):
     change = 1
     count = 0
     while change > conv:
-        #print g_hat.shape, g_bar.shape, t2.shape
+        # print g_hat.shape, g_bar.shape, t2.shape
         g_new = postmean(g_hat, g_bar, n, d_old, t2)
-        sum2 = ((sdat - np.dot(g_new.values.reshape((g_new.shape[0], 1)), np.ones((1, sdat.shape[1])))) ** 2).sum(axis=1)
+        sum2 = (
+            (sdat - np.dot(g_new.values.reshape((g_new.shape[0], 1)), np.ones((1, sdat.shape[1])))) ** 2
+        ).sum(axis=1)
         d_new = postvar(sum2, n, a, b)
-       
-        change = max((abs(g_new - g_old) / g_old).max(), (abs(d_new - d_old) / d_old).max())
-        g_old = g_new #.copy()
-        d_old = d_new #.copy()
+
+        change = max(
+            (abs(g_new - g_old) / g_old).max(),
+            (abs(d_new - d_old) / d_old).max()
+        )
+        g_old = g_new  # .copy()
+        d_old = d_new  # .copy()
         count = count + 1
     adjust = (g_new, d_new)
-    return adjust 
+    return adjust
 
-    
 
 def aprior(gamma_hat):
     m = gamma_hat.mean()
     s2 = gamma_hat.var()
-    return (2 * s2 +m**2) / s2
+    return (2 * s2 + m**2) / s2
+
 
 def bprior(gamma_hat):
     m = gamma_hat.mean()
     s2 = gamma_hat.var()
     return (m*s2+m**3)/s2
 
+
 def postmean(g_hat, g_bar, n, d_star, t2):
     return (t2*n*g_hat+d_star * g_bar) / (t2*n+d_star)
+
 
 def postvar(sum2, n, a, b):
     return (0.5 * sum2 + b) / (n / 2.0 + a - 1.0)
