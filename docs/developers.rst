@@ -137,3 +137,16 @@ Style
 When it comes to style, beyond linting we are trying
 to conform, more or less, to the Google Python style
 https://google.github.io/styleguide/pyguide.html
+
+
+Vendor
+^^^^^^
+
+We have a module with variuos submodules called vendor.
+This is a place for certain open source code from third party libraries.
+Due to the lack of version control and releases on much
+scientific software we release code from these libraries with our own.
+We include the original licenses, and code that has been 
+modified to fit the standard style of Python or whichever
+language the original code was written in. These are not complete
+versions of the libraries, rather relevant functions.
