@@ -141,10 +141,15 @@ class Pep8(TestCommand):
     description = 'validate sources against PEP8'
 
     def run_tests(self, env_python=None):
+        excludes_pat = '*' + os.path.sep + os.path.join('vendor', '*')
+        excludes = ['--exclude', excludes_pat]
         if env_python is None:
             from pycodestyle import StyleGuide
 
-            style_guide = StyleGuide(paths=self.sources())
+            style_guide = StyleGuide(
+                paths=self.sources(),
+                exclude=[excludes_pat],
+            )
             options = style_guide.options
 
             report = style_guide.check_files()
@@ -158,7 +163,7 @@ class Pep8(TestCommand):
 
         sys.exit(
             subprocess.call(
-                [env_python, '-m', 'pycodestyle'] + self.sources(),
+                [env_python, '-m', 'pycodestyle'] + excludes + self.sources(),
             ))
 
 

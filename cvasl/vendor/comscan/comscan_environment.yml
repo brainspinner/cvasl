@@ -1,8 +1,9 @@
 # comscam environment, partial, you must then hand install unreleased libraries
 # note nipy is unversioned, unreleased and has upgraded since this package
+# this is not from the original package
 
 
-name: comscaniy
+name: comscan6
 channels:
   - conda-forge
   
@@ -16,6 +17,7 @@ dependencies:
   - kneed==0.7.0
   - scipy>=1.5.4
   - scikit-learn>=0.23.2
+  - seaborn
   # - git+https://github.com/nipy/nipy.git
   - tqdm>=4.59
   - umap-learn>=0.5.1

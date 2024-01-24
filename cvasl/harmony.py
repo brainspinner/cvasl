@@ -22,9 +22,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.mixture import GaussianMixture
-from scipy.stats import ranksums, ttest_ind
-from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
+# from sklearn.mixture import GaussianMixture
+# from scipy.stats import ranksums, ttest_ind
+# from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
 # import neuroCombat as nC
 
 
