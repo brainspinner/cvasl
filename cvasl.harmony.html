@@ -217,6 +217,16 @@ i.e. prep_for_neurocombat(dataframename1, dataframename2)</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.harmony.negative_harm_outcomes">
+<span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">negative_harm_outcomes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['sex',</span> <span class="pre">'gm_vol',</span> <span class="pre">'wm_vol',</span> <span class="pre">'csf_vol',</span> <span class="pre">'gm_icvratio',</span> <span class="pre">'gmwm_icvratio',</span> <span class="pre">'wmhvol_wmvol',</span> <span class="pre">'wmh_count',</span> <span class="pre">'deepwm_b_cov',</span> <span class="pre">'aca_b_cov',</span> <span class="pre">'mca_b_cov',</span> <span class="pre">'pca_b_cov',</span> <span class="pre">'totalgm_b_cov',</span> <span class="pre">'deepwm_b_cbf',</span> <span class="pre">'aca_b_cbf',</span> <span class="pre">'mca_b_cbf',</span> <span class="pre">'pca_b_cbf',</span> <span class="pre">'totalgm_b_cbf']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.negative_harm_outcomes" title="Link to this definition">¶</a></dt>
+<dd><p>This function given a directory will
+search all subdirectory for noted file extension
+If all files are harmonization outcome files
+it will then return a list of files with negative values,
+and print off information about negatives in all files.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.harmony.prep_for_neurocombat">
 <span class="sig-prename descclassname"><span class="pre">cvasl.harmony.</span></span><span class="sig-name descname"><span class="pre">prep_for_neurocombat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.harmony.prep_for_neurocombat" title="Link to this definition">¶</a></dt>
 <dd><p>This function takes two dataframes in the cvasl format,
@@ -305,6 +315,7 @@ want the highest and lowest values seperated</p>
 <li><a class="reference internal" href="#cvasl.harmony.compare_harm_one_site_violins"><code class="docutils literal notranslate"><span class="pre">compare_harm_one_site_violins()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.log_out_columns"><code class="docutils literal notranslate"><span class="pre">log_out_columns()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.make_topper"><code class="docutils literal notranslate"><span class="pre">make_topper()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.harmony.negative_harm_outcomes"><code class="docutils literal notranslate"><span class="pre">negative_harm_outcomes()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.prep_for_neurocombat"><code class="docutils literal notranslate"><span class="pre">prep_for_neurocombat()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.split_frame_half_balanced_by_column"><code class="docutils literal notranslate"><span class="pre">split_frame_half_balanced_by_column()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.harmony.top_and_bottom_by_column"><code class="docutils literal notranslate"><span class="pre">top_and_bottom_by_column()</span></code></a></li>
