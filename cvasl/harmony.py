@@ -233,3 +233,50 @@ def compare_harm_one_site_violins(
         plt.ylim((lowest_on_graph, complete_merg[y_axis].max() * 1.5))
         plt.title(feat)
         plt.show()
+
+
+def negative_harm_outcomes(
+    folder,
+    file_extension,
+    number_columns=[
+        'sex',
+        'gm_vol',
+        'wm_vol',
+        'csf_vol',
+        'gm_icvratio',
+        'gmwm_icvratio',
+        'wmhvol_wmvol',
+        'wmh_count',
+        'deepwm_b_cov',
+        'aca_b_cov',
+        'mca_b_cov',
+        'pca_b_cov',
+        'totalgm_b_cov',
+        'deepwm_b_cbf',
+        'aca_b_cbf',
+        'mca_b_cbf',
+        'pca_b_cbf',
+        'totalgm_b_cbf',]
+):
+    """
+    This function given a directory will
+    search all subdirectory for noted file extension
+    If all files are harmonization outcome files
+    it will then return a list of files with negative values,
+    and print off information about negatives in all files.
+    """
+    files = '**/*.' + file_extension
+
+    suspects = glob.glob(
+        os.path.join(folder, files),
+        recursive=True,
+    )
+    list_negs = []
+    for file in suspects:
+        read = pd.read_csv(file)
+        read.columns = read.columns.str.lower()
+        print(file)
+        print((read[number_columns] < 0).sum())
+        if ((read[number_columns] < 0).sum().sum()) > 0:
+            list_negs.append(file)
+    return list_negs
