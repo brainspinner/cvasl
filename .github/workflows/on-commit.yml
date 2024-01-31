@@ -2,12 +2,11 @@ name: Sanity
 on: [push]
 
 jobs:
-  Sanity:
+  SanityOnDocker:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: ['ubuntu-latest']
-        # os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.10', '3.11']
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +34,25 @@ jobs:
             python -m pip install pycodestyle pytest nbmake
             python ./setup.py install
             python ./setup.py test'
+
+  SanityOnMulti:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.10', '3.11']
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+          python-version: '3.11'
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install pycodestyle pytest nbmake
+      - run: .venv/bin/python ./setup.py install
+      - run: .venv/bin/python ./setup.py test -a "test_multi.py"
 
   Lint:
     runs-on: ubuntu-latest
