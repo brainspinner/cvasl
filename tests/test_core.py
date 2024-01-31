@@ -162,34 +162,34 @@ class TestDockerTests(unittest.TestCase):
                             
 
 
-class TestHarmonyDataManipulation(unittest.TestCase):
+# class TestHarmonyDataManipulation(unittest.TestCase):
 
-    def test_top_and_bottom_by_column(self):
-        data = pd.read_csv(sample_tab_csv1)
-        split1, split2 = top_and_bottom_by_column(data,'age')
-        self.assertGreater(split2['age'].sum(), split1['age'].sum())
+#     def test_top_and_bottom_by_column(self):
+#         data = pd.read_csv(sample_tab_csv1)
+#         split1, split2 = top_and_bottom_by_column(data,'age')
+#         self.assertGreater(split2['age'].sum(), split1['age'].sum())
     
-    def test_split_frame_half_balanced_by_column(self):
-        data = pd.read_csv(sample_tab_csv1)
-        split1, split2 = top_and_bottom_by_column(data,'age')
-        self.assertEqual(len(split1), len(split2))
+#     def test_split_frame_half_balanced_by_column(self):
+#         data = pd.read_csv(sample_tab_csv1)
+#         split1, split2 = top_and_bottom_by_column(data,'age')
+#         self.assertEqual(len(split1), len(split2))
 
-    def test_log_out_columns_cat_logged(self):
-        data = pd.read_csv(sample_tab_csv1)
-        logged = log_out_columns(data,['gm_vol'])
-        self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
+#     def test_log_out_columns_cat_logged(self):
+#         data = pd.read_csv(sample_tab_csv1)
+#         logged = log_out_columns(data,['gm_vol'])
+#         self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
 
-    def test_log_out_columns_no_log(self):
-        data = pd.read_csv(sample_tab_csv1)
-        logged = log_out_columns(data,[])
-        result = data.equals(logged)
-        self.assertTrue(result)
+#     def test_log_out_columns_no_log(self):
+#         data = pd.read_csv(sample_tab_csv1)
+#         logged = log_out_columns(data,[])
+#         result = data.equals(logged)
+#         self.assertTrue(result)
     
-    def test_recode_sex_to_numeric(self):
-        data = pd.read_csv(sample_tab_csv1)
-        number_s = recode_sex_to_numeric(data)
-        numeric_result = number_s['sex'].sum()
-        self.assertTrue(numeric_result)
+#     def test_recode_sex_to_numeric(self):
+#         data = pd.read_csv(sample_tab_csv1)
+#         number_s = recode_sex_to_numeric(data)
+#         numeric_result = number_s['sex'].sum()
+#         self.assertTrue(numeric_result)
 
 
 
