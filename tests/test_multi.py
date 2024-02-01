@@ -208,7 +208,6 @@ class TestTabDataCleaning(unittest.TestCase):
 class TestTabDataChecking(unittest.TestCase):
 
     def test_negative_harm_outcomes(self):
-        #data = pd.read_csv(sample_tab_csv1)
         negs = negative_harm_outcomes(
             "researcher_interface/sample_sep_values/",
             'csv',
