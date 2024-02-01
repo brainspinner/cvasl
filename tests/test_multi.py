@@ -37,6 +37,7 @@ from cvasl.seperated import recode_sex_to_numeric
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
 from cvasl.harmony import log_out_columns
+from cvasl.harmony import negative_harm_outcomes
 
 
 
@@ -203,6 +204,18 @@ class TestTabDataCleaning(unittest.TestCase):
         data = pd.read_csv(sample_tab_csv1)
         outed = pull_off_unnamed_column(data, extra_columns=['age','sex'])
         self.assertEqual(len(data.columns), (len(outed.columns) + 2))
+
+class TestTabDataChecking(unittest.TestCase):
+
+    def test_negative_harm_outcomes(self):
+        #data = pd.read_csv(sample_tab_csv1)
+        negs = negative_harm_outcomes(
+            "researcher_interface/sample_sep_values/",
+            'csv',
+            number_columns=['gm_vol','wm_vol','csf_vol',]
+        )
+        self.assertEqual(len(negs),0 )
+    
 
 class TestHarmonyDataManipulation(unittest.TestCase):
 
