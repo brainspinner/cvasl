@@ -922,7 +922,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
         cat_category='sex',
         cont_category='age',
         splits=5,
-        test_size_p=0.25,
+        test_size_p=0.2,
         printed=False
 ):
     """
@@ -935,7 +935,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
     and then the training data from the model.
     This is a twist on Stratified Shuffle Split
     to allow it's stratification on a categorical
-    and continous variable. Note tat the categorical
+    and continous variable. Note that the categorical
     should already be converted into integers before
     this function is run.
     The random state in the StratifiedShuffleSplit is set, so
@@ -1027,7 +1027,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
                 f'Category classes: {unique_train}',
                 f'from categorical: {our_ml_matrix[cat_category].unique()} ',
                 f'and continous binned to: {bins.unique()} ',
-                f'percentages: {100*counts_train/y[train_index].shape[0]}'
+                f'percentages: {100*counts_train/y[train_index].shape[0]}' # shape[iterates- i to fold]?
             )
             print(
                 f'\nTest shapes: X {X[test_index].shape}',
@@ -1038,7 +1038,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
             )
             print(
                 f'Category classes: {unique_test},'
-                f'percentages: {100*counts_test/y[test_index].shape[0]}'
+                f'percentages: {100*counts_test/y[test_index].shape[0]}'# shape[iterates i to fold]?
             )
 
         data = [[
