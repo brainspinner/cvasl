@@ -180,6 +180,42 @@ def drop_columns_folder(directory, list_droppables):
     return collection
 
 
+def folder_chain_out_columns(datasets_folder, columns, output_folder):
+    """
+    This function works  csvs in a folder at any folder level inside
+    on those with  unwanted columns
+    it drops them, they are then available
+    in a new folder called specified
+
+    :param datasets_folder: directory where csv are variable
+    :type  datasets_folder: str
+    :param columns: list of columns as strings
+    :type  columns: list
+    :param output_folder: directory where newly made csvs are sent
+    :type  output_folder: str
+
+    :returns: None
+    :rtype: None
+    """
+    directory_list = glob.glob(
+        os.path.join(datasets_folder, '**/*.csv'), recursive=True
+    )
+    for frame in directory_list:
+        # print(frame)
+        framed = pd.read_csv(frame)
+        output = framed.drop(columns, axis=1)
+        relpath = os.path.dirname(frame)
+        subpath = os.path.relpath(relpath, datasets_folder)
+        parent = os.path.join(output_folder, subpath)
+        try:
+            # print('creating parent:', parent)
+            os.makedirs(parent)
+        except FileExistsError:
+            pass
+        output.to_csv(os.path.join(parent, os.path.basename(frame)))
+        print('created file:', os.path.join(parent, os.path.basename(frame)))
+
+
 def recode_sex_folder(directory):
     """
     This function recodes sex on csvs
@@ -1027,7 +1063,8 @@ def stratified_cat_and_cont_categories_shuffle_split(
                 f'Category classes: {unique_train}',
                 f'from categorical: {our_ml_matrix[cat_category].unique()} ',
                 f'and continous binned to: {bins.unique()} ',
-                f'percentages: {100*counts_train/y[train_index].shape[0]}' # shape[iterates- i to fold]?
+                f'percentages: {100*counts_train/y[train_index].shape[0]}'
+                # TODO: shape[iterates- i to fold]?
             )
             print(
                 f'\nTest shapes: X {X[test_index].shape}',
@@ -1038,7 +1075,8 @@ def stratified_cat_and_cont_categories_shuffle_split(
             )
             print(
                 f'Category classes: {unique_test},'
-                f'percentages: {100*counts_test/y[test_index].shape[0]}'# shape[iterates i to fold]?
+                f'percentages: {100*counts_test/y[test_index].shape[0]}'
+                # TODO: shape[iterates i to fold]?
             )
 
         data = [[
