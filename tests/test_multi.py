@@ -33,6 +33,7 @@ from cvasl.seperated import stratified_one_category_shuffle_split
 from cvasl.seperated import stratified_cat_and_cont_categories_shuffle_split
 from cvasl.seperated import pull_off_unnamed_column
 from cvasl.seperated import recode_sex_to_numeric
+from cvasl.seperated import folder_chain_out_columns
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
