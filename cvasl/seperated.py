@@ -813,7 +813,7 @@ def stratified_one_category_shuffle_split(
         our_y,
         category='sex',
         splits=5,
-        test_size_p=0.25,
+        test_size_p=0.20,
         printed=False
 ):
     """
@@ -958,7 +958,8 @@ def stratified_cat_and_cont_categories_shuffle_split(
         cat_category='sex',
         cont_category='age',
         splits=5,
-        test_size_p=0.2,
+        test_size_p=0.2,  # test_size_p= 1/splits
+        # TODO:  add iff loop to WARNIND
         printed=False
 ):
     """
