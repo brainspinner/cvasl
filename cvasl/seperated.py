@@ -12,6 +12,7 @@ files towards correct formats.
 
 import os
 import sys
+import warnings
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 import numpy as np
@@ -852,6 +853,12 @@ def stratified_one_category_shuffle_split(
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
+    if test_size_p > 1/splits:
+        m1="You chose to split your data and chose test size"
+        m2 =" in a way that some parts will be oversampled"
+        message = ("".join([m1, m2]))
+        warnings.warn(message, category=None, stacklevel=1)
+
     y_split = our_ml_matrix[category].values
     sss = StratifiedShuffleSplit(
         n_splits=splits,
@@ -958,8 +965,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
         cat_category='sex',
         cont_category='age',
         splits=5,
-        test_size_p=0.2,  # test_size_p= 1/splits
-        # TODO:  add iff loop to WARNIND
+        test_size_p=0.2,  
         printed=False
 ):
     """
@@ -1005,6 +1011,11 @@ def stratified_cat_and_cont_categories_shuffle_split(
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
+    if test_size_p > 1/splits:
+        m1="You chose to split your data and chose test size"
+        m2 =" in a way that some parts will be oversampled"
+        message = ("".join([m1, m2]))
+        warnings.warn(message, category=None, stacklevel=1)
     our_ml_matrix = bin_dataset(
         our_ml_matrix,
         cont_category,
@@ -1079,6 +1090,191 @@ def stratified_cat_and_cont_categories_shuffle_split(
                 f'percentages: {100*counts_test/y[test_index].shape[0]}'
                 # TODO: shape[iterates i to fold]?
             )
+
+        data = [[
+            f'{model_name}-{i}',
+            i,
+            f'{model_file_name}.{i}',
+            mean_absolute_error(current_fold_y_test, current_fold_y_pred),
+            scikit_model.score(current_fold_X_test, current_fold_y_test),
+            metrics.explained_variance_score(
+                current_fold_y_test,
+                current_fold_y_pred
+            )]]
+        mod_results_current_fold = pd.DataFrame(data, columns=cols)
+        mod_results = pd.concat([mod_results, mod_results_current_fold])
+        mod_results.reset_index(drop=True, inplace=True)
+        all_mod_results.append(mod_results)
+        y_frame_now = pd.DataFrame(
+            {
+                'y_test': list(current_fold_y_test),
+                'y_pred': list(current_fold_y_pred),
+            })
+
+        y_frame.append(y_frame_now)
+
+        models.append((scikit_model, X[train_index][:, 0]))
+
+    df = pd.concat(all_mod_results)
+    y_frame = pd.concat([
+        y_frame[0],
+        y_frame[1],
+        y_frame[2],
+        y_frame[3],
+        y_frame[4],
+    ], axis=0)
+
+    return df, y_frame, models
+
+
+def stratified_cat_and_cont_categories_shuffle_split2(
+        model_name,
+        model_file_name,
+        scikit_model,
+        our_ml_matrix,
+        our_x,
+        our_y,
+        cat_category='sex',
+        cont_category='age',
+        splits=5,
+        test_size_p=0.2,  
+        printed=False
+):
+    """
+    This takes a sci-kit learn coded model and
+    creates a dataframe based on (stratified) k-folds of results on
+    our_ml_matrix, and it's X component
+    returns a dataframe of fold results
+    and raw y_test versus y_pred
+    as well as a tuple with models
+    and then the training data from the model.
+    This is a twist on Stratified Shuffle Split
+    to allow it's stratification on a categorical
+    and continous variable. Note that the categorical
+    should already be converted into integers before
+    this function is run.
+    The random state in the StratifiedShuffleSplit is set, so
+    the results should be reproducible.
+
+    :param model_name: name of model
+    :type model_name: str
+    :param model_file_name: name offile where specific model will be stored
+    :type model_file_name: str
+    :param skikit_model: name of skikit-model
+    :type skikit_model: str
+    :param our_ml_matrix: dataframe to work over
+    :type our_ml_matrix: `~pd.DataFrame`
+    :param our_x: X or features columnfor machine learning
+    :type our_x: dataframe
+    :param our_y: y or label column for machine learning
+    :type our_y: class:`~pandas.core.series.Series`
+    :param cat_category: categorical variable column to stratify on eg. sex
+    :type cat_category: str
+    :param cont_category: continuuous variable column to stratify on eg. age
+    :type cont_category: str
+    :param splits: number of folds desired
+    :type splits: int
+    :param test_size_p: percent to put into test
+    :type test_size_p: float
+    :param printed: printed information on folds option
+    :type printed: bool
+
+
+    :returns: dataframe, y dataframe, and models
+    :rtype: tuple
+    """
+    
+    if test_size_p > 1/splits:
+        m1="You chose to split your data and chose test size"
+        m2 =" in a way that some parts will be oversampled"
+        message = ("".join([m1, m2]))
+        warnings.warn(message, category=None, stacklevel=1)
+    our_ml_matrix = bin_dataset(
+        our_ml_matrix,
+        cont_category,
+        num_bins=4,
+        graph=False
+    )
+    print("Total number:", len(our_ml_matrix))
+    our_ml_matrix['fuse_bin'] = (
+        our_ml_matrix[cat_category] * len(
+            our_ml_matrix['binned'].unique()
+        ) + pd.to_numeric(our_ml_matrix['binned']))
+    print(our_ml_matrix.columns)
+    y_split = our_ml_matrix['fuse_bin'].values
+    print(y_split)
+
+    sss = StratifiedShuffleSplit(
+        n_splits=splits,
+        test_size=test_size_p,
+        random_state=12
+    )
+
+    X = our_x
+    # TODO: (makeda)finish split and put back index so everything is traceable
+    y = our_y
+    sss.get_n_splits(X, y_split)
+
+    unique, counts = np.unique(y_split, return_counts=True)
+
+    y_frame = []
+    all_mod_results = []
+    models = []
+    for i, (train_index, test_index) in enumerate(sss.split(X, y_split)):
+        unique_tr, counts_tr = np.unique(y_split[train_index], return_counts=True)
+        print("Fold:", i)
+        print("UNique categories:", unique_tr)
+        print("Total counts", counts_tr)
+        print("our total train number is the train-denominator:" , sum(counts_tr))
+        unique_te, counts_te = np.unique(y_split[test_index], return_counts=True)
+        #print(unique_te)
+        print("our total test number is the test-denominator:" , sum(counts_te))
+        print(counts_te)
+        cols = [
+            'algorithm',
+            'fold',
+            'file_name',
+            'mae',
+            'r2',
+            'explained_variance',
+        ]
+        mod_results = pd.DataFrame(columns=cols)
+        current_fold_X_train = X[train_index][:, 1:]
+        current_fold_y_train = y[train_index]
+        current_fold_X_test = X[test_index][:, 1:]
+        current_fold_y_test = y[test_index]
+        scikit_model.fit(current_fold_X_train, current_fold_y_train)
+        current_fold_y_pred = scikit_model.predict(current_fold_X_test)
+        # if printed:
+        #     print(f"\nFold {i}:")
+            # print(
+            #     f'Train shapes: X {X[train_index].shape}',
+            #     f' y {y[train_index].shape}'
+            # )
+            # unique_train, counts_train = np.unique(
+            #     y_split[train_index], return_counts=True
+            # )
+            # bins = our_ml_matrix['binned']
+            # print(
+            #     f'Category classes: {unique_train}',
+            #     f'from categorical: {our_ml_matrix[cat_category].unique()} ',
+            #     f'and continous binned to: {bins.unique()} ',
+            #     f'percentages_denom: {len(y[train_index])}'
+            #     f'percentages: {100*counts_train/y[train_index].shape}'
+            #     # TODO: shape[iterates- i to fold]?
+            #)
+            # print(
+            #     f'\nTest shapes: X {X[test_index].shape}',
+            #     f'  y {y[test_index].shape}'
+            # )
+            # unique_test, counts_test = np.unique(
+            #     y_split[test_index], return_counts=True
+            # )
+            # print(
+            #     f'Category classes: {unique_test},'
+            #     f'percentages: {100*counts_test/y[test_index].shape[0]}'
+            #     # TODO: shape[iterates i to fold]?
+            # )
 
         data = [[
             f'{model_name}-{i}',
