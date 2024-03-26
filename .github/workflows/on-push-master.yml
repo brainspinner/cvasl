@@ -1,0 +1,42 @@
+name: Sanitize PRs
+on:
+  push:
+    branches:
+      - main-test
+
+jobs:
+  NBStrip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+          python-version: '3.11'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install nbstripout
+      - name: Clean Up The Notebooks Output
+        # This will overwrite the history of the pushed commits to
+        # remove unwanted information from the notebooks.
+        run: |
+          PYTHON=$(pwd)/.venv/bin/python
+          BEFORE=${{ github.event.before }}
+          COMMITS=$(git rev-list $BEFORE..HEAD)
+          if [ "$COMMITS" = "" ] ; then
+            echo No new commits
+          else
+            echo Will process commits: $COMMITS
+            git config --global user.name "${{ github.actor }}"
+            git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+            git filter-branch -f --index-filter "
+            git checkout -- :*.ipynb
+            find . -name \"*.ipynb\" -exec \"$PYTHON\" -c 'from nbstripout import _nbstripout ; _nbstripout.main()' \"{}\" +
+            git add . --ignore-removal
+            " $BEFORE..HEAD
+            git push --force-with-lease
+          fi
