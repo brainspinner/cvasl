@@ -25,9 +25,13 @@ jobs:
         # remove unwanted information from the notebooks.
         run: |
           PYTHON=$(pwd)/.venv/bin/python
+          file $PYTHON
           BEFORE=${{ github.event.before }}
           COMMITS=$(git rev-list $BEFORE..HEAD)
+<<<<<<< variant A
           file $PYTHON
+>>>>>>> variant B
+======= end
           if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
