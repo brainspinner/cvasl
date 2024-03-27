@@ -78,12 +78,13 @@ def translate_reqs(packages):
 
 class TestCommand(Command):
 
-    user_options = [
-        ('pytest-args=', 'a', 'Arguments to pass into py.test'),
-        ('fast', 'f', (
-            'Don\'t install dependencies, test in the current environment'
-            )),
-    ]
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
 
     def sources(self):
         return glob(
@@ -91,56 +92,12 @@ class TestCommand(Command):
             recursive=True,
         ) + [os.path.join(project_dir, 'setup.py')]
 
-    def initialize_options(self):
-        self.pytest_args = ''
-        self.fast = False
-
-    def finalize_options(self):
-        self.test_args = []
-        self.test_suite = True
-
-    def run(self):
-
-        self.run_tests()
-
-
-class PyTest(TestCommand):
-
-    description = 'run unit tests'
-
-    def run_tests(self):
-        import pytest
-
-        if self.fast:
-            here = os.path.dirname(os.path.abspath(__file__))
-            sys.path.insert(0, here)
-            self.initialize_options()
-        self.initialize_options()
-        errno = pytest.main(shlex.split(self.pytest_args))
-        sys.exit(errno)
-
-# class UnitTest(TestCommand):
-
-#     description = 'run unit tests'
-
-#     def run_tests(self, env_python=None):
-#         unittest = importlib.import_module('unittest')
-#         if env_python is None:
-#             loader = unittest.TestLoader()
-#             suite = loader.discover('tests', pattern='test.py')
-#             runner = unittest.TextTestRunner()
-#             result = runner.run(suite)
-#             sys.exit(1 if result.errors else 0)
-
-#         tests = os.path.join(project_dir, 'tests', 'test.py')
-#         sys.exit(subprocess.call((env_python, '-m', 'unittest', tests)))
-
 
 class Pep8(TestCommand):
 
     description = 'validate sources against PEP8'
 
-    def run_tests(self, env_python=None):
+    def run(self, env_python=None):
         excludes_pat = '*' + os.path.sep + os.path.join('vendor', '*')
         excludes = ['--exclude', excludes_pat]
         if env_python is None:
@@ -171,7 +128,7 @@ class Isort(TestCommand):
 
     description = 'validate imports'
 
-    def run_tests(self, env_python=None):
+    def run(self, env_python=None):
         options = ['-c', '--lai', '2', '-m' '3']
 
         if env_python is None:
@@ -603,7 +560,6 @@ if __name__ == '__main__':
         long_description_content_type='text/markdown',
         package_data={'': ('README.md',)},
         cmdclass={
-            'test': PyTest,
             'lint': Pep8,
             'isort': Isort,
             'apidoc': SphinxApiDoc,
