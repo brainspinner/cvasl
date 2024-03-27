@@ -22,14 +22,18 @@ jobs:
         run: |
           PYTHON=$(pwd)/.venv/bin/python
           BASE=$(git merge-base main-test origin/main-test)
-          echo Merge-base: $BASE
-          echo Will process commits:
-          git rev-list $BASE..HEAD
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          git filter-branch -f --index-filter "
-          git checkout -- :*.ipynb
-          find . -name \"*.ipynb\" -exec \"$PYTHON\" -c 'from nbstripout import _nbstripout ; _nbstripout.main()' \"{}\" +
-          git add . --ignore-removal
-          " $BASE..HEAD
-          git push --force-with-lease
+          COMMITS=$(git rev-list $BASE..HEAD)
+          if [ "$COMMITS" = "" ] then
+            echo No new commits
+          else
+            echo Merge-base: $BASE
+            echo Will process commits: $COMMITS
+            git config --global user.name "${{ github.actor }}"
+            git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+            git filter-branch -f --index-filter "
+            git checkout -- :*.ipynb
+            find . -name \"*.ipynb\" -exec \"$PYTHON\" -c 'from nbstripout import _nbstripout ; _nbstripout.main()' \"{}\" +
+            git add . --ignore-removal
+            " $BASE..HEAD
+            git push --force-with-lease
+          fi
