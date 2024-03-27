@@ -33,9 +33,9 @@ jobs:
           echo After: $AFTER
           echo $HEAD_HASH
           echo Range:
-          git rev-list $BEFORE..HEAD)
+          git rev-list $BEFORE..HEAD
           echo Range 2:
-          git rev-list $AFTER..HEAD)
+          git rev-list $AFTER..HEAD
           echo Range 3:
           git rev-list $BEFORE..$AFTER)
           if [ "$COMMITS" = "" ] ; then
