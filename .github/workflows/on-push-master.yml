@@ -28,18 +28,22 @@ jobs:
           BASE=$(git merge-base main-test origin/main-test)
           COMMITS=$(git rev-list $BASE..HEAD)
           HEAD_HASH=$(git rev-parse HEAD)
+          REMOTE_HEAD_HASH=$(git rev-parse origin/main-test)
           git branch
           echo Before: $BEFORE
           echo After: $AFTER
-          echo $HEAD_HASH
+          # $AFTER is the same ash $HEAD_HASH
+          echo Head hash: $HEAD_HASH
+          echo Remote head hash: $REMOTE_HEAD_HASH
           # This is impossible
           # echo Range:
           # git rev-list $BEFORE..HEAD
-          # This is empty
+          # This is empty (it's from head to head)
           echo Range 2:
           git rev-list $AFTER..HEAD
-          echo Range 3:
-          git rev-list $BEFORE..$AFTER
+          # This is also impossible
+          # echo Range 3:
+          # git rev-list $BEFORE..$AFTER
           if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
