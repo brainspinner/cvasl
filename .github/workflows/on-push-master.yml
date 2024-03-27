@@ -18,9 +18,6 @@ jobs:
       - run: python3 -m venv .venv
       - run: .venv/bin/python -m pip install nbstripout
       - uses: actions/checkout@v3
-      # This should look at all commits going to be pushed to main,
-      # then rewrite them so that no output remains in the notebooks
-      # and push them again.
       - name: Clean Up The Notebooks Output
         run: |
           PYTHON=$(pwd)/.venv/bin/python
