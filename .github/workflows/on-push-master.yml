@@ -1,0 +1,30 @@
+name: Sanitize PRs
+on:
+  push:
+    branches:
+      - main-test
+
+jobs:
+  NBStrip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+          python-version: '3.11'
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install nbstripout
+      - uses: actions/checkout@v3
+      - name: Clean Up The Notebooks Output
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git filter-branch -f --index-filter '
+          git checkout -- :*.ipynb
+          find . -name "*.ipynb" -exec nbstripout "{}" +
+          git add . --ignore-removal
+          '
+          git push --force-with-lease
