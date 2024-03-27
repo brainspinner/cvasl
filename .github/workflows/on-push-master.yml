@@ -18,13 +18,16 @@ jobs:
       - run: python3 -m venv .venv
       - run: .venv/bin/python -m pip install nbstripout
       - uses: actions/checkout@v3
+      # This should look at all commits going to be pushed to main,
+      # then rewrite them so that no output remains in the notebooks
+      # and push them again.
       - name: Clean Up The Notebooks Output
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git filter-branch -f --index-filter '
           git checkout -- :*.ipynb
-          find . -name "*.ipynb" -exec nbstripout "{}" +
+          find . -name "*.ipynb" -exec .venv/bin/python -m nbstripout "{}" +
           git add . --ignore-removal
           '
           git push --force-with-lease
