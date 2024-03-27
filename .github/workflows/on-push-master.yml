@@ -23,11 +23,13 @@ jobs:
       # and push them again.
       - name: Clean Up The Notebooks Output
         run: |
+          PYTHON=$(pwd)/.venv/bin/python
+          BASE=$(git merge-base main-test origin/main-test)
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          git filter-branch -f --index-filter '
+          git filter-branch -f --index-filter "
           git checkout -- :*.ipynb
-          find . -name "*.ipynb" -exec .venv/bin/python -m nbstripout "{}" +
+          find . -name \"*.ipynb\" -exec \"$PYTHON\" -m nbstripout \"{}\" +
           git add . --ignore-removal
-          '
+          " $BASE..HEAD
           git push --force-with-lease
