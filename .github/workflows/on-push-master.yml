@@ -23,7 +23,7 @@ jobs:
           PYTHON=$(pwd)/.venv/bin/python
           BASE=$(git merge-base main-test origin/main-test)
           COMMITS=$(git rev-list $BASE..HEAD)
-          if [ "$COMMITS" = "" ] then
+          if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
             echo Merge-base: $BASE
