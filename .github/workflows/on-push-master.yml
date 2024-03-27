@@ -32,8 +32,9 @@ jobs:
           echo Before: $BEFORE
           echo After: $AFTER
           echo $HEAD_HASH
-          echo Range:
-          git rev-list $BEFORE..HEAD
+          # This is impossible
+          # echo Range:
+          # git rev-list $BEFORE..HEAD
           echo Range 2:
           git rev-list $AFTER..HEAD
           echo Range 3:
