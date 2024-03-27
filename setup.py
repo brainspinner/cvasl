@@ -5,18 +5,22 @@ import os
 import subprocess
 import sys
 from glob import glob
+import site
+import shlex
 from contextlib import contextmanager
 from urllib import parse as urlparse
 from urllib import request as urlrequest
 from setuptools import Command, setup
 from setuptools.command.bdist_egg import bdist_egg as BDistEgg
 from setuptools.command.install import install as InstallCommand
+from setuptools.command.easy_install import easy_install as EZInstallCommand
+from setuptools.dist import Distribution
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
 project_url = 'https://github.com/brainspinner/cvasl'
 project_description = 'A package for analysis of MRI'
-project_license = 'PENDING'
+project_license = 'Apache 2.0'
 name = 'cvasl'
 try:
     tag = subprocess.check_output(
@@ -74,18 +78,13 @@ def translate_reqs(packages):
 
 class TestCommand(Command):
 
-    user_options = [
-        ('fast', 'f', (
-            'Don\'t install dependencies, test in the current environment'
-        )),
-    ]
+    user_options = []
 
     def initialize_options(self):
-        self.fast = False
+        pass
 
     def finalize_options(self):
-        self.test_args = []
-        self.test_suite = True
+        pass
 
     def sources(self):
         return glob(
@@ -93,95 +92,21 @@ class TestCommand(Command):
             recursive=True,
         ) + [os.path.join(project_dir, 'setup.py')]
 
-    @contextmanager
-    def prepare(self):
-        tf = importlib.import_module('tempfile')
-        site = importlib.import_module('site')
-        st = importlib.import_module('setuptools.dist')
-        venv = importlib.import_module('venv')
-        ei = importlib.import_module('setuptools.command.easy_install')
-        EZInstallCommand = ei.easy_install
-
-        class ContextVenvBuilder(venv.EnvBuilder):
-
-            def ensure_directories(self, env_dir):
-                self.context = super().ensure_directories(env_dir)
-                return self.context
-
-        recs = self.distribution.tests_require
-
-        with tf.TemporaryDirectory() as builddir:
-            vbuilder = ContextVenvBuilder(with_pip=True)
-            vbuilder.create(os.path.join(builddir, '.venv'))
-            env_python = vbuilder.context.env_exe
-            platlib = subprocess.check_output(
-                (env_python,
-                 '-c',
-                 'import sysconfig;print(sysconfig.get_path("platlib"))'
-                 ),
-            ).strip().decode()
-
-            egg = BDistEgg(self.distribution)
-            egg.initialize_options()
-            egg.dist_dir = builddir
-            egg.keep_temp = False
-            egg.finalize_options()
-            egg.run()
-
-            test_dist = st.Distribution()
-            test_dist.install_requires = recs
-            ezcmd = EZInstallCommand(test_dist)
-            ezcmd.initialize_options()
-            ezcmd.args = recs
-            ezcmd.always_copy = True
-            ezcmd.install_dir = platlib
-            ezcmd.install_base = platlib
-            ezcmd.install_purelib = platlib
-            ezcmd.install_platlib = platlib
-            sys.path.insert(0, platlib)
-            os.environ['PYTHONPATH'] = platlib
-            ezcmd.finalize_options()
-
-            ezcmd.easy_install(glob(os.path.join(builddir, '*.egg'))[0])
-
-            ezcmd.run()
-            site.main()
-
-            yield env_python
-
-    def run(self):
-        if not self.fast:
-            with self.prepare() as env_python:
-                self.run_tests(env_python)
-        self.run_tests()
-
-
-class UnitTest(TestCommand):
-
-    description = 'run unit tests'
-
-    def run_tests(self, env_python=None):
-        unittest = importlib.import_module('unittest')
-        if env_python is None:
-            loader = unittest.TestLoader()
-            suite = loader.discover('tests', pattern='test.py')
-            runner = unittest.TextTestRunner()
-            result = runner.run(suite)
-            sys.exit(1 if result.errors else 0)
-
-        tests = os.path.join(project_dir, 'tests', 'test.py')
-        sys.exit(subprocess.call((env_python, '-m', 'unittest', tests)))
-
 
 class Pep8(TestCommand):
 
     description = 'validate sources against PEP8'
 
-    def run_tests(self, env_python=None):
+    def run(self, env_python=None):
+        excludes_pat = '*' + os.path.sep + os.path.join('vendor', '*')
+        excludes = ['--exclude', excludes_pat]
         if env_python is None:
             from pycodestyle import StyleGuide
 
-            style_guide = StyleGuide(paths=self.sources())
+            style_guide = StyleGuide(
+                paths=self.sources(),
+                exclude=[excludes_pat],
+            )
             options = style_guide.options
 
             report = style_guide.check_files()
@@ -195,7 +120,7 @@ class Pep8(TestCommand):
 
         sys.exit(
             subprocess.call(
-                [env_python, '-m', 'pycodestyle'] + self.sources(),
+                [env_python, '-m', 'pycodestyle'] + excludes + self.sources(),
             ))
 
 
@@ -203,7 +128,7 @@ class Isort(TestCommand):
 
     description = 'validate imports'
 
-    def run_tests(self, env_python=None):
+    def run(self, env_python=None):
         options = ['-c', '--lai', '2', '-m' '3']
 
         if env_python is None:
@@ -635,7 +560,6 @@ if __name__ == '__main__':
         long_description_content_type='text/markdown',
         package_data={'': ('README.md',)},
         cmdclass={
-            'test': UnitTest,
             'lint': Pep8,
             'isort': Isort,
             'apidoc': SphinxApiDoc,
@@ -662,7 +586,7 @@ if __name__ == '__main__':
             'imageio<=2.31.5',
             'scikit-image',
         ],
-        tests_require=['pytest', 'pycodestyle', 'isort', 'wheel'],
+        tests_require=['pytest', 'nbmake', 'pycodestyle', 'isort', 'wheel'],
         setup_requires=['wheel'],
         extras_require={
             'dev': [

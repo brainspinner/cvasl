@@ -66,6 +66,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# R stuff
+.Rhistory
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -106,3 +109,8 @@ harmonization_paper/Testing/*
 help/
 researcher_interface/retool.ipynb
 harmonization_paper/Testing/ComBat/ResultTestingSite/*
+extended_harm_paper/our_datasets/*
+extended_harm_paper/harmonizations/harm_results/*
+loged1/*
+lab_datasets/*
+extended_harm_paper/our_datasets_legacy/*

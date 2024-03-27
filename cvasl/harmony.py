@@ -17,10 +17,15 @@ older versions of python, pandas and numpy than usual in 2023.
 import os
 import copy
 import glob
+from itertools import permutations
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+# from sklearn.mixture import GaussianMixture
+# from scipy.stats import ranksums, ttest_ind
+# from scipy.stats import ttest_rel, ks_2samp, anderson_ksamp
+# import neuroCombat as nC
 
 
 def log_out_columns(dataframe, column_list):
@@ -104,8 +109,14 @@ def prep_for_neurocombat(dataframe1, dataframe2):
     :rtype: tuple
     """
     # TODO:(makeda) make so it can take frame name or frame
-    two_selection = dataframe2.drop(['Unnamed: 0'], axis=1)
-    one_selection = dataframe1.drop(['Unnamed: 0'], axis=1)
+    if 'Unnamed: 0' in dataframe2.columns:
+        two_selection = dataframe2.drop(['Unnamed: 0'], axis=1)
+    else:
+        two_selection = dataframe2
+    if 'Unnamed: 0' in dataframe1.columns:
+        one_selection = dataframe1.drop(['Unnamed: 0'], axis=1)
+    else:
+        one_selection = dataframe1
     one_selection = one_selection.set_index('participant_id')
     two_selection = two_selection.set_index('participant_id')
     one_selection = one_selection.T
@@ -168,7 +179,8 @@ def make_topper(btF, row0, row1):
 def compare_harm_multi_site_violins(
         unharmonized_df,
         harmonized_df,
-        feature_list
+        feature_list,
+        batch_column='site'
 ):
     """
     Create a violin plot on multisite harmonization by features.
@@ -179,7 +191,7 @@ def compare_harm_multi_site_violins(
         complete_merge[feature] = complete_merge[feature].astype('float64')
         sns.set_style("whitegrid")
         y_axis = feature
-        g = sns.FacetGrid(complete_merge, col="batch")
+        g = sns.FacetGrid(complete_merge, col=batch_column)
         g.map(
             sns.violinplot,
             'harmonization',
@@ -221,3 +233,50 @@ def compare_harm_one_site_violins(
         plt.ylim((lowest_on_graph, complete_merg[y_axis].max() * 1.5))
         plt.title(feat)
         plt.show()
+
+
+def negative_harm_outcomes(
+    folder,
+    file_extension,
+    number_columns=[
+        'sex',
+        'gm_vol',
+        'wm_vol',
+        'csf_vol',
+        'gm_icvratio',
+        'gmwm_icvratio',
+        'wmhvol_wmvol',
+        'wmh_count',
+        'deepwm_b_cov',
+        'aca_b_cov',
+        'mca_b_cov',
+        'pca_b_cov',
+        'totalgm_b_cov',
+        'deepwm_b_cbf',
+        'aca_b_cbf',
+        'mca_b_cbf',
+        'pca_b_cbf',
+        'totalgm_b_cbf',]
+):
+    """
+    This function given a directory will
+    search all subdirectory for noted file extension
+    If all files are harmonization outcome files
+    it will then return a list of files with negative values,
+    and print off information about negatives in all files.
+    """
+    files = '**/*.' + file_extension
+
+    suspects = glob.glob(
+        os.path.join(folder, files),
+        recursive=True,
+    )
+    list_negs = []
+    for file in suspects:
+        read = pd.read_csv(file)
+        read.columns = read.columns.str.lower()
+        print(file)
+        print((read[number_columns] < 0).sum())
+        if ((read[number_columns] < 0).sum().sum()) > 0:
+            list_negs.append(file)
+    return list_negs

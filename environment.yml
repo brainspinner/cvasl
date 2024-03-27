@@ -1,6 +1,6 @@
 #  environment document
 
-name: mriland
+name: mrilanding
 channels:
   - conda-forge
   
@@ -10,6 +10,7 @@ dependencies:
   - jupyter=1.0.0
   - jupyterlab=3.6.1
   - matplotlib
+  - pytest<8.1
   - nibabel
   - notebook=6.4.10
   - numpy

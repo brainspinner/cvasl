@@ -1,0 +1,31 @@
+#  environment document
+
+name: covbat
+channels:
+  - conda-forge
+  
+dependencies:
+  - imageio=2.25.0
+  - ipympl=0.9.3
+  - jupyter=1.0.0
+  - jupyterlab=3.6.1
+  - matplotlib
+  - pytest
+  - nibabel
+  - notebook=6.4.10
+  - numpy
+  - pandas=1.5.3
+  - patsy
+  - pycodestyle
+  - python>=3.10
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - seaborn
+  - simpleitk
+  - sphinx=4.5.0
+  - pydicom
+  
+
+
+
