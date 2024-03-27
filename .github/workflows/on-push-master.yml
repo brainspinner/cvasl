@@ -35,10 +35,11 @@ jobs:
           # This is impossible
           # echo Range:
           # git rev-list $BEFORE..HEAD
+          # This is empty
           echo Range 2:
           git rev-list $AFTER..HEAD
           echo Range 3:
-          git rev-list $BEFORE..$AFTER)
+          git rev-list $BEFORE..$AFTER
           if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
