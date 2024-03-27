@@ -19,6 +19,8 @@ jobs:
       - run: .venv/bin/python -m pip install nbstripout
       - uses: actions/checkout@v3
       - name: Clean Up The Notebooks Output
+        # This will overwrite the history of the pushed commits to
+        # remove unwanted information from the notebooks
         run: |
           PYTHON=$(pwd)/.venv/bin/python
           BASE=$(git merge-base main-test origin/main-test)
