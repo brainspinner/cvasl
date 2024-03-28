@@ -29,7 +29,12 @@ jobs:
           COMMITS=$(git rev-list $BASE..HEAD)
           HEAD_HASH=$(git rev-parse HEAD)
           REMOTE_HEAD_HASH=$(git rev-parse origin/main-test)
+          echo Branch:
           git branch
+          echo Status:
+          git status
+          echo 10 Last commits:
+          git log -10 --pretty=format:"%h"
           echo Before: $BEFORE
           echo After: $AFTER
           # $AFTER is the same ash $HEAD_HASH
