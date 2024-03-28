@@ -151,6 +151,81 @@ def prep_for_neurocombat(dataframe1, dataframe2):
     return both_togetherF, ftF, btF, feature_dictF, len1, len2
 
 
+def prep_for_neurocombat_5way(dataframe1, dataframe2, dataframe3, dataframe4, dataframe5):
+    """
+    This function takes five dataframes in the cvasl format,
+    then turns them into the items needed for the
+    neurocombat algorithm with re-identification.
+
+    :param dataframe1: frame variable
+    :type frame: `~pandas.DataFrame`
+    :param dataframe2: frame variable
+    :type frame: `~pandas.DataFrame`
+
+    :returns: dataframes for neurocombat algorithm and ints of some legnths
+    :rtype: tuple
+    """
+    # TODO:(makeda) make so it can take frame name or frame
+    
+    two_selection = dataframe2
+    one_selection = dataframe1
+    three_selection = dataframe3
+    four_selection = dataframe4
+    five_selection = dataframe5
+    #one_selection = dataframe1
+    
+    # set index to participant IDs
+    one_selection = one_selection.set_index('participant_id')
+    two_selection = two_selection.set_index('participant_id')
+    three_selection= three_selection.set_index('participant_id')
+    four_selection = four_selection.set_index('participant_id')
+    five_selection = five_selection.set_index('participant_id')
+    
+    #turn dataframes on side
+    one_selection = one_selection.T
+    two_selection = two_selection.T
+    three_selection =three_selection.T
+    four_selection = four_selection.T
+    five_selection = five_selection.T
+    
+    # concat the two dataframes
+    all_togetherF = pd.concat(
+        [one_selection, two_selection, three_selection, four_selection, five_selection],
+        axis=1,
+        join="inner",
+    )
+    
+    #print("Nan count", both_togetherF.isna().sum().sum())
+    # create a feautures only frame (no age, no sex)
+    features_only = all_togetherF[2:]
+    ##print(features_only)
+    dictionary_features_len = len(features_only.T.columns)
+    number = 0
+    made_keys = []
+    made_vals = []
+    for n in features_only.T.columns:
+
+        made_keys.append(number)
+        made_vals.append(n)
+        number += 1
+    feature_dictF = dict(map(lambda i, j: (i, j), made_keys, made_vals))
+    ftF = features_only.reset_index()
+    ftF = ftF.rename(columns={"index": "A"})
+    ftF = ftF.drop(['A'], axis=1)
+    ftF = ftF.dropna()
+    btF = all_togetherF.reset_index()
+    btF = btF.rename(columns={"index": "A"})
+    btF = btF.drop(['A'], axis=1)
+    btF = btF.dropna()
+    len1 = len(one_selection.columns)
+    len2 = len(two_selection.columns)
+    len3 = len(three_selection.columns)
+    len4 = len(four_selection.columns)
+    len5 = len(five_selection.columns)
+    
+    return all_togetherF, ftF, btF, feature_dictF, len1, len2, len3, len4, len5
+
+
 def make_topper(btF, row0, row1):
     """
     This function makes top rows for something harmonized
