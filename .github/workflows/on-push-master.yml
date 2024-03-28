@@ -26,31 +26,7 @@ jobs:
         run: |
           PYTHON=$(pwd)/.venv/bin/python
           BEFORE=${{ github.event.before }}
-          AFTER=${{ github.event.after }}
-          BASE=$(git merge-base main-test origin/main-test)
-          COMMITS=$(git rev-list $BASE..HEAD)
-          HEAD_HASH=$(git rev-parse HEAD)
-          REMOTE_HEAD_HASH=$(git rev-parse origin/main-test)
-          echo Branch:
-          git branch
-          echo Status:
-          git status
-          echo 10 Last commits:
-          git log -10 --pretty=format:"%h"
-          echo Before: $BEFORE
-          echo After: $AFTER
-          # $AFTER is the same ash $HEAD_HASH
-          echo Head hash: $HEAD_HASH
-          echo Remote head hash: $REMOTE_HEAD_HASH
-          # This is impossible
-          # echo Range:
-          # git rev-list $BEFORE..HEAD
-          # This is empty (it's from head to head)
-          echo Range 2:
-          git rev-list $AFTER..HEAD
-          # This is also impossible
-          # echo Range 3:
-          # git rev-list $BEFORE..$AFTER
+          COMMITS=$(git rev-list $BEFORE..HEAD)
           if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
@@ -62,6 +38,6 @@ jobs:
             git checkout -- :*.ipynb
             find . -name \"*.ipynb\" -exec \"$PYTHON\" -c 'from nbstripout import _nbstripout ; _nbstripout.main()' \"{}\" +
             git add . --ignore-removal
-            " $BASE..HEAD
+            " $BEFORE..HEAD
             git push --force-with-lease
           fi
