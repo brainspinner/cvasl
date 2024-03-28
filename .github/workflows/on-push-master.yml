@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Clean Up The Notebooks Output
         # This will overwrite the history of the pushed commits to
-        # remove unwanted information from the notebooks
+        # remove unwanted information from the notebooks.
         run: |
           PYTHON=$(pwd)/.venv/bin/python
           BEFORE=${{ github.event.before }}
