@@ -27,6 +27,7 @@ jobs:
           PYTHON=$(pwd)/.venv/bin/python
           BEFORE=${{ github.event.before }}
           COMMITS=$(git rev-list $BEFORE..HEAD)
+          file $PYTHON
           if [ "$COMMITS" = "" ] ; then
             echo No new commits
           else
