@@ -70,6 +70,9 @@ Changed repo name from brainspin to cvasl
 
 	- testing has been changed to use pytest ( all unit-test formatted tests will still run)
     - testing has been split into two files so CI can run a docker based testing, and a general (multi-os) test
+    - testing platform (what makes venv + run) switched to tox
     - possibility to test notebooks with nbmake module added, but not in CI due to time and data issues
     - vendor module of cvasl, harmonization code from outside packages without a release
+    - notebook outputs filtered out
+    - work for first long paper in secluded notebook
 
