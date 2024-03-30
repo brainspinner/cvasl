@@ -4,7 +4,7 @@ Licensed under the Apache License, version 2.0. See LICENSE for details.
 
 This file contains tests for the cvasl library.
 """
-#sanity tests for the  library
+# sanity tests in docker for the  library
 
 
 import unittest
@@ -89,67 +89,7 @@ class TestConfig(TestCase):
             pass
         else:
             assert False, 'Didn\'t notify on missing config file'
-    
-
-
-
-
-# class TestPolynomiaMethods(unittest.TestCase):
-## should be turned into specific testing for real data in docker
-#     def test_find_original_y_values_quadratic(self):
-#         polynomial = 4,3,1
-#         original_values = [1,2,3,4,5,6]
-#         results_poly1 = []
-#         for xs in original_values:
-#             y = (4*xs**2 + xs*3 +1)
-#             results_poly1.append(y)
-#         mapped_back_values =find_original_y_values(polynomial, results_poly1)      
-#         self.assertEqual((sum(original_values)),(sum(mapped_back_values)))
-
-#     def test_find_original_y_values_linear(self):
-#         polynomial = 4,3
-#         original_values = [3,4,5,6]
-#         results_poly1 = []
-#         for xs in original_values:
-#             y = (xs*4 + 3)
-#             results_poly1.append(y)
-#         mapped_back_values =find_original_y_values(polynomial, results_poly1)      
-#         self.assertEqual(np.array(original_values).all(),np.array(mapped_back_values).all())
-    
-#     def test_generate_transform_matrix_linear2(self):
-#         # test that different polynomials translate
-#         polynomial1 = 4,3
-#         polynomial2 = 3,3
-#         matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
-#         pol_made = (polynomial1 * matrix1).sum(axis=1)
-#         self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
-
-#     def test_generate_transform_matrix_linear1(self):
-#         # test that the same polynomial makes an identity matrix
-#         polynomial1 = 4,3
-#         polynomial2 = 4,3
-#         matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
-#         matrix2 = np.array([[1,0],[0,1]])       
-#         self.assertEqual(matrix1.all(),(matrix2.all()))
-
-#     def test_generate_transform_matrix_quadratic1(self):
-#         # test that the same polynomial makes an identity matrix
-#         polynomial1 = 4,3,1
-#         polynomial2 = 4,3,1
-#         matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
-#         matrix2 = np.array([[1,0,0],[0,1,0],[0,0,1]])       
-#         self.assertEqual(matrix1.all(),(matrix2.all()))
-
-#     def test_generate_transform_matrix_quadratic2(self):
-#         # test that different polynomials translate
-#         polynomial1 = 4,3,1
-#         polynomial2 = 3,3,3
-#         matrix1 = generate_transformation_matrix(polynomial1,polynomial2)
-#         pol_made = (polynomial1 * matrix1).sum(axis=1)     
-#         self.assertEqual((np.array(polynomial2)).all(),pol_made.all())
-
-
-                            
+             
 
 
 class TestDockerTests(unittest.TestCase):
@@ -161,35 +101,6 @@ class TestDockerTests(unittest.TestCase):
 
                             
 
-
-# class TestHarmonyDataManipulation(unittest.TestCase):
-
-#     def test_top_and_bottom_by_column(self):
-#         data = pd.read_csv(sample_tab_csv1)
-#         split1, split2 = top_and_bottom_by_column(data,'age')
-#         self.assertGreater(split2['age'].sum(), split1['age'].sum())
-    
-#     def test_split_frame_half_balanced_by_column(self):
-#         data = pd.read_csv(sample_tab_csv1)
-#         split1, split2 = top_and_bottom_by_column(data,'age')
-#         self.assertEqual(len(split1), len(split2))
-
-#     def test_log_out_columns_cat_logged(self):
-#         data = pd.read_csv(sample_tab_csv1)
-#         logged = log_out_columns(data,['gm_vol'])
-#         self.assertLess(logged['gm_vol'].sum(), data['gm_vol'].sum())
-
-#     def test_log_out_columns_no_log(self):
-#         data = pd.read_csv(sample_tab_csv1)
-#         logged = log_out_columns(data,[])
-#         result = data.equals(logged)
-#         self.assertTrue(result)
-    
-#     def test_recode_sex_to_numeric(self):
-#         data = pd.read_csv(sample_tab_csv1)
-#         number_s = recode_sex_to_numeric(data)
-#         numeric_result = number_s['sex'].sum()
-#         self.assertTrue(numeric_result)
 
 
 
