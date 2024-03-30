@@ -3,11 +3,19 @@ on: [push]
 
 jobs:
   SanityOnDocker:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ['ubuntu-latest']
-        python-version: ['3.10', '3.11']
+        # TODO: Add image with Python 3.10 so that we can test with
+        # both supported versions of python.
+
+        # python-version: ['3.10', '3.11']
+        python-version: ['3.11']
+        include:
+          # - python-version: '3.10'
+          #   tox-python: "py310"
+          - python-version: '3.11'
+            tox-python: 'py311'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -31,11 +39,9 @@ jobs:
             set -xe
             mount --bind /cvasl/test_data/ /ci/test_data/
             cd /ci
-            python -m pip install pycodestyle "pytest<8.1" nbmake
-            python ./setup.py bdist_wheel
-            python -m pip install ./dist/*.whl
-            python ./setup.py test'
-
+            python -m pip install tox
+            python -m tox -e  ${{ matrix.tox-python }} \
+            -- tests/test_core.py'
   SanityOnMulti:
       runs-on: ${{ matrix.os }}
       strategy:
