@@ -15,11 +15,11 @@ jobs:
         with:
           conda-channels: conda-forge
           python-version: '3.11'
-      - run: python3 -m venv .venv
-      - run: .venv/bin/python -m pip install nbstripout
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install nbstripout
       - name: Clean Up The Notebooks Output
         # This will overwrite the history of the pushed commits to
         # remove unwanted information from the notebooks.
