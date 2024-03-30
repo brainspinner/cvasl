@@ -32,8 +32,8 @@ that versions 3.10 and above are supported.
 
 |                             | Linux     | Win       | OSX       |
 |:---------------------------:|:---------:|:---------:|:---------:|
-| ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
-| ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
+| ![p](etcetera/python-logo.png)   | Supported | Unknown   | Unknown   |
+| ![a](etcetera/anaconda-logo.png) | Supported | Supported | Supported |
 
 ### Program files
 
