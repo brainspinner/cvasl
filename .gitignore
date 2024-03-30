@@ -106,6 +106,8 @@ harmonization_paper/Testing/*
 !researcher_interface/sample_sep_values/showable_standard.csv
 *.tsv
 *.png
+!etcetera/python-logo.png
+!etcetera/anaconda-logo.png
 help/
 researcher_interface/retool.ipynb
 harmonization_paper/Testing/ComBat/ResultTestingSite/*
