@@ -18,6 +18,23 @@ supports the ongoing research at University of Amsterdam Medical Center on brain
 is being buit for the entire community of radiology researchers across all university and academic medical centers and beyond.
 
 
+### Supported Platforms
+
+cvasl is not a pure Python package. If
+you want to run all possibilities you will need R, and therefore the conda version. 
+Below is the list of platforms that should work in terms of the Python code.
+Other platforms may work, but have had less extensive testing.
+Please note that where
+python.org Python or Anaconda Python stated as supported, it means
+that versions 3.10 and above are supported.
+
+#### AMD64 (x86)
+
+|                             | Linux     | Win       | OSX       |
+|:---------------------------:|:---------:|:---------:|:---------:|
+| ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
+| ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
+
 ### Program files
 
 The main program in this repository (made of the modules in the cvasl folder) contains functions for analysis of MRIs.
