@@ -90,11 +90,6 @@ You may now locally run:
   pytest
 
 
-or you can call the testing from the setup file:
-
-.. code-block:: bash
-
-  python setup.py test
 
 Under the hood, this runs unittest and pytest tests.
 
