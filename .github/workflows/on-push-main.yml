@@ -2,7 +2,7 @@ name: Sanitize PRs
 on:
   push:
     branches:
-      - main
+      - premain
 
 jobs:
   NBStrip:
