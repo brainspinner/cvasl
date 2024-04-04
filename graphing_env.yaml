@@ -1,0 +1,24 @@
+#  environment document
+
+name: graphing
+channels:
+  - conda-forge
+  
+dependencies:
+  - imageio=2.25.0
+  - ipympl=0.9.3
+  #- ipywidgets=7.7.2
+  - jupyter=1.0.0
+  - jupyterlab=3.6.1
+  - matplotlib
+  - pytest<8.1
+  
+  - numpy
+  - pandas
+  
+  - python>=3.10
+  - seaborn
+
+
+
+
