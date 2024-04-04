@@ -1005,7 +1005,7 @@ def stratified_cat_and_cont_categories_shuffle_split(
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
-    if test_size_p > 1 / splits :
+    if test_size_p > 1 / splits:
         message1 = "You us a potentially problematic percent (may resample) "
         warnings.warn(message1)
     our_ml_matrix = bin_dataset(
