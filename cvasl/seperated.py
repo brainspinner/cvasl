@@ -12,6 +12,7 @@ files towards correct formats.
 
 import os
 import sys
+import warnings
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 import numpy as np
@@ -813,7 +814,7 @@ def stratified_one_category_shuffle_split(
         our_y,
         category='sex',
         splits=5,
-        test_size_p=0.25,
+        test_size_p=0.20,
         printed=False
 ):
     """
@@ -1004,6 +1005,9 @@ def stratified_cat_and_cont_categories_shuffle_split(
     :returns: dataframe, y dataframe, and models
     :rtype: tuple
     """
+    if test_size_p > 1 / splits :
+        message1 = "You us a potentially problematic percent (may resample) "
+        warnings.warn(message1)
     our_ml_matrix = bin_dataset(
         our_ml_matrix,
         cont_category,
@@ -1059,13 +1063,13 @@ def stratified_cat_and_cont_categories_shuffle_split(
                 y_split[train_index], return_counts=True
             )
             bins = our_ml_matrix['binned']
-            print(
-                f'Category classes: {unique_train}',
-                f'from categorical: {our_ml_matrix[cat_category].unique()} ',
-                f'and continous binned to: {bins.unique()} ',
-                f'percentages: {100*counts_train/y[train_index].shape[0]}'
-                # TODO: shape[iterates- i to fold]?
-            )
+            # print(
+            #     f'Category classes: {unique_train}',
+            #     f'from categorical: {our_ml_matrix[cat_category].unique()} ',
+            #     f'and continous binned to: {bins.unique()} ',
+            #     f'percentages: {100*counts_train/y[train_index].shape[0]}'
+            #     # TODO: shape[iterates- i to fold]?
+            # )
             print(
                 f'\nTest shapes: X {X[test_index].shape}',
                 f'  y {y[test_index].shape}'
@@ -1073,11 +1077,11 @@ def stratified_cat_and_cont_categories_shuffle_split(
             unique_test, counts_test = np.unique(
                 y_split[test_index], return_counts=True
             )
-            print(
-                f'Category classes: {unique_test},'
-                f'percentages: {100*counts_test/y[test_index].shape[0]}'
-                # TODO: shape[iterates i to fold]?
-            )
+            # print(
+            #     f'Category classes: {unique_test},'
+            #     f'percentages: {100*counts_test/y[test_index].shape[0]}'
+            #     # TODO: shape[iterates i to fold]?
+            # )
 
         data = [[
             f'{model_name}-{i}',
