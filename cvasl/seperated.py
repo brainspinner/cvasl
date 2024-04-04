@@ -1117,3 +1117,43 @@ def stratified_cat_and_cont_categories_shuffle_split(
     ], axis=0)
 
     return df, y_frame, models
+
+
+def preprocess(
+    folder,
+    file_extension,
+    outcome_folder,
+    log_cols=[],
+    plus_one_log_columns=[],
+):
+    """
+    This function given a directory will
+    search all subdirectory for noted file extension
+    Copies of the files will be processed as specified
+    which is the specified columns turned to log or +1 then log
+    then put in the outcome folder
+    """
+    if not os.path.exists(outcome_folder):
+        os.makedirs(outcome_folder)
+    files = '**/*.' + file_extension
+    suspects = glob.glob(
+        os.path.join(folder, files),
+        recursive=True,
+    )
+    read_names = []
+    for file in suspects:
+        read = pd.read_csv(file, index_col=0)
+        filenames1 = os.path.split(file)[0]
+        filenames = os.path.split(filenames1)[-1]
+        if not os.path.exists(os.path.join(outcome_folder, filenames)):
+            os.makedirs(os.path.join(outcome_folder, filenames))
+        filey = os.path.basename(file).split('/')[-1]
+        read_name = os.path.join(outcome_folder, filenames, filey)
+        read[plus_one_log_columns] = read[plus_one_log_columns].apply(
+            lambda x: x + 1, axis=1)
+        read[plus_one_log_columns] = read[plus_one_log_columns].apply(
+            lambda x: np.log(x), axis=1)
+        read[log_cols] = read[log_cols].apply(lambda x: np.log(x), axis=1)
+        read.to_csv(read_name)
+        read_names.append(read_name)
+    return read_names
