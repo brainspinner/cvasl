@@ -74,6 +74,9 @@ derived value datasets (which use measurements instead of images)
 You will need tsv and/or csv file 
 datasets arranged in a particular format as specified in
 [seperated_values_specifications.md](seperated_values_specifications.md)
+If you plan to make pull requests to the library or use it to show your work
+you should take care not to use tabular data in such a way as patient identifying data
+is revealed.
 
 
 ### Configuring (to work with your data)

@@ -367,3 +367,74 @@ def negative_harm_outcomes(
         if ((read[number_columns] < 0).sum().sum()) > 0:
             list_negs.append(file)
     return list_negs
+
+
+def show_diff_on_var(
+        dataset1,
+        name_dataset1,
+        dataset2,
+        name_dataset2,
+        var1,
+        var2):
+    dataset1['set'] = name_dataset1
+    dataset2['set'] = name_dataset2
+    mixer = pd.concat([dataset1, dataset2])
+    jp1 = sns.jointplot(
+        x=mixer[var1],
+        y=mixer[var2],
+        hue=mixer['set'],
+        alpha=0.3,
+        space=0,
+        ratio=4)
+
+
+def show_diff_on_var3(
+        dataset1,
+        name_dataset1,
+        dataset2,
+        name_dataset2,
+        dataset3,
+        name_dataset3,
+        var1,
+        var2,
+        ):
+    dataset1['set'] = name_dataset1
+    dataset2['set'] = name_dataset2
+    dataset3['set'] = name_dataset3
+    mixer = pd.concat([dataset1, dataset2, dataset3])
+    jp1 = sns.jointplot(
+        x=mixer[var1],
+        y=mixer[var2],
+        hue=mixer['set'],
+        alpha=0.2,
+        space=0,
+        ratio=4,
+        )
+
+
+def show_diff_on_var5(
+        dataset1,
+        name_dataset1,
+        dataset2,
+        name_dataset2,
+        dataset3,
+        name_dataset3,
+        dataset4,
+        name_dataset4,
+        dataset5,
+        name_dataset5,
+        var1,
+        var2):
+    dataset1['set'] = name_dataset1
+    dataset2['set'] = name_dataset2
+    dataset3['set'] = name_dataset3
+    dataset4['set'] = name_dataset4
+    dataset5['set'] = name_dataset5
+    mixer = pd.concat([dataset1, dataset2, dataset3, dataset4, dataset5])
+    jp1 = sns.jointplot(
+        x=mixer[var1],
+        y=mixer[var2],
+        hue=mixer['set'],
+        alpha=0.2,
+        space=0,
+        ratio=4)
