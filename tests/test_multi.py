@@ -34,6 +34,7 @@ from cvasl.seperated import stratified_cat_and_cont_categories_shuffle_split
 from cvasl.seperated import pull_off_unnamed_column
 from cvasl.seperated import recode_sex_to_numeric
 from cvasl.seperated import folder_chain_out_columns
+from cvasl.seperated import preprocess
 # harmony
 from cvasl.harmony import top_and_bottom_by_column
 from cvasl.harmony import split_frame_half_balanced_by_column
@@ -295,6 +296,19 @@ class TestWithNoLog(TestLogWithParameters):
 class TestWithTwoLog(TestLogWithParameters):
     data = pd.read_csv(sample_tab_csv1)
     parameter = log_out_columns(data,['gm_vol', 'wm_vol'])
+
+class TestPreprocessing(unittest.TestCase):
+    def test_preprocessing(self):
+        with TemporaryDirectory() as td:
+            data = preprocess(
+                "researcher_interface/sample_sep_values/",
+                "csv",
+                td,
+                log_cols=[],
+                plus_one_log_columns=[],)
+            filename = data[0]
+            self.assertEqual(os.path.basename(filename),(os.path.basename(sample_tab_csv1)))
+    
 
 
 if __name__ == '__main__':
