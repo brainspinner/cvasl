@@ -72,7 +72,6 @@ Changed repo name from brainspin to cvasl
     - testing has been split into two files so CI can run a docker based testing, and a general (multi-os) test
     - testing platform (what makes venv + run) switched to tox
     - possibility to test notebooks with nbmake module added, but not in CI due to time and data issues
-    - notebook outputs filtered out by addition of nbstrip workflow on premain branch
-    - vendor module of cvasl, harmonization code from outside packages without a release
+    - vendor module of cvasl, harmonization code from outside packages previously without releases
     - work for first long paper in secluded notebook
 
