@@ -396,7 +396,8 @@ def show_diff_on_var3(
         dataset3,
         name_dataset3,
         var1,
-        var2):
+        var2,
+        ):
     dataset1['set'] = name_dataset1
     dataset2['set'] = name_dataset2
     dataset3['set'] = name_dataset3
@@ -407,7 +408,8 @@ def show_diff_on_var3(
         hue=mixer['set'],
         alpha=0.2,
         space=0,
-        ratio=4)
+        ratio=4,
+        )
 
 
 def show_diff_on_var5(
