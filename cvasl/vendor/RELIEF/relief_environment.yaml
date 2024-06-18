@@ -1,0 +1,15 @@
+#  environment document
+
+name: reliefland
+channels:
+  - conda-forge
+  
+dependencies:
+  - r-recommended 
+  - r-irkernel 
+  - Jupyter
+  - r-devtools
+  - r-rcppcnpy
+  
+
+# after running this from terminal use devtools::install_github("andy1764/CovBat_Harmonization/R")
