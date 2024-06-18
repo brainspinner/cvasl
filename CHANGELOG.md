@@ -73,5 +73,6 @@ Changed repo name from brainspin to cvasl
     - testing platform (what makes venv + run) switched to tox
     - possibility to test notebooks with nbmake module added, but not in CI due to time and data issues
     - vendor module of cvasl, harmonization code from outside packages previously without releases
-    - work for first long paper in secluded notebook
+    - work for first long paper in secluded notebooks: extended_harm_paper_all_harm, extended_harm_paper_selective_harm, 
+    
 
