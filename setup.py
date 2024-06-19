@@ -542,7 +542,10 @@ class BdistConda(BDistEgg):
             self.patch_conda_build()
 
         rc = conda_build.execute(cmd)
-        sys.stderr.write('Built package: {}'.format(rc[0]))
+        if isinstance(rc, int):
+            sys.stderr.write('Built package: {}'.format(rc))
+        else:
+            sys.stderr.write('Built package: {}'.format(rc[0]))
 
 
 if __name__ == '__main__':
