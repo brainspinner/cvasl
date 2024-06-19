@@ -64,7 +64,7 @@ Changed repo name from brainspin to cvasl
 
 ## Release 0.0.3
 
-### Pending
+### Added
 
 * Fourth version of this Python project containing (added to this version):
 
@@ -73,6 +73,11 @@ Changed repo name from brainspin to cvasl
     - testing platform (what makes venv + run) switched to tox
     - possibility to test notebooks with nbmake module added, but not in CI due to time and data issues
     - vendor module of cvasl, harmonization code from outside packages previously without releases, original open licenses copied
+    - vendor module versions for for RELIEF, neurocombat, autocombat, Combat++, covbat and open nested combat
+
+## Release 0.0.4
+
+### Pending
     - work for first long paper in secluded notebooks: extended_harm_paper_all_harm, extended_harm_paper_selective_harm, 
     
 
