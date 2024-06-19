@@ -572,6 +572,7 @@ if __name__ == '__main__':
         },
         test_suite='setup.my_test_suite',
         install_requires=[
+            'numpy<2.0.0',
             'pyxdf',
             'pandas',
             'scipy',
