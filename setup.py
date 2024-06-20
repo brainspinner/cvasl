@@ -514,7 +514,13 @@ class BdistConda(BDistEgg):
             'anaconda-client',
             'python=={}'.format(frozen),
         ]
-        if run_and_log(cmd):
+        # Since recently, CI on Windows seems to run in such a way
+        # that even though it starts in Bash, it will still use Windows-style
+        # path lookup, which will prevent it from finding conda executable.
+        # Running inside the shell (hopefully, the same as parent) seems to
+        # help it to find conda
+        need_shell = sys.platform == 'win32'
+        if run_and_log(cmd, shell=need_shell):
             sys.stderr.write('Failed to install conda-build\n')
             raise SystemExit(3)
         shutil.rmtree(

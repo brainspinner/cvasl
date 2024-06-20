@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - v*
+# on: [push]
 
 jobs:
   PyPIBuild:
@@ -41,16 +42,24 @@ jobs:
     defaults:
       run:
         shell: bash -el {0}
+    defaults:
+      run:
+        shell: bash -el {0}
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.11]
-        os: [ubuntu-latest, windows-latest, macos-12]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - { os: windows-latest, shell: msys2 }
+          - { os: ubuntu-latest,  shell: bash  }
+          - { os: macos-latest,   shell: bash  }
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
           fetch-depth: 0
+      - uses: conda-incubator/setup-miniconda@v3
       - uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ matrix.python-version }}
@@ -60,10 +69,7 @@ jobs:
       - run: conda config --remove channels defaults
       - name: Generate conda meta.yaml (Python 3.11)
         run: python -u setup.py anaconda_gen_meta
-      - if: ${{ matrix.os == 'macos-12' }}
-        run: python -u setup.py bdist_conda -o
-      - if: ${{ matrix.os != 'macos-12' }}
-        run: python -u setup.py bdist_conda
+      - run: python -u setup.py bdist_conda
       - name: Upload Anaconda package
         run: >-
           python setup.py anaconda_upload
