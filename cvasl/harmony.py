@@ -438,3 +438,10 @@ def show_diff_on_var5(
         alpha=0.2,
         space=0,
         ratio=4)
+
+
+def increment_keys(input_dict, chosen_value=1):
+    """
+    This function increments all keys in dictionary by a certain chosen value.
+    """
+    return {key + chosen_value: value for key, value in input_dict.items()}
