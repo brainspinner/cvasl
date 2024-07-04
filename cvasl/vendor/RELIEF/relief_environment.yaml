@@ -1,15 +1,18 @@
 #  environment document
 
-name: reliefland
+name: reliefland_justr3
 channels:
   - conda-forge
   
 dependencies:
-  - r-recommended 
+  - r=3.6
+  #- r-recommended 
+  - r-denoiser
   - r-irkernel 
   - Jupyter
   - r-devtools
   - r-rcppcnpy
+  
   
 
 # after running this from terminal use devtools::install_github("andy1764/CovBat_Harmonization/R")
