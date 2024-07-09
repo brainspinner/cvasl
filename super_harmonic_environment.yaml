@@ -1,0 +1,30 @@
+#  environment document for combat-GAM neuroHarmonize ,neurcombat, covbat, open nested combat and comscan/autocombat
+# note you should be using a python like 3.10 or 3.11
+name: superharm
+channels:
+  - conda-forge
+  
+dependencies:
+
+  - pandas
+  - numpy
+  - statsmodels
+  - nibabel
+  - jupyterlab
+
+  - matplotlib
+  - pytest<8.1
+  - nbmake
+  - notebook=6.4.10
+
+  - python>=3.10
+  - seaborn
+  - scipy
+
+  - scikit-learn
+ 
+
+  - pip:
+
+    - neuroHarmonize
+    - neuroCombat
