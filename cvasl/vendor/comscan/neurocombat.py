@@ -10,25 +10,31 @@ from typing import Union, List, Tuple, Optional
 
 import numpy as np
 import pandas as pd
-from neuroCombat.neuroCombat import standardize_across_features
-from neuroCombat.neuroCombat import find_parametric_adjustments
-from neuroCombat.neuroCombat import fit_LS_model_and_find_priors
-from neuroCombat.neuroCombat import find_non_eb_adjustments
-from neuroCombat.neuroCombat import find_non_parametric_adjustments
+from ..neurocombat.neurocombat.neuroCombat import standardize_across_features
+from ..neurocombat.neurocombat.neuroCombat import find_parametric_adjustments
+from ..neurocombat.neurocombat.neuroCombat import fit_LS_model_and_find_priors
+from ..neurocombat.neurocombat.neuroCombat import find_non_eb_adjustments
+from ..neurocombat.neurocombat.neuroCombat import find_non_parametric_adjustments
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.utils.validation import check_is_fitted
 from tqdm import tqdm
 
-from ComScan.clustering import optimal_clustering
-from ComScan.nifti import _compute_mask_files, flatten_nifti_files
-from ComScan.utils import get_column_index, one_hot_encoder, fix_columns, scaler_encoder, check_is_nii_exist, \
-    load_nifty_volume_as_array, save_to_nii, check_exist_vars
+from .clustering import optimal_clustering
+from .nifti import _compute_mask_files, flatten_nifti_files
+from .utils import (
+    get_column_index,
+    one_hot_encoder,
+    fix_columns,
+    scaler_encoder,
+    check_is_nii_exist,
+    load_nifty_volume_as_array,
+    save_to_nii,
+    check_exist_vars,
+)
 
-__all__ = [
-    'Combat', 'AutoCombat', 'ImageCombat'
-]
+__all__ = ["Combat", "AutoCombat", "ImageCombat"]
 
 
 def _check_single_covariate_sample(df: pd.DataFrame, _vars: List) -> None:
@@ -40,8 +46,10 @@ def _check_single_covariate_sample(df: pd.DataFrame, _vars: List) -> None:
     """
     for _var in _vars:
         if 1 in df[_var].value_counts().tolist():
-            raise ValueError(f"Combat ComScan requires more than one sample. "
-                             f"The following covariate contain a unique sample: {_var} ")
+            raise ValueError(
+                f"Combat ComScan requires more than one sample. "
+                f"The following covariate contain a unique sample: {_var} "
+            )
 
 
 def _check_nans(df: pd.DataFrame) -> None:
@@ -52,10 +60,12 @@ def _check_nans(df: pd.DataFrame) -> None:
     :raise: ValueError if NaNs are present
     """
     if df.isnull().values.any():
-        raise ValueError("NaN values found on data. \n"
-                         "Combat can not work with NaN values,\n"
-                         " maybe drop samples or features columns"
-                         " containing these values")
+        raise ValueError(
+            "NaN values found on data. \n"
+            "Combat can not work with NaN values,\n"
+            " maybe drop samples or features columns"
+            " containing these values"
+        )
 
 
 def _reorder_columns(all_columns: List[List]):
@@ -90,7 +100,7 @@ class Combat(BaseEstimator, TransformerMixin):
     ----------
     features : Target features to be harmonized
 
-    sites : Target variable for ComScan problems 
+    sites : Target variable for ComScan problems
     (e.g. acquisition sites or scanner).
 
     discrete_covariates : Target covariates which are
@@ -146,7 +156,7 @@ class Combat(BaseEstimator, TransformerMixin):
 
     Examples
     --------
-    
+
 
     Notes
     -----
@@ -154,18 +164,20 @@ class Combat(BaseEstimator, TransformerMixin):
 
     """
 
-    def __init__(self,
-                 features: Union[List[str], List[int], str, int],
-                 sites: Union[str, int],
-                 discrete_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 continuous_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 ref_site: Optional[Union[str, int]] = None,
-                 empirical_bayes: bool = True,
-                 parametric: bool = True,
-                 mean_only: bool = False,
-                 return_only_features: bool = False,
-                 raise_ref_site: bool = True,
-                 copy: bool = True) -> None:
+    def __init__(
+        self,
+        features: Union[List[str], List[int], str, int],
+        sites: Union[str, int],
+        discrete_covariates: Optional[Union[List[str], List[int], str, int]] = None,
+        continuous_covariates: Optional[Union[List[str], List[int], str, int]] = None,
+        ref_site: Optional[Union[str, int]] = None,
+        empirical_bayes: bool = True,
+        parametric: bool = True,
+        mean_only: bool = False,
+        return_only_features: bool = False,
+        raise_ref_site: bool = True,
+        copy: bool = True,
+    ) -> None:
 
         self.features = features
         self.discrete_covariates = discrete_covariates
@@ -185,14 +197,18 @@ class Combat(BaseEstimator, TransformerMixin):
         __init__ parameters are not touched.
         """
 
-        if hasattr(self, 'info_dict_fit_'):
+        if hasattr(self, "info_dict_fit_"):
             del self.info_dict_fit_
             del self.stand_mean_
             del self.var_pooled_
             del self.gamma_star_
             del self.delta_star_
 
-    def fit(self, X: Union[np.ndarray, pd.DataFrame], *y: Optional[Union[np.ndarray, pd.DataFrame]]) -> "Combat":
+    def fit(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        *y: Optional[Union[np.ndarray, pd.DataFrame]],
+    ) -> "Combat":
         """
         Compute the stand mean, var pooled, gamma star, delta star to be used for later adjusted data.
 
@@ -214,13 +230,19 @@ class Combat(BaseEstimator, TransformerMixin):
         all_columns = self._check_data(X)
         columns_needed = all_columns[0:4]
 
-        columns_features, columns_discrete_covariates, columns_continuous_covariates, columns_sites \
-            = _reorder_columns(columns_needed)
+        (
+            columns_features,
+            columns_discrete_covariates,
+            columns_continuous_covariates,
+            columns_sites,
+        ) = _reorder_columns(columns_needed)
 
         if isinstance(X, pd.DataFrame):
             X = X.to_numpy()
 
-        X = self._validate_data(X[:, sum(columns_needed, [])], copy=self.copy, estimator=self)
+        X = self._validate_data(
+            X[:, sum(columns_needed, [])], copy=self.copy, estimator=self
+        )
 
         if self.ref_site is None:
             ref_level = None
@@ -231,56 +253,74 @@ class Combat(BaseEstimator, TransformerMixin):
                     raise ValueError(f"ref_site: {self.ref_site} not found")
                 else:
                     ref_level = None
-                    warnings.warn(f"raise_ref_site is False and ref site not found. Setting to None", UserWarning,
-                                  stacklevel=2)
+                    warnings.warn(
+                        f"raise_ref_site is False and ref site not found. Setting to None",
+                        UserWarning,
+                        stacklevel=2,
+                    )
             else:
                 ref_level = np.int(X[ref_indices[0], columns_sites])
 
         # create dictionary that stores batch info
-        (batch_levels, sample_per_batch) = np.unique(X[:, columns_sites], return_counts=True)
+        (batch_levels, sample_per_batch) = np.unique(
+            X[:, columns_sites], return_counts=True
+        )
         self.info_dict_fit_ = {
-            'batch_levels': batch_levels,
-            'ref_level': ref_level,
-            'n_batch': len(batch_levels),
-            'n_sample': int(X.shape[0]),
-            'sample_per_batch': sample_per_batch.astype('int'),
-            'batch_info': [list(np.where(X[:, columns_sites] == idx)[0]) for idx in batch_levels]
+            "batch_levels": batch_levels,
+            "ref_level": ref_level,
+            "n_batch": len(batch_levels),
+            "n_sample": int(X.shape[0]),
+            "sample_per_batch": sample_per_batch.astype("int"),
+            "batch_info": [
+                list(np.where(X[:, columns_sites] == idx)[0]) for idx in batch_levels
+            ],
         }
 
         # create design matrix
-        design = self._make_design_matrix(X=X,
-                                          sites_col=columns_sites,
-                                          ref_site=ref_level,
-                                          discrete_covariates_col=columns_discrete_covariates,
-                                          continuous_covariates_col=columns_continuous_covariates,
-                                          fitting=True)
+        design = self._make_design_matrix(
+            X=X,
+            sites_col=columns_sites,
+            ref_site=ref_level,
+            discrete_covariates_col=columns_discrete_covariates,
+            continuous_covariates_col=columns_continuous_covariates,
+            fitting=True,
+        )
 
         # standardize data across features
-        s_data, self.stand_mean_, self.var_pooled_, self.mod_mean_ = standardize_across_features(
-            X=X[:, columns_features].T,
-            design=design,
-            info_dict=self.info_dict_fit_)
+        s_data, self.stand_mean_, self.var_pooled_, self.mod_mean_ = (
+            standardize_across_features(
+                X=X[:, columns_features].T, design=design, info_dict=self.info_dict_fit_
+            )
+        )
 
         # fit L/S models and find priors
-        LS_dict = fit_LS_model_and_find_priors(s_data=s_data, design=design,
-                                               info_dict=self.info_dict_fit_,
-                                               mean_only=self.mean_only)
+        LS_dict = fit_LS_model_and_find_priors(
+            s_data=s_data,
+            design=design,
+            info_dict=self.info_dict_fit_,
+            mean_only=self.mean_only,
+        )
 
         # find parametric adjustments
         if self.empirical_bayes:
             if self.parametric:
-                self.gamma_star_, self.delta_star_ = find_parametric_adjustments(s_data=s_data,
-                                                                                 LS=LS_dict,
-                                                                                 info_dict=self.info_dict_fit_,
-                                                                                 mean_only=self.mean_only)
+                self.gamma_star_, self.delta_star_ = find_parametric_adjustments(
+                    s_data=s_data,
+                    LS=LS_dict,
+                    info_dict=self.info_dict_fit_,
+                    mean_only=self.mean_only,
+                )
             else:
-                self.gamma_star_, self.delta_star_ = find_non_parametric_adjustments(s_data=s_data,
-                                                                                     LS=LS_dict,
-                                                                                     info_dict=self.info_dict_fit_,
-                                                                                     mean_only=self.mean_only)
+                self.gamma_star_, self.delta_star_ = find_non_parametric_adjustments(
+                    s_data=s_data,
+                    LS=LS_dict,
+                    info_dict=self.info_dict_fit_,
+                    mean_only=self.mean_only,
+                )
         else:
-            self.gamma_star_, self.delta_star_ = find_non_eb_adjustments(s_data=s_data, LS=LS_dict,
-                                                                         info_dict=self.info_dict_fit_)
+            self.gamma_star_, self.delta_star_ = find_non_eb_adjustments(
+                s_data=s_data, LS=LS_dict, info_dict=self.info_dict_fit_
+            )
 
         return self
 
@@ -304,8 +344,12 @@ class Combat(BaseEstimator, TransformerMixin):
         columns_needed = all_columns[0:4]
 
         # Warning: Here we reorder all columns
-        columns_features, columns_discrete_covariates, columns_continuous_covariates, columns_sites \
-            = _reorder_columns(columns_needed)
+        (
+            columns_features,
+            columns_discrete_covariates,
+            columns_continuous_covariates,
+            columns_sites,
+        ) = _reorder_columns(columns_needed)
 
         columns_df = None
         if isinstance(X, pd.DataFrame):
@@ -317,50 +361,78 @@ class Combat(BaseEstimator, TransformerMixin):
         # make a copy of original
         original_X = np.copy(X)
 
-        X = self._validate_data(X[:, sum(columns_needed, [])], copy=self.copy, estimator=self)
+        X = self._validate_data(
+            X[:, sum(columns_needed, [])], copy=self.copy, estimator=self
+        )
 
-        (batch_levels, sample_per_batch) = np.unique(X[:, columns_sites], return_counts=True)
+        (batch_levels, sample_per_batch) = np.unique(
+            X[:, columns_sites], return_counts=True
+        )
 
         # Check all sites from new_data were seen
-        if not all(site_name in self.info_dict_fit_["batch_levels"] for site_name in batch_levels):
-            raise ValueError(f"There is an unseen site during the fit method in the data")
+        if not all(
+            site_name in self.info_dict_fit_["batch_levels"]
+            for site_name in batch_levels
+        ):
+            raise ValueError(
+                f"There is an unseen site during the fit method in the data"
+            )
 
         # create dictionary that stores batch info
         self.info_dict_transform_ = {
-            'batch_levels': batch_levels,
-            'ref_level': self.ref_site,
-            'n_batch': len(batch_levels),
-            'n_sample': int(X.shape[0]),
-            'sample_per_batch': sample_per_batch.astype('int'),
-            'batch_info': [list(np.where(X[:, columns_sites] == idx)[0]) for idx in batch_levels]
+            "batch_levels": batch_levels,
+            "ref_level": self.ref_site,
+            "n_batch": len(batch_levels),
+            "n_sample": int(X.shape[0]),
+            "sample_per_batch": sample_per_batch.astype("int"),
+            "batch_info": [
+                list(np.where(X[:, columns_sites] == idx)[0]) for idx in batch_levels
+            ],
         }
 
         # create design matrix
-        design = self._make_design_matrix(X=X,
-                                          sites_col=columns_sites,
-                                          ref_site=self.ref_site,
-                                          discrete_covariates_col=columns_discrete_covariates,
-                                          continuous_covariates_col=columns_continuous_covariates,
-                                          fitting=False)
+        design = self._make_design_matrix(
+            X=X,
+            sites_col=columns_sites,
+            ref_site=self.ref_site,
+            discrete_covariates_col=columns_discrete_covariates,
+            continuous_covariates_col=columns_continuous_covariates,
+            fitting=False,
+        )
 
-        self.stand_mean_transform_ = np.repeat(self.stand_mean_[:, [0]],
-                                               self.info_dict_transform_["n_sample"], axis=1)
-        self.mod_mean_transform_ = np.repeat(self.mod_mean_[:, [0]],
-                                             self.info_dict_transform_["n_sample"], axis=1)
+        self.stand_mean_transform_ = np.repeat(
+            self.stand_mean_[:, [0]], self.info_dict_transform_["n_sample"], axis=1
+        )
+        self.mod_mean_transform_ = np.repeat(
+            self.mod_mean_[:, [0]], self.info_dict_transform_["n_sample"], axis=1
+        )
 
-        s_data = ((X[:, columns_features].T - self.stand_mean_transform_ - self.mod_mean_transform_) / np.dot(
+        s_data = (
+            X[:, columns_features].T
+            - self.stand_mean_transform_
+            - self.mod_mean_transform_
+        ) / np.dot(
             np.sqrt(self.var_pooled_),
-            np.ones(
-                (1, self.info_dict_transform_[
-                    "n_sample"]))))
+            np.ones((1, self.info_dict_transform_["n_sample"])),
+        )
 
         # adjust data
         # ** obligatory to match the fit data for adjust_data (sample_per_batch, n_sample, batch_info)
-        bayes_data = self._adjust_final_data(s_data=s_data, design=design, sample_per_batch=np.array(
-            [np.count_nonzero(X[:, columns_sites] == lvl) for lvl in self.info_dict_fit_["batch_levels"]]),
-                                             n_sample=self.info_dict_transform_["n_sample"],
-                                             batch_info=[list(np.where(X[:, columns_sites] == idx)[0]) for idx in
-                                                         self.info_dict_fit_["batch_levels"]]).T
+        bayes_data = self._adjust_final_data(
+            s_data=s_data,
+            design=design,
+            sample_per_batch=np.array(
+                [
+                    np.count_nonzero(X[:, columns_sites] == lvl)
+                    for lvl in self.info_dict_fit_["batch_levels"]
+                ]
+            ),
+            n_sample=self.info_dict_transform_["n_sample"],
+            batch_info=[
+                list(np.where(X[:, columns_sites] == idx)[0])
+                for idx in self.info_dict_fit_["batch_levels"]
+            ],
+        ).T
 
         original_X[:, columns_needed[0]] = bayes_data
 
@@ -372,10 +444,9 @@ class Combat(BaseEstimator, TransformerMixin):
 
         return original_X
 
-    def _check_data(self,
-                    X: Union[np.ndarray, pd.DataFrame],
-                    check_single_covariate: bool = True
-                    ) -> Tuple[List, List, List, List, List]:
+    def _check_data(
+        self, X: Union[np.ndarray, pd.DataFrame], check_single_covariate: bool = True
+    ) -> Tuple[List, List, List, List, List]:
         """
         Check that the input data array-like or DataFrame of shape (n_samples, n_features) have all the required
         format needed by the Combat()
@@ -385,9 +456,20 @@ class Combat(BaseEstimator, TransformerMixin):
         :return: idx of columns_features, columns_discrete_covariates,
             columns_continuous_covariates, columns_sites, other_columns
         """
-        self.features, self.discrete_covariates, self.continuous_covariates, self.sites = map(
+        (
+            self.features,
+            self.discrete_covariates,
+            self.continuous_covariates,
+            self.sites,
+        ) = map(
             lambda x: [x] if isinstance(x, (str, int)) else x if x is not None else [],
-            [self.features, self.discrete_covariates, self.continuous_covariates, self.sites])
+            [
+                self.features,
+                self.discrete_covariates,
+                self.continuous_covariates,
+                self.sites,
+            ],
+        )
 
         if not isinstance(X, pd.DataFrame):
             X = pd.DataFrame(X.copy())
@@ -401,12 +483,18 @@ class Combat(BaseEstimator, TransformerMixin):
             _check_single_covariate_sample(X, self.discrete_covariates)
             columns_used += (columns_discrete_covariates,)
         if self.continuous_covariates:
-            columns_continuous_covariates = check_exist_vars(X, self.continuous_covariates)
+            columns_continuous_covariates = check_exist_vars(
+                X, self.continuous_covariates
+            )
             _check_single_covariate_sample(X, self.continuous_covariates)
             columns_used += (columns_continuous_covariates,)
 
-        unq, unq_cnt = np.unique(np.concatenate((X.columns.get_indexer(X.columns), np.concatenate(columns_used))),
-                                 return_counts=True)
+        unq, unq_cnt = np.unique(
+            np.concatenate(
+                (X.columns.get_indexer(X.columns), np.concatenate(columns_used))
+            ),
+            return_counts=True,
+        )
         other_columns = unq[unq_cnt == 1]
 
         if check_single_covariate:
@@ -416,23 +504,49 @@ class Combat(BaseEstimator, TransformerMixin):
             if self.continuous_covariates:
                 _check_single_covariate_sample(X, self.continuous_covariates)
 
-        columns_features, columns_discrete_covariates, columns_continuous_covariates, columns_sites, other_columns \
-            = map(lambda x: x.tolist() if isinstance(x, np.ndarray) else x,
-                  [columns_features, columns_discrete_covariates,
-                   columns_continuous_covariates, columns_sites,
-                   other_columns])
+        (
+            columns_features,
+            columns_discrete_covariates,
+            columns_continuous_covariates,
+            columns_sites,
+            other_columns,
+        ) = map(
+            lambda x: x.tolist() if isinstance(x, np.ndarray) else x,
+            [
+                columns_features,
+                columns_discrete_covariates,
+                columns_continuous_covariates,
+                columns_sites,
+                other_columns,
+            ],
+        )
 
-        _check_nans(X[self.features + self.discrete_covariates + self.continuous_covariates + self.sites])
+        _check_nans(
+            X[
+                self.features
+                + self.discrete_covariates
+                + self.continuous_covariates
+                + self.sites
+            ]
+        )
 
-        return columns_features, columns_discrete_covariates, columns_continuous_covariates, columns_sites, other_columns
+        return (
+            columns_features,
+            columns_discrete_covariates,
+            columns_continuous_covariates,
+            columns_sites,
+            other_columns,
+        )
 
-    def _make_design_matrix(self,
-                            X: np.ndarray,
-                            sites_col: int,
-                            ref_site: Optional[Union[str, int]] = None,
-                            discrete_covariates_col: Optional[List[int]] = None,
-                            continuous_covariates_col: Optional[List[int]] = None,
-                            fitting: bool = False) -> np.ndarray:
+    def _make_design_matrix(
+        self,
+        X: np.ndarray,
+        sites_col: int,
+        ref_site: Optional[Union[str, int]] = None,
+        discrete_covariates_col: Optional[List[int]] = None,
+        continuous_covariates_col: Optional[List[int]] = None,
+        fitting: bool = False,
+    ) -> np.ndarray:
         """
         Method to create a design matrix that contain:
             - One-hot encoding of the sites [n_samples, n_sites]
@@ -457,10 +571,17 @@ class Combat(BaseEstimator, TransformerMixin):
 
         sites_design = self.site_encoder.transform(X[:, sites_col])
         if ref_site:
-            if len(self.site_encoder.categories_) > 1 or not self.site_encoder.categories_:
-                raise NotImplementedError(f"An error of encoding occurs: {self.site_encoder.categories_}")
+            if (
+                len(self.site_encoder.categories_) > 1
+                or not self.site_encoder.categories_
+            ):
+                raise NotImplementedError(
+                    f"An error of encoding occurs: {self.site_encoder.categories_}"
+                )
 
-            sites_design[:, self.site_encoder.categories_[0].tolist().index(ref_site)] = np.ones(sites_design.shape[0])
+            sites_design[
+                :, self.site_encoder.categories_[0].tolist().index(ref_site)
+            ] = np.ones(sites_design.shape[0])
 
         design_list.append(sites_design)
 
@@ -486,13 +607,14 @@ class Combat(BaseEstimator, TransformerMixin):
 
         return design
 
-    def _adjust_final_data(self,
-                           s_data: np.ndarray,
-                           design: np.ndarray,
-                           sample_per_batch: np.ndarray,
-                           n_sample: int,
-                           batch_info: np.ndarray
-                           ) -> np.ndarray:
+    def _adjust_final_data(
+        self,
+        s_data: np.ndarray,
+        design: np.ndarray,
+        sample_per_batch: np.ndarray,
+        n_sample: int,
+        batch_info: np.ndarray,
+    ) -> np.ndarray:
         """
         Adjust final data
 
@@ -504,7 +626,7 @@ class Combat(BaseEstimator, TransformerMixin):
         :return: bayes data
         """
         bayes_data = s_data
-        batch_design = design[:, :self.info_dict_fit_["n_batch"]]
+        batch_design = design[:, : self.info_dict_fit_["n_batch"]]
 
         for j, batch_idxs in enumerate(batch_info):
             if not batch_idxs:
@@ -512,13 +634,19 @@ class Combat(BaseEstimator, TransformerMixin):
             dsq = np.sqrt(self.delta_star_[j, :])
             dsq = dsq.reshape((len(dsq), 1))
             denom = np.dot(dsq, np.ones((1, sample_per_batch[j])))
-            numer = np.array(bayes_data[:, batch_idxs] - np.dot(batch_design[batch_idxs, :], self.gamma_star_).T)
+            numer = np.array(
+                bayes_data[:, batch_idxs]
+                - np.dot(batch_design[batch_idxs, :], self.gamma_star_).T
+            )
 
             bayes_data[:, batch_idxs] = numer / denom
 
         vpsq = np.sqrt(self.var_pooled_).reshape((len(self.var_pooled_), 1))
-        bayes_data = bayes_data * np.dot(vpsq,
-                                         np.ones((1, n_sample))) + self.stand_mean_transform_ + self.mod_mean_transform_
+        bayes_data = (
+            bayes_data * np.dot(vpsq, np.ones((1, n_sample)))
+            + self.stand_mean_transform_
+            + self.mod_mean_transform_
+        )
 
         return bayes_data
 
@@ -535,10 +663,13 @@ class Combat(BaseEstimator, TransformerMixin):
         if not filepath.endswith(".pkl"):
             filepath += ".pkl"
 
-        attrs_to_save = {k: v for k, v in vars(self).items()
-                         if k.endswith("_") and not k.startswith("__")}
+        attrs_to_save = {
+            k: v
+            for k, v in vars(self).items()
+            if k.endswith("_") and not k.startswith("__")
+        }
 
-        with open(filepath, 'wb') as output:  # Overwrites any existing file.
+        with open(filepath, "wb") as output:  # Overwrites any existing file.
             pickle.dump(attrs_to_save, output, pickle.HIGHEST_PROTOCOL)
 
     def load_fit(self, filepath: str) -> None:
@@ -548,7 +679,7 @@ class Combat(BaseEstimator, TransformerMixin):
 
         :param filepath: filepath of the pkl file to load
         """
-        with open(filepath, 'rb') as pickle_file:  # Overwrites any existing file.
+        with open(filepath, "rb") as pickle_file:  # Overwrites any existing file.
             loaded_pickle = pickle.load(pickle_file)
         for k, v in loaded_pickle.items():
             setattr(self, k, v)
@@ -688,42 +819,60 @@ class AutoCombat(Combat):
 
     """
 
-    def __init__(self,
-                 features: Union[List[str], List[int], str, int],
-                 sites_features: Union[List[str], List[int], str, int] = None,
-                 sites: Optional[Union[str, int]] = None,
-                 size_min: int = 10,
-                 metric: str = "distortion",
-                 use_ref_site: bool = False,
-                 scaler_clustering=StandardScaler(),
-                 discrete_cluster_features: Optional[Union[List[str], List[int], str, int]] = None,
-                 continuous_cluster_features: Optional[Union[List[str], List[int], str, int]] = None,
-                 features_reduction: Optional[str] = None,
-                 n_components: int = 2,
-                 threshold_missing_sites_features=25,
-                 drop_site_columns: bool = False,
-                 discrete_combat_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 continuous_combat_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 empirical_bayes: bool = True,
-                 parametric: bool = True,
-                 mean_only: bool = False,
-                 return_only_features: bool = False,
-                 n_jobs: int = 1,
-                 random_state: Union[int, None] = 123,
-                 copy: bool = True) -> None:
-        super().__init__(features=features,
-                         sites=sites,
-                         discrete_covariates=discrete_combat_covariates,
-                         continuous_covariates=continuous_combat_covariates,
-                         empirical_bayes=empirical_bayes,
-                         parametric=parametric,
-                         mean_only=mean_only)
+    def __init__(
+        self,
+        features: Union[List[str], List[int], str, int],
+        sites_features: Union[List[str], List[int], str, int] = None,
+        sites: Optional[Union[str, int]] = None,
+        size_min: int = 10,
+        metric: str = "distortion",
+        use_ref_site: bool = False,
+        scaler_clustering=StandardScaler(),
+        discrete_cluster_features: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        continuous_cluster_features: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        features_reduction: Optional[str] = None,
+        n_components: int = 2,
+        threshold_missing_sites_features=25,
+        drop_site_columns: bool = False,
+        discrete_combat_covariates: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        continuous_combat_covariates: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        empirical_bayes: bool = True,
+        parametric: bool = True,
+        mean_only: bool = False,
+        return_only_features: bool = False,
+        n_jobs: int = 1,
+        random_state: Union[int, None] = 123,
+        copy: bool = True,
+    ) -> None:
+        super().__init__(
+            features=features,
+            sites=sites,
+            discrete_covariates=discrete_combat_covariates,
+            continuous_covariates=continuous_combat_covariates,
+            empirical_bayes=empirical_bayes,
+            parametric=parametric,
+            mean_only=mean_only,
+        )
 
         if not 0 < threshold_missing_sites_features < 100:
-            raise ValueError("threshold_missing_sites_features need to be comprise between 0 and 100")
+            raise ValueError(
+                "threshold_missing_sites_features need to be comprise between 0 and 100"
+            )
 
-        if (sites_features is None and sites is None) or (sites_features is not None and sites is not None):
-            raise ValueError("one of sites_features or sites must be provided. If sites will run traditional ComBat")
+        if (sites_features is None and sites is None) or (
+            sites_features is not None and sites is not None
+        ):
+            raise ValueError(
+                "one of sites_features or sites must be provided. If sites will run traditional ComBat"
+            )
 
         self.features = features
         self.sites_features = sites_features
@@ -753,7 +902,10 @@ class AutoCombat(Combat):
         __init__ parameters are not touched.
         """
 
-        if hasattr(self, "cls_", ):
+        if hasattr(
+            self,
+            "cls_",
+        ):
             del self.cls_
             del self.cls_feature_reduction_
             del self.clustering_data_features_
@@ -762,10 +914,17 @@ class AutoCombat(Combat):
             del self.X_hat_
             del self.dict_cls_fitted
 
-        if hasattr(self, "clustering_data_discrete_features_", ):
+        if hasattr(
+            self,
+            "clustering_data_discrete_features_",
+        ):
             del self.clustering_data_discrete_features_
 
-    def fit(self, X: Union[np.ndarray, pd.DataFrame], *y: Optional[Union[np.ndarray, pd.DataFrame]]) -> "AutoCombat":
+    def fit(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        *y: Optional[Union[np.ndarray, pd.DataFrame]],
+    ) -> "AutoCombat":
         """
         Compute sites, ref_site using clustering. Then compute the stand mean, var pooled, gamma star, delta star
         to be used for later adjusted data from Combat.
@@ -787,35 +946,56 @@ class AutoCombat(Combat):
 
         if self.sites_features is not None:
 
-            clustering_data, columns_clustering_features, columns_discrete_cluster_features, \
-            columns_continuous_cluster_features = self._check_data_cluster(X)
+            (
+                clustering_data,
+                columns_clustering_features,
+                columns_discrete_cluster_features,
+                columns_continuous_cluster_features,
+            ) = self._check_data_cluster(X)
 
             # get clustering data columns
             self.clustering_data_features_ = self.sites_features
 
-            self.cls_, self.cls_feature_reduction_, cluster_nb, labels, ref_label, \
-            wicss_clusters, best_wicss_cluster, _, self.X_hat_, mu = optimal_clustering(X=clustering_data,
-                                                                                        size_min=self.size_min,
-                                                                                        metric=self.metric,
-                                                                                        features_reduction=self.features_reduction,
-                                                                                        n_jobs=self.n_jobs,
-                                                                                        random_state=self.random_state)
+            (
+                self.cls_,
+                self.cls_feature_reduction_,
+                cluster_nb,
+                labels,
+                ref_label,
+                wicss_clusters,
+                best_wicss_cluster,
+                _,
+                self.X_hat_,
+                mu,
+            ) = optimal_clustering(
+                X=clustering_data,
+                size_min=self.size_min,
+                metric=self.metric,
+                features_reduction=self.features_reduction,
+                n_jobs=self.n_jobs,
+                random_state=self.random_state,
+            )
 
-            self.clustering_data_features_mean_ = pd.DataFrame(mu,
-                                                               columns=list(clustering_data.columns)).iloc[0].to_dict()
+            self.clustering_data_features_mean_ = (
+                pd.DataFrame(mu, columns=list(clustering_data.columns))
+                .iloc[0]
+                .to_dict()
+            )
 
             self.info_clustering_ = {
-                'cluster_nb': cluster_nb,
-                'labels': labels,
-                'ref_label': ref_label,
-                'wicss_clusters': wicss_clusters,
-                'best_wicss_cluster': best_wicss_cluster,
+                "cluster_nb": cluster_nb,
+                "labels": labels,
+                "ref_label": ref_label,
+                "wicss_clusters": wicss_clusters,
+                "best_wicss_cluster": best_wicss_cluster,
             }
 
             if cluster_nb == 1:
-                raise ValueError("Combat can not run. "
-                                 "Only one acquisition site found from sites features. "
-                                 "Are the data really different or from different acquisition site?")
+                raise ValueError(
+                    "Combat can not run. "
+                    "Only one acquisition site found from sites features. "
+                    "Are the data really different or from different acquisition site?"
+                )
 
             # add sites columns
             X = self._add_sites(X, labels)
@@ -844,11 +1024,17 @@ class AutoCombat(Combat):
         check_is_fitted(self)
 
         if self.sites_features is not None:
-            clustering_data, columns_clustering_features, columns_discrete_cluster_features, \
-            columns_continuous_cluster_features = self._check_data_cluster(X)
+            (
+                clustering_data,
+                columns_clustering_features,
+                columns_discrete_cluster_features,
+                columns_continuous_cluster_features,
+            ) = self._check_data_cluster(X)
 
             # check for NaN for clustering data
-            clustering_data.fillna(value=self.clustering_data_features_mean_, inplace=True)
+            clustering_data.fillna(
+                value=self.clustering_data_features_mean_, inplace=True
+            )
 
             if self.features_reduction is not None:
                 clustering_data = self.cls_feature_reduction_.transform(clustering_data)
@@ -856,7 +1042,9 @@ class AutoCombat(Combat):
             # get labels for sites
             # tricky to avoid error with this verification:
             # size_min * n_clusters > n_samples: n_sample = clustering_data.shape[0]
-            self.cls_.n_clusters = 1  # can be set to 1 because cls_.predict don't use this args
+            self.cls_.n_clusters = (
+                1  # can be set to 1 because cls_.predict don't use this args
+            )
             # don't
             labels = self.cls_.predict(clustering_data, size_min=None, size_max=None)
 
@@ -875,8 +1063,9 @@ class AutoCombat(Combat):
 
         return X
 
-    def _check_data_cluster(self, X: Union[np.ndarray, pd.DataFrame]) -> Tuple[
-        pd.DataFrame, List, List, List]:
+    def _check_data_cluster(
+        self, X: Union[np.ndarray, pd.DataFrame]
+    ) -> Tuple[pd.DataFrame, List, List, List]:
         """
         Check that the input data array-like or DataFrame of shape (n_samples, n_features) have all the required
         format needed by the :py:class:`Combat()`
@@ -888,9 +1077,18 @@ class AutoCombat(Combat):
         if not self.sites_features:
             raise ValueError("sites_features is empty")
 
-        self.sites_features, self.discrete_cluster_features, self.continuous_cluster_features = map(
+        (
+            self.sites_features,
+            self.discrete_cluster_features,
+            self.continuous_cluster_features,
+        ) = map(
             lambda x: [x] if isinstance(x, (str, int)) else x if x is not None else [],
-            [self.sites_features, self.discrete_cluster_features, self.continuous_cluster_features])
+            [
+                self.sites_features,
+                self.discrete_cluster_features,
+                self.continuous_cluster_features,
+            ],
+        )
 
         if not isinstance(X, pd.DataFrame):
             X = pd.DataFrame(X.copy())
@@ -904,87 +1102,153 @@ class AutoCombat(Combat):
         columns_used = (columns_clustering_features,)
         columns_discrete_cluster_features, columns_continuous_cluster_features = [], []
         if self.discrete_cluster_features:
-            columns_discrete_cluster_features = check_exist_vars(X, self.discrete_cluster_features)
+            columns_discrete_cluster_features = check_exist_vars(
+                X, self.discrete_cluster_features
+            )
             columns_used += (columns_discrete_cluster_features,)
         if self.continuous_cluster_features:
-            columns_continuous_cluster_features = check_exist_vars(X, self.continuous_cluster_features)
+            columns_continuous_cluster_features = check_exist_vars(
+                X, self.continuous_cluster_features
+            )
             columns_used += (columns_continuous_cluster_features,)
 
-        unq, unq_cnt = np.unique(np.concatenate((columns_clustering_features, np.concatenate(columns_used))),
-                                 return_counts=True)
+        unq, unq_cnt = np.unique(
+            np.concatenate((columns_clustering_features, np.concatenate(columns_used))),
+            return_counts=True,
+        )
         other_columns = unq[unq_cnt == 1]
 
         if other_columns.size > 0:
             warnings.warn(
                 f"Some columns: {X.columns[other_columns].tolist()} are not specified as discrete or continuous. "
-                f"Clustering will interpret this data as raw.", UserWarning, stacklevel=2)
+                f"Clustering will interpret this data as raw.",
+                UserWarning,
+                stacklevel=2,
+            )
 
-        percent_missing = X.iloc[:, columns_clustering_features].isnull().sum() * 100 / len(X)
+        percent_missing = (
+            X.iloc[:, columns_clustering_features].isnull().sum() * 100 / len(X)
+        )
         percent_missing = percent_missing.to_dict()
 
         if not hasattr(self, "clustering_data_features_"):
             self.sites_features_removed_ = []
             for features, val in percent_missing.items():
                 if val > self.threshold_missing_sites_features:
-                    warnings.warn(f"sites_features: {features} removed because more than "
-                                  f"{self.threshold_missing_sites_features}% of missing data", UserWarning,
-                                  stacklevel=2)
+                    warnings.warn(
+                        f"sites_features: {features} removed because more than "
+                        f"{self.threshold_missing_sites_features}% of missing data",
+                        UserWarning,
+                        stacklevel=2,
+                    )
                     self.sites_features_removed_.append(features)
-                    columns_clustering_features, columns_discrete_cluster_features, columns_continuous_cluster_features \
-                        = list(map(lambda x: np.delete(x, np.where(x == get_column_index(X, [features])[0])), (
-                        columns_clustering_features, columns_discrete_cluster_features,
-                        columns_continuous_cluster_features)))
+                    (
+                        columns_clustering_features,
+                        columns_discrete_cluster_features,
+                        columns_continuous_cluster_features,
+                    ) = list(
+                        map(
+                            lambda x: np.delete(
+                                x, np.where(x == get_column_index(X, [features])[0])
+                            ),
+                            (
+                                columns_clustering_features,
+                                columns_discrete_cluster_features,
+                                columns_continuous_cluster_features,
+                            ),
+                        )
+                    )
 
-        columns_clustering_features, columns_discrete_cluster_features, columns_continuous_cluster_features = map(
+        (
+            columns_clustering_features,
+            columns_discrete_cluster_features,
+            columns_continuous_cluster_features,
+        ) = map(
             lambda x: x.tolist() if isinstance(x, np.ndarray) else x,
-            [columns_clustering_features, columns_discrete_cluster_features, columns_continuous_cluster_features])
+            [
+                columns_clustering_features,
+                columns_discrete_cluster_features,
+                columns_continuous_cluster_features,
+            ],
+        )
 
         # remove same features has in train
         if self.sites_features_removed_ and hasattr(self, "clustering_data_features_"):
             for feature_to_remove in self.sites_features_removed_:
-                list(map(lambda x: x.remove(feature_to_remove) if feature_to_remove in x else x,
-                         (columns_clustering_features, columns_discrete_cluster_features,
-                          columns_continuous_cluster_features)))
+                list(
+                    map(
+                        lambda x: (
+                            x.remove(feature_to_remove) if feature_to_remove in x else x
+                        ),
+                        (
+                            columns_clustering_features,
+                            columns_discrete_cluster_features,
+                            columns_continuous_cluster_features,
+                        ),
+                    )
+                )
 
-        clustering_data_discrete, clustering_data_continuous = pd.DataFrame([]), pd.DataFrame([])
+        clustering_data_discrete, clustering_data_continuous = pd.DataFrame(
+            []
+        ), pd.DataFrame([])
         if columns_discrete_cluster_features:
-            clustering_data_discrete = one_hot_encoder(df=X.iloc[:, columns_discrete_cluster_features],
-                                                       columns=list(
-                                                           X.iloc[:, columns_discrete_cluster_features].columns),
-                                                       dummy_na=True, add_nan_columns=True)
+            clustering_data_discrete = one_hot_encoder(
+                df=X.iloc[:, columns_discrete_cluster_features],
+                columns=list(X.iloc[:, columns_discrete_cluster_features].columns),
+                dummy_na=True,
+                add_nan_columns=True,
+            )
 
             # pure transform
             if hasattr(self, "clustering_data_discrete_features_"):
-                clustering_data_discrete = fix_columns(df=clustering_data_discrete,
-                                                       columns=self.clustering_data_discrete_features_,
-                                                       inplace=False,
-                                                       extra_nans=True)
+                clustering_data_discrete = fix_columns(
+                    df=clustering_data_discrete,
+                    columns=self.clustering_data_discrete_features_,
+                    inplace=False,
+                    extra_nans=True,
+                )
             else:
-                self.clustering_data_discrete_features_ = list(clustering_data_discrete.columns)
+                self.clustering_data_discrete_features_ = list(
+                    clustering_data_discrete.columns
+                )
 
         if columns_continuous_cluster_features:
 
             # pure transform
             if hasattr(self, "clustering_data_features_"):
-                clustering_data_continuous = pd.DataFrame(index=list(X.index),
-                                                          columns=list(self.dict_cls_fitted.keys()))
+                clustering_data_continuous = pd.DataFrame(
+                    index=list(X.index), columns=list(self.dict_cls_fitted.keys())
+                )
                 for col, scal in self.dict_cls_fitted.items():
                     try:
                         clustering_data_continuous[col] = scal.fit_transform(X[col])
                     except ValueError:
-                        clustering_data_continuous[col] = scal.fit_transform(pd.DataFrame(X[col]))
+                        clustering_data_continuous[col] = scal.fit_transform(
+                            pd.DataFrame(X[col])
+                        )
             else:
-                clustering_data_continuous, self.dict_cls_fitted \
-                    = scaler_encoder(df=X.iloc[:, columns_continuous_cluster_features],
-                                     columns=list(X.iloc[:, columns_continuous_cluster_features].columns),
-                                     scaler=self.scaler_clustering)
+                clustering_data_continuous, self.dict_cls_fitted = scaler_encoder(
+                    df=X.iloc[:, columns_continuous_cluster_features],
+                    columns=list(
+                        X.iloc[:, columns_continuous_cluster_features].columns
+                    ),
+                    scaler=self.scaler_clustering,
+                )
 
-        clustering_data = pd.concat([clustering_data_discrete, clustering_data_continuous], axis=1)
+        clustering_data = pd.concat(
+            [clustering_data_discrete, clustering_data_continuous], axis=1
+        )
 
-        return clustering_data, columns_clustering_features, columns_discrete_cluster_features, columns_continuous_cluster_features
+        return (
+            clustering_data,
+            columns_clustering_features,
+            columns_discrete_cluster_features,
+            columns_continuous_cluster_features,
+        )
 
-    def _add_sites(self, X: Union[np.ndarray, pd.DataFrame], labels: Union[np.ndarray, List]) \
-            -> Union[np.ndarray, pd.DataFrame]:
+    def _add_sites(
+        self, X: Union[np.ndarray, pd.DataFrame], labels: Union[np.ndarray, List]
+    ) -> Union[np.ndarray, pd.DataFrame]:
         """
         Add sites find by clustering to X
 
@@ -997,8 +1261,8 @@ class AutoCombat(Combat):
 
         sites = None
         if isinstance(X, pd.DataFrame):
-            X['sites'] = labels
-            sites = 'sites'
+            X["sites"] = labels
+            sites = "sites"
         elif isinstance(X, np.ndarray):
             X = np.c_[X, labels]
             sites = X.shape[1]
@@ -1096,48 +1360,63 @@ class ImageCombat(AutoCombat):
 
     """
 
-    def __init__(self, image_path: Union[str, int],
-                 sites_features: Union[List[str], List[int], str, int] = None,
-                 sites: Union[str, int] = None,
-                 save_path_fit: str = 'fit_data',
-                 save_path_transform: str = 'transform_data',
-                 size_min: int = 10, method: str = "silhouette",
-                 use_ref_site: bool = False,
-                 scaler_clustering=StandardScaler(),
-                 discrete_cluster_features: Optional[Union[List[str], List[int], str, int]] = None,
-                 continuous_cluster_features: Optional[Union[List[str], List[int], str, int]] = None,
-                 features_reduction: Optional[str] = None,
-                 n_components: int = 2,
-                 threshold_missing_sites_features=25,
-                 drop_site_columns: bool = True,
-                 discrete_combat_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 continuous_combat_covariates: Optional[Union[List[str], List[int], str, int]] = None,
-                 empirical_bayes: bool = True,
-                 parametric: bool = True, mean_only: bool = False,
-                 random_state: Union[int, None] = 123,
-                 flattened_dtype: Optional[np.dtype] = np.float16,
-                 output_dtype: Optional[np.dtype] = np.float32,
-                 copy: bool = True) -> None:
-        super().__init__(features=[],
-                         sites_features=sites_features,
-                         sites=sites,
-                         size_min=size_min,
-                         method=method,
-                         use_ref_site=use_ref_site,
-                         scaler_clustering=scaler_clustering,
-                         discrete_cluster_features=discrete_cluster_features,
-                         continuous_cluster_features=continuous_cluster_features,
-                         features_reduction=features_reduction,
-                         n_components=n_components,
-                         threshold_missing_sites_features=threshold_missing_sites_features,
-                         drop_site_columns=drop_site_columns,
-                         discrete_combat_covariates=discrete_combat_covariates,
-                         continuous_combat_covariates=continuous_combat_covariates,
-                         empirical_bayes=empirical_bayes,
-                         parametric=parametric,
-                         mean_only=mean_only,
-                         random_state=random_state,
-                         copy=copy)
+    def __init__(
+        self,
+        image_path: Union[str, int],
+        sites_features: Union[List[str], List[int], str, int] = None,
+        sites: Union[str, int] = None,
+        save_path_fit: str = "fit_data",
+        save_path_transform: str = "transform_data",
+        size_min: int = 10,
+        method: str = "silhouette",
+        use_ref_site: bool = False,
+        scaler_clustering=StandardScaler(),
+        discrete_cluster_features: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        continuous_cluster_features: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        features_reduction: Optional[str] = None,
+        n_components: int = 2,
+        threshold_missing_sites_features=25,
+        drop_site_columns: bool = True,
+        discrete_combat_covariates: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        continuous_combat_covariates: Optional[
+            Union[List[str], List[int], str, int]
+        ] = None,
+        empirical_bayes: bool = True,
+        parametric: bool = True,
+        mean_only: bool = False,
+        random_state: Union[int, None] = 123,
+        flattened_dtype: Optional[np.dtype] = np.float16,
+        output_dtype: Optional[np.dtype] = np.float32,
+        copy: bool = True,
+    ) -> None:
+        super().__init__(
+            features=[],
+            sites_features=sites_features,
+            sites=sites,
+            size_min=size_min,
+            method=method,
+            use_ref_site=use_ref_site,
+            scaler_clustering=scaler_clustering,
+            discrete_cluster_features=discrete_cluster_features,
+            continuous_cluster_features=continuous_cluster_features,
+            features_reduction=features_reduction,
+            n_components=n_components,
+            threshold_missing_sites_features=threshold_missing_sites_features,
+            drop_site_columns=drop_site_columns,
+            discrete_combat_covariates=discrete_combat_covariates,
+            continuous_combat_covariates=continuous_combat_covariates,
+            empirical_bayes=empirical_bayes,
+            parametric=parametric,
+            mean_only=mean_only,
+            random_state=random_state,
+            copy=copy,
+        )
 
         self.image_path = image_path
         self.save_path_fit = save_path_fit
@@ -1154,24 +1433,39 @@ class ImageCombat(AutoCombat):
         __init__ parameters are not touched.
         """
 
-        if hasattr(self, 'mask_', ):
+        if hasattr(
+            self,
+            "mask_",
+        ):
             del self.mask_
             del self.flattened_array_
 
-    def fit(self, X: Union[np.ndarray, pd.DataFrame], *y: Optional[Union[np.ndarray, pd.DataFrame]]) -> "ImageCombat":
+    def fit(
+        self,
+        X: Union[np.ndarray, pd.DataFrame],
+        *y: Optional[Union[np.ndarray, pd.DataFrame]],
+    ) -> "ImageCombat":
 
         _, list_image_path = self._check_image_path(X)
 
         # create common brain mask
-        self.mask_, _ = _compute_mask_files(input_path=list_image_path,
-                                            output_path=os.path.join(self.save_path_fit, "common_mask.nii.gz"),
-                                            return_mean=False)
+        self.mask_, _ = _compute_mask_files(
+            input_path=list_image_path,
+            output_path=os.path.join(self.save_path_fit, "common_mask.nii.gz"),
+            return_mean=False,
+        )
 
         # flatten nifti files
-        self.flattened_array_ = flatten_nifti_files(input_path=list_image_path, mask=self.mask_,
-                                                    output_flattened_array_path=os.path.join(self.save_path_fit,
-                                                                                             "flattened_array"),
-                                                    dtype=self.flattened_dtype, save=True, compress_save=True)
+        self.flattened_array_ = flatten_nifti_files(
+            input_path=list_image_path,
+            mask=self.mask_,
+            output_flattened_array_path=os.path.join(
+                self.save_path_fit, "flattened_array"
+            ),
+            dtype=self.flattened_dtype,
+            save=True,
+            compress_save=True,
+        )
 
         X, _ = self._add_voxels_as_features(X.copy(deep=True), self.flattened_array_)
 
@@ -1201,23 +1495,36 @@ class ImageCombat(AutoCombat):
         # to avoid OOM, apply sequentially the transform for image path
         for i, image_path in enumerate(tqdm(list_image_path, desc="Transform image")):
             to_convert = X.loc[[i]] if isinstance(X, pd.DataFrame) else X[[i]]
-            flattened_array = np.zeros((1, n_voxels_flattened)).astype(self.flattened_dtype)
+            flattened_array = np.zeros((1, n_voxels_flattened)).astype(
+                self.flattened_dtype
+            )
             image_arr, header = load_nifty_volume_as_array(image_path)
             flattened_array[0, :] = image_arr[logical_mask]
-            to_convert, features_columns = self._add_voxels_as_features(to_convert.copy(deep=self.copy),
-                                                                        flattened_array)
+            to_convert, features_columns = self._add_voxels_as_features(
+                to_convert.copy(deep=self.copy), flattened_array
+            )
             # run AutoCombat transform
             adjusted_array = super().transform(to_convert)
             adjusted_array = adjusted_array[:, features_columns]
             #
             nifti_out = logical_mask.copy().astype(self.output_dtype)
             nifti_out[logical_mask] = adjusted_array[0, :]
-            save_to_nii(im=nifti_out, header=header, output_dir=self.save_path_transform,
-                        filename=os.path.basename(image_path))
+            save_to_nii(
+                im=nifti_out,
+                header=header,
+                output_dir=self.save_path_transform,
+                filename=os.path.basename(image_path),
+            )
 
-    def _check_image_path(self, X: Union[np.ndarray, pd.DataFrame]) -> Tuple[List, List]:
+    def _check_image_path(
+        self, X: Union[np.ndarray, pd.DataFrame]
+    ) -> Tuple[List, List]:
 
-        self.image_path = [self.image_path] if isinstance(self.image_path, (str, int)) else self.image_path
+        self.image_path = (
+            [self.image_path]
+            if isinstance(self.image_path, (str, int))
+            else self.image_path
+        )
 
         if not isinstance(X, pd.DataFrame):
             X = pd.DataFrame(X.copy())
@@ -1234,7 +1541,9 @@ class ImageCombat(AutoCombat):
 
         return column_image_path, list_image_path
 
-    def _add_voxels_as_features(self, X: Union[np.ndarray, pd.DataFrame], flattened_array: np.ndarray):
+    def _add_voxels_as_features(
+        self, X: Union[np.ndarray, pd.DataFrame], flattened_array: np.ndarray
+    ):
         """
         Add voxels as features and drop the image_path columns
         :param X: Initial input of ImageCombat
@@ -1247,15 +1556,21 @@ class ImageCombat(AutoCombat):
         features_columns = list(range(init_columns, end_columns))
 
         if isinstance(X, pd.DataFrame):
-            X[self.image_path] = 0.  # create null columns for image path, allows to keep order
+            X[self.image_path] = (
+                0.0  # create null columns for image path, allows to keep order
+            )
             # parameters of columns parameters (because string type)
-            X = pd.concat([X.reset_index(drop=True), pd.DataFrame(flattened_array)], axis=1)
+            X = pd.concat(
+                [X.reset_index(drop=True), pd.DataFrame(flattened_array)], axis=1
+            )
             self.features = list(range(flattened_array.shape[1]))
             if (np.unique(X.columns.to_list(), return_counts=True)[1] > 1).any():
-                raise ValueError(f"There is a column in the dataframe with the name in the range: "
-                                 f"{features_columns[0]} ... {features_columns[-1]} ")
+                raise ValueError(
+                    f"There is a column in the dataframe with the name in the range: "
+                    f"{features_columns[0]} ... {features_columns[-1]} "
+                )
         elif isinstance(X, np.ndarray):
-            X[:, 1] = 0.
+            X[:, 1] = 0.0
             X = np.c_[X, flattened_array]
             self.features = features_columns
 
