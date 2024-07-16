@@ -1,30 +1,39 @@
 #  environment document
 
-name: mrilanding
+name: one-env-to-rule-them-all
 channels:
   - conda-forge
   
 dependencies:
+  - python>=3.11
   - imageio=2.25.0
   - ipympl=0.9.3
-  - jupyter=1.0.0
-  - jupyterlab=3.6.1
+  - jupyter
+  - jupyterlab
+  - kneed
   - matplotlib
-  - pytest<8.1
+  - matplotlib-inline
   - nibabel
-  - notebook=6.4.10
-  - numpy
-  - pandas
+  - notebook
+  - numpy~=1.20
+  - pandas>=1.2.0
+  - patsy
+  - pip
   - pycodestyle
-  - python>=3.10
+  - pydicom
+  - pytest<8.1
   - scipy
   - scikit-image
-  - scikit-learn
+  - scikit-learn>=0.23.2
+  - scipy>=1.5.4
   - seaborn
-  - simpleitk
-  - sphinx=4.5.0
-  - pydicom
-  
+  - simpleitk>=2.0.1
+  # - sphinx=4.5.0
+  - tqdm>=4.59
+  - umap-learn>=0.5.1
+  - yellowbrick>=1.3
 
-
-
+  - pip:
+    # - neuroCombat==0.2.12
+    - k-means-constrained>=0.5.2
+    - nipy
