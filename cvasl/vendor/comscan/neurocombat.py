@@ -10,11 +10,19 @@ from typing import Union, List, Tuple, Optional
 
 import numpy as np
 import pandas as pd
+<<<<<<< HEAD
 from ..neurocombat.neurocombat import standardize_across_features
 from ..neurocombat.neurocombat import find_parametric_adjustments
 from ..neurocombat.neurocombat import fit_LS_model_and_find_priors
 from ..neurocombat.neurocombat import find_non_eb_adjustments
 from ..neurocombat.neurocombat import find_non_parametric_adjustments
+=======
+from ..neurocombat.neurocombat.neuroCombat import standardize_across_features
+from ..neurocombat.neurocombat.neuroCombat import find_parametric_adjustments
+from ..neurocombat.neurocombat.neuroCombat import fit_LS_model_and_find_priors
+from ..neurocombat.neurocombat.neuroCombat import find_non_eb_adjustments
+from ..neurocombat.neurocombat.neuroCombat import find_non_parametric_adjustments
+>>>>>>> a807c21 (vendor/comscan: fix incomplete vendoring of ComScan)
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
@@ -101,7 +109,11 @@ class Combat(BaseEstimator, TransformerMixin):
     features : Target features to be harmonized
 
     sites : Target variable for ComScan problems
+<<<<<<< HEAD
         (e.g. acquisition sites or scanner).
+=======
+    (e.g. acquisition sites or scanner).
+>>>>>>> a807c21 (vendor/comscan: fix incomplete vendoring of ComScan)
 
     discrete_covariates : Target covariates which are
         categorical (e.g. male or female).
