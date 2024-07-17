@@ -10,11 +10,11 @@ from typing import Union, List, Tuple, Optional
 
 import numpy as np
 import pandas as pd
-from ..neurocombat.neurocombat.neuroCombat import standardize_across_features
-from ..neurocombat.neurocombat.neuroCombat import find_parametric_adjustments
-from ..neurocombat.neurocombat.neuroCombat import fit_LS_model_and_find_priors
-from ..neurocombat.neurocombat.neuroCombat import find_non_eb_adjustments
-from ..neurocombat.neurocombat.neuroCombat import find_non_parametric_adjustments
+from ..neurocombat.neurocombat import standardize_across_features
+from ..neurocombat.neurocombat import find_parametric_adjustments
+from ..neurocombat.neurocombat import fit_LS_model_and_find_priors
+from ..neurocombat.neurocombat import find_non_eb_adjustments
+from ..neurocombat.neurocombat import find_non_parametric_adjustments
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
