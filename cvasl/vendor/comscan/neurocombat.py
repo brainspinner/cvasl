@@ -107,11 +107,7 @@ class Combat(BaseEstimator, TransformerMixin):
     features : Target features to be harmonized
 
     sites : Target variable for ComScan problems
-<<<<<<< HEAD
         (e.g. acquisition sites or scanner).
-=======
-    (e.g. acquisition sites or scanner).
->>>>>>> a807c21 (vendor/comscan: fix incomplete vendoring of ComScan)
 
     discrete_covariates : Target covariates which are
         categorical (e.g. male or female).
