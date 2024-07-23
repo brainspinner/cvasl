@@ -15,6 +15,7 @@ import sys
 import warnings
 import pandas as pd
 import numpy as np
+import neuroHarmonize
 from neuroHarmonize import harmonizationLearn
 
 

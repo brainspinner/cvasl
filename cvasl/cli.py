@@ -20,7 +20,7 @@ from .seperated import recode_sex_folder
 from .seperated import make_log_folder
 from .seperated import drop_columns_folder
 from .seperated import make_log_file
-
+from .harm2 import neuroharmony_apply
 
 def common(parser):
     """
@@ -143,6 +143,42 @@ def make_parser():
         columns which will be loged.
         ''',
     )
+
+
+    common(neuroharmony_apply)
+
+    neuroharmony_apply = subparsers.add_parser('neuroharmony_apply')
+    neuroharmony_apply.set_defaults(action='neuroharmony_apply')
+    neuroharmony_apply.add_argument(
+        '-i',
+        '--input',
+        default='.',
+        help='''
+        File to use of csv data with a site column.
+        ''',
+    )
+
+    neuroharmony_apply.add_argument(
+        '-l',
+        '--columns',
+        action='append',
+        default=['wmh_count'],
+        help='''
+        columns which will be harmonized.
+        ''',
+    )
+
+    neuroharmony_apply.add_argument(
+        '-c',
+        '--covariates',
+        action='append',
+        default=['Sex'],
+        help='''
+        columns which will be covariates.
+        ''',
+    )
+
+
 
     common(log_file_over)
 
@@ -268,6 +304,17 @@ def main(argv):
         try:
             make_log_file(
                 parsed.input,
+                parsed.columns,
+            )
+        except Exception as e:
+            logging.exception(e)
+            return 1
+
+    elif parsed.action == 'neuroharmony_apply_over':
+        try:
+            make_log_file(
+                parsed.input,
+                parsed.covariates,
                 parsed.columns,
             )
         except Exception as e:
