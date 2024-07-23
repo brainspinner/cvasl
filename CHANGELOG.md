@@ -77,10 +77,12 @@ Changed repo name from brainspin to cvasl
 
 ## Release 0.0.4
 
-### Pending
+### Added
 
 * Fifth version of this Python project containing (added to this version):
 
-    - work for first long paper in secluded notebooks: extended_harm_paper_all_harm, extended_harm_paper_selective_harm
+    - work for first long paper in secluded notebooks
+    = reworked environment to run all pythonharmonizations from venfor in one environment
+    - change to setup to include vendor
     
 
