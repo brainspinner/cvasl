@@ -22,6 +22,9 @@ is being buit for the entire community of radiology researchers across all unive
 
 cvasl is not a pure Python package. If
 you want to run all possibilities you will need R, and therefore the conda version. 
+The current conda version release v0.0.4 has the limitation that it is missing the `nipy` 
+and `k-means-constrained` python libraries.
+We are  working to update this, but the user should add these to their environment.
 Below is the list of platforms that should work in terms of the Python code.
 Other platforms may work, but have had less extensive testing.
 Please note that where
