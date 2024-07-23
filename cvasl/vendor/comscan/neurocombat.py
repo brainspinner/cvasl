@@ -101,16 +101,16 @@ class Combat(BaseEstimator, TransformerMixin):
     features : Target features to be harmonized
 
     sites : Target variable for ComScan problems
-    (e.g. acquisition sites or scanner).
+        (e.g. acquisition sites or scanner).
 
     discrete_covariates : Target covariates which are
-    categorical (e.g. male or female).
+        categorical (e.g. male or female).
 
     continuous_covariates : Target covariates
-    which are continuous (e.g. age).
+        which are continuous (e.g. age).
 
     ref_site : Variable value (acquisition sites or scanner)
-    to be used as reference for batch adjustment.
+        to be used as reference for batch adjustment.
         Default is False.
 
     empirical_bayes : Performed empirical bayes.
@@ -133,25 +133,25 @@ class Combat(BaseEstimator, TransformerMixin):
 
     Attributes
     ----------
-    info_dict_fit_ : dictionary that stores batch info of fitted data with:
+    info_dict_fit\_ : dictionary that stores batch info of fitted data with:
          batch_levels, ref_level, n_batch, n_sample, sample_per_batch, batch_info
 
-    stand_mean_ : array-like
+    stand_mean\_ : array-like
         Standardized mean
 
-    var_pooled_ : array-like
+    var_pooled\_ : array-like
          Variance pooled
 
-    mod_mean_ : array-like
+    mod_mean\_ : array-like
         Mod mean
 
-    gamma_star_ : array-like
+    gamma_star\_ : array-like
         Adjustement gamma star
 
-    delta_star_ : array-like
+    delta_star\_ : array-like
         Adjustement delta star
 
-    info_dict_transform_ : dictionary that stores batch info of transformed data with
+    info_dict_transform\_ : dictionary that stores batch info of transformed data with
          batch_levels, ref_level, n_batch, n_sample, sample_per_batch, batch_info
 
     Examples
@@ -215,9 +215,9 @@ class Combat(BaseEstimator, TransformerMixin):
         Parameters
         ----------
         X : array-like or DataFrame of shape (n_samples, n_features).
-        Requires the columns needed by the Combat().
+            Requires the columns needed by the Combat().
             The data used to find adjustments.
-        *y : y in scikit learn: None
+        \*y : y in scikit learn: None
             Ignored.
 
         Returns
@@ -776,20 +776,20 @@ class AutoCombat(Combat):
     Attributes
     ----------
 
-    cls_ : clustering classifier object
+    cls\_ : clustering classifier object
 
-    info_clustering_ : Dictionary that stores info of clustering from sites_features with cluster_nb, labels, ref_label
+    info_clustering\_ : Dictionary that stores info of clustering from sites_features with cluster_nb, labels, ref_label
         wicss_clusters, best_wicss_cluster
 
-    cls_feature_reduction_ : feature reduction object
+    cls_feature_reduction\_ : feature reduction object
 
-    clustering_data_features_mean_ : dict of mean for clustering data (use for imputation)
+    clustering_data_features_mean\_ : dict of mean for clustering data (use for imputation)
 
-    X_hat_ : array after fit
+    X_hat\_ : array after fit
 
-    clustering_data_features_ : column features for clustering from train (after encoding + scaling)
+    clustering_data_features\_ : column features for clustering from train (after encoding + scaling)
 
-    clustering_data_discrete_features_: column features for clustering after one-hot encoding
+    clustering_data_discrete_features\_: column features for clustering after one-hot encoding
 
     dict_cls_fitted: dict of columns of fitted cls used for fitted clustering data
 
@@ -934,7 +934,7 @@ class AutoCombat(Combat):
         X : array-like or DataFrame of shape (n_samples, n_features).
             Requires the columns needed by the ComScan().
             The data used to find adjustments.
-        *y : y in scikit learn: None
+        \*y : y in scikit learn: None
             Ignored.
 
         Returns
@@ -1349,9 +1349,9 @@ class ImageCombat(AutoCombat):
     Attributes
     ----------
 
-    mask_ : array-like of the common brain mask
+    mask\_ : array-like of the common brain mask
 
-    flattened_array_ : flattened array of all the training set
+    flattened_array\_ : flattened array of all the training set
 
 
     Notes

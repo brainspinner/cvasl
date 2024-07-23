@@ -10,6 +10,7 @@ Submodules
    cvasl.carve
    cvasl.cli
    cvasl.file_handler
+   cvasl.harmony
    cvasl.mold
    cvasl.seperated
 
