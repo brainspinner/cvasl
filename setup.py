@@ -53,8 +53,19 @@ def run_and_log(cmd, **kwargs):
     sys.stderr.write('> {}\n'.format(' '.join(cmd)))
     return subprocess.call(cmd, **kwargs)
 
+def is_conda_exclude(package):
+    package = package.strip()
+    excludes = 'k_means_constrained', 'nipy'
+    for e in excludes:
+        if package.startswith(e):
+            if package == e:
+                return True
+            if package[len(e) + 1] in ('<', '>', '=', '!', ' '):
+                return True
+    return False
 
 def translate_reqs(packages):
+    packages = tuple(p for p in packages if not is_conda_exclude(p))
     re = importlib.import_module('re')
     tr = {
         'codestyle': 'pycodestyle',
@@ -600,7 +611,7 @@ if __name__ == '__main__':
         install_requires=[
             'k_means_constrained',
             'kneed',
-            'numpy==1.23.2',
+            'numpy==1.26.4',
             'nipy',
             'patsy',
             'pyxdf',
