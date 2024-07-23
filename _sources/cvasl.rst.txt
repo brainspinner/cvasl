@@ -1,14 +1,6 @@
 cvasl package
 =============
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   cvasl.vendor
-
 Submodules
 ----------
 

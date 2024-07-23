@@ -1,7 +1,0 @@
-cvasl.vendor.neurocombat.neurocombat module
-===========================================
-
-.. automodule:: cvasl.vendor.neurocombat.neurocombat
-   :members:
-   :undoc-members:
-   :show-inheritance:
