@@ -595,6 +595,7 @@ if __name__ == '__main__':
             # scikit-image and its dependencies
             'imageio<=2.31.5',
             'scikit-image',
+            'tqdm',
         ],
         tests_require=['pytest', 'nbmake', 'pycodestyle', 'isort', 'wheel'],
         setup_requires=['wheel'],
