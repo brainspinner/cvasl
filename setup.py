@@ -53,6 +53,7 @@ def run_and_log(cmd, **kwargs):
     sys.stderr.write('> {}\n'.format(' '.join(cmd)))
     return subprocess.call(cmd, **kwargs)
 
+
 def is_conda_exclude(package):
     package = package.strip()
     excludes = 'k_means_constrained', 'nipy'
@@ -63,6 +64,7 @@ def is_conda_exclude(package):
             if package[len(e) + 1] in ('<', '>', '=', '!', ' '):
                 return True
     return False
+
 
 def translate_reqs(packages):
     packages = tuple(p for p in packages if not is_conda_exclude(p))
@@ -75,7 +77,6 @@ def translate_reqs(packages):
 
     for p in packages:
         p = re.sub(r'\s+', '', p)
-        p = re.sub('=+', '=', p)
         parts = re.split(r'[ <>=]', p, maxsplit=1)
         name = parts[0]
         version = p[len(name):]
