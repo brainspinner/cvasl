@@ -61,7 +61,7 @@ def is_conda_exclude(package):
         if package.startswith(e):
             if package == e:
                 return True
-            if package[len(e) + 1] in ('<', '>', '=', '!', ' '):
+            if package[len(e)] in ('<', '>', '=', '!', ' '):
                 return True
     return False
 
