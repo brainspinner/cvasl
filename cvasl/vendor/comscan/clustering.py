@@ -98,26 +98,26 @@ class KMeansConstrainedMissing(TransformerMixin, ClusterMixin, BaseEstimator):
 
     Attributes
     ----------
-    cluster_centers_ : array, [n_clusters, n_features]
+    cluster_centers\_ : array, [n_clusters, n_features]
         Coordinates of cluster centers
 
-    labels_ :
+    labels\_ :
         Labels of each point
 
-    inertia_ : float
+    inertia\_ : float
         Sum of squared distances of samples to their closest cluster center.
 
-    cls_ : KMeansConstrained classifier object
+    cls\_ : KMeansConstrained classifier object
 
-    cls_features_reduction_ : PCA or UMAP reduction object
+    cls_features_reduction\_ : PCA or UMAP reduction object
 
-    centroids_: array
+    centroids\_: array
         Centroids found at the last iteration of k-means.
 
-    X_hat_ : array
+    X_hat\_ : array
         Copy of X with the missing values filled in.
 
-    mu_ : Columns means
+    mu\_ : Columns means
 
     Examples
     --------
@@ -425,19 +425,19 @@ class KElbowVisualizer(ClusteringScoreVisualizer):
 
     Attributes
     ----------
-    k_scores_ : array of shape (n,) where n is no. of k values
+    k_scores\_ : array of shape (n,) where n is no. of k values
         The silhouette score corresponding to each k value.
 
-    k_timers_ : array of shape (n,) where n is no. of k values
+    k_timers\_ : array of shape (n,) where n is no. of k values
         The time taken to fit n KMeans model corresponding to each k value.
 
-    elbow_value_ : integer
+    elbow_value\_ : integer
         The optimal value of k.
 
-    elbow_score_ : float
+    elbow_score\_ : float
         The silhouette score corresponding to the optimal value of k.
 
-    estimators_ : ``BaseEstimator``
+    estimators\_ : ``BaseEstimator``
         a scikit-learn fitted estimator
 
     Examples

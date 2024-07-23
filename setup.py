@@ -238,8 +238,9 @@ class SphinxApiDoc(Command):
         sys.exit(main([
             '-o', src,
             '-f',
-            os.path.join(project_dir, 'cvasl'),
             '--separate',
+            os.path.join(project_dir, 'cvasl'),
+            'cvasl/vendor*',
         ]))
 
 
@@ -560,14 +561,30 @@ if __name__ == '__main__':
         version=version,
         author='A team including the NLeSC and the Amsterdam Medical Center',
         author_email='c.moore@esciencecenter.nl',
-        packages=['cvasl'],
+        packages=[
+            'cvasl',
+            'cvasl.vendor.ComBat++',
+            'cvasl.vendor.comscan',
+            'cvasl.vendor.covbat',
+            'cvasl.vendor.neurocombat',
+            'cvasl.vendor.open_nested_combat',
+            'cvasl.vendor.RELIEF',
+                  ],
         url=project_url,
         license=project_license,
         license_files=('LICENSE.md',),
         description=project_description,
         long_description=open('README.md').read(),
         long_description_content_type='text/markdown',
-        package_data={'': ('README.md',)},
+        package_data={
+            '': (
+                'README.md',
+                'cvasl/vendor/**/LICENSE',
+                'cvasl/vendor/**/*.md',
+                # R namespace is not included for now
+                'cvasl/vendor/**/*.R',
+            ),
+        },
         cmdclass={
             'lint': Pep8,
             'isort': Isort,
@@ -581,7 +598,11 @@ if __name__ == '__main__':
         },
         test_suite='setup.my_test_suite',
         install_requires=[
-            'numpy<2.0.0',
+            'k_means_constrained',
+            'kneed',
+            'numpy==1.23.2',
+            'nipy',
+            'patsy',
             'pyxdf',
             'pandas',
             'scipy',
@@ -596,6 +617,8 @@ if __name__ == '__main__':
             'imageio<=2.31.5',
             'scikit-image',
             'tqdm',
+            'umap-learn>=0.5.1',
+            'yellowbrick>=1.3',
         ],
         tests_require=['pytest', 'nbmake', 'pycodestyle', 'isort', 'wheel'],
         setup_requires=['wheel'],
