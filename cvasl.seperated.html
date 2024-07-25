@@ -228,6 +228,29 @@ in a given dataframe.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cvasl.seperated.deal_with_readout_and_labelling">
+<span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">deal_with_readout_and_labelling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframes_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">droppies</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.deal_with_readout_and_labelling" title="Link to this definition">¶</a></dt>
+<dd><p>This function takes a list of asl containing dataframes
+of extracted MRI parameters and converts some of the ASL
+parameters to numerical values so they can be used for
+machine learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframes_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of dataframes</p></li>
+<li><p><strong>droppies</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – list of columns to drop</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of dataframes transformed</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cvasl.seperated.derived_function">
 <span class="sig-prename descclassname"><span class="pre">cvasl.seperated.</span></span><span class="sig-name descname"><span class="pre">derived_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvasl.seperated.derived_function" title="Link to this definition">¶</a></dt>
 <dd><p>This functions allows you to derive a projected
@@ -724,6 +747,7 @@ the results should be reproducible.</p>
 <li><a class="reference internal" href="#cvasl.seperated.check_identical_columns"><code class="docutils literal notranslate"><span class="pre">check_identical_columns()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.check_sex_dimorph_expectations"><code class="docutils literal notranslate"><span class="pre">check_sex_dimorph_expectations()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.concat_double_header"><code class="docutils literal notranslate"><span class="pre">concat_double_header()</span></code></a></li>
+<li><a class="reference internal" href="#cvasl.seperated.deal_with_readout_and_labelling"><code class="docutils literal notranslate"><span class="pre">deal_with_readout_and_labelling()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.derived_function"><code class="docutils literal notranslate"><span class="pre">derived_function()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.drop_columns_folder"><code class="docutils literal notranslate"><span class="pre">drop_columns_folder()</span></code></a></li>
 <li><a class="reference internal" href="#cvasl.seperated.drop_y"><code class="docutils literal notranslate"><span class="pre">drop_y()</span></code></a></li>
