@@ -22,7 +22,7 @@ keywords = [
     "MRI",
     "harmonisation",
 ]
-license = {file = "LICENSE.md"}
+license = {file = "LICENSE"}
 readme = {file = "README.md", content-type = "text/markdown"}
 dynamic = ["version"]
 requires-python = ">=3.10"
@@ -63,7 +63,7 @@ dev = [
 Repository = "https://github.com/brainspinner/cvasl"
 
 [tool.setuptools.packages.find]
-include = ["cvasl"]
+include = ["cvasl",  "cvasl.vendor*"]
 
 [tool.setuptools_scm]
 version_file = "cvasl/_version.py"
