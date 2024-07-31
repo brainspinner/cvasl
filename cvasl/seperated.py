@@ -1178,15 +1178,28 @@ def deal_with_readout_and_labelling(dataframes_list, droppies):
     """
     new_frames = []
     for frame in dataframes_list:
-        frame.M0 = frame.M0.replace(to_replace=['No', 'Yes'], value=[1, 2])
-        frame.Readout = frame.Readout.replace(
-            to_replace=['3DSpiral', '2DEPI', '3DGRASE'],
-            value=[1, 2, 3]
-        )
-        frame.Labelling = frame.Labelling.replace(
-            to_replace=['PCASL', 'PASL'],
-            value=[1, 2]
-        )
+        if 'M0' in frame.columns:
+            frame.M0 = frame.M0.replace(to_replace=['No', 'Yes'], value=[1, 2])
+        if 'm0' in frame.columns:
+            frame.m0 = frame.m0.replace(to_replace=['No', 'Yes'], value=[1, 2])
+        if 'Readout' in frame.columns:
+            frame.Readout = frame.Readout.replace(
+                to_replace=['3DSpiral', '2DEPI', '3DGRASE'],
+                value=[1, 2, 3]
+            )
+            frame.Labelling = frame.Labelling.replace(
+                to_replace=['PCASL', 'PASL'],
+                value=[1, 2]
+            )
+        if 'readout' in frame.columns:
+            frame.readout = frame.readout.replace(
+                to_replace=['3DSpiral', '2DEPI', '3DGRASE'],
+                value=[1, 2, 3]
+            )
+            frame.labelling = frame.labelling.replace(
+                to_replace=['PCASL', 'PASL'],
+                value=[1, 2]
+            )
         frame = frame.drop(droppies, axis=1)
         new_frames.append(frame)
     return new_frames
