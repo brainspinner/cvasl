@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "setuptools-scm[toml]>=8", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cvasl"
+description = "A package for analysis of MRI"
+authors = [
+  { name = "A team including the NLeSC and the Amsterdam Medical Center", email = "c.moore@esciencecenter.nl" }
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = [
+    "MRI",
+    "harmonisation",
+]
+license = {file = "LICENSE.md"}
+readme = {file = "README.md", content-type = "text/markdown"}
+dynamic = ["version"]
+requires-python = ">=3.10"
+dependencies = [
+    # Unfortunately, in later versions this library decided to cap
+    # its version requirements for Pillow, which breaks installation
+    # of other tools, which will install Pillow before we install
+    # scikit-image and its dependencies
+    "imageio<=2.31.5",
+    "k_means_constrained>=0.5.2",
+    "kneed",
+    "matplotlib",
+    "nipy",
+    "numpy==1.26.4",
+    "pandas>=1.2.0",
+    "patsy",
+    "pyxdf",
+    "scikit-image",
+    "scikit-learn>=0.23.2",
+    "scipy>=1.5.4",
+    "seaborn",
+    "simpleitk>=2.0.1",
+    "tqdm>=4.59",
+    "umap-learn>=0.5.1",
+    "yellowbrick>=1.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipympl",
+    "isort",
+    "nbmake",
+    "pycodestyle", 
+    "pytest",
+]
+
+[project.urls]
+Repository = "https://github.com/brainspinner/cvasl"
+
+[tool.setuptools.packages.find]
+include = ["cvasl"]
+
+[tool.setuptools_scm]
+version_file = "cvasl/_version.py"
+# default: guess-next-dev, alternatives: release-branch-semver, post-release, no-guess-dev
+version_scheme = "guess-next-dev"
