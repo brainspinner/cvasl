@@ -91,7 +91,7 @@ jobs:
       - run: python3 -m venv .venv
       - run: .venv/bin/python -m pip install wheel  
       - run: .venv/bin/python -m pip install pycodestyle "pytest<8.1"
-      - run: .venv/bin/python setup.py lint
+      - run: .venv/bin/python -m pycodestyle --exclude="*/vendor/*" cvasl
 
   Sphinx:
     runs-on: ubuntu-latest
