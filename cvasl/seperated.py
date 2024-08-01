@@ -1157,3 +1157,49 @@ def preprocess(
         read.to_csv(read_name)
         read_names.append(read_name)
     return read_names
+
+
+def deal_with_readout_and_labelling(dataframes_list, droppies):
+    """
+    This function takes a list of asl containing dataframes
+    of extracted MRI parameters and converts some of the ASL
+    parameters to numerical values so they can be used for
+    machine learning.
+
+
+    :param dataframes_list: list of dataframes
+    :type dataframes_list: list
+    :param droppies: list of columns to drop
+    :type droppies: list
+
+
+    :returns: list of dataframes transformed
+    :rtype: list
+    """
+    new_frames = []
+    for frame in dataframes_list:
+        if 'M0' in frame.columns:
+            frame.M0 = frame.M0.replace(to_replace=['No', 'Yes'], value=[1, 2])
+        if 'm0' in frame.columns:
+            frame.m0 = frame.m0.replace(to_replace=['No', 'Yes'], value=[1, 2])
+        if 'Readout' in frame.columns:
+            frame.Readout = frame.Readout.replace(
+                to_replace=['3DSpiral', '2DEPI', '3DGRASE'],
+                value=[1, 2, 3]
+            )
+            frame.Labelling = frame.Labelling.replace(
+                to_replace=['PCASL', 'PASL'],
+                value=[1, 2]
+            )
+        if 'readout' in frame.columns:
+            frame.readout = frame.readout.replace(
+                to_replace=['3DSpiral', '2DEPI', '3DGRASE'],
+                value=[1, 2, 3]
+            )
+            frame.labelling = frame.labelling.replace(
+                to_replace=['PCASL', 'PASL'],
+                value=[1, 2]
+            )
+        frame = frame.drop(droppies, axis=1)
+        new_frames.append(frame)
+    return new_frames
